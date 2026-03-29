@@ -12,7 +12,7 @@
 RootModule = 'NativeCommandCompleter.completions.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.0'
+ModuleVersion = '0.1'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core'
@@ -87,7 +87,12 @@ PowerShellVersion = '7.6.0'
 # ModuleList = @()
 
 # List of all files packaged with this module
-# FileList = @()
+FileList = @(
+    'README.md'
+    'LICENSE'
+    'NativeCommandCompleter.completions.psd1'
+    'NativeCommandCompleter.completions.psm1'
+)
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
