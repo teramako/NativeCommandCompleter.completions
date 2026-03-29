@@ -20,8 +20,7 @@ if ([string]::IsNullOrEmpty($completePath)) {
     $env:PS_COMPLETE_PATH = $dirs -join $pathSep
 } else {
     $dirs = [string[]]$completePath.Split($pathSep, [StringSplitOptions]::TrimEntries -bor [StringSplitOptions]::RemoveEmptyEntries)
-    $stringComparsion = $IsWindows ? [StringComparison]::OrdinalIgnoreCase : [StringComparison]::Ordinal
-    if (-not $dirs.Contains($completionsDir, $stringComparsion)) {
+    if (-not (($IsWindows -and $dirs -icontains $completionsDir) -or $dirs -ccontains $completionsDir)) {
         $env:PS_COMPLETE_PATH = ($dirs + $completionsDir) -join $pathSep
     }
 }
