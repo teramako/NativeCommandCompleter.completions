@@ -214,6 +214,9 @@ $msg = data { ConvertFrom-StringData @'
     crl_nextupdate          = Output the nextUpdate field
     crl_nameopt             = how the subject or issuer names are displayed
 
+    crl2pkcs7_certfile      = Filename containing one or more certificates in PEM format
+    crl2pkcs7_nocrl         = no CRL is included in the output file and a CRL is not read
+
     dgst_list               = Prints out a list of supported message digests
     dgst_c                  = Print digest with separating colons
     dgst_hex                = Output as hex dump
@@ -688,7 +691,20 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $providerPathParam
         $provparamParam
         $propqueryParam
-    )
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name crl2pkcs7 -Description $msg._crl2pkcs7 -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        New-ParamCompleter -Name certfile -Description $msg.crl2pkcs7_certfile -Type File -VariableName 'filename'
+        New-ParamCompleter -Name nocrl -Description $msg.crl2pkcs7_nocrl
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions
 
     New-CommandCompleter -Name dgst -Description $msg._dgst -Style Unix -Parameters @(
         $digestParams
