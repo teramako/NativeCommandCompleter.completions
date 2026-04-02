@@ -233,6 +233,9 @@ $msg = data { ConvertFrom-StringData @'
     dgst_fips_fingerprint   = Compute HMAC using a specific key for certain OpenSSL-FIPS operations
     dgst_engine_impl        = Use engine id for digest operations
 
+    dhparam_dsaparam        = DSA rather than DH parameters are read or created
+    dhparam_genvalue        = Generator value
+
     enc_list                = List all supported ciphers
     enc_encrypt             = Encrypt
     enc_decrypt             = Decrypt
@@ -427,6 +430,7 @@ $certformParam = New-ParamCompleter -Name certform -Description $msg.certform -A
 $caFormParam = New-ParamCompleter -Name CAform -Description $msg.caform -Arguments $certformArgs -VariableName 'format'
 $caKeyFormParam = New-ParamCompleter -Name CAkeyform -Description $msg.cakeyform -Arguments $keyformArgs -VariableName 'format'
 $certParam = New-ParamCompleter -Name cert -Description $msg.cert -Type File -VariableName 'file'
+$checkParam = New-ParamCompleter -Name check -Description $msg.check
 
 $sigoptParam = New-ParamCompleter -Name sigopt -Description $msg.sigopt -Type Required -VariableName 'nm:v'
 $vfyoptParam = New-ParamCompleter -Name vfyopt -Description $msg.vfyopt -Type Required -VariableName 'nm:v'
@@ -737,6 +741,28 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $propqueryParam
     )
 
+    New-CommandCompleter -Name dhparam -Description $msg._dhparam -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        New-ParamCompleter -Name dsaparam -Description $msg.dhparam_dsaparam
+        $checkParam
+        New-ParamCompleter -Name 2, 3, 5 -Description $msg.dhparam_genvalue
+        $nooutParam
+        $textParam
+        $randParam
+        $writerandParam
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions -ArgumentCompleter {
+        "512`tMinimum value",
+        "2048`tDefault value",
+        "10000`tMaximum value"
+    }
+
     New-CommandCompleter -Name enc -Description $msg._enc -Style Unix -Parameters @(
         $cipherParams
         New-ParamCompleter -Name list -Description $msg.enc_list
@@ -892,7 +918,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $textParam
         $nooutParam
         New-ParamCompleter -Name modulus -Description $msg.modulus
-        New-ParamCompleter -Name check -Description $msg.check
+        $checkParam
         New-ParamCompleter -Name pubin -Description $msg.pubin
         New-ParamCompleter -Name pubout -Description $msg.pubout
         New-ParamCompleter -Name RSAPublicKey_in -Description $msg.rsa_RSAPublicKey_in
