@@ -475,7 +475,7 @@ $keyformArgs = @(
     "ENGINE`t{0}" -f $msg.format_ENGINE
 )
 $informParam = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $formArgs -VariableName 'format'
-$inform2Param = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $keyformArgs-VariableName 'format'
+$inform2Param = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $keyformArgs -VariableName 'format'
 $outformParam = New-ParamCompleter -Name outform -Description $msg.outform -Arguments $formArgs -VariableName 'format'
 $keyformParam = New-ParamCompleter -Name keyform -Description $msg.keyform -Arguments $keyformArgs -VariableName 'format'
 $certformParam = New-ParamCompleter -Name certform -Description $msg.certform -Arguments $certformArgs -VariableName 'format'
