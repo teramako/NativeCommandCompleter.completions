@@ -303,6 +303,41 @@ $msg = data { ConvertFrom-StringData @'
     kdf_mac                 = Specify the MAC
     kdf_kdfopt              = Passes options to the KDF algorithm
 
+    list_select             = Only list algorithms that match this name
+    list_singlecolumn       = List in a single column
+    list_all_algorithms     = Display lists of all algorithms
+    list_commands           = Display a list of standard commands
+    list_standard_commands  = List of standard commands
+    list_digest_commands    = Display a list of message digest commands
+    list_cipher_commands    = Display a list of cipher commands
+    list_cipher_algorithms  = Display a list of symmetric cipher algorithms
+    list_digest_algorithms  = Display a list of digest algorithms
+    list_kdf_algorithms     = Display a list of kdf algorithms
+    list_mac_algorithms     = Display a list of mac algorithms
+    list_random_instances   = List the primary, public and private random number generator details
+    list_random_generators  = Display a list of random number generators
+    list_encoders           = Display a list of encoders
+    list_decoders           = Display a list of decoders
+    list_public_key_algorithms = Display a list of public key algorithms
+    list_public_key_methods = Display a list of public key methods
+    list_key_managers       = Display a list of key managers
+    list_skey_managers      = Display a list of symmetric key managers
+    list_key_exchange_algorithms = Display a list of key exchange algorithms
+    list_kem_algorithms     = Display a list of key encapsulation algorithms
+    list_tls_groups         = Display a list of the IANA names of all available TLS groups
+    list_all_tls_groups     = Display a list of the names of all available TLS groups, including any aliases
+    list_tls1_2             = List those compatible with TLS 1.2
+    list_tls1_3             = List those compatible with TLS 1.3
+    list_signature_algorithms = Display a list of signature algorithms
+    list_tls_signature_algorithms = Display the list of signature algorithms available for TLS handshakes
+    list_asymcipher_algorithms = Display a list of asymmetric cipher algorithms
+    list_store_loaders      = Display a list of store loaders
+    list_providers          = Display a list of all loaded providers with their names, version and status
+    list_engines            = Display a list of loaded engines
+    list_disabled           = Display a list of disabled features
+    list_objects            = Display a list of built in objects, i.e. OIDs with names
+    list_options            = Output a two-column list of the options accepted by the specified command
+
     req_cipher              = Cipher for encrypting the private key
     req_modulus             = Output value of modulus of the public key
     req_verify              = Verifies the self-signature on the request
@@ -1342,6 +1377,44 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
                 'ghash', 'rand', 'kmac128', 'kmac256'
         $list.Where({ $_ -like "$wordToComplete*" })
     }
+
+    New-CommandCompleter -Name list -Description $msg._list -Style Unix -Parameters @(
+        $verboseParam
+        New-ParamCompleter -Name select -Description $msg.list_select -Type Required -VariableName 'name'
+        New-ParamCompleter -Name 1 -Description $msg.list_singlecolumn
+        New-ParamCompleter -Name all-algorithms -Description $msg.list_all_algorithms
+        New-ParamCompleter -Name commands -Description $msg.list_commands
+        New-ParamCompleter -Name standard-commands -Description $msg.list_standard_commands
+        New-ParamCompleter -Name digest-commands -Description $msg.list_digest_commands
+        New-ParamCompleter -Name cipher-commands -Description $msg.list_cipher_commands
+        New-ParamCompleter -Name cipher-algorithms -Description $msg.list_cipher_algorithms
+        New-ParamCompleter -Name digest-algorithms -Description $msg.list_digest_algorithms
+        New-ParamCompleter -Name kdf-algorithms -Description $msg.list_kdf_algorithms
+        New-ParamCompleter -Name mac-algorithms -Description $msg.list_mac_algorithms
+        New-ParamCompleter -Name random-instances -Description $msg.list_random_instances
+        New-ParamCompleter -Name random-generators -Description $msg.list_random_generators
+        New-ParamCompleter -Name encoders -Description $msg.list_encoders
+        New-ParamCompleter -Name decoders -Description $msg.list_decoders
+        New-ParamCompleter -Name public-key-algorithms -Description $msg.list_public_key_algorithms
+        New-ParamCompleter -Name public-key-methods -Description $msg.list_public_key_methods
+        New-ParamCompleter -Name key-managers -Description $msg.list_key_managers
+        New-ParamCompleter -Name skey-managers -Description $msg.list_skey_managers
+        New-ParamCompleter -Name key-exchange-algorithms -Description $msg.list_key_exchange_algorithms
+        New-ParamCompleter -Name kem-algorithms -Description $msg.list_kem_algorithms
+        New-ParamCompleter -Name tls-groups -Description $msg.list_tls_groups
+        New-ParamCompleter -Name all-tls-groups -Description $msg.list_all_tls_groups
+        New-ParamCompleter -Name tls1_2 -Description $msg.list_tls1_2
+        New-ParamCompleter -Name tls1_3 -Description $msg.list_tls1_3
+        New-ParamCompleter -Name signature-algorithms -Description $msg.list_signature_algorithms
+        New-ParamCompleter -Name tls-signature-algorithms -Description $msg.list_tls_signature_algorithms
+        New-ParamCompleter -Name asymcipher-algorithms -Description $msg.list_asymcipher_algorithms
+        New-ParamCompleter -Name store-loaders -Description $msg.list_store_loaders
+        New-ParamCompleter -Name providers -Description $msg.list_providers
+        New-ParamCompleter -Name engines -Description $msg.list_engines
+        New-ParamCompleter -Name disabled -Description $msg.list_disabled
+        New-ParamCompleter -Name objects -Description $msg.list_objects
+        New-ParamCompleter -Name options -Description $msg.list_options -Type Required -VariableName 'command'
+    ) -NoFileCompletions
 
     New-CommandCompleter -Name rand -Description $msg._rand -Style Unix -Parameters @(
         $outParam
