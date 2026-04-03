@@ -400,6 +400,25 @@ $msg = data { ConvertFrom-StringData @'
     passwd_table            = In the output list, show "{cleartext}TAB{hash}"
     passwd_reverse          = When the -table option is used, reverse the order of {cleartext} and {hash}
 
+    speed_elapsed           = Measure time in real time
+    speed_evp               = Use EVP cipher
+    speed_multi             = Run multiple operations in parallel
+    speed_async_jobs        = Enable async mode and start specified number of jobs
+    speed_misalign          = Misalign the buffers by the specified number of bytes
+    speed_hmac              = Time the HMAC algorithm using the specified message digest
+    speed_cmac              = Time the CMAC algorithm using the specified cipher
+    speed_decrypt           = Time the decryption instead of encryption. Affects only the EVP testing
+    speed_mb                = Enable multi-block mode on EVP-named cipher
+    speed_aead              = Benchmark EVP-named AEAD cipher in TLS-like sequence
+    speed_kem_algorithms    = Benchmark KEM algorithms: key generation, encapsulation, decapsulation
+    speed_signature_algorithms = Benchmark signature algorithms: key generation, signature, verification
+    speed_primes            = Generate a num-prime RSA key and use it to run the benchmarks
+    speed_seconds           = Run benchmarks for num seconds
+    speed_bytes             = Run benchmarks on num-byte buffers
+    speed_mr                = Produce the summary in a mechanical, machine-readable, format
+    speed_mlock             = Lock memory into RAM for more deterministic measurements
+    speed_testmode          = Runs only 1 iteration of each algorithm test
+
     provider                = Load and initialize the provider identified by name
     providerPath            = Specifies the search path that is to be used for looking for providers
     provparam               = Set configuration parameter key to value val in provider name (optional)
@@ -1292,24 +1311,24 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
 
     New-CommandCompleter -Name speed -Description $msg._speed -Style Unix -Parameters @(
         $configParam
-        New-ParamCompleter -Name elapsed -Description 'Measure time in real time'
-        New-ParamCompleter -Name evp -Description 'Use EVP cipher' -Type Required -VariableName 'alg'
-        New-ParamCompleter -Name multi -Description 'Run multiple operations in parallel' -Type Required -VariableName 'num'
-        New-ParamCompleter -Name async_jobs -Description 'Enable async mode and start specified number of jobs'  -Type Required -VariableName 'num'
-        New-ParamCompleter -Name misalign   -Description 'Misalign the buffers by the specified number of bytes' -Type Required -VariableName 'num'
-        New-ParamCompleter -Name hmac -Description 'Time the HMAC algorithm using the specified message digest' -Arguments $digests -VariableName 'digest'
-        New-ParamCompleter -Name cmac -Description 'Time the CMAC algorithm using the specified cipher' -Arguments $ciphers -VariableName 'cipher'
-        New-ParamCompleter -Name decrypt -Description 'Time the decryption instead of encryption. Affects only the EVP testing'
-        New-ParamCompleter -Name mb -Description 'Enable multi-block mode on EVP-named cipher'
-        New-ParamCompleter -Name aead -Description 'Benchmark EVP-named AEAD cipher in TLS-like sequence'
-        New-ParamCompleter -Name kem-algorithms -Description 'Benchmark KEM algorithms: key generation, encapsulation, decapsulation'
-        New-ParamCompleter -Name signature-algorithms -Description 'Benchmark signature algorithms: key generation, signature, verification'
-        New-ParamCompleter -Name primes -Description 'Generate a num-prime RSA key and use it to run the benchmarks' -Type Required -VariableName 'num'
-        New-ParamCompleter -Name seconds -Description 'Run benchmarks for num seconds' -Type Required -VariableName 'num'
-        New-ParamCompleter -Name bytes -Description 'Run benchmarks on num-byte buffers' -Type Required -VariableName 'num'
-        New-ParamCompleter -Name mr -Description 'Produce the summary in a mechanical, machine-readable, format'
-        New-ParamCompleter -Name mlock -Description 'Lock memory into RAM for more deterministic measurements'
-        New-ParamCompleter -Name testmode -Description 'Runs only 1 iteration of each algorithm test'
+        New-ParamCompleter -Name elapsed -Description $msg.speed_elapsed
+        New-ParamCompleter -Name evp -Description $msg.speed_evp -Type Required -VariableName 'alg'
+        New-ParamCompleter -Name multi -Description $msg.speed_multi -Type Required -VariableName 'num'
+        New-ParamCompleter -Name async_jobs -Description $msg.speed_async_jobs -Type Required -VariableName 'num'
+        New-ParamCompleter -Name misalign   -Description $msg.speed_misalign -Type Required -VariableName 'num'
+        New-ParamCompleter -Name hmac -Description $msg.speed_hmac -Arguments $digests -VariableName 'digest'
+        New-ParamCompleter -Name cmac -Description $msg.speed_cmac -Arguments $ciphers -VariableName 'cipher'
+        New-ParamCompleter -Name decrypt -Description $msg.speed_decrypt
+        New-ParamCompleter -Name mb -Description $msg.speed_mb
+        New-ParamCompleter -Name aead -Description $msg.speed_aead
+        New-ParamCompleter -Name kem-algorithms -Description $msg.speed_kem_algorithms
+        New-ParamCompleter -Name signature-algorithms -Description $msg.speed_signature_algorithms
+        New-ParamCompleter -Name primes -Description $msg.speed_primes -Type Required -VariableName 'num'
+        New-ParamCompleter -Name seconds -Description $msg.speed_seconds -Type Required -VariableName 'num'
+        New-ParamCompleter -Name bytes -Description $msg.speed_bytes -Type Required -VariableName 'num'
+        New-ParamCompleter -Name mr -Description $msg.speed_mr
+        New-ParamCompleter -Name mlock -Description $msg.speed_mlock
+        New-ParamCompleter -Name testmode -Description $msg.speed_testmode
         $randParam
         $writerandParam
         $providerParam
