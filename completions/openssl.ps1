@@ -286,6 +286,16 @@ $msg = data { ConvertFrom-StringData @'
     genpkey_paramfile       = Generate a private key based on a set of parameters
     genpkey_text            = Print an (unencrypted) text representation
 
+    info_configdir          = Outputs the default directory for OpenSSL configuration files
+    info_enginesdir         = Outputs the default directory for OpenSSL engine modules
+    info_modulesdir         = Outputs the default directory for OpenSSL dynamically loadable modules other than engine modules
+    info_dsoext             = Outputs the DSO extension OpenSSL uses
+    info_dirnamesep         = Outputs the separator character between a directory specification and a filename
+    info_listsep            = Outputs the OpenSSL list separator character
+    info_seeds              = Outputs the randomness seed sources
+    info_cpusettings        = Outputs the OpenSSL CPU settings info
+    info_windowscontext     = Outputs the Windows install context
+
     req_cipher              = Cipher for encrypting the private key
     req_modulus             = Output value of modulus of the public key
     req_verify              = Verifies the self-signature on the request
@@ -948,6 +958,18 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $provparamParam
         $propqueryParam
         $configParam
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name info -Description $msg._info -Style Unix -Parameters @(
+        New-ParamCompleter -Name configdir -Description $msg.info_configdir
+        New-ParamCompleter -Name enginesdir -Description $msg.info_enginesdir
+        New-ParamCompleter -Name modulesdir -Description $msg.info_modulesdir
+        New-ParamCompleter -Name dsoext -Description $msg.info_dsoext
+        New-ParamCompleter -Name dirnamesep -Description $msg.info_dirnamesep
+        New-ParamCompleter -Name listsep -Description $msg.info_listsep
+        New-ParamCompleter -Name seeds -Description $msg.info_seeds
+        New-ParamCompleter -Name cpusettings -Description $msg.info_cpusettings
+        New-ParamCompleter -Name windowscontext -Description $msg.info_windowscontext
     ) -NoFileCompletions
 
     New-CommandCompleter -Name req -Description $msg._req -Style Unix -Parameters @(
