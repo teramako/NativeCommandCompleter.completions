@@ -243,6 +243,11 @@ $msg = data { ConvertFrom-StringData @'
 
     dsaparam_genkey         = Generate a DSA key
 
+    ec_param_out            = Print the elliptic curve parameters
+    ec_conv_form            = how the points on the elliptic curve are converted into octet strings
+    ec_param_enc            = how the elliptic curve parameters are encoded
+    ec_no_public            = omits the public key components from the private key output
+
     enc_list                = List all supported ciphers
     enc_encrypt             = Encrypt
     enc_decrypt             = Decrypt
@@ -428,6 +433,7 @@ $keyformArgs = @(
     "ENGINE`t{0}" -f $msg.format_ENGINE
 )
 $informParam = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $formArgs -VariableName 'format'
+$inform2Param = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $keyformArgs-VariableName 'format'
 $outformParam = New-ParamCompleter -Name outform -Description $msg.outform -Arguments $formArgs -VariableName 'format'
 $keyformParam = New-ParamCompleter -Name keyform -Description $msg.keyform -Arguments $keyformArgs -VariableName 'format'
 $certformParam = New-ParamCompleter -Name certform -Description $msg.certform -Arguments $certformArgs -VariableName 'format'
@@ -805,6 +811,30 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $quietParam
         $randParam
         $writerandParam
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name ec -Description $msg._ec -Style Unix -Parameters @(
+        $inform2Param
+        $outformParam
+        $inParam
+        $outParam
+        $passinParam
+        New-ParamCompleter -Name des -Description $msg.des
+        New-ParamCompleter -Name des3 -Description $msg.des3
+        New-ParamCompleter -Name idea -Description $msg.idea
+        $textParam
+        $nooutParam
+        New-ParamCompleter -Name param_out -Description $msg.ec_param_out
+        $pubinParam
+        $puboutParam
+        New-ParamCompleter -Name conv_form -Description $msg.ec_conv_form -Arguments "compressed", "uncompressed", "hybrid" -VariableName 'arg'
+        New-ParamCompleter -Name param_enc -Description $msg.ec_param_enc -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name no_public -Description $msg.ec_no_public
+        $checkParam
         $providerParam
         $providerPathParam
         $provparamParam
