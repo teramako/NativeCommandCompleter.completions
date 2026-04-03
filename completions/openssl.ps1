@@ -274,7 +274,7 @@ $msg = data { ConvertFrom-StringData @'
     genpkey_text            = Print an (unencrypted) text representation
 
     req_cipher              = Cipher for encrypting the private key
-    req_modules             = Output value of modules of the public key
+    req_modulus             = Output value of modulus of the public key
     req_verify              = Verifies the self-signature on the request
     req_noenc               = Create a non-encrypted private key
     req_section             = Section name to be used (default = req)
@@ -885,7 +885,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $outSubjectParam
         $outPubkeyParam
         $nooutParam
-        New-ParamCompleter -Name modules -Description $msg.req_modules
+        New-ParamCompleter -Name modulus -Description $msg.req_modulus
         New-ParamCompleter -Name verify -Description $msg.req_verify
         New-ParamCompleter -Name new -Description $msg.new
         New-ParamCompleter -Name newkey -Description $msg.newkey -Type Required -VariableName 'arg'
