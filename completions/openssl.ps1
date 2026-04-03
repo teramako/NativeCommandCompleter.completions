@@ -925,7 +925,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $propqueryParam
     ) -NoFileCompletions
 
-    New-CommandCompleter -Name genpkey -Description $msg._genpkey -Parameters @(
+    New-CommandCompleter -Name genpkey -Description $msg._genpkey -Style Unix -Parameters @(
         $outParam
         New-ParamCompleter -Name outpubkey -Description $msg.genpkey_outpubkey -Type File -VariableName 'filename'
         $outformParam
@@ -948,7 +948,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $provparamParam
         $propqueryParam
         $configParam
-    )
+    ) -NoFileCompletions
 
     New-CommandCompleter -Name req -Description $msg._req -Style Unix -Parameters @(
         $informParam
