@@ -248,6 +248,12 @@ $msg = data { ConvertFrom-StringData @'
     ec_param_enc            = how the elliptic curve parameters are encoded
     ec_no_public            = omits the public key components from the private key output
 
+    ecparam_check_named     = Check if the curve parameters match any built-in curves
+    ecparam_name            = Use the EC parameters with the specified 'short' name
+    ecparam_list_curves     = Print out a list of all implemented EC parameters names
+    ecparam_no_seed         = Do not include the 'seed' for parameter generation in the structure
+    ecparam_genkey          = Generate an EC private key
+
     enc_list                = List all supported ciphers
     enc_encrypt             = Encrypt
     enc_decrypt             = Decrypt
@@ -835,6 +841,29 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name param_enc -Description $msg.ec_param_enc -Type Required -VariableName 'arg'
         New-ParamCompleter -Name no_public -Description $msg.ec_no_public
         $checkParam
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name ecparam -Description $msg._ecparam -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        $nooutParam
+        $textParam
+        $checkParam
+        New-ParamCompleter -Name check_named -Description $msg.ecparam_check_named
+        New-ParamCompleter -Name name -Description $msg.ecparam_name -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name list_curves -Description $msg.ecparam_list_curves
+        New-ParamCompleter -Name conv_form -Description $msg.ec_conv_form -Arguments "compressed", "uncompressed", "hybrid" -VariableName 'arg'
+        New-ParamCompleter -Name param_enc -Description $msg.ec_param_enc -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name no_seed -Description $msg.ecparam_no_seed
+        New-ParamCompleter -Name genkey -Description $msg.ecparam_genkey
+        $randParam
+        $writerandParam
         $providerParam
         $providerPathParam
         $provparamParam
