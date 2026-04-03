@@ -241,6 +241,8 @@ $msg = data { ConvertFrom-StringData @'
 
     dsa_modulus             = Output value of the public key component of the key
 
+    dsaparam_genkey         = Generate a DSA key
+
     enc_list                = List all supported ciphers
     enc_encrypt             = Encrypt
     enc_decrypt             = Decrypt
@@ -785,6 +787,24 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $pvkStrongParam
         $pvkWeakParam
         $pvkNoneParam
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name dsaparam -Description $msg._dsaparam -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        $nooutParam
+        $textParam
+        New-ParamCompleter -Name genkey -Description $msg.dsaparam_genkey
+        $verboseParam
+        $quietParam
+        $randParam
+        $writerandParam
         $providerParam
         $providerPathParam
         $provparamParam
