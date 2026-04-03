@@ -296,6 +296,13 @@ $msg = data { ConvertFrom-StringData @'
     info_cpusettings        = Outputs the OpenSSL CPU settings info
     info_windowscontext     = Outputs the Windows install context
 
+    kdf_keylen              = The output size of the derived key
+    kdf_binary              = Output the derived key in binary form
+    kdf_cipher              = Specify the cipher
+    kdf_digest              = Specify the digest
+    kdf_mac                 = Specify the MAC
+    kdf_kdfopt              = Passes options to the KDF algorithm
+
     req_cipher              = Cipher for encrypting the private key
     req_modulus             = Output value of modulus of the public key
     req_verify              = Verifies the self-signature on the request
@@ -971,6 +978,23 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name cpusettings -Description $msg.info_cpusettings
         New-ParamCompleter -Name windowscontext -Description $msg.info_windowscontext
     ) -NoFileCompletions
+
+    New-CommandCompleter -Name kdf -Description $msg._kdf -Style Unix -Parameters @(
+        New-ParamCompleter -Name keylen -Description $msg.kdf_keylen -Type Required -VariableName 'num'
+        $outParam
+        New-ParamCompleter -Name binay -Description $msg.kdf_binary
+        New-ParamCompleter -Name cipher -Description $msg.kdf_cipher -Type Required -VariableName 'name'
+        New-ParamCompleter -Name digest -Description $msg.kdf_digest -Type Required -VariableName 'name'
+        New-ParamCompleter -Name mac -Description $msg.kdf_mac -Type Required -VariableName 'name'
+        New-ParamCompleter -Name kdfopt -Description $msg.kdf_kdfopt -Type Required -VariableName 'nm:v'
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions -ArgumentCompleter {
+        "TLS1-PRF", "HKDF", "SSKDF", "PBKDF2", "SSHKDF", "X942KDF-ASN1", "X942KDF-CONCAT", "X963KDF", "SCRYPT" |
+            Where-Object { $_ -like "$wordToComplete*" }
+    }
 
     New-CommandCompleter -Name req -Description $msg._req -Style Unix -Parameters @(
         $informParam
