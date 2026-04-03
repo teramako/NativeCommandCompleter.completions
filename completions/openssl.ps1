@@ -980,12 +980,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
     )
 
     New-CommandCompleter -Name rsa -Description $msg._rsa -Style Unix -Parameters @(
-        New-ParamCompleter -Name inform -Description $msg.inform -Arguments @(
-            "PEM`t{0}" -f $msg.format_PEM
-            "DER`t{0}" -f $msg.format_DER
-            "P12`t{0}" -f $msg.format_P12
-            "ENGINE`t{0}" -f $msg.format_ENGINE
-        ) -VariableName 'format'
+        $inform2Param
         $outformParam
         $traditionalParam
         $inParam
