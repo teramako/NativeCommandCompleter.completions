@@ -135,6 +135,9 @@ $msg = data { ConvertFrom-StringData @'
     caform                  = CA certificate data format
     cakeyform               = CA key format
     caserial                = Sets the CA serial number file to use
+    pvk_strong              = Enable 'Strong' PVK encoding level (default)
+    pvk_weak                = Enable 'Weak' PVK encoding level
+    pvk_none                = Don't enforce PVK encoding
 
     format_PEM              = PEM format
     format_DER              = DER format
@@ -236,6 +239,8 @@ $msg = data { ConvertFrom-StringData @'
     dhparam_dsaparam        = DSA rather than DH parameters are read or created
     dhparam_genvalue        = Generator value
 
+    dsa_modulus             = Output value of the public key component of the key
+
     enc_list                = List all supported ciphers
     enc_encrypt             = Encrypt
     enc_decrypt             = Decrypt
@@ -286,9 +291,6 @@ $msg = data { ConvertFrom-StringData @'
 
     rsa_RSAPublicKey_in     = Like -pubin except RSAPublicKey format is used instead
     rsa_RSAPublicKey_out    = Like -pubout except RSAPublicKey format is used instead
-    rsa_pvk_strong          = Enable 'Strong' PVK encoding level (default)
-    rsa_pvk_weak            = Enable 'Weak' PVK encoding level
-    rsa_pvk_none            = Don't enforce PVK encoding
 
     s_client_proxy          = With -connect, specify proxy host and port for HTTP
     s_client_proxy_user     = The proxy user
@@ -463,6 +465,11 @@ $certoptParam = New-ParamCompleter -Name certopt -Description $msg.certopt -Type
 $caParam = New-ParamCompleter -Name CA -Description $msg.ca -Type File -VariableName 'filename|uri'
 $caKeyParam = New-ParamCompleter -Name CAkey -Description $msg.cakey -Type File -VariableName 'filename|uri'
 $caserialParam = New-ParamCompleter -Name CAserial -Description $msg.caserial -Type File -VariableName 'filename'
+$pubinParam = New-ParamCompleter -Name pubin -Description $msg.pubin
+$puboutParam = New-ParamCompleter -Name pubout -Description $msg.pubout
+$pvkStrongParam = New-ParamCompleter -Name pvk-strong -Description $msg.pvk_strong
+$pvkWeakParam = New-ParamCompleter -Name pvk-weak -Description $msg.pvk_weak
+$pvkNoneParam = New-ParamCompleter -Name pvk-none -Description $msg.pvk_none
 
 $passphraseCompleter = {
     switch -Wildcard ($wordToComplete) {
@@ -763,6 +770,27 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         "10000`tMaximum value"
     }
 
+    New-CommandCompleter -Name dsa -Description $msg._dsa -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        $passinParam
+        $encryptParams
+        $textParam
+        $nooutParam
+        New-ParamCompleter -Name modulus -Description $msg.dsa_modulus
+        $pubinParam
+        $puboutParam
+        $pvkStrongParam
+        $pvkWeakParam
+        $pvkNoneParam
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    ) -NoFileCompletions
+
     New-CommandCompleter -Name enc -Description $msg._enc -Style Unix -Parameters @(
         $cipherParams
         New-ParamCompleter -Name list -Description $msg.enc_list
@@ -919,13 +947,13 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $nooutParam
         New-ParamCompleter -Name modulus -Description $msg.modulus
         $checkParam
-        New-ParamCompleter -Name pubin -Description $msg.pubin
-        New-ParamCompleter -Name pubout -Description $msg.pubout
+        $pubinParam
+        $puboutParam
         New-ParamCompleter -Name RSAPublicKey_in -Description $msg.rsa_RSAPublicKey_in
         New-ParamCompleter -Name RSAPublicKey_out -Description $msg.rsa_RSAPublicKey_out
-        New-ParamCompleter -Name pvk-strong -Description $msg.rsa_pvk_strong
-        New-ParamCompleter -Name pvk-weak -Description $msg.rsa_pvk_weak
-        New-ParamCompleter -Name pvk-none -Description $msg.rsa_pvk_none
+        $pvkStrongParam
+        $pvkWeakParam
+        $pvkNoneParam
         $engineParam
         $providerParam
         $providerPathParam
