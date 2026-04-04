@@ -338,6 +338,10 @@ $msg = data { ConvertFrom-StringData @'
     list_objects            = Display a list of built in objects, i.e. OIDs with names
     list_options            = Output a two-column list of the options accepted by the specified command
 
+    mac_binary              = Output the MAC in binary form
+    mac_cipher              = Used by CMAC and GMAC to specify the cipher algorithm
+    mac_digest              = Used by HMAC as an alphanumeric string
+
     req_cipher              = Cipher for encrypting the private key
     req_modulus             = Output value of modulus of the public key
     req_verify              = Verifies the self-signature on the request
@@ -1431,6 +1435,19 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name objects -Description $msg.list_objects
         New-ParamCompleter -Name options -Description $msg.list_options -Type Required -VariableName 'command'
     ) -NoFileCompletions
+
+    New-CommandCompleter -Name mac -Description $msg._mac -Style Unix -Parameters @(
+        $inParam
+        $outParam
+        New-ParamCompleter -Name binary -Description $msg.mac_binary
+        New-ParamCompleter -Name cipher -Description $msg.mac_cipher -Type Required -VariableName 'name'
+        New-ParamCompleter -Name digest -Description $msg.mac_digest -Type Required -VariableName 'name'
+        New-ParamCompleter -Name macopt -Description $msg.mac_macopt -Type Required -VariableName 'nm:v'
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    )
 
     New-CommandCompleter -Name rand -Description $msg._rand -Style Unix -Parameters @(
         $outParam
