@@ -465,6 +465,29 @@ $msg = data { ConvertFrom-StringData @'
     pkey_pubcheck           = Check the correctness of either a public key or the public component of a key pair
     pkey_text_pub           = Output in text form only the public key components (also for private keys)
 
+    pkeyutl_rawin           = Indicate that the signature or verification input data is raw data
+    pkeyutl_digest          = Specify the digest algorithm used before signing or verifying
+    pkeyutl_secret          = Specify the shared-secret output filename
+    pkeyutl_sigfile         = Signature file, required and allowed for -verify operations only
+    pkeyutl_inkey           = The input key, by default it should be a private key
+    pkeyutl_certin          = The input is a certificate containing a public key
+    pkeyutl_rev             = Reverse the order of the input buffer
+    pkeyutl_sign            = Sign the input data and output the signed result
+    pkeyutl_verify          = Verify the input data against the signature given with the -sigfile option
+    pkeyutl_verifyrecover   = Verify the given signature and output the recovered data
+    pkeyutl_encrypt         = Encrypt the input data using a public key
+    pkeyutl_decrypt         = Decrypt the input data using a private key
+    pkeyutl_derive          = Derive a shared secret using own private (EC)DH key and peer key
+    pkeyutl_peerkey         = File containing the peer public or private (EC)DH key to use with the key derivation
+    pkeyutl_peerform        = The peer key format
+    pkeyutl_encap           = Use a Key Encapsulation Mechanism (KEM) to encapsulate a shared-secret to a peer's public key
+    pkeyutl_decap           = Decode an encapsulated secret, with the use of a -private key
+    pkeyutl_kemop           = Used with the -encap/-decap commands and specifies the KEM mode
+    pkeyutl_kdf             = Use key derivation function algorithm
+    pkeyutl_kdflen          = Set the output length for KDF
+    pkeyutl_hexdump         = hex dump the output data
+    pkeyutl_asn1parse       = Parse the ASN.1 output data to check its DER encoding and print any errors
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1512,5 +1535,41 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $nooutParam
         $checkParam
         $providerParams
+    ) -NoFileCompletions
+
+    New-CommandCompleter-Name pkeyutl -Description $msg._pkeyutl -Style Unix -Parameters @(
+        $inParam
+        New-ParamCompleter -Name rawin -Description $msg.pkeyutl_rawin
+        New-ParamCompleter -Name digest -Description $msg.pkeyutl_digest -Type Required -VariableName 'algorithm'
+        $outParam
+        New-ParamCompleter -Name secret -Description $msg.pkeyutl_secret -Type File -VariableName 'filename'
+        New-ParamCompleter -Name sigfile -Description $msg.pkeyutl_sigfile -Type File -VariableName 'file'
+        New-ParamCompleter -Name inkey -Description $msg.pkeyutl_inkey -Type File -VariableName 'filename|uri'
+        $keyformParam
+        $passinParam
+        $pubinParam
+        New-ParamCompleter -Name certin -Description $msg.pkeyutl_certin
+        New-ParamCompleter -Name rev -Description $msg.pkeyutl_rev
+        New-ParamCompleter -Name sign -Description $msg.pkeyutl_sign
+        New-ParamCompleter -Name verify -Description $msg.pkeyutl_verify
+        New-ParamCompleter -Name verifyrecover -Description $msg.pkeyutl_verifyrecover
+        New-ParamCompleter -Name encrypt -Description $msg.pkeyutl_encrypt
+        New-ParamCompleter -Name decrypt -Description $msg.pkeyutl_decrypt
+        New-ParamCompleter -Name derive -Description $msg.pkeyutl_derive
+        New-ParamCompleter -Name peerkey -Description $msg.pkeyutl_peerkey -Type File -VariableName 'file'
+        New-ParamCompleter -Name peerform -Description $msg.pkeyutl_peerform -Arguments $keyformArgs -VariableName 'form'
+        New-ParamCompleter -Name encap -Description $msg.pkeyutl_encap
+        New-ParamCompleter -Name decap -Description $msg.pkeyutl_decap
+        New-ParamCompleter -Name kemop -Description $msg.pkeyutl_kemop -Type Required -VariableName 'mode'
+        New-ParamCompleter -Name kdf -Description $msg.pkeyutl_kdf -Type Required -VariableName 'algorithm'
+        New-ParamCompleter -Name kdflen -Description $msg.pkeyutl_kdflen -Type Required -VariableName 'length'
+        $pkeyoptParam
+        New-ParamCompleter -Name pkeyopt_passin -Description $msg.pkeyutl_pkeyopt_passin -Type Required -VariableName 'arg' -ArgumentCompleter $passphraseCompleter
+        New-ParamCompleter -Name hexdump -Description $msg.pkeyutl_hexdump
+        New-ParamCompleter -Name asn1parse -Description $msg.pkeyutl_asn1parse
+        $randParam
+        $writerandParam
+        $providerParams
+        $configParam
     ) -NoFileCompletions
 ) -NoFileCompletions
