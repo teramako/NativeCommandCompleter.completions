@@ -442,6 +442,20 @@ $msg = data { ConvertFrom-StringData @'
     pkcs7_print             = Print out the full PKCS7 object
     pkcs7_print_certs       = Prints out any certificates or CRLs
 
+    pkcs8_topk8             = Write a private key as PKCS#8 format
+    pkcs8_traditional       = Write a private key as traditional format
+    pkcs8_iter              = Iteration count in deriving the encryption key
+    pkcs8_noiter            = use 1 as iteration count
+    pkcs8_nocrypt           = Generate an unencrypted PrivateKeyInfo structure
+    pkcs8_v2                = Set the PKCS#5 v2.0 algorithm
+    pkcs8_v2prf             = Set the PRF algorithm to use with PKCS#5 v2.0
+    pkcs8_v1                = Use PKCS#5 v1.5 or PKCS#12 algorithm
+    pkcs8_scrypt            = Use the scrypt algorithm for private key encryption
+    pkcs8_scrypt_N          = Modify scrypt parameter 'N'
+    pkcs8_scrypt_r          = Modify scrypt parameter 'r'
+    pkcs8_scrypt_p          = Modify scrypt parameter 'p'
+    pkcs8_saltlen           = Set the salt length for the PBE algorithm
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1420,6 +1434,30 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $quietParam
         $textParam
         $nooutParam
+        $providerParams
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name pkcs8 -Description $msg._pkcs8 -Style Unix -Parameters @(
+        New-ParamCompleter -Name topk8 -Description $msg.pkcs8_topk8
+        $informParam
+        $outformParam
+        New-ParamCompleter -Name traditional -Description $msg.pkcs8_traditional
+        $inParam
+        $passinParam
+        $outParam
+        New-ParamCompleter -Name iter -Description $msg.pkcs8_iter -Type Require -VariableName 'count'
+        New-ParamCompleter -Name noiter -Description $msg.pkcs8_noiter
+        New-ParamCompleter -Name nocrypt -Description $msg.pkcs8_nocrypt
+        New-ParamCompleter -Name v2 -Description $msg.pkcs8_v2 -VariableName 'alg' -Arguments "aes128", "aes256", "des3"
+        New-ParamCompleter -Name v2prf -Description $msg.pkcs8_v2prf -VariableName 'alg' -Arguments "hmacWithSHA256", "hmacWithSHA1"
+        New-ParamCompleter -Name v1 -Description $msg.pkcs8_v1 -VariableName 'alg'
+        New-ParamCompleter -Name scrypt -Description $msg.pkcs8_scrypt
+        New-ParamCompleter -Name scrypt_N -Description $msg.pkcs8_scrypt_N -Type Required -VariableName 'N'
+        New-ParamCompleter -Name scrypt_r -Description $msg.pkcs8_scrypt_r -Type Required -VariableName 'r'
+        New-ParamCompleter -Name scrypt_p -Description $msg.pkcs8_scrypt_p -Type Required -VariableName 'p'
+        New-ParamCompleter -Name saltlen -Description $msg.pkcs8_saltlen -Type Required -VariableName 'size'
+        $randParam
+        $writerandParam
         $providerParams
     ) -NoFileCompletions
 ) -NoFileCompletions
