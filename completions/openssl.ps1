@@ -606,6 +606,7 @@ $providerParam = New-ParamCompleter -Name provider -Description $msg.provider -T
 $providerPathParam = New-ParamCompleter -Name provider-path -Description $msg.providerParam -Type Directory -VariableName 'path'
 $provparamParam = New-ParamCompleter -Name provparam -Description $msg.provparam -Type Required -VariableName '[name:]key=value'
 $propqueryParam = New-ParamCompleter -Name propquery -Description $msg.propquery -Type Required -VariableName 'propq'
+$providerParams = $providerParam, $providerPathParam, $provparamParam, $propqueryParam
 
 $keyParam = New-ParamCompleter -Name key -Description $msg.key -Type File -VariableName 'file'
 $pkeyoptParam = New-ParamCompleter -Name pkeyopt -Description $msg.genpkey_pkeyopt -Type Required -VariableName 'opt:value' -ArgumentCompleter {
@@ -721,10 +722,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $engineParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
         New-ParamCompleter -Name gencrl -Description $msg.ca_gencrl
         New-ParamCompleter -Name crl_lastupdate -Description $msg.ca_crl_lastupdate -Type Required -VariableName 'time'
         New-ParamCompleter -Name crl_nextupdate -Description $msg.ca_crl_nextupdate -Type Required -VariableName 'time'
@@ -743,10 +741,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
     )
 
     New-CommandCompleter -Name ciphers -Description $msg._ciphers -Style Unix -Parameters @(
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
         New-ParamCompleter -Name s -Description $msg.ciphers_s
         New-ParamCompleter -Name psk -Description $msg.ciphers_psk
         $verbose2Param
@@ -787,10 +782,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $noCApathParam
         $CAstoreParam
         $noCAstoreParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name crl2pkcs7 -Description $msg._crl2pkcs7 -Style Unix -Parameters @(
@@ -800,10 +792,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $outParam
         New-ParamCompleter -Name certfile -Description $msg.crl2pkcs7_certfile -Type File -VariableName 'filename'
         New-ParamCompleter -Name nocrl -Description $msg.crl2pkcs7_nocrl
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name dgst -Description $msg._dgst -Style Unix -Parameters @(
@@ -831,10 +820,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $writerandParam
         $engineParam
         New-ParamCompleter -Name engine_impl -Description $msg.dgst_engine_impl -Type Required -VariableName 'id'
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     )
 
     New-CommandCompleter -Name dhparam -Description $msg._dhparam -Style Unix -Parameters @(
@@ -849,10 +835,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $textParam
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions -ArgumentCompleter {
         "512`tMinimum value",
         "2048`tDefault value",
@@ -874,10 +857,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $pvkStrongParam
         $pvkWeakParam
         $pvkNoneParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name dsaparam -Description $msg._dsaparam -Style Unix -Parameters @(
@@ -892,10 +872,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $quietParam
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name ec -Description $msg._ec -Style Unix -Parameters @(
@@ -916,10 +893,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name param_enc -Description $msg.ec_param_enc -Type Required -VariableName 'arg'
         New-ParamCompleter -Name no_public -Description $msg.ec_no_public
         $checkParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name ecparam -Description $msg._ecparam -Style Unix -Parameters @(
@@ -939,10 +913,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name genkey -Description $msg.ecparam_genkey
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name enc -Description $msg._enc -Style Unix -Parameters @(
@@ -975,10 +946,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name none -Description $msg.enc_null_cipher
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
         $engineParam
     )
 
@@ -992,10 +960,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $quietParam
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     )
 
     New-CommandCompleter -Name genrsa -Description $msg._genrsa -Style Unix -Parameters @(
@@ -1010,10 +975,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $engineParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name genpkey -Description $msg._genpkey -Style Unix -Parameters @(
@@ -1034,10 +996,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $engineParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
         $configParam
     ) -NoFileCompletions
 
@@ -1061,10 +1020,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name digest -Description $msg.kdf_digest -Type Required -VariableName 'name'
         New-ParamCompleter -Name mac -Description $msg.kdf_mac -Type Required -VariableName 'name'
         New-ParamCompleter -Name kdfopt -Description $msg.kdf_kdfopt -Type Required -VariableName 'nm:v'
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions -ArgumentCompleter {
         "TLS1-PRF", "HKDF", "SSKDF", "PBKDF2", "SSHKDF", "X942KDF-ASN1", "X942KDF-CONCAT", "X963KDF", "SCRYPT" |
             Where-Object { $_ -like "$wordToComplete*" }
@@ -1122,10 +1078,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $engineParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     )
 
     New-CommandCompleter -Name rsa -Description $msg._rsa -Style Unix -Parameters @(
@@ -1149,10 +1102,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $pvkWeakParam
         $pvkNoneParam
         $engineParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     )
 
     New-CommandCompleter -Name s_client -Description $msg._s_client -Style Unix -Parameters @(
@@ -1358,10 +1308,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $engineParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     )
 
     New-CommandCompleter -Name speed -Description $msg._speed -Style Unix -Parameters @(
@@ -1386,10 +1333,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name testmode -Description $msg.speed_testmode
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions -ArgumentCompleter {
         $list = 'md5', 'sha1', 'rmd160', 'sha256', 'sha512', 'hmac', 'des-ede3',
                 'aes-128-cbc', 'aes-192-cbc', 'aes-256-cbc',
@@ -1443,10 +1387,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name cipher -Description $msg.mac_cipher -Type Required -VariableName 'name'
         New-ParamCompleter -Name digest -Description $msg.mac_digest -Type Required -VariableName 'name'
         New-ParamCompleter -Name macopt -Description $msg.mac_macopt -Type Required -VariableName 'nm:v'
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     )
 
     New-CommandCompleter -Name rand -Description $msg._rand -Style Unix -Parameters @(
@@ -1456,10 +1397,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $engineParam
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 
     New-CommandCompleter -Name passwd -Description $msg._passwd -Style Unix -Parameters @(
@@ -1477,9 +1415,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name reverse -Description $msg.passwd_reverse
         $randParam
         $writerandParam
-        $providerParam
-        $providerPathParam
-        $provparamParam
-        $propqueryParam
+        $providerParams
     ) -NoFileCompletions
 ) -NoFileCompletions
