@@ -1504,4 +1504,13 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name ec_conv_form -Description $msg.ec_conv_form -Arguments "compressed", "uncompressed", "hybrid" -VariableName 'arg'
         New-ParamCompleter -Name ec_param_enc -Description $msg.ec_param_enc -Type Required -VariableName 'arg'
     ) -NoFileCompletions
+
+    New-CommandCompleter -Name pkeyparam -Description $msg._pkeyparam -Style Unix -Parameters @(
+        $inParam
+        $outParam
+        $textParam
+        $nooutParam
+        $checkParam
+        $providerParams
+    ) -NoFileCompletions
 ) -NoFileCompletions
