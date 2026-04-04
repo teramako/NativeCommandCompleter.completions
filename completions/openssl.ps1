@@ -478,7 +478,6 @@ $msg = data { ConvertFrom-StringData @'
 
     rand                    = A file or files containing random data used to seed the random number generator
     writerand               = Writes the seed data to the specified file
-    engine                  = Load the engine
 
     sigopt                  = Signature algorithm during sign operations
     vfyopt                  = Signature algorithm during verify operations
@@ -597,7 +596,6 @@ $nooutParam = New-ParamCompleter -Name noout -Description $msg.noout
 
 $randParam = New-ParamCompleter -Name rand -Description $msg.rand -Type File -VariableName 'files'
 $writerandParam = New-ParamCompleter -Name writerand -Description $msg.writerand -Type File -VariableName 'file'
-$engineParam = New-ParamCompleter -Name engine -Description $msg.engine -Type Required -VariableName 'id'
 
 $batchParam = New-ParamCompleter -Name batch -Description $msg.batch
 $utf8Param = New-ParamCompleter -Name utf8 -Description $msg.utf8
@@ -721,7 +719,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name rand_serial -Description $msg.ca_rand_serial
         $randParam
         $writerandParam
-        $engineParam
         $providerParams
         New-ParamCompleter -Name gencrl -Description $msg.ca_gencrl
         New-ParamCompleter -Name crl_lastupdate -Description $msg.ca_crl_lastupdate -Type Required -VariableName 'time'
@@ -818,7 +815,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name fips-fingerprint -Description $msg.dgst_fips_fingerprint
         $randParam
         $writerandParam
-        $engineParam
         New-ParamCompleter -Name engine_impl -Description $msg.dgst_engine_impl -Type Required -VariableName 'id'
         $providerParams
     )
@@ -947,7 +943,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $providerParams
-        $engineParam
     )
 
     New-CommandCompleter -Name errstr -Description $msg._errstr -Style Unix -NoFileCompletions
@@ -974,7 +969,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $traditionalParam
         $randParam
         $writerandParam
-        $engineParam
         $providerParams
     ) -NoFileCompletions
 
@@ -995,7 +989,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name text -Description $msg.genpkey_text
         $randParam
         $writerandParam
-        $engineParam
         $providerParams
         $configParam
     ) -NoFileCompletions
@@ -1077,7 +1070,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name nameopt -Description $msg.req_nameopt -Type Required -VariableName 'option'
         $randParam
         $writerandParam
-        $engineParam
         $providerParams
     )
 
@@ -1101,7 +1093,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $pvkStrongParam
         $pvkWeakParam
         $pvkNoneParam
-        $engineParam
         $providerParams
     )
 
@@ -1307,7 +1298,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
 
         $randParam
         $writerandParam
-        $engineParam
         $providerParams
     )
 
@@ -1394,7 +1384,6 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $outParam
         New-ParamCompleter -Name base64 -Description $msg.rand_base64
         New-ParamCompleter -Name hex -Description $msg.rand_hex
-        $engineParam
         $randParam
         $writerandParam
         $providerParams
