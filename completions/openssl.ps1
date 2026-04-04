@@ -439,6 +439,9 @@ $msg = data { ConvertFrom-StringData @'
     passwd_table            = In the output list, show "{cleartext}TAB{hash}"
     passwd_reverse          = When the -table option is used, reverse the order of {cleartext} and {hash}
 
+    pkcs7_print             = Print out the full PKCS7 object
+    pkcs7_print_certs       = Prints out any certificates or CRLs
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1404,6 +1407,19 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name reverse -Description $msg.passwd_reverse
         $randParam
         $writerandParam
+        $providerParams
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name pkcs7 -Description $msg._pkcs7 -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        New-ParamCompleter -Name print -Description $msg.pkcs7_print
+        New-ParamCompleter -Name print_certs -Description $msg.pkcs7_print_certs
+        $quietParam
+        $textParam
+        $nooutParam
         $providerParams
     ) -NoFileCompletions
 ) -NoFileCompletions
