@@ -462,6 +462,9 @@ $msg = data { ConvertFrom-StringData @'
     pkcs12_nocerts          = No certificates will be output
     pkcs12_legacy           = Use legacy mode of operation and automatically load the legacy provider
 
+    pkey_pubcheck           = Check the correctness of either a public key or the public component of a key pair
+    pkey_text_pub           = Output in text form only the public key components (also for private keys)
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1479,5 +1482,26 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $providerParams
         $randParam
         $writerandParam
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name pkey -Description $msg._pkey -Style Unix -Parameters @(
+        $providerParams
+        $checkParam
+        New-ParamCompleter -Name pubcheck -Description $msg.pkey_pubcheck
+        $inParam
+        $inform2Param
+        $passinParam
+        $pubinParam
+        $outParam
+        $outformParam
+        $cipherParams
+        $passoutParam
+        New-ParamCompleter -Name traditional -Description $msg.pkcs8_traditional
+        $puboutParam
+        $nooutParam
+        $textParam
+        New-ParamCompleter -Name text_pub -Description $msg.pkey_text_pub
+        New-ParamCompleter -Name ec_conv_form -Description $msg.ec_conv_form -Arguments "compressed", "uncompressed", "hybrid" -VariableName 'arg'
+        New-ParamCompleter -Name ec_param_enc -Description $msg.ec_param_enc -Type Required -VariableName 'arg'
     ) -NoFileCompletions
 ) -NoFileCompletions
