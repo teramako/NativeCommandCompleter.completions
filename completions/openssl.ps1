@@ -978,6 +978,8 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $engineParam
     )
 
+    New-CommandCompleter -Name errstr -Description $msg._errstr -Style Unix -NoFileCompletions
+
     New-CommandCompleter -Name genrsa -Description $msg._genrsa -Style Unix -Parameters @(
         $outParam
         $passoutParam
