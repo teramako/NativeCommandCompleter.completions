@@ -456,6 +456,12 @@ $msg = data { ConvertFrom-StringData @'
     pkcs8_scrypt_p          = Modify scrypt parameter 'p'
     pkcs8_saltlen           = Set the salt length for the PBE algorithm
 
+    pkcs12_password         = With -export, same as -passout, otherwise -passin
+    pkcs12_twopass          = Prompt for separate integrity and encryption passwords
+    pkcs12_nokeys           = No private keys will be output
+    pkcs12_nocerts          = No certificates will be output
+    pkcs12_legacy           = Use legacy mode of operation and automatically load the legacy provider
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1459,5 +1465,19 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $providerParams
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name pkcs12 -Description $msg._pkcs12 -Style Unix -Parameters @(
+        $passinParam
+        $passoutParam
+        New-ParamCompleter -Name password -Description $msg.pkcs12_password -VariableName 'arg' -ArgumentCompleter $passphraseCompleter
+        New-ParamCompleter -Name twopass -Description $msg.pkcs12_twopass
+        New-ParamCompleter -Name nokeys -Description $msg.pkcs12_nokeys
+        New-ParamCompleter -Name nocerts -Description $msg.pkcs12_nocerts
+        $nooutParam
+        New-ParamCompleter -Name legacy -Description $msg.pkcs12_legacy
+        $providerParams
+        $randParam
+        $writerandParam
     ) -NoFileCompletions
 ) -NoFileCompletions
