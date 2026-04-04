@@ -980,6 +980,20 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
 
     New-CommandCompleter -Name errstr -Description $msg._errstr -Style Unix -NoFileCompletions
 
+    New-CommandCompleter -Name gendsa -Description $msg._gendsa -Style Unix -Parameters @(
+        $outParam
+        $passoutParam
+        $encryptParams
+        $verboseParam
+        $quietParam
+        $randParam
+        $writerandParam
+        $providerParam
+        $providerPathParam
+        $provparamParam
+        $propqueryParam
+    )
+
     New-CommandCompleter -Name genrsa -Description $msg._genrsa -Style Unix -Parameters @(
         $outParam
         $passoutParam
