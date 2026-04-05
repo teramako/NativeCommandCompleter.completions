@@ -567,6 +567,35 @@ $msg = data { ConvertFrom-StringData @'
     storeutl_fingerprint    = Search for an object having the given fingerprint
     storeutl_digest         = The digest that was used to compute the fingerprint given with -fingerprint
 
+    ts_query                = Generate a TS query
+    ts_reply                = Generate a TS reply
+    ts_verify               = Verify a TS response
+    ts_query_data           = The data file for which the timestamp request needs to be created
+    ts_query_digest         = Specify the message imprint explicitly without the data file
+    ts_query_tspolicy       = The policy that the client expects the TSA to use for creating the timestamp token
+    ts_query_no_nonce       = No nonce is specified in the request
+    ts_query_cert           = The TSA is expected to include its signing certificate in the response
+    ts_query_in             = Specify a previously created timestamp request in DER format
+    ts_query_out            = Name of the output file to which the request will be written
+    ts_query_text           = Output human-readable text instead of DER
+    ts_reply_section        = The name of the config file section
+    ts_reply_queryfile      = The name of the file containing a DER encoded timestamp request
+    ts_reply_signer         = The signer certificate of the TSA in PEM format
+    ts_reply_inkey          = The signer private key of the TSA in PEM format
+    ts_reply_chain          = The collection of certificates in PEM format
+    ts_reply_tspolicy       = The default policy to use for the response
+    ts_reply_in             = Specify a previously created timestamp response or timestamp token
+    ts_reply_token_in       = Indicate that the input is a DER encoded timestamp token
+    ts_reply_out            = The response is written to this file
+    ts_reply_token_out      = Output a timestamp token instead of timestamp response
+    ts_reply_text           = Output human-readable text instead of DER
+    ts_verify_data          = The response or token must be verified against file_to_hash
+    ts_verify_digest        = The response or token must be verified against the message digest
+    ts_verify_queryfile     = The original timestamp request in DER format
+    ts_verify_in            = The timestamp response that needs to be verified in DER format
+    ts_verify_token_in      = Indicate that the input is a DER encoded timestamp token
+    ts_verify_untrusted     = Set of additional untrusted certificates
+
     provider                = Load and initialize the provider identified by name
     providerPath            = Specifies the search path that is to be used for looking for providers
     provparam               = Set configuration parameter key to value val in provider name (optional)
@@ -1754,4 +1783,49 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name digest -Description $msg.storeutl_digest
         $providerParams
     ) -NoFileCompletions
+
+    New-CommandCompleter -Name ts -Description $msg._ts -Style Unix -SubCommands @(
+        New-CommandCompleter -Name '-query' -Description $msg.ts_query -Style Unix -Parameters @(
+            $configParam
+            New-ParamCompleter -Name data -Description $msg.ts_query_data -Type File -VariableName 'file_to_hash'
+            New-ParamCompleter -Name digest -Description $msg.ts_query_digest -Type Required -VariableName 'digest_bytes'
+            $digestParams
+            New-ParamCompleter -Name tspolicy -Description $msg.ts_query_tspolicy -Type Required -VariableName 'object_id'
+            New-ParamCompleter -Name no_nonce -Description $msg.ts_query_no_nonce
+            New-ParamCompleter -Name cert -Description $msg.ts_query_cert
+            New-ParamCompleter -Name in -Description $msg.ts_query_in -Type File -VariableName 'request.tsq'
+            New-ParamCompleter -Name out -Description $msg.ts_query_out -Type File -VariableName 'request.tsq'
+            New-ParamCompleter -Name text -Description $msg.ts_query_text
+            $randParam
+            $writerandParam
+        ) -NoFileCompletions
+        New-CommandCompleter -Name '-reply' -Description $msg.ts_reply -Style Unix -Parameters @(
+            $configParam
+            New-ParamCompleter -Name section -Description $msg.ts_reply_section -Type Required -VariableName 'tsa_section'
+            New-ParamCompleter -Name queryfile -Description $msg.ts_reply_queryfile -Type File -VariableName 'request.tsq'
+            $passinParam
+            New-ParamCompleter -Name signer -Description $msg.ts_reply_signer -Type File -VariableName 'tsa_cert.pem'
+            New-ParamCompleter -Name inkey -Description $msg.ts_reply_inkey -Type File -VariableName 'filename|uri'
+            $digestParams
+            New-ParamCompleter -Name chain -Description $msg.ts_reply_chain -Type File -VariableName 'certs_file.pem'
+            New-ParamCompleter -Name tspolicy -Description $msg.ts_reply_tspolicy -Type Required -VariableName 'object_id'
+            New-ParamCompleter -Name in -Description $msg.ts_reply_in -Type File -VariableName 'request.tsr'
+            New-ParamCompleter -Name token_in -Description $msg.ts_reply_token_in
+            New-ParamCompleter -Name out -Description $msg.ts_reply_out -Type File -VariableName 'request.tsr'
+            New-ParamCompleter -Name token_out -Description $msg.ts_reply_out
+            New-ParamCompleter -Name text -Description $msg.ts_query_text
+            $providerParams
+        ) -NoFileCompletions
+        New-CommandCompleter -Name '-verify' -Description $msg.ts_verify -Style Unix -Parameters @(
+            New-ParamCompleter -Name data -Description $msg.ts_verify_data -Type File -VariableName 'file_to_hash'
+            New-ParamCompleter -Name digest -Description $msg.ts_verify_digest -Type Required -VariableName 'digest_bytes'
+            New-ParamCompleter -Name queryfile -Description $msg.ts_verify_queryfile -Type File -VariableName 'request.tsq'
+            New-ParamCompleter -Name in -Description $msg.ts_verify_in -Type File -VariableName 'request.tsr'
+            New-ParamCompleter -Name token_in -Description $msg.ts_verify_token_in
+            New-ParamCompleter -Name untrusted -Description $msg.ts_verify_untrusted -Type File -VariableName 'files|uris'
+            $CAfileParam
+            $CApathParam
+            $CAstoreParam
+        )
+    )
 ) -NoFileCompletions
