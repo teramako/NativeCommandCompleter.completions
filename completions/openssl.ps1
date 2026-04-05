@@ -393,6 +393,35 @@ $msg = data { ConvertFrom-StringData @'
     sess_id_cert            = Output a certificate if present in the session
     sess_id_context         = Output session information uses the supplied ID
 
+    smime_encrypt           = Encrypt mail for the given recipient certificates
+    smime_decrypt           = Decrypt mail using the supplied certificate and private key
+    smime_sign              = Sign mail using the supplied certificate and private key
+    smime_resign            = Resign a message
+    smime_verify            = Verify signed mail
+    smime_pk7out            = Write out a PEM encoded PKCS#7 structure
+    smime_indef             = Enable streaming I/O for encoding operations
+    smime_noindef           = Disable streaming I/O
+    smime_content           = File containing the detached content, only useful with the -verify
+    smime_text              = Adds 'text/plain' MIME headers to the supplied message if encrypting or signing
+    smime_md                = Digest algorithm to use when signing or resigning
+    smime_nointern          = Use only the certificates specified in the -certfile
+    smime_noverify          = Do not verify the signers certificate of a signed message
+    smime_nochain           = Do not do chain verification of signers certificates
+    smime_nosigs            = Don't try to verify the signatures on the message
+    smime_nocerts           = Do not include the signer's certificate when signing
+    smime_noattr            = Do not include a set of attributes when signing
+    smime_nodetach          = Use opaque signing when signing
+    smime_nosmimecap        = Do not include the SMIMECapabilities attribute when signing
+    smime_binary            = Do not convert to "canonical" format
+    smime_crlfeol           = Use CRLF as end of line instead of LF
+    smime_certfile          = Allows additional certificates to be specified
+    smime_signer            = A signing certificate when signing or resigning a message
+    smime_recip             = The recipients certificate when decrypting a message
+    smime_inkey             = The private key to use when signing or decrypting
+    smime_to                = Add mail header 'To'
+    smime_from              = Add mail header 'From'
+    smime_subject           = Add mail header 'Subject'
+
     verify_CRLfile          = The file or URI should contain one or more CRLs in PEM or DER format
     verify_show_chain       = Display information about the certificate chain
     verify_trusted          = A file or URI of (more or less) trusted certificates
@@ -581,6 +610,8 @@ $keyformArgs = @(
     "P12`t{0}" -f $msg.format_P12
     "ENGINE`t{0}" -f $msg.format_ENGINE
 )
+$smimeformArgs = @( $formArgs; "SMIME`t{0}" -f $msg.format_SMIME )
+$smimekeyformArgs = @( $certformArgs; "SMIME`t{0}" -f $msg.format_SMIME )
 $informParam = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $formArgs -VariableName 'format'
 $inform2Param = New-ParamCompleter -Name inform -Description $msg.inform -Arguments $keyformArgs -VariableName 'format'
 $outformParam = New-ParamCompleter -Name outform -Description $msg.outform -Arguments $formArgs -VariableName 'format'
@@ -1646,5 +1677,53 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name cert -Description $msg.sess_id_cert
         $nooutParam
         New-ParamCompleter -name context -Description $msg.sess_id_context -Type Required -VariableName 'ID'
+    )
+
+    New-CommandCompleter -Name smime -Description $msg._smime -Style Unix -Parameters @(
+        New-ParamCompleter -Name encrypt -Description $msg.smime_encrypt
+        New-ParamCompleter -Name decrypt -Description $msg.smime_decrypt
+        New-ParamCompleter -Name sign -Description $msg.smime_sign
+        New-ParamCompleter -Name resign -Description $msg.smime_resign
+        New-ParamCompleter -Name verify -Description $msg.smime_verify
+        New-ParamCompleter -Name pk7out -Description $msg.smime_pk7out
+        $inParam
+        $outParam
+        New-ParamCompleter -Name inform -Description $msg.inform -Arguments $smimeformArgs -VariableName 'format'
+        New-ParamCompleter -Name outform -Description $msg.outform -Arguments $smimeformArgs -VariableName 'format'
+        New-ParamCompleter -Name keyform -Description $msg.keyform -Arguments $smimekeyformArgs -VariableName 'format'
+        New-ParamCompleter -Name stream,indef -Description $msg.smime_indef
+        New-ParamCompleter -Name noindef -Description $msg.smime_noindef
+        New-ParamCompleter -Name content -Description $msg.smime_content -Type File -VariableName 'filename'
+        New-ParamCompleter -Name text -Description $msg.smime_text
+        New-ParamCompleter -Name md -Description $msg.smime_md -Arguments $digests -VariableName 'digest'
+        $cipherParams
+        New-ParamCompleter -Name nointern -Description $msg.smime_nointern
+        New-ParamCompleter -Name noverify -Description $msg.smime_noverify
+        New-ParamCompleter -Name nochain -Description $msg.smime_nochain
+        New-ParamCompleter -Name nosigs -Description $msg.smime_nosigs
+        New-ParamCompleter -Name nocerts -Description $msg.smime_nocerts
+        New-ParamCompleter -Name noattr -Description $msg.smime_noattr
+        New-ParamCompleter -Name nodetach -Description $msg.smime_nodetach
+        New-ParamCompleter -Name nosmimecap -Description $msg.smime_nosmimecap
+        New-ParamCompleter -Name binary -Description $msg.smime_binary
+        New-ParamCompleter -Name crlfeol -Description $msg.smime_crlfeol
+        New-ParamCompleter -Name certfile -Description $msg.smime_certfile -Type File -VariableName 'file'
+        New-ParamCompleter -Name signer -Description $msg.smime_signer -Type File -VariableName 'file'
+        New-ParamCompleter -Name recip -Description $msg.smime_recip -Type File -VariableName 'file'
+        New-ParamCompleter -Name inkey -Description $msg.smime_inkey -Type File -VariableName 'filename|uri'
+        $passinParam
+        New-ParamCompleter -Name to -Description $msg.smime_to -Type Required -VariableName 'addr'
+        New-ParamCompleter -Name from -Description $msg.smime_from -Type Required -VariableName 'addr'
+        New-ParamCompleter -Name subject -Description $msg.smime_subject -Type Required -VariableName 's'
+        $CAfileParam
+        $noCAfileParam
+        $CApathParam
+        $noCApathParam
+        $CAstoreParam
+        $noCAstoreParam
+        $randParam
+        $writerandParam
+        $providerParams
+        $configParam
     )
 ) -NoFileCompletions
