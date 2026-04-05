@@ -680,12 +680,11 @@ $passphraseCompleter = {
         }
         'file:*' {
             $w = $wordToComplete.Split(':', 2)[1]
-            [MT.Comp.Helper]::CompleteFilename($w, $this.CurrentDirectory, $true) |
-                ForEach-Object { $_.SetPrefix('file:') }
+            [MT.Comp.Helper]::CompleteFilename($w, $this.CurrentDirectory, $true, $false, $null, 'file:')
         }
         'fd:*' { $null }
         'stdin' { $null }
-        default: {
+        default {
             @(
                 "pass:`tThe actual password",
                 "env:`tFrom Environment variable",
