@@ -488,6 +488,11 @@ $msg = data { ConvertFrom-StringData @'
     pkeyutl_hexdump         = hex dump the output data
     pkeyutl_asn1parse       = Parse the ASN.1 output data to check its DER encoding and print any errors
 
+    prime_hex               = Enable hex format for output or input to primality checking
+    prime_generate          = Generate a prime number
+    prime_bits              = Generate a prime with num bits
+    prime_safe              = Generate a "safe" prime
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1571,5 +1576,14 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $writerandParam
         $providerParams
         $configParam
+    ) -NoFileCompletions
+
+    New-CommandCompleter -Name prime -Description $msg._prime -Style Unix -Parameters @(
+        New-ParamCompleter -Name hex -Description $msg.prime_hex
+        $inParam
+        New-ParamCompleter -Name generate -Description $msg.prime_generate
+        New-ParamCompleter -Name bits -Description $msg.prime_bits -Type Required -VariableName 'num'
+        New-ParamCompleter -Name safe -Description $msg.prime_safe
+        $providerParams
     ) -NoFileCompletions
 ) -NoFileCompletions
