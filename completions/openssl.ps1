@@ -390,6 +390,9 @@ $msg = data { ConvertFrom-StringData @'
     s_time_bugs             = Enable various workarounds for SSL/TLS bugs
     s_time_time             = Connection time to the server (seconds)
 
+    sess_id_cert            = Output a certificate if present in the session
+    sess_id_context         = Output session information uses the supplied ID
+
     verify_CRLfile          = The file or URI should contain one or more CRLs in PEM or DER format
     verify_show_chain       = Display information about the certificate chain
     verify_trusted          = A file or URI of (more or less) trusted certificates
@@ -1632,5 +1635,16 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name compat -Description $msg.rehash_compat
         New-ParamCompleter -Name v -Description $msg.rehash_v
         $providerParams
+    )
+
+    New-CommandCompleter -Name sess_id -Description $msg._sess_id -Style Unix -Parameters @(
+        $informParam
+        $outformParam
+        $inParam
+        $outParam
+        $textParam
+        New-ParamCompleter -Name cert -Description $msg.sess_id_cert
+        $nooutParam
+        New-ParamCompleter -name context -Description $msg.sess_id_context -Type Required -VariableName 'ID'
     )
 ) -NoFileCompletions
