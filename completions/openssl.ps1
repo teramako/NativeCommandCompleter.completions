@@ -556,6 +556,17 @@ $msg = data { ConvertFrom-StringData @'
     speed_mlock             = Lock memory into RAM for more deterministic measurements
     speed_testmode          = Runs only 1 iteration of each algorithm test
 
+    storeutl_r              = Fetch objects recursively when possible
+    storeutl_certs          = Only select the certificates
+    storeutl_keys           = Only select the keys
+    storeutl_crls           = Only select the CRLs
+    storeutl_subject        = Search for an object having the subject name
+    storeutl_issuer         = Search for an object having the issuer name
+    storeutl_serial         = Search for an object having the serial number
+    storeutl_alias          = Search for an object having the given alias
+    storeutl_fingerprint    = Search for an object having the given fingerprint
+    storeutl_digest         = The digest that was used to compute the fingerprint given with -fingerprint
+
     provider                = Load and initialize the provider identified by name
     providerPath            = Specifies the search path that is to be used for looking for providers
     provparam               = Set configuration parameter key to value val in provider name (optional)
@@ -1726,4 +1737,22 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $providerParams
         $configParam
     )
+
+    New-CommandCompleter -Name storeutl -Description $msg._storeutl-Style Unix -Parameters @(
+        $outParam
+        $nooutParam
+        $passinParam
+        $textParam
+        New-ParamCompleter -Name r -Description $msg.storeutl_r
+        New-ParamCompleter -Name certs -Description $msg.storeutl_certs
+        New-ParamCompleter -Name keys -Description $msg.storeutl_keys
+        New-ParamCompleter -Name crls -Description $msg.storeutl_crls
+        New-ParamCompleter -Name subject -Description $msg.storeutl_subject -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name issuer -Description $msg.storeutl_issuer -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name serial -Description $msg.storeutl_serial -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name alias -Description $msg.storeutl_alias -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name fingerprint -Description $msg.storeutl_fingerprint -Type Required -VariableName 'arg'
+        New-ParamCompleter -Name digest -Description $msg.storeutl_digest
+        $providerParams
+    ) -NoFileCompletions
 ) -NoFileCompletions
