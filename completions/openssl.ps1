@@ -712,7 +712,7 @@ $batchParam = New-ParamCompleter -Name batch -Description $msg.batch
 $utf8Param = New-ParamCompleter -Name utf8 -Description $msg.utf8
 
 $providerParam = New-ParamCompleter -Name provider -Description $msg.provider -Type Required -VariableName 'name'
-$providerPathParam = New-ParamCompleter -Name provider-path -Description $msg.providerParam -Type Directory -VariableName 'path'
+$providerPathParam = New-ParamCompleter -Name provider-path -Description $msg.providerPath -Type Directory -VariableName 'path'
 $provparamParam = New-ParamCompleter -Name provparam -Description $msg.provparam -Type Required -VariableName '[name:]key=value'
 $propqueryParam = New-ParamCompleter -Name propquery -Description $msg.propquery -Type Required -VariableName 'propq'
 $providerParams = $providerParam, $providerPathParam, $provparamParam, $propqueryParam
