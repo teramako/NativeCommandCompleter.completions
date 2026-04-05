@@ -493,6 +493,11 @@ $msg = data { ConvertFrom-StringData @'
     prime_bits              = Generate a prime with num bits
     prime_safe              = Generate a "safe" prime
 
+    rehash_old              = Use old-style hashing (MD5, as opposed to SHA-1) for generating links
+    rehash_n                = Do not remove existing links
+    rehash_compat           = Generate links for both old-style (MD5) and new-style (SHA1) hashing
+    rehash_v                = Print messages about old links removed and new links created
+
     speed_elapsed           = Measure time in real time
     speed_evp               = Use EVP cipher
     speed_multi             = Run multiple operations in parallel
@@ -1586,4 +1591,12 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name safe -Description $msg.prime_safe
         $providerParams
     ) -NoFileCompletions
+
+    New-CommandCompleter -Name rehash -Description $msg._rehash -Style Unix -Parameters @(
+        New-ParamCompleter -Name old -Description $msg.rehash_old
+        New-ParamCompleter -Name n -Description $msg.rehash_n
+        New-ParamCompleter -Name compat -Description $msg.rehash_compat
+        New-ParamCompleter -Name v -Description $msg.rehash_v
+        $providerParams
+    )
 ) -NoFileCompletions
