@@ -106,6 +106,7 @@ $msg = data { ConvertFrom-StringData @'
     crlf                    = Convert LF to CRLF
     ign_eof                 = Ignore input EOF
     no_ign_eof              = Don't ignore input EOF
+    ssl3                    = Use SSLv3
     tls1                    = Use TLSv1
     tls1_1                  = Use TLSv1.1
     tls1_2                  = Use TLSv1.2
@@ -382,6 +383,12 @@ $msg = data { ConvertFrom-StringData @'
     s_server_context        = Sets the SSL context id
     s_server_www            = Respond to WWW style requests
     s_server_http           = Respond to WWW style requests, serve files
+
+    s_time_www              = Specify the page to GET from the server
+    s_time_new              = Use a new session ID for each connection
+    s_time_reuse            = Use the same session ID
+    s_time_bugs             = Enable various workarounds for SSL/TLS bugs
+    s_time_time             = Connection time to the server (seconds)
 
     verify_CRLfile          = The file or URI should contain one or more CRLs in PEM or DER format
     verify_show_chain       = Display information about the certificate chain
@@ -1269,6 +1276,33 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name cipher -Description $msg.cipher -Type Required -VariableName 'cipherlist'
         New-ParamCompleter -Name nbio -Description $msg.nbio
     )
+
+    New-CommandCompleter -Name s_time -Description $msg._s_time -Style Unix -Parameters @(
+        New-ParamCompleter -Name connect -Description $msg.connect -Type Required -VariableName 'host:port'
+        New-ParamCompleter -Name www -Description $msg.s_time_www -Type Required -VariableName 'page'
+        $certParam
+        $keyParam
+        New-ParamCompleter -Name verify -Description $msg.s_server_verify -Type Required -VariableName 'depth'
+        New-ParamCompleter -Name new -Description $msg.s_time_new
+        New-ParamCompleter -Name reuse -Description $msg.s_time_reuse
+        New-ParamCompleter -Name bugs -Description $msg.s_time_bugs
+        New-ParamCompleter -Name cipher -Description $msg.cipher -Type Required -VariableName 'cipherlist'
+        New-ParamCompleter -Name ciphersuites -Description $msg.ciphers_ciphersuites -Type Required -VariableName 'val'
+        New-ParamCompleter -Name time -Description $msg.s_time_time -Type Required -VariableName 'length'
+        New-ParamCompleter -Name nameopt -Description $msg.verify_nameopt -Type Required -VariableName 'option'
+        $CAfileParam
+        $noCAfileParam
+        $CApathParam
+        $noCApathParam
+        $CAstoreParam
+        $noCAstoreParam
+        $providerParams
+        New-ParamCompleter -Name ssl3 -Description $msg.ssl3
+        New-ParamCompleter -Name tls1 -Description $msg.tls1
+        New-ParamCompleter -Name tls1_1 -Description $msg.tls1_1
+        New-ParamCompleter -Name tls1_2 -Description $msg.tls1_2
+        New-ParamCompleter -Name tls1_3 -Description $msg.tls1_3
+    ) -NoFileCompletions
 
     New-CommandCompleter -Name verify -Description $msg._verify -Style Unix -Parameters @(
         New-ParamCompleter -Name CRLfile -Description $msg.verify_CRLfile -Type File -VariableName 'filename|uri'
