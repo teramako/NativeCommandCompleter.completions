@@ -1625,7 +1625,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $providerParams
     ) -NoFileCompletions
 
-    New-CommandCompleter-Name pkeyutl -Description $msg._pkeyutl -Style Unix -Parameters @(
+    New-CommandCompleter -Name pkeyutl -Description $msg._pkeyutl -Style Unix -Parameters @(
         $inParam
         New-ParamCompleter -Name rawin -Description $msg.pkeyutl_rawin
         New-ParamCompleter -Name digest -Description $msg.pkeyutl_digest -Type Required -VariableName 'algorithm'
