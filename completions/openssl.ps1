@@ -1275,7 +1275,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $CApathParam
         New-ParamCompleter -Name cipher -Description $msg.cipher -Type Required -VariableName 'cipherlist'
         New-ParamCompleter -Name nbio -Description $msg.nbio
-    )
+    ) -NoFileCompletions
 
     New-CommandCompleter -Name s_time -Description $msg._s_time -Style Unix -Parameters @(
         New-ParamCompleter -Name connect -Description $msg.connect -Type Required -VariableName 'host:port'
