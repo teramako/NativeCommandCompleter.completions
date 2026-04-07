@@ -11,11 +11,7 @@ $msg = data { ConvertFrom-StringData @'
     image                           = Manage images
     manifest                        = Manage Docker image manifests and manifest lists
     network                         = Manage networks
-    node                            = Manage Swarm nodes
     plugin                          = Manage plugins
-    secret                          = Manage Swarm secrets
-    service                         = Manage Swarm services
-    stack                           = Manage Swarm stacks
     system                          = Manage Docker
     volume                          = Manage volumes
     attach                          = Attach local standard input, output, and error streams to a running container
@@ -349,14 +345,6 @@ $msg = data { ConvertFrom-StringData @'
     volume_rm                       = Remove one or more volumes
     volume_rm_force                 = Force the removal of one or more volumes
 
-    node_demote                     = Demote one or more nodes from manager in the swarm
-    node_inspect                    = Display detailed information on one or more nodes
-    node_ls                         = List nodes in the swarm
-    node_promote                    = Promote one or more nodes to manager in the swarm
-    node_ps                         = List tasks running on one or more nodes, defaults to current node
-    node_rm                         = Remove one or more nodes from the swarm
-    node_update                     = Update a node
-
     plugin_create                   = Create a plugin from a rootfs and configuration
     plugin_disable                  = Disable a plugin
     plugin_enable                   = Enable a plugin
@@ -368,26 +356,6 @@ $msg = data { ConvertFrom-StringData @'
     plugin_set                      = Change settings for a plugin
     plugin_upgrade                  = Upgrade an existing plugin
 
-    secret_create                   = Create a secret from a file or STDIN as content
-    secret_inspect                  = Display detailed information on one or more secrets
-    secret_ls                       = List secrets
-    secret_rm                       = Remove one or more secrets
-    service_create                  = Create a new service
-    service_inspect                 = Display detailed information on one or more services
-    service_logs                    = Fetch the logs of a service or task
-    service_ls                      = List services
-    service_ps                      = List the tasks of one or more services
-    service_rm                      = Remove one or more services
-    service_rollback                = Revert changes to a service config
-    service_scale                   = Scale one or multiple replicated services
-    service_update                  = Update a service
-
-    stack_config                    = Outputs the final config file, after doing merges and interpolations
-    stack_deploy                    = Deploy a new stack or update an existing stack
-    stack_ls                        = List stacks
-    stack_ps                        = List the tasks in the stack
-    stack_rm                        = Remove one or more stacks
-    stack_services                  = List the services in the stack
 
     system_df                       = Show docker disk usage
     system_df_format                = Format output using a custom template
@@ -411,10 +379,6 @@ $msg = data { ConvertFrom-StringData @'
     login_password_stdin            = Take the password from stdin
     login_username                  = Username
 
-    stats_all                       = Show all containers (default shows just running)
-    stats_format                    = Format output using a custom template
-    stats_no_stream                 = Disable streaming stats and only pull the first result
-    stats_no_trunc                  = Do not truncate output
 
     update_blkio_weight             = Block IO (relative weight), between 10 and 1000, or 0 to disable
     update_cpu_period               = Limit CPU CFS period
@@ -870,16 +834,6 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
         New-CommandCompleter -Name rm         -Description $msg.network_rm         -NoFileCompletions -ArgumentCompleter $networkCompleter
     ) -NoFileCompletions
 
-    New-CommandCompleter -Name node -Description $msg.node -SubCommands @(
-        New-CommandCompleter -Name demote   -Description $msg.node_demote
-        New-CommandCompleter -Name inspect  -Description $msg.node_inspect
-        New-CommandCompleter -Name ls       -Description $msg.node_ls
-        New-CommandCompleter -Name promote  -Description $msg.node_promote
-        New-CommandCompleter -Name ps       -Description $msg.node_ps
-        New-CommandCompleter -Name rm       -Description $msg.node_rm
-        New-CommandCompleter -Name update   -Description $msg.node_update
-    ) -NoFileCompletions
-
     New-CommandCompleter -Name plugin -Description $msg.plugin -SubCommands @(
         New-CommandCompleter -Name create   -Description $msg.plugin_create
         New-CommandCompleter -Name disable  -Description $msg.plugin_disable
@@ -891,34 +845,6 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
         New-CommandCompleter -Name rm       -Description $msg.plugin_rm
         New-CommandCompleter -Name set      -Description $msg.plugin_set
         New-CommandCompleter -Name upgrade  -Description $msg.plugin_upgrade
-    ) -NoFileCompletions
-
-    New-CommandCompleter -Name secret -Description $msg.secret -SubCommands @(
-        New-CommandCompleter -Name create   -Description $msg.secret_create
-        New-CommandCompleter -Name inspect  -Description $msg.secret_inspect
-        New-CommandCompleter -Name ls       -Description $msg.secret_ls
-        New-CommandCompleter -Name rm       -Description $msg.secret_rm
-    ) -NoFileCompletions
-
-    New-CommandCompleter -Name service -Description $msg.service -SubCommands @(
-        New-CommandCompleter -Name create   -Description $msg.service_create
-        New-CommandCompleter -Name inspect  -Description $msg.service_inspect
-        New-CommandCompleter -Name logs     -Description $msg.service_logs
-        New-CommandCompleter -Name ls       -Description $msg.service_ls
-        New-CommandCompleter -Name ps       -Description $msg.service_ps
-        New-CommandCompleter -Name rm       -Description $msg.service_rm
-        New-CommandCompleter -Name rollback -Description $msg.service_rollback
-        New-CommandCompleter -Name scale    -Description $msg.service_scale
-        New-CommandCompleter -Name update   -Description $msg.service_update
-    ) -NoFileCompletions
-
-    New-CommandCompleter -Name stack -Description $msg.stack -SubCommands @(
-        New-CommandCompleter -Name config   -Description $msg.stack_config
-        New-CommandCompleter -Name deploy   -Description $msg.stack_deploy
-        New-CommandCompleter -Name ls       -Description $msg.stack_ls
-        New-CommandCompleter -Name ps       -Description $msg.stack_ps
-        New-CommandCompleter -Name rm       -Description $msg.stack_rm
-        New-CommandCompleter -Name services -Description $msg.stack_services
     ) -NoFileCompletions
 
     New-CommandCompleter -Name system -Description $msg.system -SubCommands @(
