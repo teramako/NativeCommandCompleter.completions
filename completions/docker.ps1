@@ -17,7 +17,6 @@ $msg = data { ConvertFrom-StringData @'
     service                         = Manage Swarm services
     stack                           = Manage Swarm stacks
     system                          = Manage Docker
-    trust                           = Manage trust on Docker images
     volume                          = Manage volumes
     attach                          = Attach local standard input, output, and error streams to a running container
     build                           = Build an image from a Dockerfile
@@ -332,16 +331,6 @@ $msg = data { ConvertFrom-StringData @'
 
     network_prune_filter            = Provide filter values
     network_prune_force             = Do not prompt for confirmation
-
-    trust_inspect                   = Return low-level information about keys and signatures
-    trust_key                       = Manage keys for signing Docker images
-    trust_key_generate              = Generate and load a signing key-pair
-    trust_key_load                  = Load a private key file for signing
-    trust_revoke                    = Remove trust for an image
-    trust_sign                      = Sign an image
-    trust_signer                    = Manage entities who can sign Docker images
-    trust_signer_add                = Add a signer
-    trust_signer_remove             = Remove a signer
 
     volume_create                   = Create a volume
     volume_create_driver            = Specify volume driver name
@@ -951,20 +940,6 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
             New-ParamCompleter              -LongName filter  -Description $msg.system_prune_filter  -Type Required -VariableName 'FILTER'
             New-ParamCompleter -ShortName f -LongName force   -Description $msg.system_prune_force
             New-ParamCompleter              -LongName volumes -Description $msg.system_prune_volumes
-        )
-    ) -NoFileCompletions
-
-    New-CommandCompleter -Name trust -Description $msg.trust -SubCommands @(
-        New-CommandCompleter -Name inspect  -Description $msg.trust_inspect
-        New-CommandCompleter -Name key      -Description $msg.trust_key -SubCommands @(
-            New-CommandCompleter -Name generate -Description $msg.trust_key_generate
-            New-CommandCompleter -Name load     -Description $msg.trust_key_load
-        )
-        New-CommandCompleter -Name revoke   -Description $msg.trust_revoke
-        New-CommandCompleter -Name sign     -Description $msg.trust_sign
-        New-CommandCompleter -Name signer   -Description $msg.trust_signer -SubCommands @(
-            New-CommandCompleter -Name add    -Description $msg.trust_signer_add
-            New-CommandCompleter -Name remove -Description $msg.trust_signer_remove
         )
     ) -NoFileCompletions
 
