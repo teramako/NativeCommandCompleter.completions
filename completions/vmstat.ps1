@@ -15,9 +15,9 @@ $msg = data { ConvertFrom-StringData @'
     partition           = Display partition statistics
     unit                = Output unit
     unit_k              = Output in 1000 bytes
-    unit_K              = Output in 1024 bytes
+    unit_Kib            = Output in 1024 bytes
     unit_m              = Output in 1000000 bytes
-    unit_M              = Output in 1048576 bytes
+    unit_Mib            = Output in 1048576 bytes
     timestamp           = Append timestamp to each line
     wide                = Wide output mode
     noFirst             = Skip first report
@@ -38,9 +38,9 @@ Register-NativeCompleter -Name vmstat -Description $msg.vmstat -Parameters @(
     New-ParamCompleter -ShortName p -LongName partition -Description $msg.partition -VariableName 'device'
     New-ParamCompleter -ShortName S -LongName unit -Description $msg.unit -Arguments @(
         "k`t{0}" -f $msg.unit_k
-        "K`t{0}" -f $msg.unit_K
+        "K`t{0}" -f $msg.unit_Kib
         "m`t{0}" -f $msg.unit_m
-        "M`t{0}" -f $msg.unit_M
+        "M`t{0}" -f $msg.unit_Mib
     ) -VariableName 'UNIT'
     New-ParamCompleter -ShortName t -LongName timestamp -Description $msg.timestamp
     New-ParamCompleter -ShortName w -LongName wide -Description $msg.wide
