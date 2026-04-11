@@ -150,7 +150,7 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
     New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -Type File
-    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -Type Required
+    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPTION'
     New-ParamCompleter -ShortName y -LongName yes, assume-yes -Description $msg.assumeYes
     New-ParamCompleter -LongName assume-no -Description $msg.assumeNo
     New-ParamCompleter -LongName no-install-recommends -Description $msg.noInstallRecommends
