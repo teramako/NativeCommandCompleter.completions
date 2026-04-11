@@ -51,9 +51,9 @@ else
         New-ParamCompleter -ShortName u -Description $msg.bsd_utc
         New-ParamCompleter -ShortName j -Description $msg.bsd_dontSet
         New-ParamCompleter -ShortName r -Description $msg.bsd_mtimeOrTimestamp -VariableName 'FILE-OR-SECONDS'
-        New-ParamCompleter -ShortName v -Description $msg.bsd_adjust -Type Required
+        New-ParamCompleter -ShortName v -Description $msg.bsd_adjust -VariableName '[+|-]val[y|m|w|d|H|M|S]'
         New-ParamCompleter -ShortName R -Description $msg.bsd_rfc2822
         New-ParamCompleter -ShortName I -Description $msg.bsd_iso8601 -Arguments "date","hours","minutes","seconds" -VariableName 'FMT'
-        New-ParamCompleter -ShortName f -Description $msg.bsd_format -Type Required
+        New-ParamCompleter -ShortName f -Description $msg.bsd_format -VariableName 'input_fmt'
     ) -NoFileCompletions
 }
