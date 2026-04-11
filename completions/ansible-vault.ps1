@@ -31,7 +31,7 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$vaultIdParam = New-ParamCompleter -LongName vault-id -Description $msg.vault_id -Type Required -VariableName 'VAULT_ID'
+$vaultIdParam = New-ParamCompleter -LongName vault-id -Description $msg.vault_id -VariableName 'VAULT_ID'
 $vaultPasswordFileParam = New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -Type File -VariableName 'VAULT_PASSWORD_FILE'
 $askVaultPassParam = New-ParamCompleter -LongName ask-vault-password, ask-vault-pass -Description $msg.ask_vault_pass
 $verboseParam = New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
@@ -80,10 +80,10 @@ Register-NativeCompleter -Name ansible-vault -Description $msg.ansible_vault -Pa
         $vaultIdParam
         $vaultPasswordFileParam
         $askVaultPassParam
-        New-ParamCompleter -LongName stdin-name -Description $msg.encrypt_string_stdin_name -Type Required -VariableName 'ENCRYPT_STRING_STDIN_NAME'
+        New-ParamCompleter -LongName stdin-name -Description $msg.encrypt_string_stdin_name -VariableName 'ENCRYPT_STRING_STDIN_NAME'
         New-ParamCompleter -ShortName p -LongName prompt -Description $msg.encrypt_string_prompt
         New-ParamCompleter -LongName show-input -Description $msg.encrypt_string_show_input
-        New-ParamCompleter -ShortName n -LongName name -Description $msg.encrypt_string_name -Type Required -VariableName 'ENCRYPT_STRING_NAME'
+        New-ParamCompleter -ShortName n -LongName name -Description $msg.encrypt_string_name -VariableName 'ENCRYPT_STRING_NAME'
         New-ParamCompleter -LongName output -Description $msg.output -Type File -VariableName 'OUTPUT_FILE'
         $verboseParam
         $helpParam
@@ -93,7 +93,7 @@ Register-NativeCompleter -Name ansible-vault -Description $msg.ansible_vault -Pa
         $vaultIdParam
         $vaultPasswordFileParam
         $askVaultPassParam
-        New-ParamCompleter -LongName new-vault-id -Description $msg.new_vault_id -Type Required -VariableName 'NEW_VAULT_ID'
+        New-ParamCompleter -LongName new-vault-id -Description $msg.new_vault_id -VariableName 'NEW_VAULT_ID'
         New-ParamCompleter -LongName new-vault-password-file -Description $msg.new_vault_password_file -Type File -VariableName 'NEW_VAULT_PASSWORD_FILE'
         $verboseParam
         $helpParam

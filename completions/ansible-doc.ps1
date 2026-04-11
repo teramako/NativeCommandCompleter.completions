@@ -56,11 +56,11 @@ $pluginTypes = @(
 
 Register-NativeCompleter -Name ansible-doc -Parameters @(
     New-ParamCompleter -ShortName a -LongName all -Description $msg.all
-    New-ParamCompleter -ShortName e -LongName entry-point -Description $msg.entry_point -Type Required -VariableName 'ENTRY_POINT'
+    New-ParamCompleter -ShortName e -LongName entry-point -Description $msg.entry_point -VariableName 'ENTRY_POINT'
     New-ParamCompleter -ShortName j -LongName json -Description $msg.json
     New-ParamCompleter -ShortName l -LongName list -Description $msg.list
     New-ParamCompleter -LongName metadata-dump -Description $msg.metadata_dump
-    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -Type Required -VariableName 'MODULE_PATH'
+    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -VariableName 'MODULE_PATH'
     New-ParamCompleter -LongName no-native-async -Description $msg.no_native_async
     New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -Type Directory -VariableName 'BASEDIR'
     New-ParamCompleter -ShortName r -LongName rotate-pages -Description $msg.rotate_pages

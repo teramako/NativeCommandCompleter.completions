@@ -22,8 +22,8 @@ Register-NativeCompleter -Name ssh-copy-id -Description $msg.ssh_copy_id -Parame
     New-ParamCompleter -ShortName f -Description $msg.force
     New-ParamCompleter -ShortName n -Description $msg.dryrun
     New-ParamCompleter -ShortName s -Description $msg.sftp
-    New-ParamCompleter -ShortName p -Description $msg.port -Type Required -VariableName 'port'
-    New-ParamCompleter -ShortName o -Description $msg.option -Type Required -VariableName 'ssh_option'
+    New-ParamCompleter -ShortName p -Description $msg.port -VariableName 'port'
+    New-ParamCompleter -ShortName o -Description $msg.option -VariableName 'ssh_option'
     New-ParamCompleter -ShortName x -Description $msg.debug
     New-ParamCompleter -ShortName h -Description $msg.help
 ) -NoFileCompletions

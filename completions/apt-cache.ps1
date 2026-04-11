@@ -115,5 +115,5 @@ Register-NativeCompleter -Name apt-cache -Description $msg.apt_cache -SubCommand
     New-ParamCompleter -LongName recurse -Description $msg.recurse
     New-ParamCompleter -LongName installed -Description $msg.installed
     New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -Type File -VariableName 'FILE'
-    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -Type Required -VariableName 'OPT=VAL'
+    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPT=VAL'
 ) -NoFileCompletions

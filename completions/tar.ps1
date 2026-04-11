@@ -202,21 +202,21 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName ignore-command-error -Description $msg.ignore_command_error
     New-ParamCompleter -LongName no-ignore-command-error -Description $msg.no_ignore_command_error
     New-ParamCompleter -ShortName O -LongName to-stdout -Description $msg.to_stdout
-    New-ParamCompleter -LongName to-command -Description $msg.to_command -Type Required -VariableName 'COMMAND'
+    New-ParamCompleter -LongName to-command -Description $msg.to_command -VariableName 'COMMAND'
 
     ## Handling of file attributes
     New-ParamCompleter -LongName atime-preserve -Description $msg.atime_preserve -Type FlagOrValue -Arguments "replace", "system" -VariableName 'METHOD'
     New-ParamCompleter -LongName delay-directory-restore -Description $msg.delay_directory_restore
-    New-ParamCompleter -LongName group -Description $msg.group -Type Required -VariableName 'NAME[:GID]'
+    New-ParamCompleter -LongName group -Description $msg.group -VariableName 'NAME[:GID]'
     New-ParamCompleter -LongName group-map -Description $msg.group_map -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName mode -Description $msg.mode -Type Required -VariableName 'CHANGES'
-    New-ParamCompleter -LongName mtime -Description $msg.mtime -Type Required -VariableName 'DATE-OR-FILE'
+    New-ParamCompleter -LongName mode -Description $msg.mode -VariableName 'CHANGES'
+    New-ParamCompleter -LongName mtime -Description $msg.mtime -VariableName 'DATE-OR-FILE'
     New-ParamCompleter -ShortName m -LongName touch -Description $msg.touch
     New-ParamCompleter -LongName no-delay-directory-restore -Description $msg.no_delay_directory_restore
     New-ParamCompleter -LongName no-same-owner -Description $msg.no_same_owner
     New-ParamCompleter -LongName no-same-permissions -Description $msg.no_same_permissions
     New-ParamCompleter -LongName numeric-owner -Description $msg.numeric_owner
-    New-ParamCompleter -LongName owner -Description $msg.owner -Type Required -VariableName 'NAME[:UID]'
+    New-ParamCompleter -LongName owner -Description $msg.owner -VariableName 'NAME[:UID]'
     New-ParamCompleter -LongName owner-map -Description $msg.owner_map -Type File -VariableName 'FILE'
     New-ParamCompleter -ShortName p -LongName same-permissions, preserve-permissions -Description $msg.same_permissions
     New-ParamCompleter -LongName same-owner -Description $msg.same_owner
@@ -230,27 +230,27 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName no-selinux -Description $msg.no_selinux
     New-ParamCompleter -LongName xattrs -Description $msg.xattrs
     New-ParamCompleter -LongName no-xattrs -Description $msg.no_xattrs
-    New-ParamCompleter -LongName xattrs-exclude -Description $msg.xattrs_exclude -Type Required -VariableName 'PATTERN'
-    New-ParamCompleter -LongName xattrs-include -Description $msg.xattrs_include -Type Required -VariableName 'PATTERN'
+    New-ParamCompleter -LongName xattrs-exclude -Description $msg.xattrs_exclude -VariableName 'PATTERN'
+    New-ParamCompleter -LongName xattrs-include -Description $msg.xattrs_include -VariableName 'PATTERN'
 
     ## Device selection and switching
     New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Type File -VariableName 'ARCHIVE'
-    New-ParamCompleter -LongName force-local -Description $msg.force_local -Type Required
-    New-ParamCompleter -ShortName F -LongName info-script, new-volume-script -Description $msg.info_script -Type Required -VariableName 'COMMAND'
-    New-ParamCompleter -ShortName L -LongName tape-length -Description $msg.tape_length -Type Required -VariableName 'N'
+    New-ParamCompleter -LongName force-local -Description $msg.force_local
+    New-ParamCompleter -ShortName F -LongName info-script, new-volume-script -Description $msg.info_script -VariableName 'COMMAND'
+    New-ParamCompleter -ShortName L -LongName tape-length -Description $msg.tape_length -VariableName 'N'
     New-ParamCompleter -ShortName M -LongName multi-volume -Description $msg.multi_volume
-    New-ParamCompleter -LongName rmt-command -Description $msg.rmt_command -Type Required -VariableName 'COMMAND'
-    New-ParamCompleter -LongName rsh-command -Description $msg.rsh_command -Type Required -VariableName 'COMMAND'
-    New-ParamCompleter -LongName volno-file -Description $msg.volno_file -Type Required -VariableName 'FILE'
+    New-ParamCompleter -LongName rmt-command -Description $msg.rmt_command -VariableName 'COMMAND'
+    New-ParamCompleter -LongName rsh-command -Description $msg.rsh_command -VariableName 'COMMAND'
+    New-ParamCompleter -LongName volno-file -Description $msg.volno_file -VariableName 'FILE'
 
     ## Device blocking
-    New-ParamCompleter -ShortName b -LongName blocking-factor -Description $msg.blocking_factor -Type Required -VariableName 'BLOCKS'
+    New-ParamCompleter -ShortName b -LongName blocking-factor -Description $msg.blocking_factor -VariableName 'BLOCKS'
     New-ParamCompleter -ShortName B -LongName read-full-records -Description $msg.read_full_records
     New-ParamCompleter -ShortName i -LongName ignore-zeros -Description $msg.ignore_zeros
-    New-ParamCompleter -LongName record-size -Description $msg.record_size -Type Required -VariableName 'NUMBER'
+    New-ParamCompleter -LongName record-size -Description $msg.record_size -VariableName 'NUMBER'
 
     ## Archive format selection
-    New-ParamCompleter -ShortName H -LongName format -Description $msg.format -Type Required -Arguments @(
+    New-ParamCompleter -ShortName H -LongName format -Description $msg.format -Arguments @(
         "gnu`t{0}" -f $msg.format_gnu
         "oldgnu`t{0}" -f $msg.format_oldgnu
         "pax`t{0}" -f $msg.format_pax
@@ -259,13 +259,13 @@ Register-NativeCompleter -Name tar -Parameters @(
         "v7`t{0}" -f $msg.format_v7
     ) -VariableName 'FORMAT'
     New-ParamCompleter -LongName old-archive, portability -Description $msg.old_archive
-    New-ParamCompleter -LongName pax-option -Description $msg.pax_option -Type Required -VariableName 'keyword[[:]=value]'
+    New-ParamCompleter -LongName pax-option -Description $msg.pax_option -VariableName 'keyword[[:]=value]'
     New-ParamCompleter -LongName posix -Description $msg.posix
     New-ParamCompleter -ShortName V -LongName label -Description "Set volume name" -Type Required
 
     ## Compression options
     New-ParamCompleter -ShortName a -LongName auto-compress -Description $msg.auto_compress
-    New-ParamCompleter -ShortName I -LongName use-compress-program -Description $msg.use_compress_program -Type Required -VariableName 'COMMAND'
+    New-ParamCompleter -ShortName I -LongName use-compress-program -Description $msg.use_compress_program -VariableName 'COMMAND'
     New-ParamCompleter -ShortName j -LongName bzip2 -Description $msg.bzip2
     New-ParamCompleter -ShortName J -LongName xz -Description $msg.xz
     New-ParamCompleter -LongName lzip -Description $msg.lzip
@@ -289,12 +289,12 @@ Register-NativeCompleter -Name tar -Parameters @(
         "simple`t{0}" -f $msg.backup_nver
     ) -VariableName 'CONTROL'
     New-ParamCompleter -ShortName C -LongName directory -Description $msg.directory -Type Directory -VariableName 'DIR'
-    New-ParamCompleter -LongName exclude -Description $msg.exclude -Type Required -VariableName 'PATTERN'
+    New-ParamCompleter -LongName exclude -Description $msg.exclude -VariableName 'PATTERN'
     New-ParamCompleter -LongName exclude-backups -Description $msg.exclude_backups
     New-ParamCompleter -LongName exclude-caches -Description $msg.exclude_caches
     New-ParamCompleter -LongName exclude-caches-all -Description $msg.exclude_caches_all
     New-ParamCompleter -LongName exclude-caches-under -Description $msg.exclude_caches_under
-    New-ParamCompleter -LongName exclude-ignore -Description $msg.exclude_ignore -Type Required -VariableName 'FILE'
+    New-ParamCompleter -LongName exclude-ignore -Description $msg.exclude_ignore -VariableName 'FILE'
     New-ParamCompleter -LongName exclude-ignore-recursive -Description $msg.exclude_ignore_recursive -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName exclude-tag -Description $msg.exclude_tag -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName exclude-tag-all -Description $msg.exclude_tag_all -Type File -VariableName 'FILE'
@@ -303,17 +303,17 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName exclude-vcs-ignore -Description $msg.exclude_vcs_ignore
     New-ParamCompleter -ShortName h -LongName dereference -Description $msg.dereference
     New-ParamCompleter -LongName hard-dereference -Description $msg.hard_dereference
-    New-ParamCompleter -ShortName K -LongName starting-file -Description $msg.starting_file -Type Required -VariableName 'MEMBER'
-    New-ParamCompleter -LongName newer-mtime -Description $msg.newer_mtime -Type Required -VariableName 'DATE'
+    New-ParamCompleter -ShortName K -LongName starting-file -Description $msg.starting_file -VariableName 'MEMBER'
+    New-ParamCompleter -LongName newer-mtime -Description $msg.newer_mtime -VariableName 'DATE'
     New-ParamCompleter -LongName no-null -Description $msg.no_null
     New-ParamCompleter -LongName no-recursion -Description $msg.no_recursion
     New-ParamCompleter -LongName no-unquote -Description $msg.no_unquote
     New-ParamCompleter -LongName null -Description $msg.null
-    New-ParamCompleter -ShortName N -LongName newer, after-date -Description $msg.newer -Type Required -VariableName 'DATE'
+    New-ParamCompleter -ShortName N -LongName newer, after-date -Description $msg.newer -VariableName 'DATE'
     New-ParamCompleter -LongName one-file-system -Description $msg.one_file_system
     New-ParamCompleter -ShortName P -LongName absolute-names -Description $msg.absolute_names
     New-ParamCompleter -LongName recursion -Description $msg.recursion
-    New-ParamCompleter -LongName suffix -Description $msg.suffix -Type Required -VariableName 'STRING'
+    New-ParamCompleter -LongName suffix -Description $msg.suffix -VariableName 'STRING'
     New-ParamCompleter -ShortName T -LongName files-from -Description $msg.files_from -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName unquote -Description $msg.unquote
     New-ParamCompleter -ShortName X -LongName exclude-from -Description $msg.exclude_from -Type File -VariableName 'FILE'

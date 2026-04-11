@@ -39,27 +39,27 @@ Register-NativeCompleter -Name sftp -Description $msg.sftp -Parameters @(
     New-ParamCompleter -ShortName '6' -Description $msg.ipv6
     New-ParamCompleter -ShortName A -Description $msg.forwardAgent
     New-ParamCompleter -ShortName a -Description $msg.attemptContinue
-    New-ParamCompleter -ShortName B -Description $msg.bufferSize -Type Required -VariableName 'buffer_size'
+    New-ParamCompleter -ShortName B -Description $msg.bufferSize -VariableName 'buffer_size'
     New-ParamCompleter -ShortName b -Description $msg.batchfile -Type File -VariableName 'batchfile'
-    New-ParamCompleter -ShortName c -Description $msg.ciphers -Type Required -VariableName 'cipher_spec'
+    New-ParamCompleter -ShortName c -Description $msg.ciphers -VariableName 'cipher_spec'
     New-ParamCompleter -ShortName C -Description $msg.compression
-    New-ParamCompleter -ShortName D -Description $msg.directConnect -Type Required -VariableName 'sftp_server_path'
+    New-ParamCompleter -ShortName D -Description $msg.directConnect -VariableName 'sftp_server_path'
     New-ParamCompleter -ShortName F -Description $msg.configFile -Type File -VariableName 'ssh_config'
     New-ParamCompleter -ShortName f -Description $msg.fsync
     New-ParamCompleter -ShortName i -Description $msg.identity -Type File -VariableName 'identity_file'
-    New-ParamCompleter -ShortName J -Description $msg.jumpHost -Type Required -VariableName 'destination'
-    New-ParamCompleter -ShortName l -Description $msg.limitBandwidth -Type Required -VariableName 'limit'
+    New-ParamCompleter -ShortName J -Description $msg.jumpHost -VariableName 'destination'
+    New-ParamCompleter -ShortName l -Description $msg.limitBandwidth -VariableName 'limit'
     New-ParamCompleter -ShortName N -Description $msg.noQuiet
-    New-ParamCompleter -ShortName o -Description $msg.sshOption -Type Required -VariableName 'ssh_option'
-    New-ParamCompleter -ShortName P -Description $msg.port -Type Required -VariableName 'port'
+    New-ParamCompleter -ShortName o -Description $msg.sshOption -VariableName 'ssh_option'
+    New-ParamCompleter -ShortName P -Description $msg.port -VariableName 'port'
     New-ParamCompleter -ShortName p -Description $msg.preserveTimes
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName R -Description $msg.requests -Type Required -VariableName 'num_requests'
+    New-ParamCompleter -ShortName R -Description $msg.requests -VariableName 'num_requests'
     New-ParamCompleter -ShortName r -Description $msg.recursiveCopy
-    New-ParamCompleter -ShortName S -Description $msg.program -Type Required -VariableName 'program'
-    New-ParamCompleter -ShortName s -Description $msg.subsystem -Type Required -VariableName 'subsystem'
+    New-ParamCompleter -ShortName S -Description $msg.program -VariableName 'program'
+    New-ParamCompleter -ShortName s -Description $msg.subsystem -VariableName 'subsystem'
     New-ParamCompleter -ShortName v -Description $msg.verbose
-    New-ParamCompleter -ShortName X -Description $msg.sftpOption -Type Required -VariableName 'sftp_option'
+    New-ParamCompleter -ShortName X -Description $msg.sftpOption -VariableName 'sftp_option'
 ) -NoFileCompletions -ArgumentCompleter {
     param([int] $position, [int] $argIndex)
     if ($argIndex -eq 0)

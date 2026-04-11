@@ -79,15 +79,15 @@ Register-NativeCompleter -Name ps -Description 'report a snapshot of the current
     New-ParamCompleter -ShortName u -Description $msg.format_user
     New-ParamCompleter -ShortName v -Description $msg.format_vm
     New-ParamCompleter -ShortName F -Description $msg.format_full_extra
-    New-ParamCompleter -ShortName o -LongName format -Description $msg.format_custom -Type Required -VariableName 'format'
-    New-ParamCompleter -ShortName O -Description $msg.with_preloaded -Type Required -VariableName 'format'
+    New-ParamCompleter -ShortName o -LongName format -Description $msg.format_custom -VariableName 'format'
+    New-ParamCompleter -ShortName O -Description $msg.with_preloaded -VariableName 'format'
 
     # Output modifiers
     New-ParamCompleter -ShortName H -LongName forest -Description $msg.forest
     New-ParamCompleter -ShortName h -LongName headers -Description $msg.headers
     New-ParamCompleter -LongName no-headers -Description $msg.no_headers
-    New-ParamCompleter -LongName lines -Description $msg.lines -Type Required -VariableName 'n'
-    New-ParamCompleter -LongName cols,columns,width -Description $msg.columns -Type Required -VariableName 'n'
+    New-ParamCompleter -LongName lines -Description $msg.lines -VariableName 'n'
+    New-ParamCompleter -LongName cols,columns,width -Description $msg.columns -VariableName 'n'
     New-ParamCompleter -ShortName w -Description $msg.wide
     New-ParamCompleter -LongName cumulative -Description $msg.cumulative
 
@@ -97,7 +97,7 @@ Register-NativeCompleter -Name ps -Description 'report a snapshot of the current
     New-ParamCompleter -ShortName T -Description $msg.threads_with_SPID
 
     # Miscellaneous options
-    New-ParamCompleter -LongName sort -Description $msg.sort -Type Required -VariableName '[+|-]key'
+    New-ParamCompleter -LongName sort -Description $msg.sort -VariableName '[+|-]key'
     New-ParamCompleter -LongName context -Description $msg.context
     New-ParamCompleter -ShortName q -LongName quick-pid -Description $msg.quick_pid
 

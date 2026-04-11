@@ -91,7 +91,7 @@ if ($LASTEXITCODE -eq 0) # GNU mount
         New-ParamCompleter -ShortName r -LongName read-only -Description $msg.gnu_read_only
         New-ParamCompleter -ShortName R -LongName rbind -Description $msg.gnu_rbind
         New-ParamCompleter -ShortName s -Description $msg.gnu_sloppy
-        New-ParamCompleter -LongName source -Description $msg.gnu_source -Type Required -VariableName 'device'
+        New-ParamCompleter -LongName source -Description $msg.gnu_source -VariableName 'device'
         New-ParamCompleter -LongName target -Description $msg.gnu_target -Type Directory -VariableName 'dir'
         New-ParamCompleter -ShortName T -LongName fstab -Description $msg.gnu_fstab -Type File -VariableName 'file'
         New-ParamCompleter -ShortName t -LongName types -Description $msg.gnu_types -Type List -VariableName 'fstype'

@@ -28,21 +28,21 @@ if ($IsWindows)
 {
     Register-NativeCompleter -Name arp -Description $msg.arp -Style Unix -Parameters @(
         New-ParamCompleter -ShortName a,g -Description $msg.win_display_all -Type FlagOrValue -VariableName 'inet_addr'
-        New-ParamCompleter -ShortName d -Description $msg.win_delete -Type Required -VariableName 'inet_addr'
-        New-ParamCompleter -ShortName s -Description $msg.win_set -Type Required -VariableName 'inet_addr'
-        New-ParamCompleter -ShortName N -Description $msg.win_display_inet -Type Required -VariableName 'if_addr'
+        New-ParamCompleter -ShortName d -Description $msg.win_delete -VariableName 'inet_addr'
+        New-ParamCompleter -ShortName s -Description $msg.win_set -VariableName 'inet_addr'
+        New-ParamCompleter -ShortName N -Description $msg.win_display_inet -VariableName 'if_addr'
     ) -NoFileCompletions
 }
 else
 {
     Register-NativeCompleter -Name arp -Description $msg.arp -Parameters @(
         New-ParamCompleter -ShortName a -LongName display -Description $msg.display -Type FlagOrValue -VariableName 'hostname'
-        New-ParamCompleter -ShortName d -LongName delete -Description $msg.delete -Type Required -VariableName 'hostname'
-        New-ParamCompleter -ShortName s -LongName set -Description $msg.set -Type Required -VariableName 'hostname'
+        New-ParamCompleter -ShortName d -LongName delete -Description $msg.delete -VariableName 'hostname'
+        New-ParamCompleter -ShortName s -LongName set -Description $msg.set -VariableName 'hostname'
         New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Type File -VariableName 'filename'
         New-ParamCompleter -ShortName n -LongName numeric -Description $msg.numeric
         New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-        New-ParamCompleter -ShortName i -LongName device -Description $msg.device -Type Required -VariableName 'if'
+        New-ParamCompleter -ShortName i -LongName device -Description $msg.device -VariableName 'if'
         New-ParamCompleter -ShortName h -LongName help -Description $msg.help
         New-ParamCompleter -ShortName V -LongName version -Description $msg.version
     ) -NoFileCompletions

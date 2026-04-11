@@ -83,14 +83,14 @@ Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter              -LongName completion            -Description $msg.completion -VariableName 'SHELL' -Arguments "bash", "fish", "zsh", "ps1"
     New-ParamCompleter -ShortName p -LongName plain                 -Description $msg.plain
     New-ParamCompleter -ShortName l -LongName language              -Description $msg.language -VariableName 'language' -ArgumentCompleter $languageCompleter
-    New-ParamCompleter -ShortName H -LongName highlight-line        -Description $msg.highlight_line -Type Required -VariableName 'N:M'
+    New-ParamCompleter -ShortName H -LongName highlight-line        -Description $msg.highlight_line -VariableName 'N:M'
     New-ParamCompleter              -LongName file-name             -Description $msg.file_name -Type File -VariableName 'name'
     New-ParamCompleter -ShortName d -LongName diff                  -Description $msg.diff
-    New-ParamCompleter              -LongName diff-context          -Description $msg.diff_context -Type Required -VariableName 'N'
-    New-ParamCompleter              -LongName tabs                  -Description $msg.tabs -Type Required -VariableName 'T'
+    New-ParamCompleter              -LongName diff-context          -Description $msg.diff_context -VariableName 'N'
+    New-ParamCompleter              -LongName tabs                  -Description $msg.tabs -VariableName 'T'
     New-ParamCompleter              -LongName wrap                  -Description $msg.wrap -VariableName 'mode' -Arguments "auto", "never", "character"
     New-ParamCompleter -ShortName S -LongName chop-long-lines       -Description $msg.chop_long_lines
-    New-ParamCompleter              -LongName terminal-width        -Description $msg.terminal_width -Type Required -VariableName 'width'
+    New-ParamCompleter              -LongName terminal-width        -Description $msg.terminal_width -VariableName 'width'
     New-ParamCompleter -ShortName n -LongName number                -Description $msg.number
     New-ParamCompleter              -LongName color                 -Description $msg.color -VariableName 'when' -Arguments $whenArguments
     New-ParamCompleter              -LongName italic-text           -Description $msg.italic_text -VariableName 'when' -Arguments 'always', 'never'
@@ -99,17 +99,17 @@ Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter              -LongName paging                -Description $msg.paging -VariableName 'when' -Arguments $whenArguments
     New-ParamCompleter -ShortName P -LongName no-paging             -Description $msg.no_paging
     New-ParamCompleter              -LongName pager                 -Description $msg.pager -VariableName 'command'
-    New-ParamCompleter -ShortName m -LongName map-syntax            -Description $msg.map_syntax -Type Required -VariableName 'glob-pattern:syntax-name'
-    New-ParamCompleter              -LongName ignored-suffix        -Description $msg.ignore_suffix -Type Required -VariableName 'suffix'
+    New-ParamCompleter -ShortName m -LongName map-syntax            -Description $msg.map_syntax -VariableName 'glob-pattern:syntax-name'
+    New-ParamCompleter              -LongName ignored-suffix        -Description $msg.ignore_suffix -VariableName 'suffix'
     New-ParamCompleter              -LongName theme                 -Description $msg.theme -VariableName 'theme' -ArgumentCompleter $themeCompleter
     New-ParamCompleter              -LongName theme-dark            -Description $msg.theme_dark
     New-ParamCompleter              -LongName theme-light           -Description $msg.theme_light
     New-ParamCompleter              -LongName list-themes           -Description $msg.list_themes
     New-ParamCompleter -ShortName s -LongName squeeze-blank         -Description $msg.squeeze_blank
-    New-ParamCompleter              -LongName squeeze-limit         -Description $msg.squeeze_limit -Type Required -VariableName 'limit'
+    New-ParamCompleter              -LongName squeeze-limit         -Description $msg.squeeze_limit -VariableName 'limit'
     New-ParamCompleter              -LongName strip-ansi            -Description $msg.strip_ansi -VariableName 'when' -Arguments "auto", "always", "never"
     New-ParamCompleter              -LongName style                 -Description $msg.style -Type List -Arguments $stylesArguments
-    New-ParamCompleter -ShortName r -LongName line-range            -Description $msg.line_range -Type Required -VariableName 'N:M'
+    New-ParamCompleter -ShortName r -LongName line-range            -Description $msg.line_range -VariableName 'N:M'
     New-ParamCompleter -ShortName L -LongName list-languages        -Description $msg.list_languages
     New-ParamCompleter              -LongName no-custom-assets      -Description $msg.no_custom_assets
     New-ParamCompleter              -LongName config-dir            -Description $msg.config_dir

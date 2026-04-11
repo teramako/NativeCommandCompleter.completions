@@ -62,7 +62,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
-    New-ParamCompleter -ShortName c -Description $msg.command -Type Required -VariableName 'command'
+    New-ParamCompleter -ShortName c -Description $msg.command -VariableName 'command'
     New-ParamCompleter -ShortName A -Description $msg.arabic_mode
     New-ParamCompleter -ShortName b -Description $msg.binary_mode
     New-ParamCompleter -ShortName C -Description $msg.compatible_mode
@@ -86,7 +86,7 @@ Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
     New-ParamCompleter -ShortName R -Description $msg.readonly_mode
     New-ParamCompleter -ShortName s -Description $msg.source -Type File -VariableName 'scriptin'
     New-ParamCompleter -ShortName S -Description $msg.source_after_load -Type File -VariableName 'source'
-    New-ParamCompleter -ShortName T -Description $msg.terminal -Type Required -VariableName 'terminal'
+    New-ParamCompleter -ShortName T -Description $msg.terminal -VariableName 'terminal'
     New-ParamCompleter -ShortName u -Description $msg.vimrc -Type File -VariableName 'vimrc'
     New-ParamCompleter -ShortName U -Description $msg.gvimrc -Type File -VariableName 'gvimrc'
     New-ParamCompleter -ShortName v -Description $msg.vi_mode
@@ -99,18 +99,18 @@ Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
     New-ParamCompleter -ShortName y -Description $msg.easy_mode
     New-ParamCompleter -ShortName Z -Description $msg.restrict_mode
     New-ParamCompleter -LongName clean -Description $msg.clean
-    New-ParamCompleter -LongName cmd -Description $msg.command_before_load -Type Required -VariableName 'command'
+    New-ParamCompleter -LongName cmd -Description $msg.command_before_load -VariableName 'command'
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName literal -Description $msg.literal
     New-ParamCompleter -LongName noplugin -Description $msg.noplugin
-    New-ParamCompleter -LongName remote -Description $msg.remote -Type Required -VariableName 'files'
-    New-ParamCompleter -LongName remote-expr -Description $msg.remote_expr -Type Required -VariableName 'expr'
-    New-ParamCompleter -LongName remote-send -Description $msg.remote_send -Type Required -VariableName 'keys'
-    New-ParamCompleter -LongName remote-silent -Description $msg.remote_silent -Type Required -VariableName 'files'
-    New-ParamCompleter -LongName remote-wait -Description $msg.remote_wait -Type Required -VariableName 'files'
-    New-ParamCompleter -LongName remote-wait-silent -Description $msg.remote_wait_silent -Type Required -VariableName 'files'
+    New-ParamCompleter -LongName remote -Description $msg.remote -VariableName 'files'
+    New-ParamCompleter -LongName remote-expr -Description $msg.remote_expr -VariableName 'expr'
+    New-ParamCompleter -LongName remote-send -Description $msg.remote_send -VariableName 'keys'
+    New-ParamCompleter -LongName remote-silent -Description $msg.remote_silent -VariableName 'files'
+    New-ParamCompleter -LongName remote-wait -Description $msg.remote_wait -VariableName 'files'
+    New-ParamCompleter -LongName remote-wait-silent -Description $msg.remote_wait_silent -VariableName 'files'
     New-ParamCompleter -LongName serverlist -Description $msg.serverlist
-    New-ParamCompleter -LongName servername -Description $msg.servername -Type Required -VariableName 'name'
+    New-ParamCompleter -LongName servername -Description $msg.servername -VariableName 'name'
     New-ParamCompleter -LongName startuptime -Description $msg.startuptime -Type File -VariableName 'file'
     New-ParamCompleter -LongName ttyfail -Description $msg.ttyfail
     New-ParamCompleter -LongName version -Description $msg.version

@@ -37,11 +37,11 @@ Register-NativeCompleter -Name umount -Description $msg.umount -Parameters @(
     New-ParamCompleter -ShortName l -LongName lazy -Description $msg.lazy
     New-ParamCompleter -ShortName n -LongName no-mtab -Description $msg.no_mtab
     New-ParamCompleter -LongName no-canonicalize -Description $msg.no_canonicalize
-    New-ParamCompleter -ShortName O -LongName test-opts -Description $msg.test_opts -Type Required -VariableName 'list'
-    New-ParamCompleter -ShortName o -LongName options -Description $msg.options -Type Required,List -VariableName 'list'
+    New-ParamCompleter -ShortName O -LongName test-opts -Description $msg.test_opts -VariableName 'list'
+    New-ParamCompleter -ShortName o -LongName options -Description $msg.options -Type List -VariableName 'list'
     New-ParamCompleter -ShortName R -LongName recursive -Description $msg.recursive
     New-ParamCompleter -ShortName r -LongName read-only -Description $msg.read_only
-    New-ParamCompleter -ShortName t -LongName types -Description $msg.types -Type Required,List -VariableName 'list'
+    New-ParamCompleter -ShortName t -LongName types -Description $msg.types -Type List -VariableName 'list'
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help

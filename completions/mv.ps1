@@ -48,7 +48,7 @@ if ($IsLinux)
         New-ParamCompleter -ShortName i -LongName interactive -Description $msg.interactive
         New-ParamCompleter -ShortName n -LongName no-clobber -Description $msg.noClobber
         New-ParamCompleter -LongName strip-trailing-slashes -Description $msg.stripTrailingSlashes
-        New-ParamCompleter -ShortName S -LongName suffix -Type Required -Description $msg.suffix -VariableName 'SUFFIX'
+        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -VariableName 'SUFFIX'
         New-ParamCompleter -ShortName t -LongName target-directory -Type Directory -Description $msg.targetDirectory -VariableName 'DIRECTORY'
         New-ParamCompleter -ShortName T -LongName no-target-directory -Description $msg.noTargetDirectory
         New-ParamCompleter -LongName update -Description $msg.update -Type FlagOrValue -Arguments @(

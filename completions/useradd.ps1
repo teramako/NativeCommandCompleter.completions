@@ -63,28 +63,28 @@ $shellCompleter = {
 Register-NativeCompleter -Name useradd -Description $msg.useradd -Parameters @(
     New-ParamCompleter -LongName badname -Description $msg.badname
     New-ParamCompleter -ShortName b -LongName base-dir -Description $msg.base_dir -Type Directory -VariableName 'BASE_DIR'
-    New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -Type Required -VariableName 'COMMENT'
+    New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -VariableName 'COMMENT'
     New-ParamCompleter -ShortName d -LongName home-dir -Description $msg.home_dir -Type Directory -VariableName 'HOME_DIR'
     New-ParamCompleter -ShortName D -LongName defaults -Description $msg.defaults
-    New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -Type Required -VariableName 'EXPIRE_DATE'
-    New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -Type Required -VariableName 'INACTIVE'
+    New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -VariableName 'EXPIRE_DATE'
+    New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -VariableName 'INACTIVE'
     New-ParamCompleter -ShortName F -LongName add-subids-for-system -Description $msg.add_subids_for_system
-    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -Type Required -VariableName 'GROUP' -ArgumentCompleter $groupCompleter
-    New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -Type Required,List -VariableName 'GROUPS' -ArgumentCompleter $groupCompleter
+    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GROUP' -ArgumentCompleter $groupCompleter
+    New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -Type List -VariableName 'GROUPS' -ArgumentCompleter $groupCompleter
     New-ParamCompleter -ShortName k -LongName skel -Description $msg.skel -Type Directory -VariableName 'SKEL_DIR'
-    New-ParamCompleter -ShortName K -LongName key -Description $msg.key -Type Required -VariableName 'KEY=VALUE'
+    New-ParamCompleter -ShortName K -LongName key -Description $msg.key -VariableName 'KEY=VALUE'
     New-ParamCompleter -ShortName l -LongName no-log-init -Description $msg.no_log_init
     New-ParamCompleter -ShortName m -LongName create-home -Description $msg.create_home
     New-ParamCompleter -ShortName M -LongName no-create-home -Description $msg.no_create_home
     New-ParamCompleter -ShortName N -LongName no-user-group -Description $msg.no_user_group
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
-    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -Type Required -VariableName 'PASSWORD'
+    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
     New-ParamCompleter -ShortName r -LongName system -Description $msg.system
     New-ParamCompleter -ShortName R -LongName root -Description $msg.root_dir -Type Directory -VariableName 'CHROOT_DIR'
     New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'
-    New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -Type Required -VariableName 'SHELL' -ArgumentCompleter $shellCompleter
-    New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -Type Required -VariableName 'UID'
+    New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -VariableName 'SHELL' -ArgumentCompleter $shellCompleter
+    New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -VariableName 'UID'
     New-ParamCompleter -ShortName U -LongName user-group -Description $msg.user_group
-    New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux_user -Type Required -VariableName 'SEUSER'
+    New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux_user -VariableName 'SEUSER'
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
 ) -NoFileCompletions

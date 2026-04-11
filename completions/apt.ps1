@@ -144,7 +144,7 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
         New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
         New-ParamCompleter -ShortName s -LongName simulate, just-print, dry-run, recon, no-act -Description $msg.simulate
         New-ParamCompleter -ShortName y -LongName yes, assume-yes -Description $msg.assumeYes
-        New-ParamCompleter -ShortName t -LongName target-release -Description $msg.targetRelease -Type Required -VariableName 'RELEASE'
+        New-ParamCompleter -ShortName t -LongName target-release -Description $msg.targetRelease -VariableName 'RELEASE'
         New-ParamCompleter -LongName assume-no -Description $msg.assumeNo
         New-ParamCompleter -LongName reinstall -Description $msg.reinstall
         New-ParamCompleter -LongName no-upgrade -Description $msg.noUpgrade
@@ -155,7 +155,7 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
         New-ParamCompleter -LongName no-show-upgraded -Description $msg.noShowUpgraded
         New-ParamCompleter -LongName no-allow-insecure-repositories -Description $msg.noAllowInsecureRepositories
         New-ParamCompleter -LongName show-progress -Description $msg.showProgress
-        New-ParamCompleter -LongName with-source -Description $msg.withSource -Type Required -VariableName 'FILE'
+        New-ParamCompleter -LongName with-source -Description $msg.withSource -VariableName 'FILE'
         New-ParamCompleter -LongName no-remove -Description $msg.noRemove
         New-ParamCompleter -LongName ignore-hold -Description $msg.ignoreHold
     ) -ArgumentCompleter $packageCompleter

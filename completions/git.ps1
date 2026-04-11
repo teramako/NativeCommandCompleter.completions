@@ -251,8 +251,8 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -ShortName v -LongName version -Description $msg._version
     New-ParamCompleter -ShortName h -LongName help -Description $msg._help
     New-ParamCompleter -ShortName C -Description $msg._changeCurrentDir -Type Directory -VariableName 'path'
-    New-ParamCompleter -ShortName c -Description $msg._configParam -Type Required -VariableName 'name=value'
-    New-ParamCompleter -LongName config-env -Description $msg._configEnv -Type Required -VariableName 'name=envvar'
+    New-ParamCompleter -ShortName c -Description $msg._configParam -VariableName 'name=value'
+    New-ParamCompleter -LongName config-env -Description $msg._configEnv -VariableName 'name=envvar'
     New-ParamCompleter -LongName exec-path -Description $msg._execPath -Type FlagOrValue
     New-ParamCompleter -LongName html-path -Description $msg._htmlPath
     New-ParamCompleter -LongName man-path -Description $msg._manPath
@@ -302,11 +302,11 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name log -Description $msg.log -Parameters @(
         New-ParamCompleter -ShortName g -LongName graph -Description $msg.log_graph
         New-ParamCompleter -ShortName p -LongName patch -Description $msg.log_patch
-        New-ParamCompleter -ShortName n -LongName max-count -Description $msg.log_maxCount -Type Required -VariableName 'NUM'
+        New-ParamCompleter -ShortName n -LongName max-count -Description $msg.log_maxCount -VariableName 'NUM'
         New-ParamCompleter -LongName stat -Description $msg.log_stat
-        New-ParamCompleter -LongName since, after -Description $msg.log_since -Type Required -VariableName 'date'
-        New-ParamCompleter -LongName 'until', before -Description $msg.log_until -Type Required -VariableName 'date'
-        New-ParamCompleter -LongName author, committer -Description $msg.log_author -Type Required -VariableName 'pattern'
+        New-ParamCompleter -LongName since, after -Description $msg.log_since -VariableName 'date'
+        New-ParamCompleter -LongName 'until', before -Description $msg.log_until -VariableName 'date'
+        New-ParamCompleter -LongName author, committer -Description $msg.log_author -VariableName 'pattern'
     )
     New-CommandCompleter -Name maintenance -Description $msg.maintenance
     New-CommandCompleter -Name merge -Description $msg.merge -ArgumentCompleter $branchCompleter

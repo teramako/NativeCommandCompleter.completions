@@ -220,13 +220,13 @@ $certParam = New-ParamCompleter -LongName cert -Description $msg.cert -Type File
 $checkParam = New-ParamCompleter -LongName check -Description $msg.check -Type FlagOrValue -VariableName 'CHECK_TYPE'
 $configParam = New-ParamCompleter -ShortName c -LongName config -Description $msg.config -Type File -VariableName 'FILE'
 $envFileParam = New-ParamCompleter -LongName env-file -Description $msg.env_file -Type File -VariableName 'FILE'
-$extParam = New-ParamCompleter -LongName ext -Description $msg.ext -Type Required -VariableName 'EXT'
+$extParam = New-ParamCompleter -LongName ext -Description $msg.ext -VariableName 'EXT'
 $frozenParam = New-ParamCompleter -LongName frozen -Description $msg.frozen
 $importMapParam = New-ParamCompleter -LongName import-map -Description $msg.import_map -Type File -VariableName 'FILE'
 $inspectParam = New-ParamCompleter -LongName inspect -Description $msg.inspect -Type FlagOrValue -VariableName 'HOST_AND_PORT'
 $inspectBrkParam = New-ParamCompleter -LongName inspect-brk -Description $msg.inspect_brk -Type FlagOrValue -VariableName 'HOST_AND_PORT'
 $inspectWaitParam = New-ParamCompleter -LongName inspect-wait -Description $msg.inspect_wait -Type FlagOrValue -VariableName 'HOST_AND_PORT'
-$locationParam = New-ParamCompleter -LongName location -Description $msg.location -Type Required -VariableName 'HREF'
+$locationParam = New-ParamCompleter -LongName location -Description $msg.location -VariableName 'HREF'
 $lockParam = New-ParamCompleter -LongName lock -Description $msg.lock -Type FlagOrValue -VariableName 'FILE'
 $lockWriteParam = New-ParamCompleter -LongName lock-write -Description $msg.lock_write
 $logLevelParam = New-ParamCompleter -ShortName L -LongName log-level -Description $msg.log_level -Arguments "trace","debug","info" -VariableName 'LEVEL'
@@ -240,7 +240,7 @@ $noRemoteParam = New-ParamCompleter -LongName no-remote -Description $msg.no_rem
 $nodeModulesDirParam = New-ParamCompleter -LongName node-modules-dir -Description $msg.node_modules_dir -Type FlagOrValue -VariableName 'BOOL'
 $quietParam = New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
 $reloadParam = New-ParamCompleter -ShortName r -LongName reload -Description $msg.reload -Type FlagOrValue -VariableName 'CACHE_BLOCKLIST'
-$seedParam = New-ParamCompleter -LongName seed -Description $msg.seed -Type Required -VariableName 'NUMBER'
+$seedParam = New-ParamCompleter -LongName seed -Description $msg.seed -VariableName 'NUMBER'
 $unsafeCertsParam = New-ParamCompleter -LongName unsafely-ignore-certificate-errors -Description $msg.unsafely_ignore_certificate_errors -Type FlagOrValue -VariableName 'HOSTNAMES'
 $v8FlagsParam = New-ParamCompleter -LongName v8-flags -Description $msg.v8_flags -Type List -VariableName 'V8_FLAGS'
 $watchParam = New-ParamCompleter -LongName watch -Description $msg.watch -Type FlagOrValue -VariableName 'FILES'
@@ -361,8 +361,8 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $v8FlagsParam
         $watchParam
         $watchExcludeParam
-        New-ParamCompleter -LongName port -Description $msg.serve_port -Type Required -VariableName 'PORT'
-        New-ParamCompleter -LongName host -Description $msg.serve_host -Type Required -VariableName 'HOST'
+        New-ParamCompleter -LongName port -Description $msg.serve_port -VariableName 'PORT'
+        New-ParamCompleter -LongName host -Description $msg.serve_host -VariableName 'HOST'
         $helpParam
     )
 
@@ -422,7 +422,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $v8FlagsParam
         $watchParam
         $watchExcludeParam
-        New-ParamCompleter -LongName filter -Description $msg.test_filter -Type Required -VariableName 'PATTERN'
+        New-ParamCompleter -LongName filter -Description $msg.test_filter -VariableName 'PATTERN'
         New-ParamCompleter -LongName ignore -Description $msg.test_ignore -Type List -VariableName 'PATHS'
         New-ParamCompleter -LongName json -Description $msg.info_json
         New-ParamCompleter -LongName no-run -Description $msg.test_no_run
@@ -525,7 +525,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $unstableSloppyImportsParam
         $v8FlagsParam
         New-ParamCompleter -ShortName o -LongName output -Description $msg.compile_output -Type File -VariableName 'OUTPUT'
-        New-ParamCompleter -LongName target -Description $msg.compile_target -Type Required -VariableName 'TARGET'
+        New-ParamCompleter -LongName target -Description $msg.compile_target -VariableName 'TARGET'
         New-ParamCompleter -LongName no-terminal -Description $msg.compile_no_terminal
         New-ParamCompleter -LongName icon -Description $msg.compile_icon -Type File -VariableName 'FILE'
         New-ParamCompleter -LongName include -Description $msg.compile_include -Type File -VariableName 'FILE'
@@ -568,11 +568,11 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $unstableBareNodeBuiltinsParam
         $unstableByonmParam
         $unstableSloppyImportsParam
-        New-ParamCompleter -LongName filter -Description $msg.doc_filter -Type Required -VariableName 'FILTER'
+        New-ParamCompleter -LongName filter -Description $msg.doc_filter -VariableName 'FILTER'
         New-ParamCompleter -LongName html -Description $msg.doc_html
         New-ParamCompleter -LongName json -Description $msg.doc_json
         New-ParamCompleter -LongName lint -Description $msg.doc_lint
-        New-ParamCompleter -LongName name -Description $msg.doc_name -Type Required -VariableName 'NAME'
+        New-ParamCompleter -LongName name -Description $msg.doc_name -VariableName 'NAME'
         New-ParamCompleter -LongName output -Description $msg.doc_output -Type Directory -VariableName 'DIR'
         New-ParamCompleter -LongName private -Description $msg.doc_private
         $helpParam
@@ -642,9 +642,9 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $watchParam
         $watchExcludeParam
         New-ParamCompleter -LongName check -Description $msg.fmt_check
-        New-ParamCompleter -LongName ext -Description $msg.fmt_ext -Type Required -VariableName 'EXT'
+        New-ParamCompleter -LongName ext -Description $msg.fmt_ext -VariableName 'EXT'
         New-ParamCompleter -LongName ignore -Description $msg.fmt_ignore -Type List -VariableName 'PATHS'
-        New-ParamCompleter -LongName line-width -Description $msg.fmt_line_width -Type Required -VariableName 'WIDTH'
+        New-ParamCompleter -LongName line-width -Description $msg.fmt_line_width -VariableName 'WIDTH'
         New-ParamCompleter -LongName no-semicolons -Description $msg.fmt_no_semicolons -Type FlagOrValue -VariableName 'BOOL'
         New-ParamCompleter -LongName prose-wrap -Description $msg.fmt_prose_wrap -Arguments "always","never","preserve" -VariableName 'MODE'
         New-ParamCompleter -LongName single-quote -Description $msg.fmt_single_quote -Type FlagOrValue -VariableName 'BOOL'
@@ -728,7 +728,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $v8FlagsParam
         New-ParamCompleter -ShortName f -LongName force -Description $msg.install_force
         New-ParamCompleter -ShortName g -LongName global -Description $msg.install_global
-        New-ParamCompleter -ShortName n -LongName name -Description $msg.install_name -Type Required -VariableName 'NAME'
+        New-ParamCompleter -ShortName n -LongName name -Description $msg.install_name -VariableName 'NAME'
         New-ParamCompleter -LongName root -Description $msg.install_root -Type Directory -VariableName 'PATH'
         $helpParam
     )
@@ -779,7 +779,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         New-ParamCompleter -LongName dry-run -Description $msg.publish_dry_run
         New-ParamCompleter -LongName no-provenance -Description $msg.publish_no_provenance
         New-ParamCompleter -LongName provenance -Description $msg.publish_provenance
-        New-ParamCompleter -LongName token -Description $msg.publish_token -Type Required -VariableName 'TOKEN'
+        New-ParamCompleter -LongName token -Description $msg.publish_token -VariableName 'TOKEN'
         $helpParam
     ) -NoFileCompletions
 
@@ -831,7 +831,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         $unstableSloppyImportsParam
         $v8FlagsParam
         New-ParamCompleter -LongName eval-file -Description $msg.repl_eval_file -Type File -VariableName 'FILES'
-        New-ParamCompleter -LongName eval -Description $msg.repl_eval -Type Required -VariableName 'CODE'
+        New-ParamCompleter -LongName eval -Description $msg.repl_eval -VariableName 'CODE'
         $helpParam
     ) -NoFileCompletions
 
@@ -906,7 +906,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         New-ParamCompleter -LongName coverage -Description $msg.test_coverage -Type Directory -VariableName 'DIR'
         New-ParamCompleter -LongName doc -Description $msg.test_doc
         New-ParamCompleter -LongName fail-fast -Description $msg.test_fail_fast -Type FlagOrValue -VariableName 'N'
-        New-ParamCompleter -LongName filter -Description $msg.test_filter -Type Required -VariableName 'PATTERN'
+        New-ParamCompleter -LongName filter -Description $msg.test_filter -VariableName 'PATTERN'
         New-ParamCompleter -LongName ignore -Description $msg.test_ignore -Type List -VariableName 'PATHS'
         New-ParamCompleter -ShortName j -LongName jobs -Description $msg.test_jobs -Type FlagOrValue -VariableName 'N'
         New-ParamCompleter -LongName junit-path -Description $msg.test_junit_path -Type File -VariableName 'PATH'
@@ -927,7 +927,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
     # uninstall
     New-CommandCompleter -Name uninstall -Description $msg.cmd_uninstall -Parameters @(
         New-ParamCompleter -ShortName g -LongName global -Description $msg.uninstall_global
-        New-ParamCompleter -ShortName n -LongName name -Description $msg.uninstall_name -Type Required -VariableName 'NAME'
+        New-ParamCompleter -ShortName n -LongName name -Description $msg.uninstall_name -VariableName 'NAME'
         New-ParamCompleter -LongName root -Description $msg.uninstall_root -Type Directory -VariableName 'PATH'
         $helpParam
     ) -NoFileCompletions
@@ -939,7 +939,7 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
         New-ParamCompleter -LongName dry-run -Description $msg.upgrade_dry_run
         New-ParamCompleter -ShortName f -LongName force -Description $msg.upgrade_force
         New-ParamCompleter -LongName output -Description $msg.upgrade_output -Type File -VariableName 'PATH'
-        New-ParamCompleter -LongName version -Description $msg.upgrade_version -Type Required -VariableName 'VERSION'
+        New-ParamCompleter -LongName version -Description $msg.upgrade_version -VariableName 'VERSION'
         $helpParam
     ) -NoFileCompletions
 

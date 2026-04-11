@@ -109,7 +109,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     # Output control
     New-ParamCompleter -LongName no-full -Description $msg.no_full
     New-ParamCompleter -ShortName a -LongName all -Description $msg.all
-    New-ParamCompleter -ShortName n -LongName lines -Description $msg.lines -Type Required -VariableName 'N'
+    New-ParamCompleter -ShortName n -LongName lines -Description $msg.lines -VariableName 'N'
     New-ParamCompleter -LongName no-tail -Description $msg.no_tail
     New-ParamCompleter -ShortName r -LongName reverse -Description $msg.reverse
     New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments @(
@@ -131,7 +131,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     ) -VariableName 'STRING'
     New-ParamCompleter -LongName utc -Description $msg.utc
     New-ParamCompleter -LongName no-hostname -Description $msg.no_hostname
-    New-ParamCompleter -LongName output-fields -Description $msg.output_fields -Type Required -VariableName 'LIST'
+    New-ParamCompleter -LongName output-fields -Description $msg.output_fields -VariableName 'LIST'
     New-ParamCompleter -ShortName x -LongName catalog -Description $msg.catalog
     
     # Source selection
@@ -142,27 +142,27 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -ShortName k -LongName dmesg -Description $msg.dmesg
     New-ParamCompleter -LongName system -Description $msg.system
     New-ParamCompleter -LongName user -Description $msg.user
-    New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -Type Required -VariableName 'CONTAINER'
+    New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -VariableName 'CONTAINER'
     New-ParamCompleter -ShortName D -LongName directory -Description $msg.directory -Type Directory -VariableName 'PATH'
     New-ParamCompleter -LongName file -Description $msg.file -Type File -VariableName 'PATH'
     New-ParamCompleter -LongName root -Description $msg.root -Type Directory -VariableName 'ROOT'
-    New-ParamCompleter -LongName namespace -Description $msg.namespace -Type Required -VariableName 'NAMESPACE'
+    New-ParamCompleter -LongName namespace -Description $msg.namespace -VariableName 'NAMESPACE'
     New-ParamCompleter -LongName image -Description $msg.image -Type File -VariableName 'IMAGE'
-    New-ParamCompleter -LongName image-policy -Description $msg.image_policy -Type Required -VariableName 'POLICY'
+    New-ParamCompleter -LongName image-policy -Description $msg.image_policy -VariableName 'POLICY'
     
     # Journal management
     New-ParamCompleter -LongName header -Description $msg.header
     New-ParamCompleter -LongName disk-usage -Description $msg.disk_usage
-    New-ParamCompleter -LongName vacuum-size -Description $msg.vacuum_size -Type Required -VariableName 'BYTES'
-    New-ParamCompleter -LongName vacuum-files -Description $msg.vacuum_files -Type Required -VariableName 'INT'
-    New-ParamCompleter -LongName vacuum-time -Description $msg.vacuum_time -Type Required -VariableName 'TIME'
+    New-ParamCompleter -LongName vacuum-size -Description $msg.vacuum_size -VariableName 'BYTES'
+    New-ParamCompleter -LongName vacuum-files -Description $msg.vacuum_files -VariableName 'INT'
+    New-ParamCompleter -LongName vacuum-time -Description $msg.vacuum_time -VariableName 'TIME'
     New-ParamCompleter -LongName list-catalog -Description $msg.list_catalog
     New-ParamCompleter -LongName dump-catalog -Description $msg.dump_catalog
     New-ParamCompleter -LongName update-catalog -Description $msg.update_catalog
     New-ParamCompleter -LongName setup-keys -Description $msg.setup_keys
-    New-ParamCompleter -LongName interval -Description $msg.interval -Type Required -VariableName 'TIME'
+    New-ParamCompleter -LongName interval -Description $msg.interval -VariableName 'TIME'
     New-ParamCompleter -LongName verify -Description $msg.verify
-    New-ParamCompleter -LongName verify-key -Description $msg.verify_key -Type Required -VariableName 'KEY'
+    New-ParamCompleter -LongName verify-key -Description $msg.verify_key -VariableName 'KEY'
     New-ParamCompleter -LongName sync -Description $msg.sync
     New-ParamCompleter -LongName relinquish-var -Description $msg.relinquish_var
     New-ParamCompleter -LongName smart-relinquish-var -Description $msg.smart_relinquish_var
@@ -170,18 +170,18 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName rotate -Description $msg.rotate
     
     # Filtering
-    New-ParamCompleter -ShortName p -LongName priority -Description $msg.priority -Type Required -VariableName 'RANGE'
-    New-ParamCompleter -LongName facility -Description $msg.facility -Type Required -VariableName 'FACILITY' -ArgumentCompleter $facilityCompleter
-    New-ParamCompleter -ShortName g -LongName grep -Description $msg.grep -Type Required -VariableName 'PATTERN'
+    New-ParamCompleter -ShortName p -LongName priority -Description $msg.priority -VariableName 'RANGE'
+    New-ParamCompleter -LongName facility -Description $msg.facility -VariableName 'FACILITY' -ArgumentCompleter $facilityCompleter
+    New-ParamCompleter -ShortName g -LongName grep -Description $msg.grep -VariableName 'PATTERN'
     New-ParamCompleter -LongName case-sensitive -Description $msg.case_sensitive -Type FlagOrValue -VariableName 'BOOLEAN'
-    New-ParamCompleter -ShortName t -LongName identifier -Description $msg.identifier -Type Required -VariableName 'STRING'
-    New-ParamCompleter -ShortName u -LongName unit -Description $msg.unit -Type Required -VariableName 'UNIT' -ArgumentCompleter $unitCompleter
-    New-ParamCompleter -LongName user-unit -Description $msg.user_unit -Type Required -VariableName 'UNIT' -ArgumentCompleter $unitCompleter
-    New-ParamCompleter -ShortName S -LongName since -Description $msg.since -Type Required -VariableName 'DATE'
-    New-ParamCompleter -ShortName U -LongName until -Description $msg.until -Type Required -VariableName 'DATE'
-    New-ParamCompleter -ShortName c -LongName cursor -Description $msg.cursor -Type Required -VariableName 'CURSOR'
+    New-ParamCompleter -ShortName t -LongName identifier -Description $msg.identifier -VariableName 'STRING'
+    New-ParamCompleter -ShortName u -LongName unit -Description $msg.unit -VariableName 'UNIT' -ArgumentCompleter $unitCompleter
+    New-ParamCompleter -LongName user-unit -Description $msg.user_unit -VariableName 'UNIT' -ArgumentCompleter $unitCompleter
+    New-ParamCompleter -ShortName S -LongName since -Description $msg.since -VariableName 'DATE'
+    New-ParamCompleter -ShortName U -LongName until -Description $msg.until -VariableName 'DATE'
+    New-ParamCompleter -ShortName c -LongName cursor -Description $msg.cursor -VariableName 'CURSOR'
     New-ParamCompleter -LongName cursor-file -Description $msg.cursor_file -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName after-cursor -Description $msg.after_cursor -Type Required -VariableName 'CURSOR'
+    New-ParamCompleter -LongName after-cursor -Description $msg.after_cursor -VariableName 'CURSOR'
     New-ParamCompleter -LongName show-cursor -Description $msg.show_cursor
     
     # Behavior

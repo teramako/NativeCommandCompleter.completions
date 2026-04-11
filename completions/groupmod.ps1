@@ -27,10 +27,10 @@ $groupCompleter = {
 }
 
 Register-NativeCompleter -Name groupmod -Description $msg.groupmod -Parameters @(
-    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -Type Required -VariableName 'GID'
-    New-ParamCompleter -ShortName n -LongName new-name -Description $msg.new_name -Type Required -VariableName 'NEW_GROUP'
+    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GID'
+    New-ParamCompleter -ShortName n -LongName new-name -Description $msg.new_name -VariableName 'NEW_GROUP'
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
-    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -Type Required -VariableName 'PASSWORD'
+    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
     New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Type Directory -VariableName 'CHROOT_DIR'
     New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help

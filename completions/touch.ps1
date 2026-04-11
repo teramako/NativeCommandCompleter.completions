@@ -24,7 +24,7 @@ if ($LASTEXITCODE -eq 0) # GNU touch
     Register-NativeCompleter -Name touch -Description $msg.description -Parameters @(
         New-ParamCompleter -ShortName a -Description $msg.atime
         New-ParamCompleter -ShortName m -Description $msg.mtime
-        New-ParamCompleter -ShortName t -Description $msg.time -Type Required -VariableName 'STAMP'
+        New-ParamCompleter -ShortName t -Description $msg.time -VariableName 'STAMP'
         New-ParamCompleter -ShortName c -LongName no-create -Description $msg.noCreate
         New-ParamCompleter -ShortName d -LongName date -Description $msg.date -VariableName 'STRING'
         New-ParamCompleter -ShortName r -LongName reference -Description $msg.reference -Type File -VariableName 'FILE'
@@ -37,7 +37,7 @@ else
     Register-NativeCompleter -Name touch -Description $msg.description -Parameters @(
         New-ParamCompleter -ShortName a -Description $msg.atime
         New-ParamCompleter -ShortName m -Description $msg.mtime
-        New-ParamCompleter -ShortName t -Description $msg.time -Type Required -VariableName 'STAMP'
+        New-ParamCompleter -ShortName t -Description $msg.time -VariableName 'STAMP'
         New-ParamCompleter -ShortName c -Description $msg.noCreate
         New-ParamCompleter -ShortName d -Description $msg.date -VariableName 'STRING'
         New-ParamCompleter -ShortName r -Description $msg.reference -Type File -VariableName 'FILE'

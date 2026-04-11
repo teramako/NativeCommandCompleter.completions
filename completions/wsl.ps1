@@ -116,8 +116,8 @@ $onlineDistributionCompleter = {
 Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
     New-ParamCompleter -LongName cd -Description $msg.cd -Type Directory
     New-ParamCompleter -Name d -LongName distribution -Description $msg.distribution -VariableName 'distro' -ArgumentCompleter $distributionCompleter
-    New-ParamCompleter -Name u -LongName user -Description $msg.user -Type Required -VariableName 'username'
-    New-ParamCompleter -Name e -LongName exec -Description $msg.exec -Type Required -VariableName 'command'
+    New-ParamCompleter -Name u -LongName user -Description $msg.user -VariableName 'username'
+    New-ParamCompleter -Name e -LongName exec -Description $msg.exec -VariableName 'command'
     New-ParamCompleter -LongName system -Description $msg.systemDistribution
     New-ParamCompleter -LongName shell-type -Description $msg.shellType -Arguments "standard","login","none" -VariableName 'type'
 ) -SubCommands @(
@@ -129,28 +129,28 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
         New-ParamCompleter -LongName from-file -Description $msg.install_fromFile -Type File -VariableName 'path'
         New-ParamCompleter -LongName legacy -Description $msg.install_legacy
         New-ParamCompleter -LongName location -Description $msg.install_location -Type Directory
-        New-ParamCompleter -LongName name -Description $msg.install_name -Type Required -VariableName 'name'
+        New-ParamCompleter -LongName name -Description $msg.install_name -VariableName 'name'
         New-ParamCompleter -LongName no-distribution -Description $msg.install_noDistribution
         New-ParamCompleter -Name n -LongName no-launch -Description $msg.install_noLaunch
-        New-ParamCompleter -LongName version -Description $msg.install_version -Type Required -VariableName 'version'
-        New-ParamCompleter -LongName vhd-size -Description $msg.install_vhdSize -Type Required -VariableName 'size'
+        New-ParamCompleter -LongName version -Description $msg.install_version -VariableName 'version'
+        New-ParamCompleter -LongName vhd-size -Description $msg.install_vhdSize -VariableName 'size'
         New-ParamCompleter -LongName web-download -Description $msg.install_webDownload
     ) -NoFileCompletions -ArgumentCompleter $onlineDistributionCompleter
 
     New-CommandCompleter -Name '--manage' -Description $msg.manage -Parameters @(
         New-ParamCompleter -LongName move -Description $msg.manage_move -Type Directory -VariableName 'location'
         New-ParamCompleter -Name s -LongName set-sparse -Description $msg.manage_setSparse -Arguments "true", "false"
-        New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -Type Required -VariableName 'username'
-        New-ParamCompleter -LongName resize -Description $msg.manage_resize -Type Required -VariableName 'size'
+        New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -VariableName 'username'
+        New-ParamCompleter -LongName resize -Description $msg.manage_resize -VariableName 'size'
     ) -NoFileCompletions -ArgumentCompleter $distributionCompleter
     
     New-CommandCompleter -Name '--mount' -Description $msg.mount -Parameters @(
         New-ParamCompleter -LongName vhd -Description $msg.mount_vhd
         New-ParamCompleter -LongName bare -Description $msg.mount_bare
-        New-ParamCompleter -LongName name -Description $msg.mount_name -Type Required -VariableName 'name'
-        New-ParamCompleter -LongName type -Description $msg.mount_type -Type Required -VariableName 'filesystem'
-        New-ParamCompleter -LongName options -Description $msg.mount_options -Type Required -VariableName 'options'
-        New-ParamCompleter -LongName partition -Description $msg.mount_partition -Type Required -VariableName 'index'
+        New-ParamCompleter -LongName name -Description $msg.mount_name -VariableName 'name'
+        New-ParamCompleter -LongName type -Description $msg.mount_type -VariableName 'filesystem'
+        New-ParamCompleter -LongName options -Description $msg.mount_options -VariableName 'options'
+        New-ParamCompleter -LongName partition -Description $msg.mount_partition -VariableName 'index'
     ) -NoFileCompletions
 
     New-CommandCompleter -Name '--set-default-version' -Description $msg.setDefaultVersion -NoFileCompletions

@@ -120,22 +120,22 @@ $stateArguments = @(
 )
 
 Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameters @(
-    New-ParamCompleter -LongName server -Description $msg.server -Type Required -VariableName 'ServerName'
+    New-ParamCompleter -LongName server -Description $msg.server -VariableName 'ServerName'
 ) -SubCommands @(
     New-CommandCompleter -Name query -Description $msg.query -Parameters @(
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArguments -VariableName 'state'
-        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -Type Required -VariableName 'BufferSize'
-        New-ParamCompleter -LongName ri -Description $msg.ri -Type Required -VariableName 'ResumeIndex'
-        New-ParamCompleter -LongName group -Description $msg.group -Type Required -VariableName 'GroupName'
+        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -VariableName 'BufferSize'
+        New-ParamCompleter -LongName ri -Description $msg.ri -VariableName 'ResumeIndex'
+        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'GroupName'
     ) -ArgumentCompleter $serviceCompleter
     
     New-CommandCompleter -Name queryex -Description $msg.queryex -Parameters @(
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArguments -VariableName 'state'
-        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -Type Required -VariableName 'BufferSize'
-        New-ParamCompleter -LongName ri -Description $msg.ri -Type Required -VariableName 'ResumeIndex'
-        New-ParamCompleter -LongName group -Description $msg.group -Type Required -VariableName 'GroupName'
+        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -VariableName 'BufferSize'
+        New-ParamCompleter -LongName ri -Description $msg.ri -VariableName 'ResumeIndex'
+        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'GroupName'
     ) -ArgumentCompleter $serviceCompleter
     
     New-CommandCompleter -Name start -Description $msg.start -ArgumentCompleter $serviceCompleter
@@ -148,13 +148,13 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArguments -VariableName 'start'
         New-ParamCompleter -LongName error -Description $msg.error_normal -Arguments $errorArguments -VariableName 'error'
-        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -Type Required -VariableName 'BinaryPathName'
-        New-ParamCompleter -LongName group -Description $msg.group -Type Required -VariableName 'LoadOrderGroup'
+        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -VariableName 'BinaryPathName'
+        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'LoadOrderGroup'
         New-ParamCompleter -LongName tag -Description 'TagId' -Arguments "yes","no" -VariableName 'yes/no'
-        New-ParamCompleter -LongName depend -Description 'Dependencies' -Type Required -VariableName 'Dependencies'
-        New-ParamCompleter -LongName obj -Description 'AccountName' -Type Required -VariableName 'AccountName'
-        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -Type Required -VariableName 'DisplayName'
-        New-ParamCompleter -LongName password -Description 'Password' -Type Required -VariableName 'Password'
+        New-ParamCompleter -LongName depend -Description 'Dependencies' -VariableName 'Dependencies'
+        New-ParamCompleter -LongName obj -Description 'AccountName' -VariableName 'AccountName'
+        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -VariableName 'DisplayName'
+        New-ParamCompleter -LongName password -Description 'Password' -VariableName 'Password'
     ) -ArgumentCompleter $serviceCompleter
     
     New-CommandCompleter -Name description -Description $msg.description -ArgumentCompleter $serviceCompleter
@@ -180,13 +180,13 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArguments -VariableName 'start'
         New-ParamCompleter -LongName error -Description $msg.error_normal -Arguments $errorArguments -VariableName 'error'
-        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -Type Required -VariableName 'BinaryPathName'
-        New-ParamCompleter -LongName group -Description $msg.group -Type Required -VariableName 'LoadOrderGroup'
+        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -VariableName 'BinaryPathName'
+        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'LoadOrderGroup'
         New-ParamCompleter -LongName tag -Description 'TagId' -Arguments "yes","no" -VariableName 'yes/no'
-        New-ParamCompleter -LongName depend -Description 'Dependencies' -Type Required -VariableName 'Dependencies'
-        New-ParamCompleter -LongName obj -Description 'AccountName' -Type Required -VariableName 'AccountName'
-        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -Type Required -VariableName 'DisplayName'
-        New-ParamCompleter -LongName password -Description 'Password' -Type Required -VariableName 'Password'
+        New-ParamCompleter -LongName depend -Description 'Dependencies' -VariableName 'Dependencies'
+        New-ParamCompleter -LongName obj -Description 'AccountName' -VariableName 'AccountName'
+        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -VariableName 'DisplayName'
+        New-ParamCompleter -LongName password -Description 'Password' -VariableName 'Password'
     ) -NoFileCompletions
     
     New-CommandCompleter -Name control -Description $msg.control -ArgumentCompleter $serviceCompleter
