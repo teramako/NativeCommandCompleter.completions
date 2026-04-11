@@ -25,7 +25,7 @@ $msg = data { ConvertFrom-StringData @'
     as_lookups              = Perform AS path lookups
     version                 = Print version info and exit
     help                    = Read this help and exit
-    
+
     max_hops                = Set max number of hops
     numeric_dns             = Do not resolve addresses to hostnames
     port_num                = Base UDP port number used in probes

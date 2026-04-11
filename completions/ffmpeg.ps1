@@ -115,7 +115,7 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name i -Description $msg.input_file -Type File -VariableName 'input'
     New-ParamCompleter -Name y -Description $msg.overwrite
     New-ParamCompleter -Name n -Description $msg.no_overwrite
-    
+
     # Codec options
     New-ParamCompleter -Name c -Description $msg.codec -VariableName 'codec'
     New-ParamCompleter -Name codec -Description $msg.codec -VariableName 'codec'
@@ -123,57 +123,57 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name vcodec -Description $msg.vcodec -VariableName 'codec'
     New-ParamCompleter -Name scodec -Description $msg.scodec -VariableName 'codec'
     New-ParamCompleter -Name dcodec -Description $msg.dcodec -VariableName 'codec'
-    
+
     # Bitrate options
     New-ParamCompleter -Name b -Description $msg.bitrate -VariableName 'bitrate'
     New-ParamCompleter -Name ab -Description $msg.bitrate_audio -VariableName 'bitrate'
     New-ParamCompleter -Name vb -Description $msg.bitrate_video -VariableName 'bitrate'
-    
+
     # Filter options
     New-ParamCompleter -Name filter -Description $msg.filter -VariableName 'filtergraph'
     New-ParamCompleter -Name af -Description $msg.filter_audio -VariableName 'filtergraph'
     New-ParamCompleter -Name vf -Description $msg.filter_video -VariableName 'filtergraph'
     New-ParamCompleter -Name filter_complex -Description $msg.filter_complex -VariableName 'filtergraph'
-    
+
     # Frame options
     New-ParamCompleter -Name frames -Description $msg.frames -VariableName 'number'
     New-ParamCompleter -Name r -Description $msg.frame_rate -VariableName 'rate'
     New-ParamCompleter -Name s -Description $msg.video_size -VariableName 'size'
     New-ParamCompleter -Name aspect -Description $msg.aspect_ratio -VariableName 'aspect'
     New-ParamCompleter -Name pix_fmt -Description $msg.pixel_format -VariableName 'format'
-    
+
     # Audio options
     New-ParamCompleter -Name ar -Description $msg.sample_rate -VariableName 'rate'
     New-ParamCompleter -Name ac -Description $msg.channels -VariableName 'channels'
     New-ParamCompleter -Name sample_fmt -Description $msg.sample_format -VariableName 'format'
     New-ParamCompleter -Name channel_layout -Description $msg.channel_layout -VariableName 'layout'
-    
+
     # Quality options
     New-ParamCompleter -Name q -Description $msg.quality -VariableName 'quality'
     New-ParamCompleter -Name qscale -Description $msg.quality -VariableName 'quality'
-    
+
     # Time options
     New-ParamCompleter -Name ss -Description $msg.start_time -VariableName 'position'
     New-ParamCompleter -Name t -Description $msg.duration -VariableName 'duration'
     New-ParamCompleter -Name to -Description $msg.duration -VariableName 'position'
     New-ParamCompleter -Name timestamp -Description $msg.timestamp -VariableName 'date'
-    
+
     # Metadata options
     New-ParamCompleter -Name metadata -Description $msg.metadata -VariableName 'key=value'
     New-ParamCompleter -Name disposition -Description $msg.disposition -VariableName 'value'
     New-ParamCompleter -Name program -Description $msg.program -VariableName 'title=program'
-    
+
     # Stream selection
     New-ParamCompleter -Name map -Description $msg.map -VariableName 'stream'
     New-ParamCompleter -Name map_chapters -Description $msg.map_chapters -VariableName 'input'
     New-ParamCompleter -Name map_metadata -Description $msg.map_metadata -VariableName 'spec'
-    
+
     # Stream disable
     New-ParamCompleter -Name an -Description $msg.an
     New-ParamCompleter -Name vn -Description $msg.vn
     New-ParamCompleter -Name sn -Description $msg.sn
     New-ParamCompleter -Name dn -Description $msg.dn
-    
+
     # Advanced options
     New-ParamCompleter -Name threads -Description $msg.threads -VariableName 'count'
     New-ParamCompleter -Name preset -Description $msg.preset -VariableName 'preset'
@@ -186,14 +186,14 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name thread_queue_size -Description $msg.thread_queue_size -VariableName 'size'
     New-ParamCompleter -Name stream_loop -Description $msg.stream_loop -VariableName 'count'
     New-ParamCompleter -Name loop -Description $msg.loop_output -VariableName 'count'
-    
+
     # Sync options
     New-ParamCompleter -Name vsync -Description $msg.video_sync -VariableName 'method'
     New-ParamCompleter -Name async -Description $msg.audio_sync -VariableName 'samples'
-    
+
     # Format options
     New-ParamCompleter -Name fmt -Description $msg.input_format -VariableName 'format'
-    
+
     # Statistics and logging
     New-ParamCompleter -Name stats -Description $msg.stats
     New-ParamCompleter -Name progress -Description $msg.progress -VariableName 'url'
@@ -204,23 +204,23 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name vstats -Description $msg.vstats
     New-ParamCompleter -Name vstats_file -Description $msg.vstats_file -Type File -VariableName 'file'
     New-ParamCompleter -Name vstats_version -Description $msg.vstats_version -VariableName 'version'
-    
+
     # Benchmark options
     New-ParamCompleter -Name benchmark -Description $msg.benchmark
     New-ParamCompleter -Name benchmark_all -Description $msg.benchmark_all
     New-ParamCompleter -Name timelimit -Description $msg.timelimit -VariableName 'duration'
-    
+
     # Debug options
     New-ParamCompleter -Name dump -Description $msg.dump
     New-ParamCompleter -Name hex -Description $msg.hex
-    
+
     # Other options
     New-ParamCompleter -Name re -Description $msg.re
     New-ParamCompleter -Name stream_group -Description $msg.stream_group -VariableName 'spec'
     New-ParamCompleter -Name max_alloc -Description $msg.max_alloc -VariableName 'bytes'
     New-ParamCompleter -Name cpuflags -Description $msg.cpuflags -VariableName 'flags'
     New-ParamCompleter -Name cpucount -Description $msg.cpucount -VariableName 'count'
-    
+
     # Display options
     New-ParamCompleter -Name hide_banner -Description $msg.hide_banner
     New-ParamCompleter -Name h -Description $msg.help -Type FlagOrValue -VariableName 'topic'

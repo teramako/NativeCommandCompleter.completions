@@ -87,7 +87,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $unitCompleter = {
-    systemctl list-units --all --no-legend --no-pager --plain | 
+    systemctl list-units --all --no-legend --no-pager --plain |
         ForEach-Object {
             if ($_ -match '^([^\s]+)\s+') {
                 $unit = $Matches[1]
@@ -133,7 +133,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName no-hostname -Description $msg.no_hostname
     New-ParamCompleter -LongName output-fields -Description $msg.output_fields -VariableName 'LIST'
     New-ParamCompleter -ShortName x -LongName catalog -Description $msg.catalog
-    
+
     # Source selection
     New-ParamCompleter -ShortName m -LongName merge -Description $msg.merge
     New-ParamCompleter -ShortName b -LongName boot -Description $msg.boot -Type FlagOrValue -VariableName 'ID'
@@ -149,7 +149,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName namespace -Description $msg.namespace -VariableName 'NAMESPACE'
     New-ParamCompleter -LongName image -Description $msg.image -Type File -VariableName 'IMAGE'
     New-ParamCompleter -LongName image-policy -Description $msg.image_policy -VariableName 'POLICY'
-    
+
     # Journal management
     New-ParamCompleter -LongName header -Description $msg.header
     New-ParamCompleter -LongName disk-usage -Description $msg.disk_usage
@@ -168,7 +168,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName smart-relinquish-var -Description $msg.smart_relinquish_var
     New-ParamCompleter -LongName flush -Description $msg.flush
     New-ParamCompleter -LongName rotate -Description $msg.rotate
-    
+
     # Filtering
     New-ParamCompleter -ShortName p -LongName priority -Description $msg.priority -VariableName 'RANGE'
     New-ParamCompleter -LongName facility -Description $msg.facility -VariableName 'FACILITY' -ArgumentCompleter $facilityCompleter
@@ -183,7 +183,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName cursor-file -Description $msg.cursor_file -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName after-cursor -Description $msg.after_cursor -VariableName 'CURSOR'
     New-ParamCompleter -LongName show-cursor -Description $msg.show_cursor
-    
+
     # Behavior
     New-ParamCompleter -ShortName f -LongName follow -Description $msg.follow
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
@@ -191,7 +191,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName force -Description $msg.force
     New-ParamCompleter -LongName no-pager -Description $msg.no_pager
     New-ParamCompleter -LongName no-legend -Description $msg.no_legend
-    
+
     # Info
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version

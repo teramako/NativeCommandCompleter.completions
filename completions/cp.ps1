@@ -130,13 +130,13 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -LongName parents -Description $msg.gnu_parents
         New-ParamCompleter -ShortName r,R -LongName recursive -Description $msg.gnu_recursive
         New-ParamCompleter -LongName reflink -Description $msg.gnu_reflink -Type FlagOrValue -Arguments @(
-            "always `t{0}" -f $msg.gnu_reflink_always 
+            "always `t{0}" -f $msg.gnu_reflink_always
             "auto `t{0}" -f $msg.gnu_reflink_auto
             "never `t{0}" -f  $msg.gnu_reflink_never
         ) -VariableName 'WHEN'
         New-ParamCompleter -LongName remove-destination -Description $msg.gnu_removeDestination
         New-ParamCompleter -LongName sparse -Description $msg.gnu_sparse -Arguments @(
-            "always `t{0}" -f $msg.gnu_sparse_always 
+            "always `t{0}" -f $msg.gnu_sparse_always
             "auto `t{0}" -f $msg.gnu_sparse_auto
             "never `t{0}" -f  $msg.gnu_sparse_never
         ) -VariableName 'WHEN'

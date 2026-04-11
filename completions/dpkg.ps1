@@ -161,10 +161,10 @@ Register-NativeCompleter -Name dpkg -Description $msg.dpkg -Parameters @(
     New-ParamCompleter -LongName expert -Description $msg.expert
 ) -ArgumentCompleter {
     param([int] $position, [int] $argIndex)
-    
+
     $params = $this.BoundParameters
-    
-    if ($params.ContainsKey('install') -or $params.ContainsKey('unpack') -or 
+
+    if ($params.ContainsKey('install') -or $params.ContainsKey('unpack') -or
         $params.ContainsKey('contents') -or $params.ContainsKey('control') -or
         $params.ContainsKey('extract') -or $params.ContainsKey('field'))
     {

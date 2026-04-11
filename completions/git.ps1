@@ -76,7 +76,7 @@ $msg = data { ConvertFrom-StringData @'
     switch                  = Switch branches
     tag                     = Create, list, delete or verify a tag object signed with GPG
     worktree                = Manage multiple working trees
-    
+
     # Ancillary Commands / Manipulators
     config                  = Get and set repository or global options
     fastExport              = Git data exporter
@@ -89,7 +89,7 @@ $msg = data { ConvertFrom-StringData @'
     remote                  = Manage set of tracked repositories
     repack                  = Pack unpacked objects in a repository
     replace                 = Create, list, delete refs to replace objects
-    
+
     # Ancillary Commands / Interrogators
     annotate                = Annotate file lines with commit information
     blame                   = Show what revision and author last modified each line of a file
@@ -107,7 +107,7 @@ $msg = data { ConvertFrom-StringData @'
     verifyTag               = Check the GPG signature of tags
     version                 = Display version information about Git
     whatchanged             = Show logs with difference each commit introduces
-    
+
     # Interacting with Others
     archimport              = Import a GNU Arch repository into Git
     cvsexportcommit         = Export a single commit to a CVS checkout
@@ -119,7 +119,7 @@ $msg = data { ConvertFrom-StringData @'
     requestPull             = Generates a summary of pending changes
     sendEmail               = Send a collection of patches as emails
     svn                     = Bidirectional operation between a Subversion repository and Git
-    
+
     # Low-level Commands / Manipulators
     apply                   = Apply a patch to files and/or to the index
     checkoutIndex           = Copy files from the index to the working tree
@@ -140,7 +140,7 @@ $msg = data { ConvertFrom-StringData @'
     updateIndex             = Register file contents in the working tree to the index
     updateRef               = Update the object name stored in a ref safely
     writeTree               = Create a tree object from the current index
-    
+
     # Low-level Commands / Interrogators
     catFile                 = Provide content or type and size information for repository objects
     cherry                  = Find commits yet to be applied to upstream
@@ -163,14 +163,14 @@ $msg = data { ConvertFrom-StringData @'
     unpackFile              = Creates a temporary file with a blob's contents
     var                     = Show a Git logical variable
     verifyPack              = Validate packed Git archive files
-    
+
     # Low-level Commands / Syncing Repositories
     daemon                  = A really simple server for Git repositories
     fetchPack               = Receive missing objects from another repository
     httpBackend             = Server side implementation of Git over HTTP
     sendPack                = Push objects over Git protocol to another repository
     updateServerInfo        = Update auxiliary info file to help dumb servers
-    
+
     # Low-level Commands / Internal Helpers
     checkAttr               = Display gitattributes information
     checkIgnore             = Debug gitignore / exclude files
@@ -190,7 +190,7 @@ $msg = data { ConvertFrom-StringData @'
     shI18n                  = Git's i18n setup code for shell scripts
     shSetup                 = Common Git shell script setup code
     stripspace              = Remove unnecessary whitespace
-    
+
     # Common options
     _version                 = Prints the Git suite version
     _help                    = Prints the synopsis and a list of the most commonly used commands
@@ -220,7 +220,7 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 $branchCompleter = {
     git for-each-ref --format="%(refname:strip=2)`tLocal Branch" --sort=refname refs/heads/ |
-        Where-Object { $_ -like "$wordToComplete*" } 
+        Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $allBranchCompleter = {
@@ -229,7 +229,7 @@ $allBranchCompleter = {
             $fields=$_.Split("`t");
             $desc = switch($fields[1]) { 'refs/heads' { 'Loacal Branch' } 'refs/remotes' { 'Remote Branch' } };
             "{0}`t{1}" -f $fields[0], $desc
-        } | Where-Object { $_ -like "$wordToComplete*" } 
+        } | Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $remoteCompleter = {
@@ -329,7 +329,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name switch -Description $msg.switch -ArgumentCompleter $branchCompleter
     New-CommandCompleter -Name tag -Description $msg.tag -ArgumentCompleter $tagCompleter
     New-CommandCompleter -Name worktree -Description $msg.worktree
-    
+
     # Ancillary Commands / Manipulators
     New-CommandCompleter -Name config -Description $msg.config
     New-CommandCompleter -Name fast-export -Description $msg.fastExport
@@ -342,7 +342,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name remote -Description $msg.remote -ArgumentCompleter $remoteCompleter
     New-CommandCompleter -Name repack -Description $msg.repack
     New-CommandCompleter -Name replace -Description $msg.replace
-    
+
     # Ancillary Commands / Interrogators
     New-CommandCompleter -Name annotate -Description $msg.annotate
     New-CommandCompleter -Name blame -Description $msg.blame
@@ -360,7 +360,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name verify-tag -Description $msg.verifyTag
     New-CommandCompleter -Name version -Description $msg.version
     New-CommandCompleter -Name whatchanged -Description $msg.whatchanged
-    
+
     # Interacting with Others
     New-CommandCompleter -Name archimport -Description $msg.archimport
     New-CommandCompleter -Name cvsexportcommit -Description $msg.cvsexportcommit
@@ -372,7 +372,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name request-pull -Description $msg.requestPull
     New-CommandCompleter -Name send-email -Description $msg.sendEmail
     New-CommandCompleter -Name svn -Description $msg.svn
-    
+
     # Low-level Commands / Manipulators
     New-CommandCompleter -Name apply -Description $msg.apply
     New-CommandCompleter -Name checkout-index -Description $msg.checkoutIndex
@@ -393,7 +393,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name update-index -Description $msg.updateIndex
     New-CommandCompleter -Name update-ref -Description $msg.updateRef
     New-CommandCompleter -Name write-tree -Description $msg.writeTree
-    
+
     # Low-level Commands / Interrogators
     New-CommandCompleter -Name cat-file -Description $msg.catFile
     New-CommandCompleter -Name cherry -Description $msg.cherry
@@ -416,14 +416,14 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name unpack-file -Description $msg.unpackFile
     New-CommandCompleter -Name var -Description $msg.var
     New-CommandCompleter -Name verify-pack -Description $msg.verifyPack
-    
+
     # Low-level Commands / Syncing Repositories
     New-CommandCompleter -Name daemon -Description $msg.daemon
     New-CommandCompleter -Name fetch-pack -Description $msg.fetchPack
     New-CommandCompleter -Name http-backend -Description $msg.httpBackend
     New-CommandCompleter -Name send-pack -Description $msg.sendPack
     New-CommandCompleter -Name update-server-info -Description $msg.updateServerInfo
-    
+
     # Low-level Commands / Internal Helpers
     New-CommandCompleter -Name check-attr -Description $msg.checkAttr
     New-CommandCompleter -Name check-ignore -Description $msg.checkIgnore

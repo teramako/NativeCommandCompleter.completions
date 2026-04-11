@@ -143,7 +143,7 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
         New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -VariableName 'username'
         New-ParamCompleter -LongName resize -Description $msg.manage_resize -VariableName 'size'
     ) -NoFileCompletions -ArgumentCompleter $distributionCompleter
-    
+
     New-CommandCompleter -Name '--mount' -Description $msg.mount -Parameters @(
         New-ParamCompleter -LongName vhd -Description $msg.mount_vhd
         New-ParamCompleter -LongName bare -Description $msg.mount_bare
@@ -160,17 +160,17 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
     ) -NoFileCompletions
 
     New-CommandCompleter -Name '--status' -Description $msg.status -NoFileCompletions
-    
+
     New-CommandCompleter -Name '--unmount' -Description $msg.unmount -NoFileCompletions
 
     New-CommandCompleter -Name '--uninstall' -Description $msg.uninstall -NoFileCompletions
-    
+
     New-CommandCompleter -Name '--update' -Description $msg.update -Parameters @(
         New-ParamCompleter -LongName pre-release -Description $msg.update_prerelease
     ) -NoFileCompletions
 
     New-CommandCompleter -Name '--version' -Aliases '-v' -Description $msg.version -NoFileCompletions
-    
+
     New-CommandCompleter -Name '--export' -Description $msg.export -Parameters @(
         New-ParamCompleter -LongName format -Description $msg.export_format -Arguments "tar", "tar.gz", "tar.xz", "vhd" -VariableName 'format'
     ) -ArgumentCompleter {

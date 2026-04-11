@@ -44,7 +44,7 @@ $msg = data { ConvertFrom-StringData @'
     boot                    = Indicate whether the last boot should be saved as the last-known-good boot configuration
     Lock                    = Lock the Service Database
     QueryLock               = Query the LockStatus for the SCManager Database
-    
+
     server                  = The server to connect to
     type_own                = Service runs in its own process
     type_share              = Service shares a process with other services
@@ -129,7 +129,7 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
         New-ParamCompleter -LongName ri -Description $msg.ri -VariableName 'ResumeIndex'
         New-ParamCompleter -LongName group -Description $msg.group -VariableName 'GroupName'
     ) -ArgumentCompleter $serviceCompleter
-    
+
     New-CommandCompleter -Name queryex -Description $msg.queryex -Parameters @(
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArguments -VariableName 'state'
@@ -137,13 +137,13 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
         New-ParamCompleter -LongName ri -Description $msg.ri -VariableName 'ResumeIndex'
         New-ParamCompleter -LongName group -Description $msg.group -VariableName 'GroupName'
     ) -ArgumentCompleter $serviceCompleter
-    
+
     New-CommandCompleter -Name start -Description $msg.start -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name pause -Description $msg.pause -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name interrogate -Description $msg.interrogate -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name continue -Description $msg.continue -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name stop -Description $msg.stop -ArgumentCompleter $serviceCompleter
-    
+
     New-CommandCompleter -Name config -Description $msg.config -Parameters @(
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArguments -VariableName 'start'
@@ -156,7 +156,7 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
         New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -VariableName 'DisplayName'
         New-ParamCompleter -LongName password -Description 'Password' -VariableName 'Password'
     ) -ArgumentCompleter $serviceCompleter
-    
+
     New-CommandCompleter -Name description -Description $msg.description -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name failure -Description $msg.failure -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name failureflag -Description $msg.failureflag -ArgumentCompleter $serviceCompleter
@@ -175,7 +175,7 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
     New-CommandCompleter -Name qprotection -Description $msg.qprotection -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name quserservice -Description $msg.quserservice -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name delete -Description $msg.delete -ArgumentCompleter $serviceCompleter
-    
+
     New-CommandCompleter -Name create -Description $msg.create -Parameters @(
         New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
         New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArguments -VariableName 'start'
@@ -188,7 +188,7 @@ Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameter
         New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -VariableName 'DisplayName'
         New-ParamCompleter -LongName password -Description 'Password' -VariableName 'Password'
     ) -NoFileCompletions
-    
+
     New-CommandCompleter -Name control -Description $msg.control -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name sdshow -Description $msg.sdshow -ArgumentCompleter $serviceCompleter
     New-CommandCompleter -Name sdset -Description $msg.sdset -ArgumentCompleter $serviceCompleter

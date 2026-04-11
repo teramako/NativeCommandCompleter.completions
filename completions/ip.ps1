@@ -171,7 +171,7 @@ Register-NativeCompleter -Name ip -Description $msg.ip -Style Unix -Parameters @
 ) -SubCommands @(
     # address
     New-CommandCompleter -Name address -Aliases addr, a -Description $msg.address -SubCommands @(
-        New-CommandCompleter -Name add -Description $msg.addr_add -NoFileCompletions 
+        New-CommandCompleter -Name add -Description $msg.addr_add -NoFileCompletions
         New-CommandCompleter -Name change -Description $msg.addr_change -NoFileCompletions
         New-CommandCompleter -Name replace -Description $msg.addr_replace -NoFileCompletions
         New-CommandCompleter -Name delete -Aliases del -Description $msg.addr_delete -NoFileCompletions

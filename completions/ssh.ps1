@@ -86,7 +86,7 @@ $msg = data { ConvertFrom-StringData @'
     verify_host_key_dns      = Specifies whether to verify the remote key using DNS and SSHFP resource records
     visual_host_key          = Specifies whether an ASCII art representation of remote host key fingerprint is printed
     xauth_location           = Specifies the full pathname of the xauth program
-    
+
     print_config             = Print configuration for the Host and exit
     no_execute               = Do not execute a remote command
     tag                      = Specify a tag name that may be used to select configuration

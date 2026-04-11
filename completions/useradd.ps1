@@ -50,8 +50,8 @@ $groupCompleter = {
 
 $shellCompleter = {
     if (Test-Path '/etc/shells') {
-        Get-Content '/etc/shells' | Where-Object { 
-            -not [string]::IsNullOrWhiteSpace($_) -and -not $_.StartsWith('#') 
+        Get-Content '/etc/shells' | Where-Object {
+            -not [string]::IsNullOrWhiteSpace($_) -and -not $_.StartsWith('#')
         } | ForEach-Object {
             if ($_ -like "$wordToComplete*") {
                 $_

@@ -90,19 +90,19 @@ Register-NativeCompleter -Name fzf -Description 'command-line fuzzy finder' -Par
     New-ParamCompleter -LongName literal -Description $msg.literal
     New-ParamCompleter -LongName scheme -Description $msg.scheme -Arguments "default","path","history" -VariableName 'SCHEME'
     New-ParamCompleter -LongName algo -Description $msg.algo -Arguments "v1","v2" -VariableName 'TYPE'
-    
+
     # Search scope
     New-ParamCompleter -ShortName n -LongName nth -Description $msg.nth -VariableName 'N[,..]'
     New-ParamCompleter -LongName with-nth -Description $msg.with_nth -VariableName 'N[,..]'
     New-ParamCompleter -ShortName d -LongName delimiter -Description $msg.delimiter -VariableName 'STR'
     New-ParamCompleter -LongName disabled -Description $msg.disabled
-    
+
     # Search result
     New-ParamCompleter -LongName no-sort -Description $msg.no_sort
     New-ParamCompleter -LongName track -Description $msg.track
     New-ParamCompleter -LongName tac -Description $msg.tac
     New-ParamCompleter -LongName tiebreak -Description $msg.tiebreak -VariableName 'CRI[,..]'
-    
+
     # Interface
     New-ParamCompleter -ShortName m -LongName multi -Description $msg.multi -Type FlagOrValue -VariableName 'MAX'
     New-ParamCompleter -LongName no-mouse -Description $msg.no_mouse
@@ -114,7 +114,7 @@ Register-NativeCompleter -Name fzf -Description 'command-line fuzzy finder' -Par
     New-ParamCompleter -LongName hscroll-off -Description $msg.hscroll_off -VariableName 'COLS'
     New-ParamCompleter -LongName filepath-word -Description $msg.filepath_word
     New-ParamCompleter -LongName jump-labels -Description $msg.jump_labels -VariableName 'CHARS'
-    
+
     # Layout
     New-ParamCompleter -LongName height -Description $msg.height -VariableName 'HEIGHT[%]'
     New-ParamCompleter -LongName min-height -Description $msg.min_height -VariableName 'HEIGHT'
@@ -147,20 +147,20 @@ Register-NativeCompleter -Name fzf -Description 'command-line fuzzy finder' -Par
     New-ParamCompleter -LongName header-lines -Description $msg.header_lines -VariableName 'N'
     New-ParamCompleter -LongName header-first -Description $msg.header_first
     New-ParamCompleter -LongName ellipsis -Description $msg.ellipsis -VariableName 'STR'
-    
+
     # Display
     New-ParamCompleter -LongName ansi -Description $msg.ansi
     New-ParamCompleter -LongName tabstop -Description $msg.tabstop -VariableName 'SPACES'
     New-ParamCompleter -LongName color -Description $msg.color -VariableName 'COLSPEC'
     New-ParamCompleter -LongName no-bold -Description $msg.no_bold
     New-ParamCompleter -LongName black -Description $msg.black
-    
+
     # Preview
     New-ParamCompleter -LongName preview -Description $msg.preview -VariableName 'COMMAND'
     New-ParamCompleter -LongName preview-label -Description $msg.preview_label -VariableName 'LABEL'
     New-ParamCompleter -LongName preview-label-pos -Description $msg.preview_label_pos -VariableName 'COL'
     New-ParamCompleter -LongName preview-window -Description $msg.preview_window -VariableName 'OPTS'
-    
+
     # Scripting
     New-ParamCompleter -ShortName q -LongName query -Description $msg.query -VariableName 'STR'
     New-ParamCompleter -ShortName '1' -LongName select-1 -Description $msg.select_1
@@ -171,7 +171,7 @@ Register-NativeCompleter -Name fzf -Description 'command-line fuzzy finder' -Par
     New-ParamCompleter -LongName print0 -Description $msg.print0
     New-ParamCompleter -LongName sync -Description $msg.sync
     New-ParamCompleter -LongName listen -Description $msg.listen -VariableName 'ADDR'
-    
+
     # Misc
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -LongName help -Description $msg.help

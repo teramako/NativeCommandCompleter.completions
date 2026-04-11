@@ -14,7 +14,7 @@ $msg = data { ConvertFrom-StringData @'
     device             = Select device interface
     help               = Display help and exit
     version            = Display version and exit
-    
+
     win_display_all    = Displays current ARP entries
     win_display_inet   = Displays ARP entries for the specified interface
     win_delete         = Deletes the host specified by inet_addr

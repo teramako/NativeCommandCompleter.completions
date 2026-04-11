@@ -30,7 +30,7 @@ $msg = data { ConvertFrom-StringData @'
     download            = Download packages
     buildDep            = Install packages needed to build the given package
     satisfy             = Satisfy dependency strings
-    
+
     # Options
     help                = Show help
     version             = Show version

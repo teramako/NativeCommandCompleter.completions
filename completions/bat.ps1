@@ -61,7 +61,7 @@ $msg = data { ConvertFrom-StringData @'
     cache_clear            = Remove the cached syntax definitions and themes.
     cache_blank            = Create completely new syntax and theme sets (instead of appending to the default sets).
     cache_help             = Prints help information
-    cache_acknowledgements = Build acknowledgements.bin. 
+    cache_acknowledgements = Build acknowledgements.bin.
 '@ }
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }

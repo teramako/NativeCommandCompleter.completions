@@ -70,7 +70,7 @@ $msg = data { ConvertFrom-StringData @'
     hybrid_sleep                = Hibernate and suspend the system
     suspend_then_hibernate      = Suspend the system, wake up after period and hibernate
     cancel                      = Cancel all, one, or more jobs
-    
+
     type                        = List units of specified type
     state                       = List units in specified state
     property                    = Show only specified properties
@@ -132,7 +132,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $unitCompleter = {
-    systemctl list-units --all --no-legend --no-pager --plain | 
+    systemctl list-units --all --no-legend --no-pager --plain |
         ForEach-Object {
             if ($_ -match '^(\S+)\s+\S+\s+\S+\s+\S+\s+(.*)$') {
                 $unit = $Matches[1]
@@ -190,7 +190,7 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-CommandCompleter -Name cat -Description $msg.cat -ArgumentCompleter $unitCompleter
     New-CommandCompleter -Name help -Description $msg.help -ArgumentCompleter $unitCompleter
     New-CommandCompleter -Name reset-failed -Description $msg.reset_failed -ArgumentCompleter $unitCompleter
-    
+
     # Unit file commands
     New-CommandCompleter -Name enable -Description $msg.enable -ArgumentCompleter $unitFileCompleter
     New-CommandCompleter -Name disable -Description $msg.disable -ArgumentCompleter $unitFileCompleter
@@ -207,7 +207,7 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-CommandCompleter -Name edit -Description $msg.edit -ArgumentCompleter $unitCompleter
     New-CommandCompleter -Name get-default -Description $msg.get_default -NoFileCompletions
     New-CommandCompleter -Name set-default -Description $msg.set_default -ArgumentCompleter $unitCompleter
-    
+
     # Manager commands
     New-CommandCompleter -Name daemon-reload -Description $msg.daemon_reload -NoFileCompletions
     New-CommandCompleter -Name daemon-reexec -Description $msg.daemon_reexec -NoFileCompletions
@@ -219,7 +219,7 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-CommandCompleter -Name log-level -Description $msg.log_level -NoFileCompletions
     New-CommandCompleter -Name log-target -Description $msg.log_target -NoFileCompletions
     New-CommandCompleter -Name is-system-running -Description $msg.is_system_running -NoFileCompletions
-    
+
     # System commands
     New-CommandCompleter -Name default -Description $msg.default -NoFileCompletions
     New-CommandCompleter -Name rescue -Description $msg.rescue -NoFileCompletions

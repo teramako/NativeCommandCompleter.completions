@@ -109,7 +109,7 @@ Register-NativeCompleter -Name ssh-keygen -Description $msg.ssh_keygen -Paramete
 ) -ArgumentCompleter {
     param([int] $position, [int] $argIndex)
     [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-        $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or 
+        $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or
         $_.Extension -match '^\.(pub|pem|ppk)?$'
     })
 }

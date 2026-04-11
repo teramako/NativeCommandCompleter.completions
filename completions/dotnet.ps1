@@ -733,7 +733,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
                 $helpParam
             )
         )
-        # nuget delete 
+        # nuget delete
         New-CommandCompleter -Name delete -Description $msg.NugetDelete -Parameters @(
             $helpParam
             $nugetForceEnglishOutputParam
@@ -743,11 +743,11 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             New-ParamCompleter -LongName no-service-endpoint -Description $msg.NugetDelete_NoServiceEndpoint
             $interactiveParam
         )
-        # nuget disable 
+        # nuget disable
         New-CommandCompleter -Name disable -Description $msg.NugetDisable -Parameters $helpParam
-        # nuget enable 
+        # nuget enable
         New-CommandCompleter -Name enable -Description $msg.NugetEnable -Parameters $helpParam
-        # nuget list 
+        # nuget list
         New-CommandCompleter -Name list -Description $msg.NugetList -Parameters $helpParam -SubCommands @(
             New-CommandCompleter -Name client-cert -Description $msg.NugetListClientCert -Parameters $nugetConfigfileParam, $helpParam
             New-CommandCompleter -Name source -Description $msg.NugetListSource -Parameters @(
@@ -756,7 +756,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
                 $helpParam
             )
         )
-        # nuget locals 
+        # nuget locals
         New-CommandCompleter -Name locals -Description $msg.NugetLocals -Parameters @(
             $helpParam
             $nugetForceEnglishOutputParam
@@ -766,7 +766,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             $wordToComplete = "$_*";
             'all', 'http-cache', 'global-packages', 'temp' | Where-Object { $_ -like $wordToComplete }
         }
-        # nuget push 
+        # nuget push
         New-CommandCompleter -Name push -Description $msg.NugetPush -Parameters @(
             $helpParam
             $nugetForceEnglishOutputParam
@@ -781,7 +781,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             $interactiveParam
             New-ParamCompleter -LongName skip-duplicate -Description $msg.NugetPush_SkipDuplicate
         )
-        # nuget remove 
+        # nuget remove
         New-CommandCompleter -Name remove -Description $msg.NugetRemove -Parameters $helpParam -SubCommands @(
             New-CommandCompleter -Name client-cert -Description $msg.NugetRemoveClientCert -Parameters @(
                 $nugetPackageSourceParam
@@ -790,7 +790,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             )
             New-CommandCompleter -Name source -Description $msg.NugetRemoveSource -Parameters $nugetConfigfileParam, $helpParam
         )
-        # nuget sign 
+        # nuget sign
         New-CommandCompleter -Name sign -Description $msg.NugetSign -Parameters @(
             $outputDirParam
             New-ParamCompleter -LongName certificate-path -Description $msg.NugetSign_CertificatePath -Type File
@@ -806,7 +806,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             $verbosityParam
             $helpParam
         )
-        # nuget trust 
+        # nuget trust
         New-CommandCompleter -Name trust -Description $msg.NugetTrust -Parameters @(
             $nugetConfigfileParam
             $helpParam
@@ -829,9 +829,9 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             )
             # nuget trust list
             New-CommandCompleter -Name list -Description $msg.NugetTrustList -Parameters $nugetConfigfileParam, $verbosityParam, $helpParam
-            # nuget trust remove 
+            # nuget trust remove
             New-CommandCompleter -Name remove -Description $msg.NugetTrustRemove -Parameters $nugetConfigfileParam, $verbosityParam, $helpParam
-            # nuget trust repository 
+            # nuget trust repository
             New-CommandCompleter -Name repository -Description $msg.NugetTrustRepository -Parameters @(
                 $nugetTrustAllowUntrustedRootParam
                 New-ParamCompleter -LongName owners -Type Required
@@ -839,7 +839,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
                 $verbosityParam
                 $helpParam
             )
-            # nuget trust source 
+            # nuget trust source
             New-CommandCompleter -Name source -Description $msg.NugetTrustSource -Parameters @(
                 New-ParamCompleter -LongName owners -Type Required
                 New-ParamCompleter -LongName source-url -Type Required
@@ -863,7 +863,7 @@ Register-NativeCompleter -Name dotnet -Parameters @(
                 $nugetFindValueParam
                 $nugetForceParam
                 $nugetConfigfileParam
-                $helpParam 
+                $helpParam
             )
             # nuget update source
             New-CommandCompleter -Name source -Description $msg.NugetUpdateSource -Parameters @(
