@@ -137,27 +137,27 @@ Register-NativeCompleter -Name dpkg -Description $msg.dpkg -Parameters @(
     New-ParamCompleter -LongName no-triggers -Description $msg.no_triggers
     New-ParamCompleter -LongName triggers -Description $msg.triggers
     New-ParamCompleter -ShortName a -LongName pending -Description $msg.pending
-    New-ParamCompleter -LongName verify-format -Description $msg.verify_format -Type Required -VariableName 'format'
+    New-ParamCompleter -LongName verify-format -Description $msg.verify_format -VariableName 'format'
     New-ParamCompleter -LongName no-pager -Description $msg.no_pager
     New-ParamCompleter -LongName log -Description $msg.log -Type File -VariableName 'filename'
-    New-ParamCompleter -LongName abort-after -Description $msg.abort_after -Type Required -VariableName 'number'
-    New-ParamCompleter -LongName arch -Description $msg.arch -Type Required -VariableName 'architecture'
-    New-ParamCompleter -LongName ignore-depends -Description $msg.ignore_depends -Type Required -VariableName 'package'
+    New-ParamCompleter -LongName abort-after -Description $msg.abort_after -VariableName 'number'
+    New-ParamCompleter -LongName arch -Description $msg.arch -VariableName 'architecture'
+    New-ParamCompleter -LongName ignore-depends -Description $msg.ignore_depends -VariableName 'package'
     New-ParamCompleter -LongName force-things -Description $msg.force_things -Type List -VariableName 'things'
     New-ParamCompleter -LongName no-force-things -Description $msg.no_force_things -Type List -VariableName 'things'
     New-ParamCompleter -LongName refuse-things -Description $msg.refuse_things -Type List -VariableName 'things'
-    New-ParamCompleter -LongName path-exclude -Description $msg.path_exclude -Type Required -VariableName 'pattern'
-    New-ParamCompleter -LongName path-include -Description $msg.path_include -Type Required -VariableName 'pattern'
-    New-ParamCompleter -LongName status-fd -Description $msg.status_fd -Type Required -VariableName 'n'
-    New-ParamCompleter -LongName status-logger -Description $msg.status_logger -Type Required -VariableName 'command'
+    New-ParamCompleter -LongName path-exclude -Description $msg.path_exclude -VariableName 'pattern'
+    New-ParamCompleter -LongName path-include -Description $msg.path_include -VariableName 'pattern'
+    New-ParamCompleter -LongName status-fd -Description $msg.status_fd -VariableName 'n'
+    New-ParamCompleter -LongName status-logger -Description $msg.status_logger -VariableName 'command'
     New-ParamCompleter -LongName no-debsig -Description $msg.no_debsig
     New-ParamCompleter -ShortName E -LongName skip-same-version -Description $msg.skip_same_version
     New-ParamCompleter -ShortName G -Description $msg.selected_only
-    New-ParamCompleter -LongName pre-invoke -Description $msg.pre_invoke -Type Required -VariableName 'command'
-    New-ParamCompleter -LongName post-invoke -Description $msg.post_invoke -Type Required -VariableName 'command'
+    New-ParamCompleter -LongName pre-invoke -Description $msg.pre_invoke -VariableName 'command'
+    New-ParamCompleter -LongName post-invoke -Description $msg.post_invoke -VariableName 'command'
     New-ParamCompleter -LongName robot -Description $msg.robot
-    New-ParamCompleter -ShortName D -Description $msg.debug -Type Required -VariableName 'octal'
-    New-ParamCompleter -LongName debug -Description $msg.debug -Type Required -VariableName 'hex'
+    New-ParamCompleter -ShortName D -Description $msg.debug -VariableName 'octal'
+    New-ParamCompleter -LongName debug -Description $msg.debug -VariableName 'hex'
     New-ParamCompleter -LongName expert -Description $msg.expert
 ) -ArgumentCompleter {
     param([int] $position, [int] $argIndex)

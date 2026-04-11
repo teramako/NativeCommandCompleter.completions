@@ -45,7 +45,7 @@ if ($LASTEXITCODE -eq 0) # GNU df
 
     Register-NativeCompleter -Name df -Description $msg.df -Parameters @(
         New-ParamCompleter -ShortName a -LongName all -Description $msg.gnu_all
-        New-ParamCompleter -ShortName B -LongName block-size -Description $msg.gnu_blockSize -Type Required -VariableName 'SIZE'
+        New-ParamCompleter -ShortName B -LongName block-size -Description $msg.gnu_blockSize -VariableName 'SIZE'
         New-ParamCompleter -ShortName h -LongName human-readable -Description $msg.gnu_humanReadable
         New-ParamCompleter -ShortName H -LongName si -Description $msg.gnu_si
         New-ParamCompleter -ShortName i -LongName inodes -Description $msg.gnu_inodes
@@ -66,7 +66,7 @@ if ($LASTEXITCODE -eq 0) # GNU df
 else # BSD df
 {
     Register-NativeCompleter -Name df -Description $msg.df -Parameters @(
-        New-ParamCompleter -ShortName b -Description $msg.bsd_blockSize -Type Required -VariableName 'SIZE'
+        New-ParamCompleter -ShortName b -Description $msg.bsd_blockSize -VariableName 'SIZE'
         New-ParamCompleter -ShortName g -Description $msg.bsd_humanReadable
         New-ParamCompleter -ShortName H -Description $msg.bsd_si
         New-ParamCompleter -ShortName i -Description $msg.bsd_inodes

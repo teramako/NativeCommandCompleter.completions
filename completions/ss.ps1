@@ -74,7 +74,7 @@ Register-NativeCompleter -Name ss -Description $msg.ss -Parameters @(
     New-ParamCompleter -ShortName E -LongName events -Description $msg.events
     New-ParamCompleter -ShortName Z -LongName context -Description $msg.context
     New-ParamCompleter -ShortName z -LongName contexts -Description $msg.contexts
-    New-ParamCompleter -ShortName N -LongName net -Description $msg.net -Type Required -VariableName 'NSNAME'
+    New-ParamCompleter -ShortName N -LongName net -Description $msg.net -VariableName 'NSNAME'
     New-ParamCompleter -ShortName b -LongName bpf -Description $msg.bpf
     New-ParamCompleter -ShortName '4' -LongName ipv4 -Description $msg.ipv4
     New-ParamCompleter -ShortName '6' -LongName ipv6 -Description $msg.ipv6

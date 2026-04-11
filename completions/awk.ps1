@@ -38,14 +38,14 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 Register-NativeCompleter -Name awk -Description 'pattern scanning and text processing language' -Parameters @(
     # Program specification
     New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Type File -VariableName 'program-file'
-    New-ParamCompleter -ShortName e -LongName source -Description $msg.source -Type Required -VariableName 'program-text'
+    New-ParamCompleter -ShortName e -LongName source -Description $msg.source -VariableName 'program-text'
     New-ParamCompleter -ShortName E -LongName exec -Description $msg.exec -Type File -VariableName 'program-file'
     
     # Variable assignment
-    New-ParamCompleter -ShortName v -LongName assign -Description $msg.assign -Type Required -VariableName 'var=val'
+    New-ParamCompleter -ShortName v -LongName assign -Description $msg.assign -VariableName 'var=val'
     
     # Field separator
-    New-ParamCompleter -ShortName F -LongName field-separator -Description $msg.field_separator -Type Required -VariableName 'fs'
+    New-ParamCompleter -ShortName F -LongName field-separator -Description $msg.field_separator -VariableName 'fs'
     
     # Debugging and optimization
     New-ParamCompleter -ShortName D -LongName debug -Description $msg.debug -Type FlagOrValue -VariableName 'file'

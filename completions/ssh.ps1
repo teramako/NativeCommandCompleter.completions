@@ -114,53 +114,53 @@ Register-NativeCompleter -Name ssh -Description $msg.ssh -Metadata @{ sshOptions
     New-ParamCompleter -ShortName '6' -Description $msg.ipv6
     New-ParamCompleter -ShortName A -Description $msg.forward_agent
     New-ParamCompleter -ShortName a -Description $msg.disable_forward_agent
-    New-ParamCompleter -ShortName B -Description $msg.bind_interface -Type Required -VariableName 'bind_interface'
-    New-ParamCompleter -ShortName b -Description $msg.bind_address -Type Required -VariableName 'bind_address'
+    New-ParamCompleter -ShortName B -Description $msg.bind_interface -VariableName 'bind_interface'
+    New-ParamCompleter -ShortName b -Description $msg.bind_address -VariableName 'bind_address'
     New-ParamCompleter -ShortName C -Description $msg.compress
-    New-ParamCompleter -ShortName c -Description $msg.cipher -Type Required -VariableName 'cipher_spec'
-    New-ParamCompleter -ShortName D -Description $msg.dynamic -Type Required -VariableName '[bind_address:]port'
+    New-ParamCompleter -ShortName c -Description $msg.cipher -VariableName 'cipher_spec'
+    New-ParamCompleter -ShortName D -Description $msg.dynamic -VariableName '[bind_address:]port'
     New-ParamCompleter -ShortName E -Description $msg.log_file -Type File -VariableName 'log_file'
-    New-ParamCompleter -ShortName e -Description $msg.escape -Type Required -VariableName 'escape_char'
+    New-ParamCompleter -ShortName e -Description $msg.escape -VariableName 'escape_char'
     New-ParamCompleter -ShortName F -Description $msg.config -Type File -VariableName 'configfile'
     New-ParamCompleter -ShortName f -Description $msg.fork_after_auth
     New-ParamCompleter -ShortName G -Description $msg.print_config
     New-ParamCompleter -ShortName g -Description $msg.gateway_ports
     New-ParamCompleter -ShortName I -Description $msg.pkcs11_provider -Type File -VariableName 'pkcs11'
     New-ParamCompleter -ShortName i -Description $msg.identity_file -Type File -VariableName 'identity_file'
-    New-ParamCompleter -ShortName J -Description $msg.proxy_jump -Type Required -VariableName 'destination'
+    New-ParamCompleter -ShortName J -Description $msg.proxy_jump -VariableName 'destination'
     New-ParamCompleter -ShortName K -Description $msg.gssapi_auth
     New-ParamCompleter -ShortName k -Description $msg.disable_delegate_gssapi
-    New-ParamCompleter -ShortName L -Description $msg.local_forward -Type Required -VariableName '[bind_address:]port:host:hostport'
-    New-ParamCompleter -ShortName l -Description $msg.login_name -Type Required -VariableName 'login_name'
+    New-ParamCompleter -ShortName L -Description $msg.local_forward -VariableName '[bind_address:]port:host:hostport'
+    New-ParamCompleter -ShortName l -Description $msg.login_name -VariableName 'login_name'
     New-ParamCompleter -ShortName M -Description $msg.control_master -Arguments "yes","no","ask","auto","autoask" -VariableName 'option'
     New-ParamCompleter -ShortName m -Description $msg.mac -Type List -VariableName 'mac_spec'
     New-ParamCompleter -ShortName N -Description $msg.no_execute
     New-ParamCompleter -ShortName n -Description $msg.stdin_null
     New-ParamCompleter -ShortName O -Description $msg.multiplexing -Arguments "check", "forward","cancel","exit","stop" -VariableName 'ctl_cmd'
-    New-ParamCompleter -ShortName o -Description $msg.option -Type Required -VariableName 'option' -ArgumentCompleter {
+    New-ParamCompleter -ShortName o -Description $msg.option -VariableName 'option' -ArgumentCompleter {
         $word = $_;
         $i = $word.IndexOf('=');
         if ($i -lt 0) {
             $this.Metadata.sshOptions | Where-Object { $_ -like "$word*" }
         }
     }
-    New-ParamCompleter -ShortName P -Description $msg.tag -Type Required -VariableName 'tag'
-    New-ParamCompleter -ShortName p -Description $msg.port -Type Required -VariableName 'port'
+    New-ParamCompleter -ShortName P -Description $msg.tag -VariableName 'tag'
+    New-ParamCompleter -ShortName p -Description $msg.port -VariableName 'port'
     New-ParamCompleter -ShortName Q -Description $msg.query -Arguments "cipher","cipher-auth","mac","kex","key","key-cert","key-plain","key-sig","protocol-version","sig","help" -VariableName 'query_option'
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName R -Description $msg.remote_forward -Type Required -VariableName '[bind_address:]port:host:hostport'
+    New-ParamCompleter -ShortName R -Description $msg.remote_forward -VariableName '[bind_address:]port:host:hostport'
     New-ParamCompleter -ShortName S -Description $msg.control_path -Type File -VariableName 'ctl_path'
     New-ParamCompleter -ShortName s -Description $msg.subsystem
     New-ParamCompleter -ShortName T -Description $msg.disable_tty
     New-ParamCompleter -ShortName t -Description $msg.force_tty
     New-ParamCompleter -ShortName V -Description $msg.version
     New-ParamCompleter -ShortName v -Description $msg.verbose
-    New-ParamCompleter -ShortName W -Description $msg.forward_stdinout -Type Required -VariableName 'host:port'
+    New-ParamCompleter -ShortName W -Description $msg.forward_stdinout -VariableName 'host:port'
     New-ParamCompleter -ShortName w -Description $msg.tunnel -Arguments "yes","no","point-to-point","ethernet" -VariableName 'option'
     New-ParamCompleter -ShortName X -Description $msg.enable_x11
     New-ParamCompleter -ShortName x -Description $msg.disable_x11
     New-ParamCompleter -ShortName Y -Description $msg.trusted_x11
-    New-ParamCompleter -ShortName y -Description $msg.syslog_facility -Type Required -VariableName 'facility'
+    New-ParamCompleter -ShortName y -Description $msg.syslog_facility -VariableName 'facility'
 ) -NoFileCompletions -ArgumentCompleter {
     param([int] $position, [int] $argIndex)
     if ($argIndex -eq 0)

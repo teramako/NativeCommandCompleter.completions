@@ -53,23 +53,23 @@ Register-NativeCompleter -Name ifconfig -Description $msg.ifconfig -Parameters @
         New-ParamCompleter -LongName arp,-arp -Description $msg.arp
         New-ParamCompleter -LongName promisc,-promisc -Description $msg.promisc
         New-ParamCompleter -LongName allmulti,-allmulti -Description $msg.allmulti
-        New-ParamCompleter -LongName mtu -Description $msg.allmulti -Type Required -VariableName 'N'
-        New-ParamCompleter -LongName dstaddr -Description $msg.dstaddr -Type Required -VariableName 'addr'
-        New-ParamCompleter -LongName netmask -Description $msg.netmask -Type Required -VariableName 'addr'
-        New-ParamCompleter -LongName add -Description $msg.add -Type Required -VariableName 'addr/prefixlen'
-        New-ParamCompleter -LongName del -Description $msg.add -Type Required -VariableName 'addr/prefixlen'
-        New-ParamCompleter -LongName tunnel -Description $msg.tunnel -Type Required -VariableName '::aa.bb.cc.dd'
-        New-ParamCompleter -LongName irq -Description $msg.irq -Type Required -VariableName 'addr'
-        New-ParamCompleter -LongName io_addr -Description $msg.io_addr -Type Required -VariableName 'addr'
-        New-ParamCompleter -LongName mem_start -Description $msg.mem_start -Type Required -VariableName 'addr'
-        New-ParamCompleter -LongName media -Description $msg.media -Type Required -VariableName 'type'
+        New-ParamCompleter -LongName mtu -Description $msg.allmulti -VariableName 'N'
+        New-ParamCompleter -LongName dstaddr -Description $msg.dstaddr -VariableName 'addr'
+        New-ParamCompleter -LongName netmask -Description $msg.netmask -VariableName 'addr'
+        New-ParamCompleter -LongName add -Description $msg.add -VariableName 'addr/prefixlen'
+        New-ParamCompleter -LongName del -Description $msg.add -VariableName 'addr/prefixlen'
+        New-ParamCompleter -LongName tunnel -Description $msg.tunnel -VariableName '::aa.bb.cc.dd'
+        New-ParamCompleter -LongName irq -Description $msg.irq -VariableName 'addr'
+        New-ParamCompleter -LongName io_addr -Description $msg.io_addr -VariableName 'addr'
+        New-ParamCompleter -LongName mem_start -Description $msg.mem_start -VariableName 'addr'
+        New-ParamCompleter -LongName media -Description $msg.media -VariableName 'type'
         New-ParamCompleter -LongName broadcast, -broadcast -Description $msg.broadcast -Type FlagOrValue -VariableName 'addr'
         New-ParamCompleter -LongName pointopoint, -pointopoint -Description $msg.pointopoint -Type FlagOrValue -VariableName 'addr'
-        New-ParamCompleter -LongName hw -Description $msg.hw -Type Required -VariableName 'class address'
+        New-ParamCompleter -LongName hw -Description $msg.hw -VariableName 'class address'
         New-ParamCompleter -LongName multicast -Description $msg.multicast
         New-ParamCompleter -LongName address -Description $msg.address
-        New-ParamCompleter -LongName txqueuelen -Description $msg.txqueuelen -Type Required -VariableName 'length'
-        New-ParamCompleter -LongName name -Description $msg.name -Type Required -VariableName 'newname'
+        New-ParamCompleter -LongName txqueuelen -Description $msg.txqueuelen -VariableName 'length'
+        New-ParamCompleter -LongName name -Description $msg.name -VariableName 'newname'
     ) -NoFileCompletions
 ) -NoFileCompletions -ArgumentCompleter {
     # Complete <interface>

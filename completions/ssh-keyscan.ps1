@@ -26,8 +26,8 @@ Register-NativeCompleter -Name ssh-keyscan -Description $msg.ssh_keyscan -Parame
     New-ParamCompleter -ShortName D -Description $msg.print_SSHFP_DNS
     New-ParamCompleter -ShortName f -Description $msg.file -Type File -VariableName 'file'
     New-ParamCompleter -ShortName H -Description $msg.hash_hosts
-    New-ParamCompleter -ShortName p -Description $msg.port -Type Required -VariableName 'port'
-    New-ParamCompleter -ShortName T -Description $msg.timeout -Type Required -VariableName 'timeout'
+    New-ParamCompleter -ShortName p -Description $msg.port -VariableName 'port'
+    New-ParamCompleter -ShortName T -Description $msg.timeout -VariableName 'timeout'
     New-ParamCompleter -ShortName t -Description $msg.type -Type List -Arguments @(
         "dsa"
         "ecdsa"

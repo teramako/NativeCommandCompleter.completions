@@ -22,11 +22,11 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 Register-NativeCompleter -Name groupadd -Description $msg.groupadd -Parameters @(
     New-ParamCompleter -ShortName f -LongName force -Description $msg.force
-    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -Type Required -VariableName 'GID'
+    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GID'
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName K -LongName key -Description $msg.key -Type Required -VariableName 'KEY=VALUE'
+    New-ParamCompleter -ShortName K -LongName key -Description $msg.key -VariableName 'KEY=VALUE'
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
-    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -Type Required -VariableName 'PASSWORD'
+    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
     New-ParamCompleter -ShortName r -LongName system -Description $msg.system
     New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Type Directory -VariableName 'CHROOT_DIR'
     New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'

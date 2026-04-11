@@ -302,11 +302,11 @@ $terminalFeatures = @(
     "usstyle`tAllows underscore style and colour to be set."
 )
 
-$formatParam = New-ParamCompleter -ShortName F -Description $msg.format -Type Required -VariableName 'format'
+$formatParam = New-ParamCompleter -ShortName F -Description $msg.format -VariableName 'format'
 $filterParam = New-ParamCompleter -ShortName f -Description $msg.filter -Type Required
 $startingDirectoryParam_c = New-ParamCompleter -ShortName c -Description $msg.startingDirectory -Type Directory -VariableName 'start-directory'
 $startingDirectoryParam_d = New-ParamCompleter -ShortName d -Description $msg.startingDirectory -Type Directory -VariableName 'start-directory'
-$setEnvironmentParam = New-ParamCompleter -ShortName e -Description $msg._setEnvironment -Type Required -VariableName 'VARIABLE=name'
+$setEnvironmentParam = New-ParamCompleter -ShortName e -Description $msg._setEnvironment -VariableName 'VARIABLE=name'
 $targetClientParam = New-ParamCompleter -ShortName t -Description $msg.targetClient -VariableName 'target-client' -ArgumentCompleter $clientCompleter
 $targetClientParam_c = New-ParamCompleter -ShortName c -Description $msg.targetClient -VariableName 'target-client' -ArgumentCompleter $clientCompleter
 $targetSessionParam = New-ParamCompleter -ShortName t -Description $msg.targetSession -VariableName 'target-session' -ArgumentCompleter $sessionCompleter
@@ -314,15 +314,15 @@ $targetWindowParam = New-ParamCompleter -ShortName t -Description $msg.targetWin
 $targetPaneParam = New-ParamCompleter -ShortName t -Description $msg.targetPane -VariableName 'target-pane' -ArgumentCompleter $paneCompleter
 $bufferNameParam = New-ParamCompleter -ShortName b -Description $msg.bufferName -VariableName 'buffer-name' -ArgumentCompleter $bufferCompleter
 $promptTypeParam = New-ParamCompleter -ShortName T -Description $msg.promptType -VariableName 'prompt-type' -Arguments $promptTypes
-$keyTableParam = New-ParamCompleter -ShortName T -Description $msg.keyTable -Type Required -VariableName 'key-table'
+$keyTableParam = New-ParamCompleter -ShortName T -Description $msg.keyTable -VariableName 'key-table'
 
 Register-NativeCompleter -Name tmux -Parameters @(
     New-ParamCompleter -ShortName '2' -Description $msg.tmux_support256color
     New-ParamCompleter -ShortName C -Description $msg.tmux_control
-    New-ParamCompleter -ShortName c -Description $msg.tmux_command -Type Required -VariableName 'shell-command'
+    New-ParamCompleter -ShortName c -Description $msg.tmux_command -VariableName 'shell-command'
     New-ParamCompleter -ShortName D -Description $msg.tmux_noDaemon
     New-ParamCompleter -ShortName f -Description $msg.tmux_configFile -Type File -VariableName 'file'
-    New-ParamCompleter -ShortName L -Description $msg.tmux_socketName -Type Required -VariableName 'socket-name'
+    New-ParamCompleter -ShortName L -Description $msg.tmux_socketName -VariableName 'socket-name'
     New-ParamCompleter -ShortName l -Description $msg.tmux_loginShell
     New-ParamCompleter -ShortName N -Description $msg.tmux_noServer
     New-ParamCompleter -ShortName S -Description $msg.tmux_socketPath -Type Directory -VariableName 'socket-path'
@@ -466,7 +466,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName d -Description $msg.breakPane_doneBeCurrent
         New-ParamCompleter -ShortName P -Description $msg.breakPane_print
         $formatParam
-        New-ParamCompleter -ShortName n -Description $msg.breakPane_name -Type Required -VariableName 'window-name'
+        New-ParamCompleter -ShortName n -Description $msg.breakPane_name -VariableName 'window-name'
         New-ParamCompleter -ShortName s -Description $msg.breakPane_srcPane -VariableName 'src-pane' -ArgumentCompleter $paneCompleter
         New-ParamCompleter -ShortName t -Description $msg.breakPane_dstWindow -VariableName 'dst-window' -ArgumentCompleter $windowCompleter
     ) -NoFileCompletions
@@ -481,9 +481,9 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName N -Description $msg.capturePane_preserveTailingSpace
         New-ParamCompleter -ShortName J -Description $msg.capturePane_join
         New-ParamCompleter -ShortName P
-        New-ParamCompleter -ShortName b -Description $msg.capturePane_buffer -VariableName 'buffer-name' -Type Required
-        New-ParamCompleter -ShortName E -Description $msg.capturePane_end -VariableName 'end-line' -Type Required
-        New-ParamCompleter -ShortName S -Description $msg.capturePane_start -VariableName 'start-line' -Type Required
+        New-ParamCompleter -ShortName b -Description $msg.capturePane_buffer -VariableName 'buffer-name'
+        New-ParamCompleter -ShortName E -Description $msg.capturePane_end -VariableName 'end-line'
+        New-ParamCompleter -ShortName S -Description $msg.capturePane_start -VariableName 'start-line'
         $targetPaneParam
     ) -NoFileCompletions
     # choose-client
@@ -512,7 +512,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         # TBD
         New-ParamCompleter -ShortName b -Description $msg.displayPanes_dontBlock
         New-ParamCompleter -ShortName N -Description $msg.displayPanes_dontClose
-        New-ParamCompleter -ShortName d -Description $msg.displayPanes_duration -Type Required -VariableName duration
+        New-ParamCompleter -ShortName d -Description $msg.displayPanes_duration -VariableName duration
         $targetClientParam
     ) -NoFileCompletions
     # find-window
@@ -594,7 +594,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         # TBD
         $startingDirectoryParam_c
         $setEnvironmentParam
-        New-ParamCompleter -ShortName n -Description $msg.newWindow_name -Type Required -VariableName 'name'
+        New-ParamCompleter -ShortName n -Description $msg.newWindow_name -VariableName 'name'
         $targetWindowParam
     ) -NoFileCompletions
     # next-layout
@@ -617,15 +617,15 @@ Register-NativeCompleter -Name tmux -Parameters @(
         # TBD
         New-ParamCompleter -ShortName M -Description $msg.resizePane_mouse
         New-ParamCompleter -ShortName T -Description $msg.resizePane_trim
-        New-ParamCompleter -ShortName x -Description $msg.width -Type Required -VariableName 'width'
-        New-ParamCompleter -ShortName y -Description $msg.height -Type Required -VariableName 'height'
+        New-ParamCompleter -ShortName x -Description $msg.width -VariableName 'width'
+        New-ParamCompleter -ShortName y -Description $msg.height -VariableName 'height'
         $targetPaneParam
     ) -NoFileCompletions
     # resize-window
     New-CommandCompleter -Name resize-window -Aliases resizew -Description $msg.resizeWindow -Parameters @(
         # TBD
-        New-ParamCompleter -ShortName x -Description $msg.width -Type Required -VariableName 'width'
-        New-ParamCompleter -ShortName y -Description $msg.height -Type Required -VariableName 'height'
+        New-ParamCompleter -ShortName x -Description $msg.width -VariableName 'width'
+        New-ParamCompleter -ShortName y -Description $msg.height -VariableName 'height'
         $targetWindowParam
     ) -NoFileCompletions
     # respawn-pane
@@ -697,13 +697,13 @@ Register-NativeCompleter -Name tmux -Parameters @(
     # list-keys
     New-CommandCompleter -Name list-keys -Aliases lsk -Description $msg.listKeys -Parameters @(
         New-ParamCompleter -ShortName '1' -Description $msg.listKeys_onlyFirstKey
-        New-ParamCompleter -ShortName P -Description $msg.listKeys_prefix -Type Required -VariableName 'prefix-string'
+        New-ParamCompleter -ShortName P -Description $msg.listKeys_prefix -VariableName 'prefix-string'
         $keyTableParam
     ) -NoFileCompletions
     # send-keys
     New-CommandCompleter -Name send-keys -Aliases send -Description $msg.sendKeys -Parameters @(
         New-ParamCompleter -ShortName c -Description $msg.sendKeys_client -VariableName 'target-client' -ArgumentCompleter $clientCompleter
-        New-ParamCompleter -ShortName N -Description $mst.sendKeys_repeat -Type Required -VariableName 'repeat-count'
+        New-ParamCompleter -ShortName N -Description $mst.sendKeys_repeat -VariableName 'repeat-count'
         $targetPaneParam
     ) -NoFileCompletions
     # send-prefix
@@ -787,26 +787,26 @@ Register-NativeCompleter -Name tmux -Parameters @(
 
     # confirm-before
     New-CommandCompleter -Name confirm-before -Aliases confirm -Description $msg.confirmBefore -Parameters @(
-        New-ParamCompleter -ShortName c -Description $msg.confirmBefore_char -Type Required -VariableName 'confirm-key'
-        New-ParamCompleter -ShortName p -Description $msg.confirmBefore_prompt -Type Required -VariableName 'prompt'
+        New-ParamCompleter -ShortName c -Description $msg.confirmBefore_char -VariableName 'confirm-key'
+        New-ParamCompleter -ShortName p -Description $msg.confirmBefore_prompt -VariableName 'prompt'
         $targetClientParam
     ) -NoFileCompletions
 
     # display-menu
     New-CommandCompleter -Name display-menu -Aliases menu -Description $msg.displayMenu -Parameters @(
-        New-ParamCompleter -ShortName b -Description $msg.displayMenu_border -Type Required -VariableName 'border-lines'
+        New-ParamCompleter -ShortName b -Description $msg.displayMenu_border -VariableName 'border-lines'
         $targetClientParam_c
         $targetPaneParam
-        New-ParamCompleter -ShortName T -Description $msg.title -Type Required -VariableName 'title'
-        New-ParamCompleter -ShortName x -Description $msg.position_x -Type Required -VariableName 'position'
-        New-ParamCompleter -ShortName y -Description $msg.position_y -Type Required -VariableName 'position'
+        New-ParamCompleter -ShortName T -Description $msg.title -VariableName 'title'
+        New-ParamCompleter -ShortName x -Description $msg.position_x -VariableName 'position'
+        New-ParamCompleter -ShortName y -Description $msg.position_y -VariableName 'position'
     ) -NoFileCompletions
 
     # display-message
     New-CommandCompleter -Name display-message -Aliases display -Description $msg.displayMessage -Parameters @(
         New-ParamCompleter -ShortName p -Description $msg.displayMessage_print
         $targetClientParam_c
-        New-ParamCompleter -ShortName d -Description $msg.displayMessage_delay -Type Required -VariableName 'delay'
+        New-ParamCompleter -ShortName d -Description $msg.displayMessage_delay -VariableName 'delay'
         $targetPaneParam
     ) -NoFileCompletions
 
@@ -816,11 +816,11 @@ Register-NativeCompleter -Name tmux -Parameters @(
         $targetClientParam_c
         $startingDirectoryParam_d
         $setEnvironmentParam
-        New-ParamCompleter -ShortName h -Description $msg.height -Type Required -VariableName 'height'
-        New-ParamCompleter -ShortName w -Description $msg.width -Type Required -VariableName 'width'
-        New-ParamCompleter -ShortName T -Description $msg.title -Type Required -VariableName 'title'
-        New-ParamCompleter -ShortName x -Description $msg.position_x -Type Required -VariableName 'position'
-        New-ParamCompleter -ShortName y -Description $msg.position_y -Type Required -VariableName 'position'
+        New-ParamCompleter -ShortName h -Description $msg.height -VariableName 'height'
+        New-ParamCompleter -ShortName w -Description $msg.width -VariableName 'width'
+        New-ParamCompleter -ShortName T -Description $msg.title -VariableName 'title'
+        New-ParamCompleter -ShortName x -Description $msg.position_x -VariableName 'position'
+        New-ParamCompleter -ShortName y -Description $msg.position_y -VariableName 'position'
         $targetPaneParam
     ) -NoFileCompletions
 
@@ -885,7 +885,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName w -Description $msg.loadBuffer_clipboard
         $bufferNameParam
         $targetClientParam
-        New-ParamCompleter -ShortName n -Description $msg.setBuffer_name -Type Required -VariableName 'new-buffer-name'
+        New-ParamCompleter -ShortName n -Description $msg.setBuffer_name -VariableName 'new-buffer-name'
     ) -NoFileCompletions
 
     # show-buffer
@@ -918,7 +918,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName b -Description $msg._runBackground
         New-ParamCompleter -ShortName E -Description $msg.runShell_redirectError
         $startingDirectoryParam_c
-        New-ParamCompleter -ShortName d -Description $msg.runShell_delay -Type Required -VariableName 'delay'
+        New-ParamCompleter -ShortName d -Description $msg.runShell_delay -VariableName 'delay'
         $targetPaneParam
     ) -DelegateArgumentIndex 0
 

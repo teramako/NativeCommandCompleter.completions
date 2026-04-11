@@ -35,7 +35,7 @@ Register-NativeCompleter -Name vmstat -Description $msg.vmstat -Parameters @(
     New-ParamCompleter -ShortName s -LongName stats -Description $msg.slab
     New-ParamCompleter -ShortName d -LongName disk -Description $msg.disk
     New-ParamCompleter -ShortName D -LongName disk-sum -Description $msg.diskSum
-    New-ParamCompleter -ShortName p -LongName partition -Description $msg.partition -Type Required -VariableName 'device'
+    New-ParamCompleter -ShortName p -LongName partition -Description $msg.partition -VariableName 'device'
     New-ParamCompleter -ShortName S -LongName unit -Description $msg.unit -Arguments @(
         "k`t{0}" -f $msg.unit_k
         "K`t{0}" -f $msg.unit_K

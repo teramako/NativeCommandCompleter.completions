@@ -169,7 +169,7 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -LongName no-motd -Description $msg.no_motd
     New-ParamCompleter -ShortName I -LongName ignore-times -Description $msg.ignore_times
     New-ParamCompleter -LongName size-only -Description $msg.size_only
-    New-ParamCompleter -LongName modify-window -Description $msg.modify_window -Type Required -VariableName 'NUM'
+    New-ParamCompleter -LongName modify-window -Description $msg.modify_window -VariableName 'NUM'
     New-ParamCompleter -ShortName c -LongName checksum -Description $msg.checksum
     New-ParamCompleter -ShortName a -LongName archive -Description $msg.archive
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
@@ -177,7 +177,7 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -LongName no-implied-dirs -Description $msg.no_implied_dirs
     New-ParamCompleter -ShortName b -LongName backup -Description $msg.backup
     New-ParamCompleter -LongName backup-dir -Description $msg.backup_dir -Type Directory -VariableName 'DIR'
-    New-ParamCompleter -LongName suffix -Description $msg.suffix -Type Required -VariableName 'SUFFIX'
+    New-ParamCompleter -LongName suffix -Description $msg.suffix -VariableName 'SUFFIX'
     New-ParamCompleter -ShortName u -LongName update -Description $msg.update
     New-ParamCompleter -LongName inplace -Description $msg.inplace
     New-ParamCompleter -LongName append -Description $msg.append
@@ -197,7 +197,7 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -ShortName E -LongName executability -Description $msg.executability
     New-ParamCompleter -ShortName A -LongName acls -Description $msg.acls
     New-ParamCompleter -ShortName X -LongName xattrs -Description $msg.xattrs
-    New-ParamCompleter -LongName chmod -Description $msg.chmod -Type Required -VariableName 'CHMOD'
+    New-ParamCompleter -LongName chmod -Description $msg.chmod -VariableName 'CHMOD'
     New-ParamCompleter -ShortName o -LongName owner -Description $msg.owner
     New-ParamCompleter -ShortName g -LongName group -Description $msg.group
     New-ParamCompleter -LongName devices -Description $msg.devices
@@ -232,20 +232,20 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -LongName delete-missing-args -Description $msg.delete_missing_args
     New-ParamCompleter -LongName ignore-errors -Description $msg.ignore_errors
     New-ParamCompleter -LongName force -Description $msg.force
-    New-ParamCompleter -LongName max-delete -Description $msg.max_delete -Type Required -VariableName 'NUM'
-    New-ParamCompleter -LongName max-size -Description $msg.max_size -Type Required -VariableName 'SIZE'
-    New-ParamCompleter -LongName min-size -Description $msg.min_size -Type Required -VariableName 'SIZE'
-    New-ParamCompleter -LongName max-alloc -Description $msg.max_alloc -Type Required -VariableName 'SIZE'
-    New-ParamCompleter -ShortName B -LongName block-size -Description $msg.block_size -Type Required -VariableName 'SIZE'
-    New-ParamCompleter -ShortName e -LongName rsh -Description $msg.rsh -Type Required -VariableName 'COMMAND'
-    New-ParamCompleter -LongName rsync-path -Description $msg.rsync_path -Type Required -VariableName 'PROGRAM'
-    New-ParamCompleter -ShortName M -LongName remote-option -Description $msg.remote_option -Type Required -VariableName 'OPTION'
+    New-ParamCompleter -LongName max-delete -Description $msg.max_delete -VariableName 'NUM'
+    New-ParamCompleter -LongName max-size -Description $msg.max_size -VariableName 'SIZE'
+    New-ParamCompleter -LongName min-size -Description $msg.min_size -VariableName 'SIZE'
+    New-ParamCompleter -LongName max-alloc -Description $msg.max_alloc -VariableName 'SIZE'
+    New-ParamCompleter -ShortName B -LongName block-size -Description $msg.block_size -VariableName 'SIZE'
+    New-ParamCompleter -ShortName e -LongName rsh -Description $msg.rsh -VariableName 'COMMAND'
+    New-ParamCompleter -LongName rsync-path -Description $msg.rsync_path -VariableName 'PROGRAM'
+    New-ParamCompleter -ShortName M -LongName remote-option -Description $msg.remote_option -VariableName 'OPTION'
     New-ParamCompleter -ShortName C -LongName cvs-exclude -Description $msg.cvs_exclude
-    New-ParamCompleter -ShortName f -LongName filter -Description $msg.filter -Type Required -VariableName 'RULE'
-    New-ParamCompleter -ShortName F -Type Required -VariableName 'RULE'
-    New-ParamCompleter -LongName exclude -Description $msg.exclude -Type Required -VariableName 'PATTERN'
+    New-ParamCompleter -ShortName f -LongName filter -Description $msg.filter -VariableName 'RULE'
+    New-ParamCompleter -ShortName F -VariableName 'RULE'
+    New-ParamCompleter -LongName exclude -Description $msg.exclude -VariableName 'PATTERN'
     New-ParamCompleter -LongName exclude-from -Description $msg.exclude_from -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName include -Description $msg.include -Type Required -VariableName 'PATTERN'
+    New-ParamCompleter -LongName include -Description $msg.include -VariableName 'PATTERN'
     New-ParamCompleter -LongName include-from -Description $msg.include_from -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName files-from -Description $msg.files_from -Type File -VariableName 'FILE'
     New-ParamCompleter -ShortName '0' -LongName from0 -Description $msg.from0
@@ -253,7 +253,7 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -LongName secluded-args -Description $msg.secluded_args
     New-ParamCompleter -ShortName s -LongName protect-args -Description $msg.protect_args
     New-ParamCompleter -LongName trust-sender -Description $msg.trust_sender
-    New-ParamCompleter -LongName copy-as -Description $msg.copy_as -Type Required -VariableName 'USER[:GROUP]'
+    New-ParamCompleter -LongName copy-as -Description $msg.copy_as -VariableName 'USER[:GROUP]'
     New-ParamCompleter -ShortName T -LongName temp-dir -Description $msg.temp_dir -Type Directory -VariableName 'DIR'
     New-ParamCompleter -ShortName y -LongName fuzzy -Description $msg.fuzzy
     New-ParamCompleter -LongName compare-dest -Description $msg.compare_dest -Type Directory -VariableName 'DIR'
@@ -262,24 +262,24 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -ShortName z -LongName compress -Description $msg.compress
     New-ParamCompleter -LongName old-compress -Description $msg.old_compress
     New-ParamCompleter -LongName new-compress -Description $msg.new_compress
-    New-ParamCompleter -LongName compress-choice, zc -Description $msg.compress_choice -Type Required -VariableName 'STR' -Arguments "zstd","lz4","zlibx","zlib","none"
-    New-ParamCompleter -LongName compress-level, zl -Description $msg.compress_level -Type Required -VariableName 'NUM'
-    New-ParamCompleter -LongName skip-compress -Description $msg.skip_compress -Type Required -VariableName 'LIST'
+    New-ParamCompleter -LongName compress-choice, zc -Description $msg.compress_choice -VariableName 'STR' -Arguments "zstd","lz4","zlibx","zlib","none"
+    New-ParamCompleter -LongName compress-level, zl -Description $msg.compress_level -VariableName 'NUM'
+    New-ParamCompleter -LongName skip-compress -Description $msg.skip_compress -VariableName 'LIST'
     New-ParamCompleter -LongName numeric-ids -Description $msg.numeric_ids
-    New-ParamCompleter -LongName usermap -Description $msg.usermap -Type Required -VariableName 'STRING'
-    New-ParamCompleter -LongName groupmap -Description $msg.groupmap -Type Required -VariableName 'STRING'
-    New-ParamCompleter -LongName chown -Description $msg.chown -Type Required -VariableName 'USER:GROUP'
-    New-ParamCompleter -LongName timeout -Description $msg.timeout -Type Required -VariableName 'SECONDS'
-    New-ParamCompleter -LongName contimeout -Description $msg.contimeout -Type Required -VariableName 'SECONDS'
-    New-ParamCompleter -LongName address -Description $msg.address -Type Required -VariableName 'ADDRESS'
-    New-ParamCompleter -LongName port -Description $msg.port -Type Required -VariableName 'PORT'
-    New-ParamCompleter -LongName sockopts -Description $msg.sockopts -Type Required -VariableName 'OPTIONS'
+    New-ParamCompleter -LongName usermap -Description $msg.usermap -VariableName 'STRING'
+    New-ParamCompleter -LongName groupmap -Description $msg.groupmap -VariableName 'STRING'
+    New-ParamCompleter -LongName chown -Description $msg.chown -VariableName 'USER:GROUP'
+    New-ParamCompleter -LongName timeout -Description $msg.timeout -VariableName 'SECONDS'
+    New-ParamCompleter -LongName contimeout -Description $msg.contimeout -VariableName 'SECONDS'
+    New-ParamCompleter -LongName address -Description $msg.address -VariableName 'ADDRESS'
+    New-ParamCompleter -LongName port -Description $msg.port -VariableName 'PORT'
+    New-ParamCompleter -LongName sockopts -Description $msg.sockopts -VariableName 'OPTIONS'
     New-ParamCompleter -LongName blocking-io -Description $msg.blocking_io
-    New-ParamCompleter -LongName outbuf -Description $msg.outbuf -Type Required -VariableName 'MODE' -Arguments "n","none","l","line","b","block"
+    New-ParamCompleter -LongName outbuf -Description $msg.outbuf -VariableName 'MODE' -Arguments "n","none","l","line","b","block"
     New-ParamCompleter -ShortName i -LongName itemize-changes -Description $msg.itemize_changes
-    New-ParamCompleter -LongName out-format -Description $msg.out_format -Type Required -VariableName 'FORMAT'
+    New-ParamCompleter -LongName out-format -Description $msg.out_format -VariableName 'FORMAT'
     New-ParamCompleter -LongName log-file -Description $msg.log_file -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName log-file-format -Description $msg.log_file_format -Type Required -VariableName 'FMT'
+    New-ParamCompleter -LongName log-file-format -Description $msg.log_file_format -VariableName 'FMT'
     New-ParamCompleter -LongName stats -Description $msg.stats
     New-ParamCompleter -ShortName '8' -LongName '8-bit-output' -Description $msg.'8_bit_output'
     New-ParamCompleter -ShortName h -LongName human-readable -Description $msg.human_readable
@@ -292,16 +292,16 @@ Register-NativeCompleter -Name rsync -Description $msg.rsync -Parameters @(
     New-ParamCompleter -LongName password-file -Description $msg.password_file -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName early-input -Description $msg.early_input -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName list-only -Description $msg.list_only
-    New-ParamCompleter -LongName bwlimit -Description $msg.bwlimit -Type Required -VariableName 'RATE'
-    New-ParamCompleter -LongName stop-after -Description $msg.stop_after -Type Required -VariableName 'MINS'
-    New-ParamCompleter -LongName stop-at -Description $msg.stop_at -Type Required -VariableName 'y-m-dTh:m'
+    New-ParamCompleter -LongName bwlimit -Description $msg.bwlimit -VariableName 'RATE'
+    New-ParamCompleter -LongName stop-after -Description $msg.stop_after -VariableName 'MINS'
+    New-ParamCompleter -LongName stop-at -Description $msg.stop_at -VariableName 'y-m-dTh:m'
     New-ParamCompleter -LongName fsync -Description $msg.fsync
     New-ParamCompleter -LongName write-batch -Description $msg.write_batch -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName only-write-batch -Description $msg.only_write_batch -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName read-batch -Description $msg.read_batch -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName protocol -Description $msg.protocol -Type Required -VariableName 'NUM'
+    New-ParamCompleter -LongName protocol -Description $msg.protocol -VariableName 'NUM'
     New-ParamCompleter -LongName iconv -Description $msg.iconv -Type List -VariableName 'CONVERT_SPEC'
     New-ParamCompleter -ShortName '4' -LongName ipv4 -Description $msg.ipv4
     New-ParamCompleter -ShortName '6' -LongName ipv6 -Description $msg.ipv6
-    New-ParamCompleter -LongName checksum-seed -Description $msg.checksum_seed -Type Required -VariableName 'NUM'
+    New-ParamCompleter -LongName checksum-seed -Description $msg.checksum_seed -VariableName 'NUM'
 )

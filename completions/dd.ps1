@@ -62,8 +62,8 @@ $kvStyle = New-ParamStyle -ValueSeparator '=' -ValueStyle Adjacent
 Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
     New-ParamCompleter -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
-    New-ParamCompleter -LongName bs -Description $msg.bs -Style $kvStyle -Type Required -VariableName 'BYTES'
-    New-ParamCompleter -LongName cbs -Description $msg.cbs -Style $kvStyle -Type Required -VariableName 'BYTES'
+    New-ParamCompleter -LongName bs -Description $msg.bs -Style $kvStyle -VariableName 'BYTES'
+    New-ParamCompleter -LongName cbs -Description $msg.cbs -Style $kvStyle -VariableName 'BYTES'
     New-ParamCompleter -LongName conv -Description $msg.conv -Style $kvStyle -Type List -VariableName 'CONVS' -Arguments @(
         "ascii`t{0}" -f $msg.conv_ascii
         "ebcdic`t{0}" -f $msg.conv_ebcdic
@@ -82,8 +82,8 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "fdatasync`t{0}" -f $msg.conv_fdatasync
         "fsync`t{0}" -f $msg.conv_fsync
     )
-    New-ParamCompleter -LongName count -Description $msg.count -Style $kvStyle -Type Required -VariableName 'N'
-    New-ParamCompleter -LongName ibs -Description $msg.ibs -Style $kvStyle -Type Required -VariableName 'BYTES'
+    New-ParamCompleter -LongName count -Description $msg.count -Style $kvStyle -VariableName 'N'
+    New-ParamCompleter -LongName ibs -Description $msg.ibs -Style $kvStyle -VariableName 'BYTES'
     New-ParamCompleter -LongName if -Description $msg.if -Style $kvStyle -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName iflag -Description $msg.iflag -Style $kvStyle -Type List -VariableName 'FLAGS' -Arguments @(
         "append`t{0}" -f $msg.flag_append
@@ -100,7 +100,7 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "count_bytes`t{0}" -f $msg.flag_count_bytes
         "skip_bytes`t{0}" -f $msg.flag_skip_bytes
     )
-    New-ParamCompleter -LongName obs -Description $msg.obs -Style $kvStyle -Type Required -VariableName 'BYTES'
+    New-ParamCompleter -LongName obs -Description $msg.obs -Style $kvStyle -VariableName 'BYTES'
     New-ParamCompleter -LongName of -Description $msg.of -Style $kvStyle -Type File -VariableName 'FILE'
     New-ParamCompleter -LongName oflag -Description $msg.oflag -Style $kvStyle -Type List -VariableName 'FLAGS' -Arguments @(
         "append`t{0}" -f $msg.flag_append
@@ -115,9 +115,9 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "nofollow`t{0}" -f $msg.flag_nofollow
         "seek_bytes`t{0}" -f $msg.flag_seek_bytes
     )
-    New-ParamCompleter -LongName seek -Description $msg.seek -Style $kvStyle -Type Required -VariableName 'N'
-    New-ParamCompleter -LongName skip -Description $msg.skip -Style $kvStyle -Type Required -VariableName 'N'
-    New-ParamCompleter -LongName status -Description $msg.status -Style $kvStyle -Type Required -VariableName 'LEVEL' -Arguments @(
+    New-ParamCompleter -LongName seek -Description $msg.seek -Style $kvStyle -VariableName 'N'
+    New-ParamCompleter -LongName skip -Description $msg.skip -Style $kvStyle -VariableName 'N'
+    New-ParamCompleter -LongName status -Description $msg.status -Style $kvStyle -VariableName 'LEVEL' -Arguments @(
         "none`t{0}" -f $msg.status_none
         "noxfer`t{0}" -f $msg.status_noxfer
         "progress`t{0}" -f $msg.status_progress

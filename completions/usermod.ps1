@@ -65,26 +65,26 @@ $groupCompleter = {
 Register-NativeCompleter -Name usermod -Description $msg.usermod -Parameters @(
     New-ParamCompleter -ShortName a -LongName append -Description $msg.append
     New-ParamCompleter -LongName badname -Description $msg.badname
-    New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -Type Required -VariableName 'COMMENT'
+    New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -VariableName 'COMMENT'
     New-ParamCompleter -ShortName d -LongName home -Description $msg.home -Type Directory -VariableName 'HOME_DIR'
-    New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -Type Required -VariableName 'EXPIRE_DATE'
-    New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -Type Required -VariableName 'INACTIVE'
-    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -Type Required -VariableName 'GROUP' -ArgumentCompleter $groupCompleter
+    New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -VariableName 'EXPIRE_DATE'
+    New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -VariableName 'INACTIVE'
+    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GROUP' -ArgumentCompleter $groupCompleter
     New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -Type List -VariableName 'GROUPS' -ArgumentCompleter $groupCompleter
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName l -LongName login -Description $msg.login -Type Required -VariableName 'NEW_LOGIN'
+    New-ParamCompleter -ShortName l -LongName login -Description $msg.login -VariableName 'NEW_LOGIN'
     New-ParamCompleter -ShortName L -LongName lock -Description $msg.lock
     New-ParamCompleter -ShortName m -LongName move-home -Description $msg.move_home
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
-    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -Type Required -VariableName 'PASSWORD'
+    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
     New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Type Directory -VariableName 'CHROOT_DIR'
     New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'
-    New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -Type Required -VariableName 'SHELL'
-    New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -Type Required -VariableName 'UID'
+    New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -VariableName 'SHELL'
+    New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -VariableName 'UID'
     New-ParamCompleter -ShortName U -LongName unlock -Description $msg.unlock
-    New-ParamCompleter -ShortName v -LongName add-subuids -Description $msg.add_subuids -Type Required -VariableName 'FIRST-LAST'
-    New-ParamCompleter -ShortName V -LongName del-subuids -Description $msg.del_subuids -Type Required -VariableName 'FIRST-LAST'
-    New-ParamCompleter -ShortName w -LongName add-subgids -Description $msg.add_subgids -Type Required -VariableName 'FIRST-LAST'
-    New-ParamCompleter -ShortName W -LongName del-subgids -Description $msg.del_subgids -Type Required -VariableName 'FIRST-LAST'
-    New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux_user -Type Required -VariableName 'SEUSER'
+    New-ParamCompleter -ShortName v -LongName add-subuids -Description $msg.add_subuids -VariableName 'FIRST-LAST'
+    New-ParamCompleter -ShortName V -LongName del-subuids -Description $msg.del_subuids -VariableName 'FIRST-LAST'
+    New-ParamCompleter -ShortName w -LongName add-subgids -Description $msg.add_subgids -VariableName 'FIRST-LAST'
+    New-ParamCompleter -ShortName W -LongName del-subgids -Description $msg.del_subgids -VariableName 'FIRST-LAST'
+    New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux_user -VariableName 'SEUSER'
 ) -ArgumentCompleter $userCompleter

@@ -110,7 +110,7 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName H -Description $msg.gnu_short_H
         New-ParamCompleter -ShortName l -LongName link -Description $msg.gnu_link
         New-ParamCompleter -LongName strip-trailing-slashes -Description $msg.gnu_stripTrailingSlashes
-        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.gnu_suffix -Type Required -VariableName 'SUFFIX'
+        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.gnu_suffix -VariableName 'SUFFIX'
         New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.gnu_targetDirectory -Type Directory -VariableName 'DIRECTORY'
         New-ParamCompleter -ShortName u -Description $msg.gnu_short_update
         New-ParamCompleter -LongName update -Description $msg.gnu_update -Type FlagOrValue -Arguments @(
@@ -144,7 +144,7 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName T -LongName no-target-directory -Description $msg.gnu_noTargetDirectory
         New-ParamCompleter -ShortName x -LongName one-file-system -Description $msg.gnu_oneFileSystem
         New-ParamCompleter -ShortName Z -Description $msg.gnu_short_Z
-        New-ParamCompleter -ShortName X -LongName context -Description $msg.gnu_context -Type Required -VariableName 'CTX'
+        New-ParamCompleter -ShortName X -LongName context -Description $msg.gnu_context -VariableName 'CTX'
     )
 }
 else

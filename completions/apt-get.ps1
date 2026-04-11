@@ -163,8 +163,8 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -ShortName s -LongName simulate,just-print,dry-run,recon,no-act -Description $msg.simulate
     New-ParamCompleter -LongName show-upgraded -Description $msg.showUpgraded
     New-ParamCompleter -ShortName V -LongName verbose-versions -Description $msg.verboseVersions
-    New-ParamCompleter -ShortName a -LongName host-architecture -Description $msg.hostArchitecture -Type Required -VariableName 'architecture'
-    New-ParamCompleter -ShortName P -LongName build-profiles -Description $msg.buildProfiles -Type Required -VariableName 'profiles'
+    New-ParamCompleter -ShortName a -LongName host-architecture -Description $msg.hostArchitecture -VariableName 'architecture'
+    New-ParamCompleter -ShortName P -LongName build-profiles -Description $msg.buildProfiles -VariableName 'profiles'
     New-ParamCompleter -ShortName b -LongName compile,build -Description $msg.compile
     New-ParamCompleter -LongName ignore-hold -Description $msg.ignoreHold
     New-ParamCompleter -LongName with-new-pkgs -Description $msg.withNewPkgs
@@ -178,7 +178,7 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -LongName purge -Description $msg.purgeRemove
     New-ParamCompleter -LongName reinstall -Description $msg.reinstallOption
     New-ParamCompleter -LongName list-cleanup -Description $msg.listCleanup
-    New-ParamCompleter -ShortName t -LongName target-release,default-release -Description $msg.targetRelease -Type Required -VariableName 'target-release'
+    New-ParamCompleter -ShortName t -LongName target-release,default-release -Description $msg.targetRelease -VariableName 'target-release'
     New-ParamCompleter -LongName trivial-only -Description $msg.trivialOnly
     New-ParamCompleter -LongName no-remove -Description $msg.noRemove
     New-ParamCompleter -LongName auto-remove,autoremove -Description $msg.opt_autoRemove
@@ -196,5 +196,5 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -ShortName e -LongName error-on -Description $msg.errorOn -Type FlagOrValue -VariableName 'any'
     New-ParamCompleter -LongName mark-auto -Description $msg.markAuto
     New-ParamCompleter -LongName mark-manual -Description $msg.markManual
-    New-ParamCompleter -LongName solver -Description $msg.solver -Type Required -VariableName 'name'
+    New-ParamCompleter -LongName solver -Description $msg.solver -VariableName 'name'
 ) -NoFileCompletions

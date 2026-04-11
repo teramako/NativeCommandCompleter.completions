@@ -22,11 +22,11 @@ $style = New-ParamStyle -ValueStyle Separated
 
 Register-NativeCompleter -Name tracert -Description $msg.tracert -CustomStyle $style -Parameters @(
     New-ParamCompleter -Name '-d','/d' -Description $msg.no_resolve
-    New-ParamCompleter -Name '-h','/h' -Description $msg.max_hops -Type Required -VariableName 'maximum_hops'
-    New-ParamCompleter -Name '-j','/j' -Description $msg.source_route -Type Required -VariableName 'host-list'
-    New-ParamCompleter -Name '-w','/w' -Description $msg.max_timeout -Type Required -VariableName 'timeout'
+    New-ParamCompleter -Name '-h','/h' -Description $msg.max_hops -VariableName 'maximum_hops'
+    New-ParamCompleter -Name '-j','/j' -Description $msg.source_route -VariableName 'host-list'
+    New-ParamCompleter -Name '-w','/w' -Description $msg.max_timeout -VariableName 'timeout'
     New-ParamCompleter -Name '-R','/R' -Description $msg.reverse_route
-    New-ParamCompleter -Name '-S','/S' -Description $msg.source_route_ipv6 -Type Required -VariableName 'srcaddr'
+    New-ParamCompleter -Name '-S','/S' -Description $msg.source_route_ipv6 -VariableName 'srcaddr'
     New-ParamCompleter -Name '-4','/4' -Description $msg.ipv4
     New-ParamCompleter -Name '-6','/6' -Description $msg.ipv6
     New-ParamCompleter -Name '-?','/?' -Description $msg.help

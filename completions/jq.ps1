@@ -51,13 +51,13 @@ Register-NativeCompleter -Name jq -Description $msg.jq -Parameters @(
     New-ParamCompleter -ShortName C -LongName color-output -Description $msg.color_output
     New-ParamCompleter -ShortName M -LongName monochrome-output -Description $msg.monochrome_output
     New-ParamCompleter -LongName tab -Description $msg.tab
-    New-ParamCompleter -LongName indent -Description $msg.indent -Type Required -VariableName 'N'
+    New-ParamCompleter -LongName indent -Description $msg.indent -VariableName 'N'
     New-ParamCompleter -LongName unbuffered -Description $msg.unbuffered
     New-ParamCompleter -LongName stream -Description $msg.stream
     New-ParamCompleter -LongName seq -Description $msg.seq
     New-ParamCompleter -ShortName f -LongName from-file -Description $msg.from_file -Type File -VariableName 'file'
-    New-ParamCompleter -LongName arg -Description $msg.arg -Type Required -VariableName 'name value'
-    New-ParamCompleter -LongName argjson -Description $msg.argjson -Type Required -VariableName 'name JSON'
+    New-ParamCompleter -LongName arg -Description $msg.arg -VariableName 'name value'
+    New-ParamCompleter -LongName argjson -Description $msg.argjson -VariableName 'name JSON'
     New-ParamCompleter -LongName slurpfile -Description $msg.slurpfile -Type File -VariableName 'name file'
     New-ParamCompleter -LongName rawfile -Description $msg.rawfile -Type File -VariableName 'name file'
     New-ParamCompleter -LongName args -Description $msg.args

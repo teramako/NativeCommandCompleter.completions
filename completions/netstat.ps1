@@ -74,7 +74,7 @@ if ($IsWindows)
         New-ParamCompleter -ShortName f -Description $msg.win_fully_qualified
         New-ParamCompleter -ShortName n -Description $msg.win_numeric
         New-ParamCompleter -ShortName o -Description $msg.win_owner_pid
-        New-ParamCompleter -ShortName p -Description $msg.win_protocol -Type Required -Arguments "TCP","UDP","TCPv6","UDPv6","IP","IPv6","ICMP","ICMPv6" -VariableName 'protocol'
+        New-ParamCompleter -ShortName p -Description $msg.win_protocol -Arguments "TCP","UDP","TCPv6","UDPv6","IP","IPv6","ICMP","ICMPv6" -VariableName 'protocol'
         New-ParamCompleter -ShortName r -Description $msg.win_route_table
         New-ParamCompleter -ShortName s -Description $msg.win_statistics
         New-ParamCompleter -ShortName t -Description $msg.win_offload_state
@@ -145,10 +145,10 @@ else
             New-ParamCompleter -ShortName g -Description $msg.bsd_multicast
             New-ParamCompleter -ShortName l -Description $msg.listening
             New-ParamCompleter -ShortName n -Description $msg.bsd_numeric_ports
-            New-ParamCompleter -ShortName p -Description $msg.bsd_protocol -Type Required -VariableName 'protocol'
+            New-ParamCompleter -ShortName p -Description $msg.bsd_protocol -VariableName 'protocol'
             New-ParamCompleter -ShortName v -Description $msg.verbose
-            New-ParamCompleter -ShortName w -Description $msg.bsd_wait -Type Required -VariableName 'wait'
-            New-ParamCompleter -ShortName f -Description $msg.protocol -Type Required -Arguments "inet","inet6","unix","link" -VariableName 'address_family'
+            New-ParamCompleter -ShortName w -Description $msg.bsd_wait -VariableName 'wait'
+            New-ParamCompleter -ShortName f -Description $msg.protocol -Arguments "inet","inet6","unix","link" -VariableName 'address_family'
         ) -NoFileCompletions
     }
 }

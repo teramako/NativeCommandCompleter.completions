@@ -86,18 +86,18 @@ $signatureStatusCodes = 'EXPSIG','EXPKEYSIG','REVKEYSIG','BADSIG','ERRSIG','NO_P
 $helpParam                = New-ParamCompleter -ShortName h -LongName help -Description $msg.help
 $versionParam             = New-ParamCompleter -LongName version -Description $msg.version
 $verboseParam             = New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-$apiKeyParam              = New-ParamCompleter -LongName api-key, token -Description $msg.api_key -Type Required -VariableName 'API_KEY'
+$apiKeyParam              = New-ParamCompleter -LongName api-key, token -Description $msg.api_key -VariableName 'API_KEY'
 $ignoreCertsParam         = New-ParamCompleter -ShortName c -LongName ignore-certs -Description $msg.ignore_certs
-$timeoutParam             = New-ParamCompleter -LongName timeout -Description $msg.timeout -Type Required -VariableName 'TIMEOUT'
-$serverParam              = New-ParamCompleter -ShortName s -LongName server -Description $msg.server -Type Required -VariableName 'SERVER'
+$timeoutParam             = New-ParamCompleter -LongName timeout -Description $msg.timeout -VariableName 'TIMEOUT'
+$serverParam              = New-ParamCompleter -ShortName s -LongName server -Description $msg.server -VariableName 'SERVER'
 
 $noCacheParam             = New-ParamCompleter -LongName no-cache -Description $msg.no_cache
-$ignoreSignatureParam     = New-ParamCompleter -LongName ignore-signature-status-code -Description $msg.ignore_signature_status_code -Type Required -Arguments $signatureStatusCodes -VariableName 'IGNORE_STATUS_CODE'
-$ignoreSignaturesParam    = New-ParamCompleter -LongName ignore-signature-status-codes -Description $msg.ignore_signature_status_code -Type Required -Arguments $signatureStatusCodes -VariableName 'IGNORE_STATUS_CODE'
+$ignoreSignatureParam     = New-ParamCompleter -LongName ignore-signature-status-code -Description $msg.ignore_signature_status_code -Arguments $signatureStatusCodes -VariableName 'IGNORE_STATUS_CODE'
+$ignoreSignaturesParam    = New-ParamCompleter -LongName ignore-signature-status-codes -Description $msg.ignore_signature_status_code -Arguments $signatureStatusCodes -VariableName 'IGNORE_STATUS_CODE'
 $keyringParam             = New-ParamCompleter -LongName keyring -Description $msg.collection_keyring -Type File -VariableName 'KEYRING'
 $offlineParam             = New-ParamCompleter -LongName offline -Description $msg.offline
-$requiredValidSignatureCountParam = New-ParamCompleter -LongName required-valid-signature-count -Description $msg.required_valid_signature_count -Type Required -VariableName 'REQUIRED_VALID_SIGNATURE_COUNT'
-$signatureParam           = New-ParamCompleter -LongName signature -Description $msg.signature -Type Required -VariableName 'SIGNATURES'
+$requiredValidSignatureCountParam = New-ParamCompleter -LongName required-valid-signature-count -Description $msg.required_valid_signature_count -VariableName 'REQUIRED_VALID_SIGNATURE_COUNT'
+$signatureParam           = New-ParamCompleter -LongName signature -Description $msg.signature -VariableName 'SIGNATURES'
 $forceWithDepsParam       = New-ParamCompleter -LongName force-with-deps -Description $msg.force_with_deps
 $clearResponseCacheParam  = New-ParamCompleter -LongName clear-response-cache -Description $msg.clear_response_cache
 $forceParam               = New-ParamCompleter -ShortName f -LongName force -Description $msg.force
@@ -152,7 +152,7 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
         ) -NoFileCompletions
 
         New-CommandCompleter -Name publish -Description $msg.collection_publish -Parameters @(
-            New-ParamCompleter -LongName import-timeout -Description $msg.collection_publish_import_timeout -Type Required -VariableName 'IMPORT_TIMEOUT'
+            New-ParamCompleter -LongName import-timeout -Description $msg.collection_publish_import_timeout -VariableName 'IMPORT_TIMEOUT'
             New-ParamCompleter -LongName no-wait -Description $msg.collection_publish_no_wait
             $commonParams
         ) -ArgumentCompleter {
@@ -229,23 +229,23 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
         ) -NoFileCompletions
 
         New-CommandCompleter -Name search -Description $msg.role_search -Parameters @(
-            New-ParamCompleter -LongName author -Description $msg.role_search_author -Type Required -VariableName 'AUTHOR'
+            New-ParamCompleter -LongName author -Description $msg.role_search_author -VariableName 'AUTHOR'
             New-ParamCompleter -LongName galaxy-tags -Description $msg.role_search_galaxy_tags -Type List -VariableName 'GALAXY_TAGS'
             New-ParamCompleter -LongName platforms -Description $msg.role_search_platforms -Type List -VariableName 'PLATFORMS'
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name import -Description $msg.role_import -Parameters @(
-            New-ParamCompleter -LongName branch -Description $msg.role_import_branch -Type Required -VariableName 'BRANCH'
+            New-ParamCompleter -LongName branch -Description $msg.role_import_branch -VariableName 'BRANCH'
             New-ParamCompleter -LongName no-wait -Description $msg.role_import_no_wait
-            New-ParamCompleter -LongName role-name -Description $msg.role_import_role_name -Type Required -VariableName 'ROLE_NAME'
+            New-ParamCompleter -LongName role-name -Description $msg.role_import_role_name -VariableName 'ROLE_NAME'
             New-ParamCompleter -LongName status -Description "Check the status of the most recent import request"
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name setup -Description $msg.role_setup -Parameters @(
             New-ParamCompleter -LongName list -Description "List all GitHub integrations"
-            New-ParamCompleter -LongName remove -Description "Remove a GitHub integration" -Type Required -VariableName 'REMOVE_ID'
+            New-ParamCompleter -LongName remove -Description "Remove a GitHub integration" -VariableName 'REMOVE_ID'
             $rolesPathParam
             $commonParams
         ) -NoFileCompletions

@@ -147,7 +147,7 @@ Register-NativeCompleter -Name ip -Description $msg.ip -Style Unix -Parameters @
     New-ParamCompleter -Name force -Description $msg._force
     New-ParamCompleter -Name statistics, stats, s -Description $msg._stats
     New-ParamCompleter -Name details, d -Description $msg._details
-    New-ParamCompleter -Name loops -Description $msg._loops -Type Required -VariableName 'COUNT'
+    New-ParamCompleter -Name loops -Description $msg._loops -VariableName 'COUNT'
     New-ParamCompleter -Name family, f -Description $msg._family -Arguments $familyArguments -VariableName 'FAMILY'
     New-ParamCompleter -Name '4' -Description $msg._family_inet
     New-ParamCompleter -Name '6' -Description $msg._family_inet6
@@ -156,13 +156,13 @@ Register-NativeCompleter -Name ip -Description $msg.ip -Style Unix -Parameters @
     New-ParamCompleter -Name '0' -Description $msg._family_link
     New-ParamCompleter -Name oneline, o -Description $msg._oneline
     New-ParamCompleter -Name resolve, r -Description $msg._resolve
-    New-ParamCompleter -Name netns, n -Description $msg._netns -Type Required -VariableName 'NAME'
+    New-ParamCompleter -Name netns, n -Description $msg._netns -VariableName 'NAME'
     New-ParamCompleter -Name Numeric, N -Description $msg._numeric
     New-ParamCompleter -Name all, a -Description $msg._all
     New-ParamCompleter -Name color, c -Description $msg._color -Type FlagOrValue -VariableName 'WHEN' -Arguments "always","auto","never"
     New-ParamCompleter -Name timestamp, t -Description $msg._timestamp
     New-ParamCompleter -Name tshort, ts -Description $msg._timestampShort
-    New-ParamCompleter -Name rcvbuf, rc -Description $msg._rcvbuf -Type Required -VariableName 'SIZE'
+    New-ParamCompleter -Name rcvbuf, rc -Description $msg._rcvbuf -VariableName 'SIZE'
     New-ParamCompleter -Name iec -Description $msg._iecUnits
     New-ParamCompleter -Name brief, br -Description $msg._brief
     New-ParamCompleter -Name json, j -Description $msg._json
