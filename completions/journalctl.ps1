@@ -143,11 +143,11 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName system -Description $msg.system
     New-ParamCompleter -LongName user -Description $msg.user
     New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -VariableName 'CONTAINER'
-    New-ParamCompleter -ShortName D -LongName directory -Description $msg.directory -Type Directory -VariableName 'PATH'
-    New-ParamCompleter -LongName file -Description $msg.file -Type File -VariableName 'PATH'
-    New-ParamCompleter -LongName root -Description $msg.root -Type Directory -VariableName 'ROOT'
+    New-ParamCompleter -ShortName D -LongName directory -Description $msg.directory -ArgumentType Directory -VariableName 'PATH'
+    New-ParamCompleter -LongName file -Description $msg.file -ArgumentType File -VariableName 'PATH'
+    New-ParamCompleter -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'ROOT'
     New-ParamCompleter -LongName namespace -Description $msg.namespace -VariableName 'NAMESPACE'
-    New-ParamCompleter -LongName image -Description $msg.image -Type File -VariableName 'IMAGE'
+    New-ParamCompleter -LongName image -Description $msg.image -ArgumentType File -VariableName 'IMAGE'
     New-ParamCompleter -LongName image-policy -Description $msg.image_policy -VariableName 'POLICY'
 
     # Journal management
@@ -180,7 +180,7 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -ShortName S -LongName since -Description $msg.since -VariableName 'DATE'
     New-ParamCompleter -ShortName U -LongName until -Description $msg.until -VariableName 'DATE'
     New-ParamCompleter -ShortName c -LongName cursor -Description $msg.cursor -VariableName 'CURSOR'
-    New-ParamCompleter -LongName cursor-file -Description $msg.cursor_file -Type File -VariableName 'FILE'
+    New-ParamCompleter -LongName cursor-file -Description $msg.cursor_file -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -LongName after-cursor -Description $msg.after_cursor -VariableName 'CURSOR'
     New-ParamCompleter -LongName show-cursor -Description $msg.show_cursor
 

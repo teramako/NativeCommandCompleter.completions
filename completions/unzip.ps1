@@ -43,7 +43,7 @@ Register-NativeCompleter -Name unzip -Parameters @(
     New-ParamCompleter -ShortName t -Description $msg.test
     New-ParamCompleter -ShortName z -Description $msg.archive_comment
     New-ParamCompleter -ShortName T -Description $msg.timestamp
-    New-ParamCompleter -ShortName d -Description $msg.extract_to_dir -Type Directory
+    New-ParamCompleter -ShortName d -Description $msg.extract_to_dir -ArgumentType Directory
     New-ParamCompleter -ShortName n -Description $msg.never_overwrite
     New-ParamCompleter -ShortName o -Description $msg.overwrite
     New-ParamCompleter -ShortName q -Description $msg.quiet

@@ -119,21 +119,21 @@ Register-NativeCompleter -Name ssh -Description $msg.ssh -Metadata @{ sshOptions
     New-ParamCompleter -ShortName C -Description $msg.compress
     New-ParamCompleter -ShortName c -Description $msg.cipher -VariableName 'cipher_spec'
     New-ParamCompleter -ShortName D -Description $msg.dynamic -VariableName '[bind_address:]port'
-    New-ParamCompleter -ShortName E -Description $msg.log_file -Type File -VariableName 'log_file'
+    New-ParamCompleter -ShortName E -Description $msg.log_file -ArgumentType File -VariableName 'log_file'
     New-ParamCompleter -ShortName e -Description $msg.escape -VariableName 'escape_char'
-    New-ParamCompleter -ShortName F -Description $msg.config -Type File -VariableName 'configfile'
+    New-ParamCompleter -ShortName F -Description $msg.config -ArgumentType File -VariableName 'configfile'
     New-ParamCompleter -ShortName f -Description $msg.fork_after_auth
     New-ParamCompleter -ShortName G -Description $msg.print_config
     New-ParamCompleter -ShortName g -Description $msg.gateway_ports
-    New-ParamCompleter -ShortName I -Description $msg.pkcs11_provider -Type File -VariableName 'pkcs11'
-    New-ParamCompleter -ShortName i -Description $msg.identity_file -Type File -VariableName 'identity_file'
+    New-ParamCompleter -ShortName I -Description $msg.pkcs11_provider -ArgumentType File -VariableName 'pkcs11'
+    New-ParamCompleter -ShortName i -Description $msg.identity_file -ArgumentType File -VariableName 'identity_file'
     New-ParamCompleter -ShortName J -Description $msg.proxy_jump -VariableName 'destination'
     New-ParamCompleter -ShortName K -Description $msg.gssapi_auth
     New-ParamCompleter -ShortName k -Description $msg.disable_delegate_gssapi
     New-ParamCompleter -ShortName L -Description $msg.local_forward -VariableName '[bind_address:]port:host:hostport'
     New-ParamCompleter -ShortName l -Description $msg.login_name -VariableName 'login_name'
     New-ParamCompleter -ShortName M -Description $msg.control_master -Arguments "yes","no","ask","auto","autoask" -VariableName 'option'
-    New-ParamCompleter -ShortName m -Description $msg.mac -Type List -VariableName 'mac_spec'
+    New-ParamCompleter -ShortName m -Description $msg.mac -ArgumentType List -VariableName 'mac_spec'
     New-ParamCompleter -ShortName N -Description $msg.no_execute
     New-ParamCompleter -ShortName n -Description $msg.stdin_null
     New-ParamCompleter -ShortName O -Description $msg.multiplexing -Arguments "check", "forward","cancel","exit","stop" -VariableName 'ctl_cmd'
@@ -149,7 +149,7 @@ Register-NativeCompleter -Name ssh -Description $msg.ssh -Metadata @{ sshOptions
     New-ParamCompleter -ShortName Q -Description $msg.query -Arguments "cipher","cipher-auth","mac","kex","key","key-cert","key-plain","key-sig","protocol-version","sig","help" -VariableName 'query_option'
     New-ParamCompleter -ShortName q -Description $msg.quiet
     New-ParamCompleter -ShortName R -Description $msg.remote_forward -VariableName '[bind_address:]port:host:hostport'
-    New-ParamCompleter -ShortName S -Description $msg.control_path -Type File -VariableName 'ctl_path'
+    New-ParamCompleter -ShortName S -Description $msg.control_path -ArgumentType File -VariableName 'ctl_path'
     New-ParamCompleter -ShortName s -Description $msg.subsystem
     New-ParamCompleter -ShortName T -Description $msg.disable_tty
     New-ParamCompleter -ShortName t -Description $msg.force_tty

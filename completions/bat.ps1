@@ -84,7 +84,7 @@ Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter -ShortName p -LongName plain                 -Description $msg.plain
     New-ParamCompleter -ShortName l -LongName language              -Description $msg.language -VariableName 'language' -ArgumentCompleter $languageCompleter
     New-ParamCompleter -ShortName H -LongName highlight-line        -Description $msg.highlight_line -VariableName 'N:M'
-    New-ParamCompleter              -LongName file-name             -Description $msg.file_name -Type File -VariableName 'name'
+    New-ParamCompleter              -LongName file-name             -Description $msg.file_name -ArgumentType File -VariableName 'name'
     New-ParamCompleter -ShortName d -LongName diff                  -Description $msg.diff
     New-ParamCompleter              -LongName diff-context          -Description $msg.diff_context -VariableName 'N'
     New-ParamCompleter              -LongName tabs                  -Description $msg.tabs -VariableName 'T'
@@ -108,7 +108,7 @@ Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter -ShortName s -LongName squeeze-blank         -Description $msg.squeeze_blank
     New-ParamCompleter              -LongName squeeze-limit         -Description $msg.squeeze_limit -VariableName 'limit'
     New-ParamCompleter              -LongName strip-ansi            -Description $msg.strip_ansi -VariableName 'when' -Arguments "auto", "always", "never"
-    New-ParamCompleter              -LongName style                 -Description $msg.style -Type List -Arguments $stylesArguments
+    New-ParamCompleter              -LongName style                 -Description $msg.style -ArgumentType List -Arguments $stylesArguments
     New-ParamCompleter -ShortName r -LongName line-range            -Description $msg.line_range -VariableName 'N:M'
     New-ParamCompleter -ShortName L -LongName list-languages        -Description $msg.list_languages
     New-ParamCompleter              -LongName no-custom-assets      -Description $msg.no_custom_assets
@@ -127,8 +127,8 @@ Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter              -LongName no-config             -Description $msg.no_config
 ) -SubCommands @(
     New-CommandCompleter -Name cache -Description $msg.cache -Parameters @(
-        New-ParamCompleter              -LongName source           -Description $msg.cache_source -Type Directory -VariableName 'dir'
-        New-ParamCompleter              -LongName target           -Description $msg.cache_target -Type Directory -VariableName 'dir'
+        New-ParamCompleter              -LongName source           -Description $msg.cache_source -ArgumentType Directory -VariableName 'dir'
+        New-ParamCompleter              -LongName target           -Description $msg.cache_target -ArgumentType Directory -VariableName 'dir'
         New-ParamCompleter -ShortName b -LongName build            -Description $msg.cache_build
         New-ParamCompleter -ShortName c -LongName clear            -Description $msg.cache_clear
         New-ParamCompleter              -LongName blank            -Description $msg.cache_blank

@@ -39,7 +39,7 @@ else
         New-ParamCompleter -ShortName a -LongName display -Description $msg.display -Type FlagOrValue -VariableName 'hostname'
         New-ParamCompleter -ShortName d -LongName delete -Description $msg.delete -VariableName 'hostname'
         New-ParamCompleter -ShortName s -LongName set -Description $msg.set -VariableName 'hostname'
-        New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Type File -VariableName 'filename'
+        New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -ShortName n -LongName numeric -Description $msg.numeric
         New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
         New-ParamCompleter -ShortName i -LongName device -Description $msg.device -VariableName 'if'

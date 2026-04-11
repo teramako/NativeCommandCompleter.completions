@@ -446,7 +446,7 @@ $commonRunParams = @(
     New-ParamCompleter              -LongName cap-drop              -Description $msg.container_run_cap_drop            -VariableName 'LIST'
     New-ParamCompleter              -LongName cgroup-parent         -Description $msg.container_run_cgroup_parent       -VariableName 'STRING'
     New-ParamCompleter              -LongName cgroupns              -Description $msg.container_run_cgroupns            -Arguments "host","private" -VariableName 'MODE'
-    New-ParamCompleter              -LongName cidfile               -Description $msg.container_run_cidfile             -Type File -VariableName 'STRING'
+    New-ParamCompleter              -LongName cidfile               -Description $msg.container_run_cidfile             -ArgumentType File -VariableName 'STRING'
     New-ParamCompleter              -LongName cpu-period            -Description $msg.container_run_cpu_period          -VariableName 'INT'
     New-ParamCompleter              -LongName cpu-quota             -Description $msg.container_run_cpu_quota           -VariableName 'INT'
     New-ParamCompleter              -LongName cpu-rt-period         -Description $msg.container_run_cpu_rt_period       -VariableName 'INT'
@@ -470,7 +470,7 @@ $commonRunParams = @(
     New-ParamCompleter              -LongName domainname            -Description $msg.container_run_domainname          -VariableName 'STRING'
     New-ParamCompleter              -LongName entrypoint            -Description $msg.container_run_entrypoint          -VariableName 'STRING'
     New-ParamCompleter -ShortName e -LongName env                   -Description $msg.container_run_env                 -VariableName 'LIST'
-    New-ParamCompleter              -LongName env-file              -Description $msg.container_run_env_file            -Type File -VariableName 'LIST'
+    New-ParamCompleter              -LongName env-file              -Description $msg.container_run_env_file            -ArgumentType File -VariableName 'LIST'
     New-ParamCompleter              -LongName expose                -Description $msg.container_run_expose              -VariableName 'LIST'
     New-ParamCompleter              -LongName gpus                  -Description $msg.container_run_gpus                -VariableName 'GPU-REQUEST'
     New-ParamCompleter              -LongName group-add             -Description $msg.container_run_group_add           -VariableName 'LIST'
@@ -488,7 +488,7 @@ $commonRunParams = @(
     New-ParamCompleter              -LongName isolation             -Description $msg.container_run_isolation           -Arguments "default","process","hyperv" -VariableName 'STRING'
     New-ParamCompleter              -LongName kernel-memory         -Description $msg.container_run_kernel_memory       -VariableName 'BYTES'
     New-ParamCompleter -ShortName l -LongName label                 -Description $msg.container_run_label               -VariableName 'LIST'
-    New-ParamCompleter              -LongName label-file            -Description $msg.container_run_label_file          -Type File -VariableName 'LIST'
+    New-ParamCompleter              -LongName label-file            -Description $msg.container_run_label_file          -ArgumentType File -VariableName 'LIST'
     New-ParamCompleter              -LongName link                  -Description $msg.container_run_link                -VariableName 'LIST'
     New-ParamCompleter              -LongName link-local-ip         -Description $msg.container_run_link_local_ip       -VariableName 'LIST'
     New-ParamCompleter              -LongName log-driver            -Description $msg.container_run_log_driver          -Arguments "json-file","syslog","journald","gelf","fluentd","awslogs","splunk","none" -VariableName 'STRING'
@@ -533,7 +533,7 @@ $commonRunParams = @(
     New-ParamCompleter -ShortName v -LongName volume                -Description $msg.container_run_volume              -VariableName 'LIST'
     New-ParamCompleter              -LongName volume-driver         -Description $msg.container_run_volume_driver       -VariableName 'STRING'
     New-ParamCompleter              -LongName volumes-from          -Description $msg.container_run_volumes_from        -VariableName 'LIST'
-    New-ParamCompleter -ShortName w -LongName workdir               -Description $msg.container_run_workdir             -Type Directory -VariableName 'STRING'
+    New-ParamCompleter -ShortName w -LongName workdir               -Description $msg.container_run_workdir             -ArgumentType Directory -VariableName 'STRING'
 )
 
 $containerAttachCommand = New-CommandCompleter -Name attach  -Description $msg.container_attach  -NoFileCompletions -ArgumentCompleter $containerCompleter
@@ -554,15 +554,15 @@ $containerExecCommand   = New-CommandCompleter -Name exec    -Description $msg.c
     New-ParamCompleter -ShortName d -LongName detach       -Description $msg.container_exec_detach
     New-ParamCompleter              -LongName detach-keys  -Description $msg.container_exec_detach_keys -VariableName 'STRING'
     New-ParamCompleter -ShortName e -LongName env          -Description $msg.container_exec_env         -VariableName 'LIST'
-    New-ParamCompleter              -LongName env-file     -Description $msg.container_exec_env_file    -Type File -VariableName 'LIST'
+    New-ParamCompleter              -LongName env-file     -Description $msg.container_exec_env_file    -ArgumentType File -VariableName 'LIST'
     New-ParamCompleter -ShortName i -LongName interactive  -Description $msg.container_exec_interactive
     New-ParamCompleter              -LongName privileged   -Description $msg.container_exec_privileged
     New-ParamCompleter -ShortName t -LongName tty          -Description $msg.container_exec_tty
     New-ParamCompleter -ShortName u -LongName user         -Description $msg.container_exec_user        -VariableName 'STRING'
-    New-ParamCompleter -ShortName w -LongName workdir      -Description $msg.container_exec_workdir     -Type Directory -VariableName 'STRING'
+    New-ParamCompleter -ShortName w -LongName workdir      -Description $msg.container_exec_workdir     -ArgumentType Directory -VariableName 'STRING'
 )
 $containerExportCommand = New-CommandCompleter -Name export  -Description $msg.container_export -Parameters @(
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.container_export_output -Type File -VariableName 'STRING'
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.container_export_output -ArgumentType File -VariableName 'STRING'
 ) -NoFileCompletions -ArgumentCompleter $allContainerCompleter
 $containerKillCommand   = New-CommandCompleter -Name kill    -Description $msg.container_kill -Parameters @(
     New-ParamCompleter -ShortName s -LongName signal -Description $msg.container_kill_signal -VariableName 'STRING'
@@ -642,9 +642,9 @@ $imageBuildCommand = New-CommandCompleter -Name build   -Description $msg.image_
     New-ParamCompleter              -LongName cpuset-cpus           -Description $msg.image_build_cpuset_cpus   -VariableName 'STRING'
     New-ParamCompleter              -LongName cpuset-mems           -Description $msg.image_build_cpuset_mems   -VariableName 'STRING'
     New-ParamCompleter              -LongName disable-content-trust -Description $msg.image_build_disable_content_trust
-    New-ParamCompleter -ShortName f -LongName file                  -Description $msg.image_build_file          -Type File -VariableName 'STRING'
+    New-ParamCompleter -ShortName f -LongName file                  -Description $msg.image_build_file          -ArgumentType File -VariableName 'STRING'
     New-ParamCompleter              -LongName force-rm              -Description $msg.image_build_force_rm
-    New-ParamCompleter              -LongName iidfile               -Description $msg.image_build_iidfile       -Type File -VariableName 'STRING'
+    New-ParamCompleter              -LongName iidfile               -Description $msg.image_build_iidfile       -ArgumentType File -VariableName 'STRING'
     New-ParamCompleter              -LongName isolation             -Description $msg.image_build_isolation     -Arguments "default","process","hyperv" -VariableName 'STRING'
     New-ParamCompleter              -LongName label                 -Description $msg.image_build_label         -VariableName 'LIST'
     New-ParamCompleter -ShortName m -LongName memory                -Description $msg.image_build_memory        -VariableName 'BYTES'
@@ -677,7 +677,7 @@ $imageHistoryCommand = New-CommandCompleter -Name history -Description $msg.imag
     New-ParamCompleter -ShortName q -LongName quiet    -Description $msg.image_history_quiet
 ) -NoFileCompletions -ArgumentCompleter $imageCompleter
 $imageLoadCommand = New-CommandCompleter -Name load    -Description $msg.image_load -Parameters @(
-    New-ParamCompleter -ShortName i -LongName input -Description $msg.image_load_input -Type File -VariableName 'STRING'
+    New-ParamCompleter -ShortName i -LongName input -Description $msg.image_load_input -ArgumentType File -VariableName 'STRING'
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.image_load_quiet
 )
 $imageLsParams = @(
@@ -704,7 +704,7 @@ $imageRmParams = @(
     New-ParamCompleter              -LongName no-prune -Description $msg.image_rm_no_prune
 )
 $imageSaveCommand = New-CommandCompleter -Name save    -Description $msg.image_save -NoFileCompletions -ArgumentCompleter $imageCompleter -Parameters @(
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.image_save_output -Type File -VariableName 'STRING'
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.image_save_output -ArgumentType File -VariableName 'STRING'
 )
 $imageTagCommand = New-CommandCompleter -Name tag     -Description $msg.image_tag -NoFileCompletions -ArgumentCompleter $imageCompleter
 
@@ -719,15 +719,15 @@ $systemInfoCommand = New-CommandCompleter -Name info   -Description $msg.system_
 )
 
 Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
-    New-ParamCompleter              -LongName config        -Description $msg.global_config    -Type Directory -VariableName 'STRING'
+    New-ParamCompleter              -LongName config        -Description $msg.global_config    -ArgumentType Directory -VariableName 'STRING'
     New-ParamCompleter -ShortName c -LongName context       -Description $msg.global_context   -ArgumentCompleter $contextCompleter -VariableName 'STRING'
     New-ParamCompleter -ShortName D -LongName debug         -Description $msg.global_debug
     New-ParamCompleter -ShortName H -LongName host          -Description $msg.global_host      -VariableName 'LIST'
     New-ParamCompleter -ShortName l -LongName log-level     -Description $msg.global_log_level -Arguments "debug","info","warn","error","fatal" -VariableName 'STRING'
     New-ParamCompleter              -LongName tls           -Description $msg.global_tls
-    New-ParamCompleter              -LongName tlscacert     -Description $msg.global_tlscacert -Type File -VariableName 'STRING'
-    New-ParamCompleter              -LongName tlscert       -Description $msg.global_tlscert   -Type File -VariableName 'STRING'
-    New-ParamCompleter              -LongName tlskey        -Description $msg.global_tlskey    -Type File -VariableName 'STRING'
+    New-ParamCompleter              -LongName tlscacert     -Description $msg.global_tlscacert -ArgumentType File -VariableName 'STRING'
+    New-ParamCompleter              -LongName tlscert       -Description $msg.global_tlscert   -ArgumentType File -VariableName 'STRING'
+    New-ParamCompleter              -LongName tlskey        -Description $msg.global_tlskey    -ArgumentType File -VariableName 'STRING'
     New-ParamCompleter              -LongName tlsverify     -Description $msg.global_tlsverify
     New-ParamCompleter -ShortName v -LongName version       -Description $msg.global_version
 ) -SubCommands @(

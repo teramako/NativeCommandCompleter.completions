@@ -236,9 +236,9 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-CommandCompleter -Name suspend-then-hibernate -Description $msg.suspend_then_hibernate -NoFileCompletions
     New-CommandCompleter -Name cancel -Description $msg.cancel -NoFileCompletions
 ) -Parameters @(
-    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -Type List -VariableName 'TYPE' -Arguments $typeValues
-    New-ParamCompleter -LongName state -Description $msg.state -Type List -VariableName 'STATE' -Arguments $stateValues
-    New-ParamCompleter -ShortName p -LongName property -Description $msg.property -Type List -VariableName 'NAME'
+    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -ArgumentType List -VariableName 'TYPE' -Arguments $typeValues
+    New-ParamCompleter -LongName state -Description $msg.state -ArgumentType List -VariableName 'STATE' -Arguments $stateValues
+    New-ParamCompleter -ShortName p -LongName property -Description $msg.property -ArgumentType List -VariableName 'NAME'
     New-ParamCompleter -ShortName a -LongName all -Description $msg.all
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
     New-ParamCompleter -LongName reverse -Description $msg.reverse
@@ -257,7 +257,7 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-ParamCompleter -LongName kill-mode -Description $msg.kill_mode -Arguments "control-group","process","mixed","none" -VariableName 'MODE'
     New-ParamCompleter -LongName kill-value -Description $msg.kill_value -VariableName 'VALUE'
     New-ParamCompleter -ShortName s -LongName signal -Description $msg.signal -VariableName 'SIGNAL'
-    New-ParamCompleter -LongName what -Description $msg.what -Type List -Arguments "configuration","state","cache","logs","runtime","fdstore","all" -VariableName 'RESOURCES'
+    New-ParamCompleter -LongName what -Description $msg.what -ArgumentType List -Arguments "configuration","state","cache","logs","runtime","fdstore","all" -VariableName 'RESOURCES'
     New-ParamCompleter -LongName now -Description $msg.now
     New-ParamCompleter -LongName dry-run -Description $msg.dry_run
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
@@ -284,8 +284,8 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-ParamCompleter -LongName marked -Description $msg.marked
     New-ParamCompleter -LongName when -Description $msg.when -Arguments "active","inactive","condition" -VariableName 'CONDITION'
     New-ParamCompleter -LongName preset-mode -Description $msg.preset_mode -Arguments "full","enable-only","disable-only" -VariableName 'MODE'
-    New-ParamCompleter -LongName root -Description $msg.root -Type Directory -VariableName 'PATH'
-    New-ParamCompleter -LongName image -Description $msg.image -Type File -VariableName 'PATH'
+    New-ParamCompleter -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'PATH'
+    New-ParamCompleter -LongName image -Description $msg.image -ArgumentType File -VariableName 'PATH'
     New-ParamCompleter -LongName image-policy -Description $msg.image_policy -VariableName 'POLICY'
     New-ParamCompleter -ShortName H -LongName host -Description $msg.host -VariableName 'HOST'
     New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -VariableName 'CONTAINER'

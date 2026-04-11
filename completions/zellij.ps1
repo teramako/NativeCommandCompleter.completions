@@ -220,7 +220,7 @@ $modeCompleter = {
 $floatingParam      = New-ParamCompleter -ShortName f -LongName floating   -Description $msg.floating
 $inPlaceParam       = New-ParamCompleter -ShortName i -LongName in-place   -Description $msg.in_place
 $directionParam     = New-ParamCompleter -ShortName d -LongName direction  -Description $msg.direction  -Arguments $directionArguments -VariableName 'DIRECTION'
-$cwdParam           = New-ParamCompleter              -LongName cwd        -Description $msg.cwd        -Type Directory -VariableName 'CWD'
+$cwdParam           = New-ParamCompleter              -LongName cwd        -Description $msg.cwd        -ArgumentType Directory        -VariableName 'CWD'
 $nameParam          = New-ParamCompleter -ShortName n -LongName name       -Description $msg.name       -VariableName 'NAME'
 $xParam             = New-ParamCompleter -ShortName x -LongName x          -Description $msg.x          -VariableName 'X'
 $yParam             = New-ParamCompleter -ShortName y -LongName y          -Description $msg.y          -VariableName 'Y'
@@ -233,15 +233,15 @@ $closeReplacedParam = New-ParamCompleter              -LongName close-replaced-p
 $helpParam          = New-ParamCompleter -ShortName h -LongName help       -Description $msg.help
 
 Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
-    New-ParamCompleter -ShortName c -LongName config      -Description $msg.config     -Type File      -VariableName 'CONFIG'
-    New-ParamCompleter              -LongName config-dir  -Description $msg.config_dir -Type Directory -VariableName 'CONFIG_DIR'
-    New-ParamCompleter              -LongName data-dir    -Description $msg.data_dir   -Type Directory -VariableName 'DATA_DIR'
+    New-ParamCompleter -ShortName c -LongName config      -Description $msg.config     -ArgumentType File       -VariableName 'CONFIG'
+    New-ParamCompleter              -LongName config-dir  -Description $msg.config_dir -ArgumentType Directory  -VariableName 'CONFIG_DIR'
+    New-ParamCompleter              -LongName data-dir    -Description $msg.data_dir   -ArgumentType Directory  -VariableName 'DATA_DIR'
     New-ParamCompleter -ShortName d -LongName debug       -Description $msg.debug
     New-ParamCompleter -ShortName h -LongName help        -Description $msg.help
-    New-ParamCompleter -ShortName l -LongName layout      -Description $msg.layout     -Type File      -VariableName 'LAYOUT'
+    New-ParamCompleter -ShortName l -LongName layout      -Description $msg.layout     -ArgumentType File       -VariableName 'LAYOUT'
     New-ParamCompleter              -LongName max-panes   -Description $msg.max_panes  -VariableName 'MAX_PANES'
     New-ParamCompleter -ShortName n -LongName new-session-with-layout -Description $msg.new_session_with_layout -VariableName 'LAYOUT_STRING'
-    New-ParamCompleter -ShortName s -LongName session     -Description $msg.session    -VariableName 'SESSION' -ArgumentCompleter $sessionCompleter
+    New-ParamCompleter -ShortName s -LongName session     -Description $msg.session    -VariableName 'SESSION'  -ArgumentCompleter $sessionCompleter
     New-ParamCompleter -ShortName v -LongName version     -Description $msg.version
 ) -SubCommands @(
 
@@ -304,8 +304,8 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
             $helpParam
         )
         New-CommandCompleter -Name new-tab -Description $msg.action_new_tab -Parameters @(
-            New-ParamCompleter -ShortName c -LongName cwd    -Description $msg.action_new_tab_cwd    -Type Directory -VariableName 'CWD'
-            New-ParamCompleter -ShortName l -LongName layout -Description $msg.action_new_tab_layout -Type File      -VariableName 'LAYOUT'
+            New-ParamCompleter -ShortName c -LongName cwd    -Description $msg.action_new_tab_cwd    -ArgumentType Directory -VariableName 'CWD'
+            New-ParamCompleter -ShortName l -LongName layout -Description $msg.action_new_tab_layout -ArgumentType File      -VariableName 'LAYOUT'
             New-ParamCompleter -ShortName n -LongName name   -Description $msg.action_new_tab_name   -VariableName 'NAME'
             $helpParam
         )
@@ -348,19 +348,19 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
             New-ParamCompleter -LongName copy-command        -Description $msg.opt_copy_command       -VariableName 'COMMAND'
             New-ParamCompleter -LongName copy-on-select      -Description $msg.opt_copy_on_select     -Arguments $trueFalseArguments -VariableName 'BOOL'
             New-ParamCompleter -LongName default-layout      -Description $msg.opt_default_layout     -VariableName 'LAYOUT'
-            New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments $modeArguments     -VariableName 'MODE'
+            New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments $modeArguments      -VariableName 'MODE'
             New-ParamCompleter -LongName default-shell       -Description $msg.opt_default_shell      -VariableName 'SHELL'
-            New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -Type Directory -VariableName 'DIR'
+            New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -ArgumentType Directory        -VariableName 'DIR'
             New-ParamCompleter -LongName mirror-session      -Description $msg.opt_mirror_session     -Arguments $trueFalseArguments -VariableName 'BOOL'
             New-ParamCompleter -LongName mouse-mode          -Description $msg.opt_mouse_mode         -Arguments $trueFalseArguments -VariableName 'BOOL'
             New-ParamCompleter -LongName on-force-close      -Description $msg.opt_on_force_close     -Arguments $onForceCloseArgs   -VariableName 'BEHAVIOR'
             New-ParamCompleter -LongName pane-frames         -Description $msg.opt_pane_frames        -Arguments $trueFalseArguments -VariableName 'BOOL'
             New-ParamCompleter -LongName scroll-buffer-size  -Description $msg.opt_scroll_buffer_size -VariableName 'SIZE'
-            New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -Type File -VariableName 'PATH'
+            New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -ArgumentType File             -VariableName 'PATH'
             New-ParamCompleter -LongName session-name        -Description $msg.opt_session_name       -VariableName 'NAME'
             New-ParamCompleter -LongName simplified-ui       -Description $msg.opt_simplified_ui      -Arguments $trueFalseArguments -VariableName 'BOOL'
             New-ParamCompleter -LongName theme               -Description $msg.opt_theme              -VariableName 'THEME'
-            New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -Type Directory -VariableName 'DIR'
+            New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -ArgumentType Directory        -VariableName 'DIR'
             $helpParam
         ) -NoFileCompletions
     ) -ArgumentCompleter $sessionCompleter
@@ -421,19 +421,19 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
         New-ParamCompleter -LongName copy-command        -Description $msg.opt_copy_command       -VariableName 'COMMAND'
         New-ParamCompleter -LongName copy-on-select      -Description $msg.opt_copy_on_select     -Arguments $trueFalseArguments -VariableName 'BOOL'
         New-ParamCompleter -LongName default-layout      -Description $msg.opt_default_layout     -VariableName 'LAYOUT'
-        New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments $modeArguments     -VariableName 'MODE'
+        New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments $modeArguments      -VariableName 'MODE'
         New-ParamCompleter -LongName default-shell       -Description $msg.opt_default_shell      -VariableName 'SHELL'
-        New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -Type Directory -VariableName 'DIR'
+        New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -ArgumentType Directory        -VariableName 'DIR'
         New-ParamCompleter -LongName mirror-session      -Description $msg.opt_mirror_session     -Arguments $trueFalseArguments -VariableName 'BOOL'
         New-ParamCompleter -LongName mouse-mode          -Description $msg.opt_mouse_mode         -Arguments $trueFalseArguments -VariableName 'BOOL'
         New-ParamCompleter -LongName on-force-close      -Description $msg.opt_on_force_close     -Arguments $onForceCloseArgs   -VariableName 'BEHAVIOR'
         New-ParamCompleter -LongName pane-frames         -Description $msg.opt_pane_frames        -Arguments $trueFalseArguments -VariableName 'BOOL'
         New-ParamCompleter -LongName scroll-buffer-size  -Description $msg.opt_scroll_buffer_size -VariableName 'SIZE'
-        New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -Type File -VariableName 'PATH'
+        New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -ArgumentType File             -VariableName 'PATH'
         New-ParamCompleter -LongName session-name        -Description $msg.opt_session_name       -VariableName 'NAME'
         New-ParamCompleter -LongName simplified-ui       -Description $msg.opt_simplified_ui      -Arguments $trueFalseArguments -VariableName 'BOOL'
         New-ParamCompleter -LongName theme               -Description $msg.opt_theme              -VariableName 'THEME'
-        New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -Type Directory -VariableName 'DIR'
+        New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -ArgumentType Directory        -VariableName 'DIR'
         $helpParam
     ) -NoFileCompletions
 

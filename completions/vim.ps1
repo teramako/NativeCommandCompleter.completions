@@ -72,7 +72,7 @@ Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
     New-ParamCompleter -ShortName E -Description $msg.exim_mode
     New-ParamCompleter -ShortName g -Description $msg.gui_mode
     New-ParamCompleter -ShortName H -Description $msg.hebrew_mode
-    New-ParamCompleter -ShortName i -Description $msg.viminfo -Type File -VariableName 'viminfo'
+    New-ParamCompleter -ShortName i -Description $msg.viminfo -ArgumentType File -VariableName 'viminfo'
     New-ParamCompleter -ShortName l -Description $msg.lisp_mode
     New-ParamCompleter -ShortName L -Description $msg.list_swap
     New-ParamCompleter -ShortName m -Description $msg.disable_modify
@@ -82,17 +82,17 @@ Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
     New-ParamCompleter -ShortName o -Description $msg.horizontally_split -Type FlagOrValue -VariableName 'N'
     New-ParamCompleter -ShortName O -Description $msg.vertical_split -Type FlagOrValue -VariableName 'N'
     New-ParamCompleter -ShortName p -Description $msg.open_tab -Type FlagOrValue -VariableName 'N'
-    New-ParamCompleter -ShortName r -Description $msg.recovery -Type File -VariableName 'file.swp'
+    New-ParamCompleter -ShortName r -Description $msg.recovery -ArgumentType File -VariableName 'file.swp'
     New-ParamCompleter -ShortName R -Description $msg.readonly_mode
-    New-ParamCompleter -ShortName s -Description $msg.source -Type File -VariableName 'scriptin'
-    New-ParamCompleter -ShortName S -Description $msg.source_after_load -Type File -VariableName 'source'
+    New-ParamCompleter -ShortName s -Description $msg.source -ArgumentType File -VariableName 'scriptin'
+    New-ParamCompleter -ShortName S -Description $msg.source_after_load -ArgumentType File -VariableName 'source'
     New-ParamCompleter -ShortName T -Description $msg.terminal -VariableName 'terminal'
-    New-ParamCompleter -ShortName u -Description $msg.vimrc -Type File -VariableName 'vimrc'
-    New-ParamCompleter -ShortName U -Description $msg.gvimrc -Type File -VariableName 'gvimrc'
+    New-ParamCompleter -ShortName u -Description $msg.vimrc -ArgumentType File -VariableName 'vimrc'
+    New-ParamCompleter -ShortName U -Description $msg.gvimrc -ArgumentType File -VariableName 'gvimrc'
     New-ParamCompleter -ShortName v -Description $msg.vi_mode
     New-ParamCompleter -ShortName V -Description $msg.verbose_mode -Type FlagOrValue -VariableName 'N'
-    New-ParamCompleter -ShortName w -Description $msg.write_script -Type File -VariableName 'scriptout'
-    New-ParamCompleter -ShortName W -Description $msg.write_script2 -Type File -VariableName 'scriptout'
+    New-ParamCompleter -ShortName w -Description $msg.write_script -ArgumentType File -VariableName 'scriptout'
+    New-ParamCompleter -ShortName W -Description $msg.write_script2 -ArgumentType File -VariableName 'scriptout'
     New-ParamCompleter -ShortName x -Description $msg.encrypt
     New-ParamCompleter -ShortName X -Description $msg.no_XServer
     New-ParamCompleter -ShortName Y -Description $msg.no_wayland
@@ -111,7 +111,7 @@ Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
     New-ParamCompleter -LongName remote-wait-silent -Description $msg.remote_wait_silent -VariableName 'files'
     New-ParamCompleter -LongName serverlist -Description $msg.serverlist
     New-ParamCompleter -LongName servername -Description $msg.servername -VariableName 'name'
-    New-ParamCompleter -LongName startuptime -Description $msg.startuptime -Type File -VariableName 'file'
+    New-ParamCompleter -LongName startuptime -Description $msg.startuptime -ArgumentType File -VariableName 'file'
     New-ParamCompleter -LongName ttyfail -Description $msg.ttyfail
     New-ParamCompleter -LongName version -Description $msg.version
 )

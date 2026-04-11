@@ -61,15 +61,15 @@ Register-NativeCompleter -Name ps -Description 'report a snapshot of the current
     New-ParamCompleter -ShortName N -LongName deselect -Description $msg.deselect
 
     # Process selection by list
-    New-ParamCompleter -ShortName C -Description $msg.process_by_command -Type List -VariableName 'cmdlist'
-    New-ParamCompleter -ShortName G -LongName Group -Description $msg.process_by_rgroup -Type List -VariableName 'grplist'
-    New-ParamCompleter -ShortName g -LongName group -Description $msg.process_by_group -Type List -VariableName 'grplist'
-    New-ParamCompleter -ShortName p -LongName pid -Description $msg.process_by_pid -Type List -VariableName 'pidlist'
-    New-ParamCompleter -LongName ppid -Description $msg.process_by_ppid -Type List -VariableName 'pidlist'
-    New-ParamCompleter -LongName sid -Description $msg.process_by_sid -Type List -VariableName 'sesslist'
-    New-ParamCompleter -ShortName t -LongName tty -Description $msg.process_by_tty -Type List -VariableName 'ttylist'
-    New-ParamCompleter -ShortName U -LongName User -Description $msg.process_by_ruser -Type List -VariableName 'userlist'
-    New-ParamCompleter -ShortName u -LongName user -Description $msg.process_by_user -Type List -VariableName 'userlist'
+    New-ParamCompleter -ShortName C -Description $msg.process_by_command -ArgumentType List -VariableName 'cmdlist'
+    New-ParamCompleter -ShortName G -LongName Group -Description $msg.process_by_rgroup -ArgumentType List -VariableName 'grplist'
+    New-ParamCompleter -ShortName g -LongName group -Description $msg.process_by_group -ArgumentType List -VariableName 'grplist'
+    New-ParamCompleter -ShortName p -LongName pid -Description $msg.process_by_pid -ArgumentType List -VariableName 'pidlist'
+    New-ParamCompleter -LongName ppid -Description $msg.process_by_ppid -ArgumentType List -VariableName 'pidlist'
+    New-ParamCompleter -LongName sid -Description $msg.process_by_sid -ArgumentType List -VariableName 'sesslist'
+    New-ParamCompleter -ShortName t -LongName tty -Description $msg.process_by_tty -ArgumentType List -VariableName 'ttylist'
+    New-ParamCompleter -ShortName U -LongName User -Description $msg.process_by_ruser -ArgumentType List -VariableName 'userlist'
+    New-ParamCompleter -ShortName u -LongName user -Description $msg.process_by_user -ArgumentType List -VariableName 'userlist'
 
     # Output format control
     New-ParamCompleter -ShortName f -Description $msg.format_full

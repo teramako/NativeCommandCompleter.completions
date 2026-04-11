@@ -112,7 +112,7 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Parameters @(
     # Main options
     New-ParamCompleter -Name f -Description $msg.format -VariableName 'fmt'
-    New-ParamCompleter -Name i -Description $msg.input_file -Type File -VariableName 'input'
+    New-ParamCompleter -Name i -Description $msg.input_file -ArgumentType File -VariableName 'input'
     New-ParamCompleter -Name y -Description $msg.overwrite
     New-ParamCompleter -Name n -Description $msg.no_overwrite
 
@@ -179,7 +179,7 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name preset -Description $msg.preset -VariableName 'preset'
     New-ParamCompleter -Name target -Description $msg.target -VariableName 'type'
     New-ParamCompleter -Name pass -Description $msg.pass -VariableName 'n'
-    New-ParamCompleter -Name passlogfile -Description $msg.passlogfile -Type File -VariableName 'prefix'
+    New-ParamCompleter -Name passlogfile -Description $msg.passlogfile -ArgumentType File -VariableName 'prefix'
     New-ParamCompleter -Name shortest -Description $msg.shortest
     New-ParamCompleter -Name accurate_seek -Description $msg.accurate_seek
     New-ParamCompleter -Name seek_timestamp -Description $msg.seek_timestamp
@@ -202,7 +202,7 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name loglevel -Description $msg.loglevel -VariableName 'level'
     New-ParamCompleter -Name report -Description $msg.report
     New-ParamCompleter -Name vstats -Description $msg.vstats
-    New-ParamCompleter -Name vstats_file -Description $msg.vstats_file -Type File -VariableName 'file'
+    New-ParamCompleter -Name vstats_file -Description $msg.vstats_file -ArgumentType File -VariableName 'file'
     New-ParamCompleter -Name vstats_version -Description $msg.vstats_version -VariableName 'version'
 
     # Benchmark options

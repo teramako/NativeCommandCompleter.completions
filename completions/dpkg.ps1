@@ -99,14 +99,14 @@ $installedPackageCompleter = {
 
 Register-NativeCompleter -Name dpkg -Description $msg.dpkg -Parameters @(
     # Actions
-    New-ParamCompleter -ShortName i -LongName install -Description $msg.install -Type File
-    New-ParamCompleter -LongName unpack -Description $msg.unpack -Type File
+    New-ParamCompleter -ShortName i -LongName install -Description $msg.install -ArgumentType File
+    New-ParamCompleter -LongName unpack -Description $msg.unpack -ArgumentType File
     New-ParamCompleter -LongName configure -Description $msg.configure -ArgumentCompleter $installedPackageCompleter
     New-ParamCompleter -ShortName r -LongName remove -Description $msg.remove -ArgumentCompleter $installedPackageCompleter
     New-ParamCompleter -ShortName P -LongName purge -Description $msg.purge -ArgumentCompleter $installedPackageCompleter
     New-ParamCompleter -ShortName V -LongName verify -Description $msg.verify -ArgumentCompleter $installedPackageCompleter
-    New-ParamCompleter -LongName update-avail -Description $msg.update_avail -Type File
-    New-ParamCompleter -LongName merge-avail -Description $msg.merge_avail -Type File
+    New-ParamCompleter -LongName update-avail -Description $msg.update_avail -ArgumentType File
+    New-ParamCompleter -LongName merge-avail -Description $msg.merge_avail -ArgumentType File
     New-ParamCompleter -LongName clear-avail -Description $msg.clear_avail
     New-ParamCompleter -LongName forget-old-unavail -Description $msg.forget_old_unavail
     New-ParamCompleter -ShortName C -LongName audit -Description $msg.audit
@@ -116,10 +116,10 @@ Register-NativeCompleter -Name dpkg -Description $msg.dpkg -Parameters @(
     New-ParamCompleter -ShortName s -LongName status -Description $msg.status -ArgumentCompleter $installedPackageCompleter
     New-ParamCompleter -ShortName p -LongName print-avail -Description $msg.print_avail -ArgumentCompleter $installedPackageCompleter
     New-ParamCompleter -ShortName S -LongName search -Description $msg.search
-    New-ParamCompleter -ShortName c -LongName contents -Description $msg.contents -Type File
-    New-ParamCompleter -ShortName e -LongName control -Description $msg.control -Type File
-    New-ParamCompleter -ShortName x -LongName extract -Description $msg.fsys_tarfile -Type File
-    New-ParamCompleter -ShortName f -LongName field -Description $msg.field -Type File
+    New-ParamCompleter -ShortName c -LongName contents -Description $msg.contents -ArgumentType File
+    New-ParamCompleter -ShortName e -LongName control -Description $msg.control -ArgumentType File
+    New-ParamCompleter -ShortName x -LongName extract -Description $msg.fsys_tarfile -ArgumentType File
+    New-ParamCompleter -ShortName f -LongName field -Description $msg.field -ArgumentType File
     New-ParamCompleter -LongName compare-versions -Description $msg.compare_versions
     New-ParamCompleter -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
@@ -127,9 +127,9 @@ Register-NativeCompleter -Name dpkg -Description $msg.dpkg -Parameters @(
     New-ParamCompleter -LongName license -Description $msg.license
 
     # Options
-    New-ParamCompleter -LongName admindir -Description $msg.admindir -Type Directory -VariableName 'directory'
-    New-ParamCompleter -LongName instdir -Description $msg.instdir -Type Directory -VariableName 'directory'
-    New-ParamCompleter -LongName root -Description $msg.root -Type Directory -VariableName 'directory'
+    New-ParamCompleter -LongName admindir -Description $msg.admindir -ArgumentType Directory -VariableName 'directory'
+    New-ParamCompleter -LongName instdir -Description $msg.instdir -ArgumentType Directory -VariableName 'directory'
+    New-ParamCompleter -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'directory'
     New-ParamCompleter -ShortName B -LongName auto-deconfigure -Description $msg.auto_deconfigure
     New-ParamCompleter -LongName no-act -Description $msg.no_act
     New-ParamCompleter -LongName dry-run, simulate -Description $msg.simulate
@@ -139,13 +139,13 @@ Register-NativeCompleter -Name dpkg -Description $msg.dpkg -Parameters @(
     New-ParamCompleter -ShortName a -LongName pending -Description $msg.pending
     New-ParamCompleter -LongName verify-format -Description $msg.verify_format -VariableName 'format'
     New-ParamCompleter -LongName no-pager -Description $msg.no_pager
-    New-ParamCompleter -LongName log -Description $msg.log -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName log -Description $msg.log -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName abort-after -Description $msg.abort_after -VariableName 'number'
     New-ParamCompleter -LongName arch -Description $msg.arch -VariableName 'architecture'
     New-ParamCompleter -LongName ignore-depends -Description $msg.ignore_depends -VariableName 'package'
-    New-ParamCompleter -LongName force-things -Description $msg.force_things -Type List -VariableName 'things'
-    New-ParamCompleter -LongName no-force-things -Description $msg.no_force_things -Type List -VariableName 'things'
-    New-ParamCompleter -LongName refuse-things -Description $msg.refuse_things -Type List -VariableName 'things'
+    New-ParamCompleter -LongName force-things -Description $msg.force_things -ArgumentType List -VariableName 'things'
+    New-ParamCompleter -LongName no-force-things -Description $msg.no_force_things -ArgumentType List -VariableName 'things'
+    New-ParamCompleter -LongName refuse-things -Description $msg.refuse_things -ArgumentType List -VariableName 'things'
     New-ParamCompleter -LongName path-exclude -Description $msg.path_exclude -VariableName 'pattern'
     New-ParamCompleter -LongName path-include -Description $msg.path_include -VariableName 'pattern'
     New-ParamCompleter -LongName status-fd -Description $msg.status_fd -VariableName 'n'

@@ -50,7 +50,7 @@ Register-NativeCompleter -Name ln -Description $msg.ln -Parameters @(
     New-ParamCompleter -ShortName r -LongName relative -Description $msg.relative
     New-ParamCompleter -ShortName s -LongName symbolic -Description $msg.symbolic
     New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -VariableName 'SUFFIX'
-    New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.targetDirectory -Type Directory -VariableName 'DIRECTORY'
+    New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.targetDirectory -ArgumentType Directory -VariableName 'DIRECTORY'
     New-ParamCompleter -ShortName T -LongName no-target-directory -Description $msg.noTargetDirectory
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName help -Description $msg.help

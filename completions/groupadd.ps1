@@ -28,8 +28,8 @@ Register-NativeCompleter -Name groupadd -Description $msg.groupadd -Parameters @
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
     New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
     New-ParamCompleter -ShortName r -LongName system -Description $msg.system
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Type Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'
-    New-ParamCompleter -ShortName U -LongName users -Description $msg.users -Type List -VariableName 'USER'
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'CHROOT_DIR'
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
+    New-ParamCompleter -ShortName U -LongName users -Description $msg.users -ArgumentType List -VariableName 'USER'
     New-ParamCompleter -LongName extrausers -Description $msg.extrausers
 ) -NoFileCompletions

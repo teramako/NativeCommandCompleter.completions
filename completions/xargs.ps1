@@ -40,7 +40,7 @@ if ($LASTEXITCODE -eq 0) # GNU xargs
 {
     Register-NativeCompleter -Name xargs -Description $msg.xargs -Parameters @(
         New-ParamCompleter -ShortName '0' -LongName null -Description $msg.null
-        New-ParamCompleter -ShortName a -LongName arg-file -Description $msg.arg_file -Type File -VariableName 'file'
+        New-ParamCompleter -ShortName a -LongName arg-file -Description $msg.arg_file -ArgumentType File -VariableName 'file'
         New-ParamCompleter -ShortName d -LongName delimiter -Description $msg.delimiter -VariableName 'delim'
         New-ParamCompleter -ShortName E -Description $msg.eof -VariableName 'eof-str'
         New-ParamCompleter -ShortName e -LongName eof -Description $msg.eof -Type FlagOrValue -VariableName 'eof-str'

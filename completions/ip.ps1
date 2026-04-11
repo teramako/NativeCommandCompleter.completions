@@ -143,7 +143,7 @@ $familyArguments = @(
 Register-NativeCompleter -Name ip -Description $msg.ip -Style Unix -Parameters @(
     New-ParamCompleter -Name Version, V -Description $msg._version
     New-ParamCompleter -Name human-readable, human, h -Description $msg._humanReadable
-    New-ParamCompleter -Name batch, b -Description $msg._batch -Type File -VariableName 'FILE'
+    New-ParamCompleter -Name batch, b -Description $msg._batch -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -Name force -Description $msg._force
     New-ParamCompleter -Name statistics, stats, s -Description $msg._stats
     New-ParamCompleter -Name details, d -Description $msg._details

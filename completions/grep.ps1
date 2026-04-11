@@ -70,10 +70,10 @@ Register-NativeCompleter -Name grep -Description $msg.grep -Parameters @(
     New-ParamCompleter -ShortName d -LongName directories -Description $msg.directories -Arguments 'read', 'skip', 'recurse' -VariableName 'ACTION'
     New-ParamCompleter -ShortName E -LongName extended-regexp -Description $msg.extendedRegexp
     New-ParamCompleter -ShortName e -LongName regexp -Description $msg.regexp -VariableName 'PATTERNS'
-    New-ParamCompleter -LongName exclude-from -Type File -Description $msg.excludeFrom -VariableName 'FILE'
+    New-ParamCompleter -LongName exclude-from -ArgumentType File -Description $msg.excludeFrom -VariableName 'FILE'
     New-ParamCompleter -LongName exclude-dir -Description $msg.excludeDir -VariableName 'GLOB'
     New-ParamCompleter -ShortName F -LongName fixed-strings -Description $msg.fixedStrings
-    New-ParamCompleter -ShortName f -LongName file -Type File -Description $msg.file -VariableName 'FILE'
+    New-ParamCompleter -ShortName f -LongName file -ArgumentType File -Description $msg.file -VariableName 'FILE'
     New-ParamCompleter -ShortName G -LongName basic-regexp -Description $msg.basicRegexp
     New-ParamCompleter -ShortName H -LongName with-filename -Description $msg.withFilename
     New-ParamCompleter -ShortName h -LongName no-filename -Description $msg.noFilename

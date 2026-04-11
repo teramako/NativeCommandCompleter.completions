@@ -30,7 +30,7 @@ if ($IsLinux)
         New-ParamCompleter -ShortName n -LongName quiet, slient -Description $msg.quiet
         New-ParamCompleter -LongName debug -Description $msg.debug
         New-ParamCompleter -ShortName e -LongName expression -Description $msg.expression -VariableName script
-        New-ParamCompleter -ShortName f -LongName file -Type File -Description $msg.file -VariableName 'script-file'
+        New-ParamCompleter -ShortName f -LongName file -ArgumentType File -Description $msg.file -VariableName 'script-file'
         New-ParamCompleter -LongName follow-symlinks -Description $msg.followSymlinks
         New-ParamCompleter -ShortName i -LongName in-place -Type FlagOrValue -Description $msg."inPlace" -VariableName 'SUFFIX'
         New-ParamCompleter -ShortName l -LongName line-length -Description $msg."lineLength" -VariableName 'N'

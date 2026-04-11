@@ -195,6 +195,6 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
 ) -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
-    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -Type File -VariableName 'FILE'
+    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPTION'
 ) -NoFileCompletions

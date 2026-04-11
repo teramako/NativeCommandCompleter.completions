@@ -37,9 +37,9 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 Register-NativeCompleter -Name awk -Description 'pattern scanning and text processing language' -Parameters @(
     # Program specification
-    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Type File -VariableName 'program-file'
+    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'program-file'
     New-ParamCompleter -ShortName e -LongName source -Description $msg.source -VariableName 'program-text'
-    New-ParamCompleter -ShortName E -LongName exec -Description $msg.exec -Type File -VariableName 'program-file'
+    New-ParamCompleter -ShortName E -LongName exec -Description $msg.exec -ArgumentType File -VariableName 'program-file'
 
     # Variable assignment
     New-ParamCompleter -ShortName v -LongName assign -Description $msg.assign -VariableName 'var=val'
@@ -62,8 +62,8 @@ Register-NativeCompleter -Name awk -Description 'pattern scanning and text proce
     New-ParamCompleter -ShortName P -LongName posix -Description $msg.posix
 
     # Extensions and libraries
-    New-ParamCompleter -ShortName i -LongName include -Description $msg.include -Type File -VariableName 'source-file'
-    New-ParamCompleter -ShortName l -LongName load -Description $msg.load -Type File -VariableName 'extension'
+    New-ParamCompleter -ShortName i -LongName include -Description $msg.include -ArgumentType File -VariableName 'source-file'
+    New-ParamCompleter -ShortName l -LongName load -Description $msg.load -ArgumentType File -VariableName 'extension'
 
     # Data handling
     New-ParamCompleter -ShortName b -LongName characters-as-bytes -Description $msg.characters_as_bytes

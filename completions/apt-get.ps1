@@ -149,7 +149,7 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
 ) -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
-    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -Type File
+    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -ArgumentType File
     New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPTION'
     New-ParamCompleter -ShortName y -LongName yes, assume-yes -Description $msg.assumeYes
     New-ParamCompleter -LongName assume-no -Description $msg.assumeNo
@@ -192,7 +192,7 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -LongName no-allow-insecure-repositories -Description $msg.noAllowInsecureRepositories
     New-ParamCompleter -LongName allow-releaseinfo-change -Description $msg.allowReleaseinfoChange
     New-ParamCompleter -LongName show-progress -Description $msg.showProgress
-    New-ParamCompleter -LongName with-source -Description $msg.withSource -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName with-source -Description $msg.withSource -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -ShortName e -LongName error-on -Description $msg.errorOn -Type FlagOrValue -VariableName 'any'
     New-ParamCompleter -LongName mark-auto -Description $msg.markAuto
     New-ParamCompleter -LongName mark-manual -Description $msg.markManual

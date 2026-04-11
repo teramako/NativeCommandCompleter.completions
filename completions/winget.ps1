@@ -128,13 +128,13 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 $exactParam = New-ParamCompleter -Name e -LongName exact -Description $msg._exact
 $queryParam = New-ParamCompleter -Name q -LongName query -Description $msg._query -VariableName 'query'
-$manifestParam = New-ParamCompleter -Name m -LongName manifest -Description $msg._manifest -Type File -VariableName 'manifest'
+$manifestParam = New-ParamCompleter -Name m -LongName manifest -Description $msg._manifest -ArgumentType File -VariableName 'manifest'
 $idParam = New-ParamCompleter -LongName id -Description $msg._id -VariableName 'id'
 $nameParam = New-ParamCompleter -LongName name -Description $msg._name -VariableName 'name'
 $monikerParam = New-ParamCompleter -LongName moniker -Description $msg._moniker -VariableName 'moniker'
 $versionParam = New-ParamCompleter -Name v -LongName version -Description $msg._version -VariableName 'version'
 $archParam = New-ParamCompleter -Name a -LongName architecture -Description $msg._arch -Arguments "x86","x64","arm","arm64" -VariableName 'architecture'
-$logParam = New-ParamCompleter -Name o -LongName log -Description $msg._log -Type File -VariableName 'path'
+$logParam = New-ParamCompleter -Name o -LongName log -Description $msg._log -ArgumentType File -VariableName 'path'
 $verboseLogsParam = New-ParamCompleter -LongName verbose,verbose-logs -Description $msg._verbose_logs
 $sourceParam = New-ParamCompleter -Name s -LongName source -Description $msg._source -VariableName 'source'
 $localeParam = New-ParamCompleter -LongName locale -Description $msg._locale -VariableName 'locale'
@@ -156,7 +156,7 @@ $installerTypeParam = New-ParamCompleter -LongName installer-type -Description $
     "msix","msi","appx","exe","zip","inno","nullsoft","wix","burn","pwa"
 ) -VariableName 'type'
 $overrideParam = New-ParamCompleter -LongName override -Description $msg._override -VariableName 'arguments'
-$locationParam = New-ParamCompleter -Name l -LongName location -Description $msg._location -Type Directory -VariableName 'path'
+$locationParam = New-ParamCompleter -Name l -LongName location -Description $msg._location -ArgumentType Directory -VariableName 'path'
 $ignoreSecurityHashParam = New-ParamCompleter -LongName ignore-security-hash -Description $msg._ignore_security_hash
 $forceParam = New-ParamCompleter -LongName force -Description $msg._force
 $allowRebootParam = New-ParamCompleter -LongName allow-reboot -Description $msg._allow_reboot
@@ -405,7 +405,7 @@ Register-NativeCompleter -Name winget -Description $msg.winget -SubCommands @(
 
     # hash
     New-CommandCompleter -Name hash -Description $msg.hash -Parameters @(
-        New-ParamCompleter -Name f -LongName file -Description $msg.hash_file -Type File -VariableName 'file'
+        New-ParamCompleter -Name f -LongName file -Description $msg.hash_file -ArgumentType File -VariableName 'file'
         New-ParamCompleter -LongName msix -Description $msg.hash_msix
         $disableInteractivityParam
         $waitParam
@@ -440,7 +440,7 @@ Register-NativeCompleter -Name winget -Description $msg.winget -SubCommands @(
 
     # export
     New-CommandCompleter -Name export -Description $msg.export -Parameters @(
-        New-ParamCompleter -Name o -LongName output -Description $msg.export_output -Type File -VariableName 'file'
+        New-ParamCompleter -Name o -LongName output -Description $msg.export_output -ArgumentType File -VariableName 'file'
         $sourceParam
         New-ParamCompleter -LongName include-versions -Description $msg.export_include_versions
         $acceptSourceAgreementsParam
@@ -453,7 +453,7 @@ Register-NativeCompleter -Name winget -Description $msg.winget -SubCommands @(
 
     # import
     New-CommandCompleter -Name import -Description $msg.import -Parameters @(
-        New-ParamCompleter -Name i -LongName import-file -Description $msg.import_import_file -Type File -VariableName 'file'
+        New-ParamCompleter -Name i -LongName import-file -Description $msg.import_import_file -ArgumentType File -VariableName 'file'
         New-ParamCompleter -LongName ignore-unavailable -Description $msg.import_ignore_unavailable
         New-ParamCompleter -LongName ignore-versions -Description $msg.import_ignore_versions
         $acceptPackageAgreementsParam
@@ -527,7 +527,7 @@ Register-NativeCompleter -Name winget -Description $msg.winget -SubCommands @(
 
     # configure
     New-CommandCompleter -Name configure -Description $msg.configure -Parameters @(
-        New-ParamCompleter -Name f -LongName file -Description $msg.configure_file -Type File -VariableName 'file'
+        New-ParamCompleter -Name f -LongName file -Description $msg.configure_file -ArgumentType File -VariableName 'file'
         New-ParamCompleter -LongName accept-configuration-agreements -Description $msg.configure_accept_configuration_agreements
         $disableInteractivityParam
         $waitParam
@@ -538,7 +538,7 @@ Register-NativeCompleter -Name winget -Description $msg.winget -SubCommands @(
     # download
     New-CommandCompleter -Name download -Description $msg.download -Parameters @(
         $queryParam
-        New-ParamCompleter -Name d -LongName download-directory -Description $msg.download_download_directory -Type Directory -VariableName 'path'
+        New-ParamCompleter -Name d -LongName download-directory -Description $msg.download_download_directory -ArgumentType Directory -VariableName 'path'
         $manifestParam
         $idParam
         $nameParam

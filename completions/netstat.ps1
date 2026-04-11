@@ -109,7 +109,7 @@ else
             New-ParamCompleter -LongName numeric-hosts -Description $msg.numeric_hosts
             New-ParamCompleter -LongName numeric-ports -Description $msg.numeric_ports
             New-ParamCompleter -LongName numeric-users -Description $msg.numeric_users
-            New-ParamCompleter -ShortName A -LongName protocol -Description $msg.protocol -Type List -Arguments "inet","inet6","unix","ipx","ax25","netrom","ddp","bluetooth" -VariableName 'family'
+            New-ParamCompleter -ShortName A -LongName protocol -Description $msg.protocol -ArgumentType List -Arguments "inet","inet6","unix","ipx","ax25","netrom","ddp","bluetooth" -VariableName 'family'
             New-ParamCompleter -ShortName c -LongName continuous -Description $msg.continuous
             New-ParamCompleter -ShortName e -LongName extend -Description $msg.extend
             New-ParamCompleter -ShortName o -LongName timers -Description $msg.timers

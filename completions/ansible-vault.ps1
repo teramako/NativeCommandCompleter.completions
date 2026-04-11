@@ -32,7 +32,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $vaultIdParam = New-ParamCompleter -LongName vault-id -Description $msg.vault_id -VariableName 'VAULT_ID'
-$vaultPasswordFileParam = New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -Type File -VariableName 'VAULT_PASSWORD_FILE'
+$vaultPasswordFileParam = New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -ArgumentType File -VariableName 'VAULT_PASSWORD_FILE'
 $askVaultPassParam = New-ParamCompleter -LongName ask-vault-password, ask-vault-pass -Description $msg.ask_vault_pass
 $verboseParam = New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
 $helpParam = New-ParamCompleter -ShortName h -LongName help -Description $msg.help
@@ -54,7 +54,7 @@ Register-NativeCompleter -Name ansible-vault -Description $msg.ansible_vault -Pa
         $vaultIdParam
         $vaultPasswordFileParam
         $askVaultPassParam
-        New-ParamCompleter -LongName output -Description $msg.output -Type File -VariableName 'OUTPUT_FILE'
+        New-ParamCompleter -LongName output -Description $msg.output -ArgumentType File -VariableName 'OUTPUT_FILE'
         $verboseParam
         $helpParam
     )
@@ -71,7 +71,7 @@ Register-NativeCompleter -Name ansible-vault -Description $msg.ansible_vault -Pa
         $vaultIdParam
         $vaultPasswordFileParam
         $askVaultPassParam
-        New-ParamCompleter -LongName output -Description $msg.output -Type File -VariableName 'OUTPUT_FILE'
+        New-ParamCompleter -LongName output -Description $msg.output -ArgumentType File -VariableName 'OUTPUT_FILE'
         $verboseParam
         $helpParam
     )
@@ -84,7 +84,7 @@ Register-NativeCompleter -Name ansible-vault -Description $msg.ansible_vault -Pa
         New-ParamCompleter -ShortName p -LongName prompt -Description $msg.encrypt_string_prompt
         New-ParamCompleter -LongName show-input -Description $msg.encrypt_string_show_input
         New-ParamCompleter -ShortName n -LongName name -Description $msg.encrypt_string_name -VariableName 'ENCRYPT_STRING_NAME'
-        New-ParamCompleter -LongName output -Description $msg.output -Type File -VariableName 'OUTPUT_FILE'
+        New-ParamCompleter -LongName output -Description $msg.output -ArgumentType File -VariableName 'OUTPUT_FILE'
         $verboseParam
         $helpParam
     ) -NoFileCompletions
@@ -94,7 +94,7 @@ Register-NativeCompleter -Name ansible-vault -Description $msg.ansible_vault -Pa
         $vaultPasswordFileParam
         $askVaultPassParam
         New-ParamCompleter -LongName new-vault-id -Description $msg.new_vault_id -VariableName 'NEW_VAULT_ID'
-        New-ParamCompleter -LongName new-vault-password-file -Description $msg.new_vault_password_file -Type File -VariableName 'NEW_VAULT_PASSWORD_FILE'
+        New-ParamCompleter -LongName new-vault-password-file -Description $msg.new_vault_password_file -ArgumentType File -VariableName 'NEW_VAULT_PASSWORD_FILE'
         $verboseParam
         $helpParam
     )

@@ -24,7 +24,7 @@ Register-NativeCompleter -Name chmod -Description $msg.chmod -Parameters @(
     New-ParamCompleter -LongName preserve-root -Description $msg.preserveRoot
     New-ParamCompleter -ShortName f -LongName silent, quiet -Description $msg.slient
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-    New-ParamCompleter -LongName reference -Type File -Description $msg.reference -VariableName 'RFILE'
+    New-ParamCompleter -LongName reference -ArgumentType File -Description $msg.reference -VariableName 'RFILE'
     New-ParamCompleter -ShortName R -LongName recursive -Description $msg.recursive
     New-ParamCompleter -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version

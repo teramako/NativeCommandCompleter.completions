@@ -123,7 +123,7 @@ Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
     New-ParamCompleter -LongName dfa-size-limit -Description $msg.dfaSizeLimit -VariableName 'NUM+SUFFIX?'
     New-ParamCompleter -ShortName E -LongName encoding -Description $msg.encoding -VariableName 'ENCODING'
     New-ParamCompleter -LongName engine -Description $msg.engine -Arguments 'default','pcre2','auto' -VariableName 'ENGINE'
-    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Type File -VariableName 'PATTERNFILE'
+    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'PATTERNFILE'
     New-ParamCompleter -LongName files -Description $msg.files
     New-ParamCompleter -ShortName l -LongName files-with-matches -Description $msg.filesWithMatches
     New-ParamCompleter -LongName files-without-match -Description $msg.filesWithoutMatch
@@ -135,7 +135,7 @@ Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
     New-ParamCompleter -LongName hidden -Description $msg.hidden
     New-ParamCompleter -LongName iglob -Description $msg.iglob -VariableName 'GLOB'
     New-ParamCompleter -ShortName i -LongName ignore-case -Description $msg.ignoreCase
-    New-ParamCompleter -LongName ignore-file -Description $msg.ignoreFile -Type File -VariableName 'PATH'
+    New-ParamCompleter -LongName ignore-file -Description $msg.ignoreFile -ArgumentType File -VariableName 'PATH'
     New-ParamCompleter -LongName ignore-file-case-insensitive -Description $msg.ignoreFileCaseInsensitive
     New-ParamCompleter -LongName include-zero -Description $msg.includeZero
     New-ParamCompleter -ShortName v -LongName invert-match -Description $msg.invertMatch

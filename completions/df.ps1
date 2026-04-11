@@ -52,7 +52,7 @@ if ($LASTEXITCODE -eq 0) # GNU df
         New-ParamCompleter -ShortName k -Description $msg.gnu_kibibytes
         New-ParamCompleter -ShortName l -LongName local -Description $msg.gnu_local
         New-ParamCompleter -LongName no-sync -Description $msg.gnu_noSync
-        New-ParamCompleter -LongName output -Description $msg.gnu_output -Type FlagOrValue,List -Arguments $fieldList -VariableName 'FIELD'
+        New-ParamCompleter -LongName output -Description $msg.gnu_output -Type FlagOrValue -ArgumentType List -Arguments $fieldList -VariableName 'FIELD'
         New-ParamCompleter -ShortName P -LongName portability -Description $msg.gnu_portability
         New-ParamCompleter -LongName sync -Description $msg.gnu_sync
         New-ParamCompleter -LongName total -Description $msg.gnu_total
