@@ -5,7 +5,7 @@ Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     lsblk              = list block devices
-    noempty            = Don’t print empty devices
+    noempty            = Don't print empty devices
     all                = Print all devices
     bytes              = Print sizes in bytes
     nodeps             = Don't print slaves or holders
