@@ -391,7 +391,7 @@ Register-NativeCompleter -Name curl -Description 'transfer a URL' -Parameters @(
     New-ParamCompleter -LongName remote-name-all -Description $msg.'remote-name-all'
     New-ParamCompleter -ShortName O -LongName remote-name -Description $msg.'remote-name'
     New-ParamCompleter -ShortName R -LongName remote-time -Description $msg.'remote-time'
-    New-ParamCompleter -LongName request-target -Description $msg.'request-target' -Type Required
+    New-ParamCompleter -LongName request-target -Description $msg.'request-target' -VariableName 'PATH'
     New-ParamCompleter -ShortName X -LongName request -Description $msg.'request' -VariableName 'COMMAND'
     New-ParamCompleter -LongName resolve -Description $msg.'resolve' -VariableName 'HOST:PORT:ADDRESS'
     New-ParamCompleter -LongName retry-connrefused -Description $msg.'retry-connrefused'
