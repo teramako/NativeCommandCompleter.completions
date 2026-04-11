@@ -33,7 +33,7 @@ Register-NativeCompleter -Name gunzip -Parameters @(
     New-ParamCompleter -ShortName N -LongName name -Description $msg.name
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
-    New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -Type Required
+    New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -VariableName 'suffix'
     New-ParamCompleter -ShortName t -LongName test -Description $msg.test
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
