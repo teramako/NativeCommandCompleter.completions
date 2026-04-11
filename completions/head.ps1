@@ -34,7 +34,7 @@ if ($LASTEXITCODE -eq 0) # GNU
 else
 {
     Register-NativeCompleter -Name head -Parameters @(
-        New-ParamCompleter -ShortName c -Description $msg.macos_bytes -Type Required
-        New-ParamCompleter -ShortName n -Description $msg.macos_lines -Type Required
+        New-ParamCompleter -ShortName c -Description $msg.macos_bytes -VariableName 'bytes'
+        New-ParamCompleter -ShortName n -Description $msg.macos_lines -VariableName 'count'
     )
 }
