@@ -259,9 +259,9 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -LongName info-path -Description $msg._infoPath
     New-ParamCompleter -ShortName p -LongName paginate -Description $msg._paginate
     New-ParamCompleter -ShortName P -LongName no-pager -Description $msg._noPager
-    New-ParamCompleter -LongName git-dir -Description $msg._gitDir -Type Directory
-    New-ParamCompleter -LongName work-tree -Description $msg._workTree -Type Directory
-    New-ParamCompleter -LongName namespace -Description $msg._namespace -Type Required
+    New-ParamCompleter -LongName git-dir -Description $msg._gitDir -Type Directory -VariableName 'path'
+    New-ParamCompleter -LongName work-tree -Description $msg._workTree -Type Directory -VariableName 'path'
+    New-ParamCompleter -LongName namespace -Description $msg._namespace -VariableName 'namespace'
     New-ParamCompleter -LongName bare -Description $msg._bare
     New-ParamCompleter -LongName no-replace-objects -Description $msg._noReplaceObjects
     New-ParamCompleter -LongName literal-pathspecs -Description $msg._literalPathspecs
@@ -269,7 +269,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -LongName noglob-pathspecs -Description $msg._noglobPathspecs
     New-ParamCompleter -LongName icase-pathspecs -Description $msg._icasePathspecs
     New-ParamCompleter -LongName no-optional-locks -Description $msg._noOptionalLocks
-    New-ParamCompleter -LongName list-cmds -Description $msg._listCmds -Type Required
+    New-ParamCompleter -LongName list-cmds -Description $msg._listCmds -VariableName 'group'
 ) -SubCommands @(
     # Main porcelain commands
     New-CommandCompleter -Name add -Description $msg.add -Parameters @(
