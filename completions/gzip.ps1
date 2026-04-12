@@ -27,7 +27,7 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 Register-NativeCompleter -Name gzip -Parameters @(
     New-ParamCompleter -ShortName c -LongName stdout -Description $msg.stdout
-    New-ParamCompleter -ShortName d -LongName decompress -Description $msg.Decompress -Type File -ArgumentCompleter {
+    New-ParamCompleter -ShortName d -LongName decompress -Description $msg.Decompress -ArgumentType File -ArgumentCompleter {
         [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
             $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.\(?:gz|tgz)$'
         });

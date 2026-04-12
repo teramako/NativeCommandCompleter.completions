@@ -659,7 +659,7 @@ $keyformParam = New-ParamCompleter -Name keyform -Description $msg.keyform -Argu
 $certformParam = New-ParamCompleter -Name certform -Description $msg.certform -Arguments $certformArgs -VariableName 'format'
 $caFormParam = New-ParamCompleter -Name CAform -Description $msg.caform -Arguments $certformArgs -VariableName 'format'
 $caKeyFormParam = New-ParamCompleter -Name CAkeyform -Description $msg.cakeyform -Arguments $keyformArgs -VariableName 'format'
-$certParam = New-ParamCompleter -Name cert -Description $msg.cert -Type File -VariableName 'file'
+$certParam = New-ParamCompleter -Name cert -Description $msg.cert -ArgumentType File -VariableName 'file'
 $checkParam = New-ParamCompleter -Name check -Description $msg.check
 
 $sigoptParam = New-ParamCompleter -Name sigopt -Description $msg.sigopt -VariableName 'nm:v'
@@ -671,28 +671,28 @@ $notAfterParam = New-ParamCompleter -Name enddate, not_after -Description $msg.n
 $verboseParam = New-ParamCompleter -Name verbose -Description $msg.verbose
 $verbose2Param = New-ParamCompleter -Name v -Description $msg.verbose
 $quietParam = New-ParamCompleter -Name quiet -Description $msg.quiet
-$configParam = New-ParamCompleter -Name config -Description $msg.config -Type File -VariableName 'configfile'
+$configParam = New-ParamCompleter -Name config -Description $msg.config -ArgumentType File -VariableName 'configfile'
 
 $traditionalParam = New-ParamCompleter -Name traditional -Description $msg.traditional
 $outSubjectParam = New-ParamCompleter -Name subject -Description $msg.output_subject
 $outPubkeyParam = New-ParamCompleter -Name pubkey -Description $msg.output_pubkey
-$CAfileParam = New-ParamCompleter -Name CAfile -Description $msg.CAfile -Type File -VariableName 'file'
+$CAfileParam = New-ParamCompleter -Name CAfile -Description $msg.CAfile -ArgumentType File -VariableName 'file'
 $noCAfileParam = New-ParamCompleter -Name no-CAfile -Description $msg.no_CAfile
-$CApathParam = New-ParamCompleter -Name CApath -Description $msg.CApath -Type Directory -VariableName 'dir'
+$CApathParam = New-ParamCompleter -Name CApath -Description $msg.CApath -ArgumentType Directory -VariableName 'dir'
 $noCApathParam = New-ParamCompleter -Name no-CApath -Description $msg.no_CApath
 $CAstoreParam = New-ParamCompleter -Name CAstore -Description $msg.CAstore -VariableName 'uri'
 $noCAstoreParam = New-ParamCompleter -Name no-CAstore -Description $msg.no_CAstore
-$certChainParam = New-ParamCompleter -Name cert_chain -Description $msg.cert_chain -Type File -VariableName 'filename'
+$certChainParam = New-ParamCompleter -Name cert_chain -Description $msg.cert_chain -ArgumentType File -VariableName 'filename'
 $buildChainParam = New-ParamCompleter -Name build_chain -Description $msg.build_chain
 $dateoptParam = New-ParamCompleter -Name dateopt -Description $msg.dateopt -Arguments "rfc_822","iso_8601"
-$certoptParam = New-ParamCompleter -Name certopt -Description $msg.certopt -Type List -Arguments @(
+$certoptParam = New-ParamCompleter -Name certopt -Description $msg.certopt -ArgumentType List -Arguments @(
     "compatible", "no_header", "no_version", "no_serial", "no_signame", "no_validity", "no_subject",
     "no_issuer", "no_pubkey", "no_sigdump", "no_aux", "no_extensions", "ext_default", "ext_error",
     "ext_parse", "ext_dump", "ca_default"
 )
-$caParam = New-ParamCompleter -Name CA -Description $msg.ca -Type File -VariableName 'filename|uri'
-$caKeyParam = New-ParamCompleter -Name CAkey -Description $msg.cakey -Type File -VariableName 'filename|uri'
-$caserialParam = New-ParamCompleter -Name CAserial -Description $msg.caserial -Type File -VariableName 'filename'
+$caParam = New-ParamCompleter -Name CA -Description $msg.ca -ArgumentType File -VariableName 'filename|uri'
+$caKeyParam = New-ParamCompleter -Name CAkey -Description $msg.cakey -ArgumentType File -VariableName 'filename|uri'
+$caserialParam = New-ParamCompleter -Name CAserial -Description $msg.caserial -ArgumentType File -VariableName 'filename'
 $pubinParam = New-ParamCompleter -Name pubin -Description $msg.pubin
 $puboutParam = New-ParamCompleter -Name pubout -Description $msg.pubout
 $pvkStrongParam = New-ParamCompleter -Name pvk-strong -Description $msg.pvk_strong
@@ -725,27 +725,27 @@ $passphraseCompleter = {
     }
 }
 
-$inParam = New-ParamCompleter -Name in -Description $msg.in -Type File -VariableName 'file'
-$outParam = New-ParamCompleter -Name out -Description $msg.out -Type File -VariableName 'file'
+$inParam = New-ParamCompleter -Name in -Description $msg.in -ArgumentType File -VariableName 'file'
+$outParam = New-ParamCompleter -Name out -Description $msg.out -ArgumentType File -VariableName 'file'
 $passParam = New-ParamCompleter -Name pass -Description $msg.passout -VariableName 'arg' -ArgumentCompleter $passphraseCompleter
 $passinParam = New-ParamCompleter -Name passin -Description $msg.passin -VariableName 'arg' -ArgumentCompleter $passphraseCompleter
 $passoutParam = New-ParamCompleter -Name passout -Description $msg.passout -VariableName 'arg' -ArgumentCompleter $passphraseCompleter
 $textParam = New-ParamCompleter -Name text -Description $msg.text
 $nooutParam = New-ParamCompleter -Name noout -Description $msg.noout
 
-$randParam = New-ParamCompleter -Name rand -Description $msg.rand -Type File -VariableName 'files'
-$writerandParam = New-ParamCompleter -Name writerand -Description $msg.writerand -Type File -VariableName 'file'
+$randParam = New-ParamCompleter -Name rand -Description $msg.rand -ArgumentType File -VariableName 'files'
+$writerandParam = New-ParamCompleter -Name writerand -Description $msg.writerand -ArgumentType File -VariableName 'file'
 
 $batchParam = New-ParamCompleter -Name batch -Description $msg.batch
 $utf8Param = New-ParamCompleter -Name utf8 -Description $msg.utf8
 
 $providerParam = New-ParamCompleter -Name provider -Description $msg.provider -VariableName 'name'
-$providerPathParam = New-ParamCompleter -Name provider-path -Description $msg.providerPath -Type Directory -VariableName 'path'
+$providerPathParam = New-ParamCompleter -Name provider-path -Description $msg.providerPath -ArgumentType Directory -VariableName 'path'
 $provparamParam = New-ParamCompleter -Name provparam -Description $msg.provparam -VariableName '[name:]key=value'
 $propqueryParam = New-ParamCompleter -Name propquery -Description $msg.propquery -VariableName 'propq'
 $providerParams = $providerParam, $providerPathParam, $provparamParam, $propqueryParam
 
-$keyParam = New-ParamCompleter -Name key -Description $msg.key -Type File -VariableName 'file'
+$keyParam = New-ParamCompleter -Name key -Description $msg.key -ArgumentType File -VariableName 'file'
 $pkeyoptParam = New-ParamCompleter -Name pkeyopt -Description $msg.genpkey_pkeyopt -VariableName 'opt:value' -ArgumentCompleter {
     $alg = $this.BoundParameters."algorithm"
     if (-not $alg) { return $null }
@@ -809,12 +809,12 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name offset -Description $msg.asn1parse_offset -VariableName 'number'
         New-ParamCompleter -Name length -Description $msg.asn1parse_length -VariableName 'number'
         New-ParamCompleter -Name i -Description $msg.asn1parse_indent
-        New-ParamCompleter -Name oid -Description $msg.asn1parse_oid -Type File -VariableName 'filename'
+        New-ParamCompleter -Name oid -Description $msg.asn1parse_oid -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name dump -Description $msg.asn1parse_dump
         New-ParamCompleter -Name dlimit -Description $msg.asn1parse_dlimit -VariableName 'num'
         New-ParamCompleter -Name strparse -Description $msg.asn1parse_strparse -VariableName 'offset'
         New-ParamCompleter -Name genstr -Description $msg.asn1parse_genstr -VariableName 'string'
-        New-ParamCompleter -Name genconf -Description $msg.asn1parse_genconf -Type File -VariableName 'file'
+        New-ParamCompleter -Name genconf -Description $msg.asn1parse_genconf -ArgumentType File -VariableName 'file'
         New-ParamCompleter -Name strictpem -Description $msg.asn1parse_strictpem
         New-ParamCompleter -Name item -Description $msg.asn1parse_item -VariableName 'name'
     )
@@ -826,14 +826,14 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name name, section -Description $msg.ca_section -VariableName 'section'
         $inParam
         $informParam
-        New-ParamCompleter -Name ss_cert -Description $msg.ca_ss_cert -Type File -VariableName 'filename'
-        New-ParamCompleter -Name spkac -Description $msg.ca_spkac -Type File -VariableName 'filename'
-        New-ParamCompleter -Name infiles -Description $msg.ca_infiles -Nargs '1+' -Type File -VariableName 'filename'
+        New-ParamCompleter -Name ss_cert -Description $msg.ca_ss_cert -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name spkac -Description $msg.ca_spkac -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name infiles -Description $msg.ca_infiles -Nargs '1+' -ArgumentType File -VariableName 'filename'
         $outParam
-        New-ParamCompleter -Name outdir -Description $msg.ca_outdir -Type Directory -VariableName 'directory'
+        New-ParamCompleter -Name outdir -Description $msg.ca_outdir -ArgumentType Directory -VariableName 'directory'
         $certParam
         $certformParam
-        New-ParamCompleter -Name keyfile -Description $msg.ca_keyfile -Type File -VariableName 'file'
+        New-ParamCompleter -Name keyfile -Description $msg.ca_keyfile -ArgumentType File -VariableName 'file'
         $keyformParam
         $sigoptParam
         $vfyoptParam
@@ -851,7 +851,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name noemailDN -Description $msg.ca_noemailDN
         $batchParam
         New-ParamCompleter -Name extensions -Description $msg.ca_extentions -VariableName 'section'
-        New-ParamCompleter -Name extfile -Description $msg.ca_extfile -Type File -VariableName 'file'
+        New-ParamCompleter -Name extfile -Description $msg.ca_extfile -ArgumentType File -VariableName 'file'
         New-ParamCompleter -Name subj -Description $msg.ca_subj -VariableName 'arg'
         $utf8Param
         New-ParamCompleter -Name create_serial -Description $msg.ca_create_serial
@@ -865,8 +865,8 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name crldays -Description $msg.ca_crldays -VariableName 'num'
         New-ParamCompleter -Name crlhours -Description $msg.ca_crlhours -VariableName 'num'
         New-ParamCompleter -Name crlsec -Description $msg.ca_crlsec -VariableName 'num'
-        New-ParamCompleter -Name revoke -Description $msg.ca_revoke -Type File -VariableName 'filename'
-        New-ParamCompleter -Name valid -Description $msg.ca_valid -Type File -VariableName 'filename'
+        New-ParamCompleter -Name revoke -Description $msg.ca_revoke -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name valid -Description $msg.ca_valid -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name status -Description $msg.ca_status -VariableName 'serial'
         New-ParamCompleter -Name updatedb -Description $msg.ca_updatedb
         New-ParamCompleter -Name crl_reason -Description $msg.ca_crl_reason -VariableName 'reason'
@@ -898,7 +898,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $keyformParam
         $inParam
         $outParam
-        New-ParamCompleter -Name gendelta -Description $msg.crl_gendelta -Type File -VariableName 'filename'
+        New-ParamCompleter -Name gendelta -Description $msg.crl_gendelta -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name badsig -Description $msg.crl_badsig
         $dateoptParam
         $textParam
@@ -926,7 +926,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $outformParam
         $inParam
         $outParam
-        New-ParamCompleter -Name certfile -Description $msg.crl2pkcs7_certfile -Type File -VariableName 'filename'
+        New-ParamCompleter -Name certfile -Description $msg.crl2pkcs7_certfile -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name nocrl -Description $msg.crl2pkcs7_nocrl
         $providerParams
     ) -NoFileCompletions
@@ -941,13 +941,13 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name r -Description $msg.dgst_r
         $outParam
         New-ParamCompleter -Name xoflen -Description $msg.dgst_xoflen -VariableName 'length'
-        New-ParamCompleter -Name sign -Description $msg.dgst_sign -Type File -VariableName 'filename|uri'
+        New-ParamCompleter -Name sign -Description $msg.dgst_sign -ArgumentType File -VariableName 'filename|uri'
         $keyformParam
         $sigoptParam
         $passinParam
-        New-ParamCompleter -Name verify -Description $msg.dgst_verify -Type File -VariableName 'filename'
-        New-ParamCompleter -Name prverify -Description $msg.dgst_prverify -Type File -VariableName 'filename'
-        New-ParamCompleter -Name signature -Description $msg.dgst_signature -Type File -VariableName 'filename'
+        New-ParamCompleter -Name verify -Description $msg.dgst_verify -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name prverify -Description $msg.dgst_prverify -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name signature -Description $msg.dgst_signature -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name hmac -Description $msg.dgst_hmac -VariableName 'key'
         New-ParamCompleter -Name mac -Description $msg.dgst_mac -VariableName 'alg'
         New-ParamCompleter -Name macopt -Description $msg.dgst_macopt -VariableName 'nm:y'
@@ -1063,7 +1063,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name base64,a -Description $msg.enc_base64
         New-ParamCompleter -Name A -Description $msg.enc_base64_buffer
         New-ParamCompleter -Name k -Description $msg.enc_passphrase
-        New-ParamCompleter -Name kfile -Description $msg.enc_passphrase_file -Type File -VariableName 'file'
+        New-ParamCompleter -Name kfile -Description $msg.enc_passphrase_file -ArgumentType File -VariableName 'file'
         New-ParamCompleter -Name md -Description $msg.enc_md -VariableName 'digest'
         New-ParamCompleter -Name iter -Description $msg.enc_iter -VariableName 'count'
         New-ParamCompleter -Name pbkdf2 -Description $msg.enc_pbkdf2
@@ -1113,7 +1113,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
 
     New-CommandCompleter -Name genpkey -Description $msg._genpkey -Style Unix -Parameters @(
         $outParam
-        New-ParamCompleter -Name outpubkey -Description $msg.genpkey_outpubkey -Type File -VariableName 'filename'
+        New-ParamCompleter -Name outpubkey -Description $msg.genpkey_outpubkey -ArgumentType File -VariableName 'filename'
         $outformParam
         $verboseParam
         $quietParam
@@ -1124,7 +1124,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         )
         $pkeyoptParam
         New-ParamCompleter -Name genparam -Description $msg.genpkey_genparam
-        New-ParamCompleter -Name paramfile -Description $msg.genpkey_paramfile -Type File -VariableName 'filename'
+        New-ParamCompleter -Name paramfile -Description $msg.genpkey_paramfile -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name text -Description $msg.genpkey_text
         $randParam
         $writerandParam
@@ -1179,7 +1179,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $pkeyoptParam
         $keyParam
         $keyformParam
-        New-ParamCompleter -Name keyout -Description $msg.keyout -Type File -VariableName 'file'
+        New-ParamCompleter -Name keyout -Description $msg.keyout -ArgumentType File -VariableName 'file'
         New-ParamCompleter -Name noenc -Description $msg.req_noenc
         New-ParamCompleter -Name nodes -Description $msg.nodes
         $digestParams
@@ -1200,7 +1200,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name addext -Description $msg.req_addext -VariableName 'ext'
         New-ParamCompleter -Name precert -Description $msg.req_precert
         $utf8Param
-        New-ParamCompleter -Name reqopt -Description $msg.req_reqopt  -Type List -VariableName 'option'
+        New-ParamCompleter -Name reqopt -Description $msg.req_reqopt  -ArgumentType List -VariableName 'option'
         New-ParamCompleter -Name newhdr -Description $msg.req_newhdr
         $batchParam
         $verboseParam
@@ -1240,7 +1240,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name proxy -Description $msg.s_client_proxy -VariableName 'host:port'
         New-ParamCompleter -Name proxy_user -Description $msg.s_client_proxy_user -VariableName 'userid'
         New-ParamCompleter -Name proxy_pass -Description $msg.s_client_proxy_pass -VariableName 'arg' -ArgumentCompleter $passphraseCompleter
-        New-ParamCompleter -Name unix -Description $msg.s_client_unix -Type File -VariableName 'path'
+        New-ParamCompleter -Name unix -Description $msg.s_client_unix -ArgumentType File -VariableName 'path'
         New-ParamCompleter -Name '4' -Description $msg.use_ipv4
         New-ParamCompleter -Name '6' -Description $msg.use_ipv6
         New-ParamCompleter -Name quic -Description $msg.s_client_quic
@@ -1250,7 +1250,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $certformParam
         $certChainParam
         $buildChainParam
-        New-ParamCompleter -Name CRL -Description $msg.CRL -Type File -VariableName 'filename'
+        New-ParamCompleter -Name CRL -Description $msg.CRL -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name CRLform -Description $msg.CRLform -Arguments $formArgs -VariableName 'form'
         New-ParamCompleter -Name crl_download -Description $msg.crl_download
         $keyParam
@@ -1259,13 +1259,13 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name verify -Description $msg.verify -VariableName 'depth'
         New-ParamCompleter -Name verify_return_error -Description $msg.s_client_verify_return_error
         New-ParamCompleter -Name verify_quiet -Description $msg.s_client_verify_quiet
-        New-ParamCompleter -Name verifyCAfile -Description $msg.verifyCAfile -Type File -VariableName 'filename'
-        New-ParamCompleter -Name verifyCApath -Description $msg.verifyCApath -Type Directory -VariableName 'dir'
+        New-ParamCompleter -Name verifyCAfile -Description $msg.verifyCAfile -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name verifyCApath -Description $msg.verifyCApath -ArgumentType Directory -VariableName 'dir'
         New-ParamCompleter -Name verifyCAstore -Description $msg.verifyCAstore -VariableName 'uri'
-        New-ParamCompleter -Name chainCAfile -Description $msg.chainCAfile -Type File -VariableName 'file'
-        New-ParamCompleter -Name chainCApath -Description $msg.chainCApath -Type Directory -VariableName 'directory'
+        New-ParamCompleter -Name chainCAfile -Description $msg.chainCAfile -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -Name chainCApath -Description $msg.chainCApath -ArgumentType Directory -VariableName 'directory'
         New-ParamCompleter -Name chainCAstore -Description $msg.chainCAstore -VariableName 'uri'
-        New-ParamCompleter -Name requestCAfile -Description $msg.requestCAfile -Type File -VariableName 'file'
+        New-ParamCompleter -Name requestCAfile -Description $msg.requestCAfile -ArgumentType File -VariableName 'file'
 
         New-ParamCompleter -Name reconnect -Description $msg.s_client_reconnect
         New-ParamCompleter -Name showcerts -Description $msg.showcerts
@@ -1316,13 +1316,13 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name verify -Description $msg.s_server_verify -VariableName 'depth'
         New-ParamCompleter -Name Verify -Description $msg.s_server_verify_strict -VariableName 'depth'
         $certParam
-        New-ParamCompleter -Name cert2 -Description $msg.cert -Type File -VariableName 'file'
+        New-ParamCompleter -Name cert2 -Description $msg.cert -ArgumentType File -VariableName 'file'
         $certformParam
         $certChainParam
         $buildChainParam
         New-ParamCompleter -Name serverinfo -Description $msg.s_server_serverinfo -Typ Required -VariableName 'val'
         $keyParam
-        New-ParamCompleter -Name key2 -Description $msg.key -Type File -VariableName 'file'
+        New-ParamCompleter -Name key2 -Description $msg.key -ArgumentType File -VariableName 'file'
         $keyformParam
         $passParam
         New-ParamCompleter -Name crlf -Description $msg.crlf
@@ -1330,16 +1330,16 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name msg -Description $msg.msg
         New-ParamCompleter -Name msgfile -Description $msg.msgfile
         New-ParamCompleter -Name state -Description $msg.state
-        New-ParamCompleter -Name CRL -Description $msg.CRL -Type File -VariableName 'filename'
+        New-ParamCompleter -Name CRL -Description $msg.CRL -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name CRLform -Description $msg.CRLform -Arguments $formArgs -VariableName 'form'
         New-ParamCompleter -Name crl_download -Description $msg.crl_download
-        New-ParamCompleter -Name verifyCAfile -Description $msg.verifyCAfile -Type File -VariableName 'filename'
-        New-ParamCompleter -Name verifyCApath -Description $msg.verifyCApath -Type Directory -VariableName 'dir'
+        New-ParamCompleter -Name verifyCAfile -Description $msg.verifyCAfile -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name verifyCApath -Description $msg.verifyCApath -ArgumentType Directory -VariableName 'dir'
         New-ParamCompleter -Name verifyCAstore -Description $msg.verifyCAstore -VariableName 'uri'
-        New-ParamCompleter -Name chainCAfile -Description $msg.chainCAfile -Type File -VariableName 'file'
-        New-ParamCompleter -Name chainCApath -Description $msg.chainCApath -Type Directory -VariableName 'directory'
+        New-ParamCompleter -Name chainCAfile -Description $msg.chainCAfile -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -Name chainCApath -Description $msg.chainCApath -ArgumentType Directory -VariableName 'directory'
         New-ParamCompleter -Name chainCAstore -Description $msg.chainCAstore -VariableName 'uri'
-        New-ParamCompleter -Name requestCAfile -Description $msg.requestCAfile -Type File -VariableName 'file'
+        New-ParamCompleter -Name requestCAfile -Description $msg.requestCAfile -ArgumentType File -VariableName 'file'
         New-ParamCompleter -Name quiet -Description $msg.quiet
         New-ParamCompleter -Name www -Description $msg.s_server_www
         New-ParamCompleter -Name WWW, HTTP -Description $msg.s_server_http
@@ -1378,12 +1378,12 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
     ) -NoFileCompletions
 
     New-CommandCompleter -Name verify -Description $msg._verify -Style Unix -Parameters @(
-        New-ParamCompleter -Name CRLfile -Description $msg.verify_CRLfile -Type File -VariableName 'filename|uri'
+        New-ParamCompleter -Name CRLfile -Description $msg.verify_CRLfile -ArgumentType File -VariableName 'filename|uri'
         New-ParamCompleter -Name crl_download -Description $msg.crl_download
         New-ParamCompleter -Name show_chain
         $verboseParam
-        New-ParamCompleter -Name trusted -Description $msg.verify_trusted -Type File -VariableName 'filename|uri'
-        New-ParamCompleter -Name untrusted -Description $msg.verify_untrusted -Type File -VariableName 'filename|uri'
+        New-ParamCompleter -Name trusted -Description $msg.verify_trusted -ArgumentType File -VariableName 'filename|uri'
+        New-ParamCompleter -Name untrusted -Description $msg.verify_untrusted -ArgumentType File -VariableName 'filename|uri'
         $vfyoptParam
         New-ParamCompleter -Name nameopt -Description $msg.verify_nameopt -VariableName 'option'
         $CAfileParam
@@ -1400,7 +1400,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $informParam
         $vfyoptParam
         $keyParam
-        New-ParamCompleter -Name signkey -Description $msg.x509_signkey -Type File -VariableName 'filename|uri'
+        New-ParamCompleter -Name signkey -Description $msg.x509_signkey -ArgumentType File -VariableName 'filename|uri'
         $keyformParam
         $outParam
         $outformParam
@@ -1422,7 +1422,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name email -Description $msg.x509_email
         New-ParamCompleter -Name hash, subject_hash -Description $msg.x509_subject_hash
         New-ParamCompleter -Name issuer_hash -Description $msg.x509_issuer_hash
-        New-ParamCompleter -Name ext -Description $msg.x509_ext -Type List -Arguments @(
+        New-ParamCompleter -Name ext -Description $msg.x509_ext -ArgumentType List -Arguments @(
             "basicConstraints", "keyUsage", "extendedKeyUsage", "subjectKeyIdentifier", "authorityKeyIdentifier",
             "subjectAltName", "issuerAltName", "authorityInfoAccess", "crlDistributionPoints", "issuingDistributionPoint",
             "certificatePolicies", "policyConstraints", "nameConstraints", "noCheck", "tlsfeature"
@@ -1447,9 +1447,9 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
 
         New-ParamCompleter -Name set_issuer -Description $msg.x509_set_issuer -VariableName 'arg'
         New-ParamCompleter -Name set_subject, subj -Description $msg.x509_set_subject -VariableName 'arg'
-        New-ParamCompleter -Name force_pubkey -Description $msg.x509_force_pubkey -Type File -VariableName 'filename'
+        New-ParamCompleter -Name force_pubkey -Description $msg.x509_force_pubkey -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name clrext -Description $msg.x509_clrext
-        New-ParamCompleter -Name extfile -Description $msg.x509_extfile -Type File -VariableName 'filename'
+        New-ParamCompleter -Name extfile -Description $msg.x509_extfile -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name extensions -Description $msg.x509_extensions -VariableName 'section'
         $sigoptParam
         New-ParamCompleter -Name badsig -Description $msg.crl_badsig
@@ -1659,9 +1659,9 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name rawin -Description $msg.pkeyutl_rawin
         New-ParamCompleter -Name digest -Description $msg.pkeyutl_digest -VariableName 'algorithm'
         $outParam
-        New-ParamCompleter -Name secret -Description $msg.pkeyutl_secret -Type File -VariableName 'filename'
-        New-ParamCompleter -Name sigfile -Description $msg.pkeyutl_sigfile -Type File -VariableName 'file'
-        New-ParamCompleter -Name inkey -Description $msg.pkeyutl_inkey -Type File -VariableName 'filename|uri'
+        New-ParamCompleter -Name secret -Description $msg.pkeyutl_secret -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -Name sigfile -Description $msg.pkeyutl_sigfile -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -Name inkey -Description $msg.pkeyutl_inkey -ArgumentType File -VariableName 'filename|uri'
         $keyformParam
         $passinParam
         $pubinParam
@@ -1673,7 +1673,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name encrypt -Description $msg.pkeyutl_encrypt
         New-ParamCompleter -Name decrypt -Description $msg.pkeyutl_decrypt
         New-ParamCompleter -Name derive -Description $msg.pkeyutl_derive
-        New-ParamCompleter -Name peerkey -Description $msg.pkeyutl_peerkey -Type File -VariableName 'file'
+        New-ParamCompleter -Name peerkey -Description $msg.pkeyutl_peerkey -ArgumentType File -VariableName 'file'
         New-ParamCompleter -Name peerform -Description $msg.pkeyutl_peerform -Arguments $keyformArgs -VariableName 'form'
         New-ParamCompleter -Name encap -Description $msg.pkeyutl_encap
         New-ParamCompleter -Name decap -Description $msg.pkeyutl_decap
@@ -1732,7 +1732,7 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name keyform -Description $msg.keyform -Arguments $smimekeyformArgs -VariableName 'format'
         New-ParamCompleter -Name stream,indef -Description $msg.smime_indef
         New-ParamCompleter -Name noindef -Description $msg.smime_noindef
-        New-ParamCompleter -Name content -Description $msg.smime_content -Type File -VariableName 'filename'
+        New-ParamCompleter -Name content -Description $msg.smime_content -ArgumentType File -VariableName 'filename'
         New-ParamCompleter -Name text -Description $msg.smime_text
         New-ParamCompleter -Name md -Description $msg.smime_md -Arguments $digests -VariableName 'digest'
         $cipherParams
@@ -1746,10 +1746,10 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name nosmimecap -Description $msg.smime_nosmimecap
         New-ParamCompleter -Name binary -Description $msg.smime_binary
         New-ParamCompleter -Name crlfeol -Description $msg.smime_crlfeol
-        New-ParamCompleter -Name certfile -Description $msg.smime_certfile -Type File -VariableName 'file'
-        New-ParamCompleter -Name signer -Description $msg.smime_signer -Type File -VariableName 'file'
-        New-ParamCompleter -Name recip -Description $msg.smime_recip -Type File -VariableName 'file'
-        New-ParamCompleter -Name inkey -Description $msg.smime_inkey -Type File -VariableName 'filename|uri'
+        New-ParamCompleter -Name certfile -Description $msg.smime_certfile -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -Name signer -Description $msg.smime_signer -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -Name recip -Description $msg.smime_recip -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -Name inkey -Description $msg.smime_inkey -ArgumentType File -VariableName 'filename|uri'
         $passinParam
         New-ParamCompleter -Name to -Description $msg.smime_to -VariableName 'addr'
         New-ParamCompleter -Name from -Description $msg.smime_from -VariableName 'addr'
@@ -1787,14 +1787,14 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
     New-CommandCompleter -Name ts -Description $msg._ts -Style Unix -SubCommands @(
         New-CommandCompleter -Name '-query' -Description $msg.ts_query -Style Unix -Parameters @(
             $configParam
-            New-ParamCompleter -Name data -Description $msg.ts_query_data -Type File -VariableName 'file_to_hash'
+            New-ParamCompleter -Name data -Description $msg.ts_query_data -ArgumentType File -VariableName 'file_to_hash'
             New-ParamCompleter -Name digest -Description $msg.ts_query_digest -VariableName 'digest_bytes'
             $digestParams
             New-ParamCompleter -Name tspolicy -Description $msg.ts_query_tspolicy -VariableName 'object_id'
             New-ParamCompleter -Name no_nonce -Description $msg.ts_query_no_nonce
             New-ParamCompleter -Name cert -Description $msg.ts_query_cert
-            New-ParamCompleter -Name in -Description $msg.ts_query_in -Type File -VariableName 'request.tsq'
-            New-ParamCompleter -Name out -Description $msg.ts_query_out -Type File -VariableName 'request.tsq'
+            New-ParamCompleter -Name in -Description $msg.ts_query_in -ArgumentType File -VariableName 'request.tsq'
+            New-ParamCompleter -Name out -Description $msg.ts_query_out -ArgumentType File -VariableName 'request.tsq'
             New-ParamCompleter -Name text -Description $msg.ts_query_text
             $randParam
             $writerandParam
@@ -1802,27 +1802,27 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-CommandCompleter -Name '-reply' -Description $msg.ts_reply -Style Unix -Parameters @(
             $configParam
             New-ParamCompleter -Name section -Description $msg.ts_reply_section -VariableName 'tsa_section'
-            New-ParamCompleter -Name queryfile -Description $msg.ts_reply_queryfile -Type File -VariableName 'request.tsq'
+            New-ParamCompleter -Name queryfile -Description $msg.ts_reply_queryfile -ArgumentType File -VariableName 'request.tsq'
             $passinParam
-            New-ParamCompleter -Name signer -Description $msg.ts_reply_signer -Type File -VariableName 'tsa_cert.pem'
-            New-ParamCompleter -Name inkey -Description $msg.ts_reply_inkey -Type File -VariableName 'filename|uri'
+            New-ParamCompleter -Name signer -Description $msg.ts_reply_signer -ArgumentType File -VariableName 'tsa_cert.pem'
+            New-ParamCompleter -Name inkey -Description $msg.ts_reply_inkey -ArgumentType File -VariableName 'filename|uri'
             $digestParams
-            New-ParamCompleter -Name chain -Description $msg.ts_reply_chain -Type File -VariableName 'certs_file.pem'
+            New-ParamCompleter -Name chain -Description $msg.ts_reply_chain -ArgumentType File -VariableName 'certs_file.pem'
             New-ParamCompleter -Name tspolicy -Description $msg.ts_reply_tspolicy -VariableName 'object_id'
-            New-ParamCompleter -Name in -Description $msg.ts_reply_in -Type File -VariableName 'request.tsr'
+            New-ParamCompleter -Name in -Description $msg.ts_reply_in -ArgumentType File -VariableName 'request.tsr'
             New-ParamCompleter -Name token_in -Description $msg.ts_reply_token_in
-            New-ParamCompleter -Name out -Description $msg.ts_reply_out -Type File -VariableName 'request.tsr'
+            New-ParamCompleter -Name out -Description $msg.ts_reply_out -ArgumentType File -VariableName 'request.tsr'
             New-ParamCompleter -Name token_out -Description $msg.ts_reply_out
             New-ParamCompleter -Name text -Description $msg.ts_query_text
             $providerParams
         ) -NoFileCompletions
         New-CommandCompleter -Name '-verify' -Description $msg.ts_verify -Style Unix -Parameters @(
-            New-ParamCompleter -Name data -Description $msg.ts_verify_data -Type File -VariableName 'file_to_hash'
+            New-ParamCompleter -Name data -Description $msg.ts_verify_data -ArgumentType File -VariableName 'file_to_hash'
             New-ParamCompleter -Name digest -Description $msg.ts_verify_digest -VariableName 'digest_bytes'
-            New-ParamCompleter -Name queryfile -Description $msg.ts_verify_queryfile -Type File -VariableName 'request.tsq'
-            New-ParamCompleter -Name in -Description $msg.ts_verify_in -Type File -VariableName 'request.tsr'
+            New-ParamCompleter -Name queryfile -Description $msg.ts_verify_queryfile -ArgumentType File -VariableName 'request.tsq'
+            New-ParamCompleter -Name in -Description $msg.ts_verify_in -ArgumentType File -VariableName 'request.tsr'
             New-ParamCompleter -Name token_in -Description $msg.ts_verify_token_in
-            New-ParamCompleter -Name untrusted -Description $msg.ts_verify_untrusted -Type File -VariableName 'files|uris'
+            New-ParamCompleter -Name untrusted -Description $msg.ts_verify_untrusted -ArgumentType File -VariableName 'files|uris'
             $CAfileParam
             $CApathParam
             $CAstoreParam

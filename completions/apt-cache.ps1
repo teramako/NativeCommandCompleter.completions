@@ -95,8 +95,8 @@ Register-NativeCompleter -Name apt-cache -Description $msg.apt_cache -SubCommand
 ) -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
-    New-ParamCompleter -ShortName p -LongName pkg-cache -Description $msg.pkg_cache -Type File -VariableName 'FILE'
-    New-ParamCompleter -ShortName s -LongName src-cache -Description $msg.src_cache -Type File -VariableName 'FILE'
+    New-ParamCompleter -ShortName p -LongName pkg-cache -Description $msg.pkg_cache -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -ShortName s -LongName src-cache -Description $msg.src_cache -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName i -LongName important -Description $msg.important
     New-ParamCompleter -LongName no-pre-depends -Description $msg.no_pre_depends
@@ -114,6 +114,6 @@ Register-NativeCompleter -Name apt-cache -Description $msg.apt_cache -SubCommand
     New-ParamCompleter -LongName all-names -Description $msg.all_names
     New-ParamCompleter -LongName recurse -Description $msg.recurse
     New-ParamCompleter -LongName installed -Description $msg.installed
-    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -Type File -VariableName 'FILE'
+    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPT=VAL'
 ) -NoFileCompletions

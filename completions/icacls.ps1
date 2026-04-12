@@ -70,7 +70,7 @@ $winStyle2 = New-ParamStyle -ShortOptionPrefix '/' -ValueStyle Separated
 
 Register-NativeCompleter -Name icacls -Description $msg.icacls -Style Windows -SubCommands @(
     New-CommandCompleter -Name '*' -Description $msg.target -Style Windows  -Parameters @(
-        New-ParamCompleter -Name save -Description $msg.save -Style $winStyle2 -Type File -VariableName 'ACLFILE'
+        New-ParamCompleter -Name save -Description $msg.save -Style $winStyle2 -ArgumentType File -VariableName 'ACLFILE'
         New-ParamCompleter -Name grant -Description $msg.grant -Style $winStyle2 -VariableName 'USER:PERM'
         New-ParamCompleter -Name remove -Description $msg.remove -Style $winStyle2 -VariableName 'USER'
         New-ParamCompleter -Name deny -Description $msg.deny -Style $winStyle2 -VariableName 'USER:PERM'
@@ -80,7 +80,7 @@ Register-NativeCompleter -Name icacls -Description $msg.icacls -Style Windows -S
         New-ParamCompleter -Name reset -Description $msg.reset
         New-ParamCompleter -Name inheritance -Description $msg.inheritance -Arguments $inheritanceArguments -VariableName 'e|d|r'
         New-ParamCompleter -Name setowner -Description $msg.setowner -Style $winStyle2 -VariableName 'USER'
-        New-ParamCompleter -Name restore -Description $msg.restore -Style $winStyle2 -Type File -VariableName 'ACLFILE'
+        New-ParamCompleter -Name restore -Description $msg.restore -Style $winStyle2 -ArgumentType File -VariableName 'ACLFILE'
         New-ParamCompleter -Name substitute -Description $msg.substitute -Style $winStyle2 -Nargs 2 -VariableName 'SID1 SID2' -ArgumentCompleter $sidCompleter
         New-ParamCompleter -Name T -Description $msg.recurse
         New-ParamCompleter -Name C -Description $msg.continue

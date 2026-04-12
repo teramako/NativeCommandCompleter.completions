@@ -61,7 +61,7 @@ Register-NativeCompleter -Name lsblk -Description $msg.lsblk -Parameters @(
     New-ParamCompleter -ShortName T -LongName tree -Description $msg.tree
     New-ParamCompleter -ShortName n -LongName noheadings -Description $msg.noheadings
     New-ParamCompleter -ShortName x -LongName sort -Description $msg.sort -VariableName 'column'
-    New-ParamCompleter -LongName sysroot -Description $msg.sysroot -Type Directory -VariableName 'directory'
+    New-ParamCompleter -LongName sysroot -Description $msg.sysroot -ArgumentType Directory -VariableName 'directory'
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
     New-ParamCompleter -ShortName t -LongName topology -Description $msg.topology
     New-ParamCompleter -ShortName m -LongName perms -Description $msg.perms

@@ -19,8 +19,8 @@ Register-NativeCompleter -Name userdel -Description $msg.userdel -Parameters @(
     New-ParamCompleter -ShortName f -LongName force -Description $msg.force
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName r -LongName remove -Description $msg.remove
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Type Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'CHROOT_DIR'
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
     New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux
 ) -NoFileCompletions -ArgumentCompleter {
     if (Test-Path -LiteralPath '/etc/passwd') {

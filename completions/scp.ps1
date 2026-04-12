@@ -41,8 +41,8 @@ Register-NativeCompleter -Name scp -Description $msg.scp -Parameters @(
     New-ParamCompleter -ShortName C -Description $msg.compression
     New-ParamCompleter -ShortName c -Description $msg.cipher -VariableName 'cipher'
     New-ParamCompleter -ShortName D -Description $msg.directConnect -VariableName 'sftp_server_path'
-    New-ParamCompleter -ShortName F -Description $msg.config -Type File -VariableName 'ssh_config'
-    New-ParamCompleter -ShortName i -Description $msg.identityFile -Type File -VariableName 'identity_file'
+    New-ParamCompleter -ShortName F -Description $msg.config -ArgumentType File -VariableName 'ssh_config'
+    New-ParamCompleter -ShortName i -Description $msg.identityFile -ArgumentType File -VariableName 'identity_file'
     New-ParamCompleter -ShortName J -Description $msg.jumpHost -VariableName 'destination'
     New-ParamCompleter -ShortName l -Description $msg.limit -VariableName 'limit'
     New-ParamCompleter -ShortName O -Description $msg.useSCP

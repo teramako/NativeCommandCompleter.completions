@@ -17,7 +17,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name time -DelegateArgumentIndex 0 -Parameters @(
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Type File
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -ArgumentType File
     New-ParamCompleter -ShortName a -LongName append -Description $msg.append
     New-ParamCompleter -ShortName f -LongName format -Description $msg.format -Type Required
     New-ParamCompleter -ShortName p -LongName portability -Description $msg.portability

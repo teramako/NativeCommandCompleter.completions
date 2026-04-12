@@ -89,10 +89,10 @@ Register-NativeCompleter -Name diff -Parameters @(
     New-ParamCompleter -LongName ignoreFileNameCase -Description $msg.ignoreFileNameCase
     New-ParamCompleter -LongName noIgnoreFileNameCase -Description $msg.noIgnoreFileNameCase
     New-ParamCompleter -ShortName x -LongName exclude -Description $msg.exclude -VariableName 'PAT'
-    New-ParamCompleter -ShortName X -LongName excludeFrom -Type File -Description $msg.excludeFrom -VariableName 'FILE'
-    New-ParamCompleter -ShortName S -LongName startingFile -Type File -Description $msg.startingFile -VariableName 'FILE'
-    New-ParamCompleter -LongName fromFile -Type File -Description $msg.fromFile -VariableName 'FILE1'
-    New-ParamCompleter -LongName toFile -Type File -Description $msg.toFile -VariableName 'FILE2'
+    New-ParamCompleter -ShortName X -LongName excludeFrom -ArgumentType File -Description $msg.excludeFrom -VariableName 'FILE'
+    New-ParamCompleter -ShortName S -LongName startingFile -ArgumentType File -Description $msg.startingFile -VariableName 'FILE'
+    New-ParamCompleter -LongName fromFile -ArgumentType File -Description $msg.fromFile -VariableName 'FILE1'
+    New-ParamCompleter -LongName toFile -ArgumentType File -Description $msg.toFile -VariableName 'FILE2'
     New-ParamCompleter -ShortName i -LongName ignoreCase -Description $msg.ignoreCase
     New-ParamCompleter -ShortName E -LongName ignoreTabExpansion -Description $msg.ignoreTabExpansion
     New-ParamCompleter -ShortName Z -LongName ignoreTrailingSpace -Description $msg.ignoreTrailingSpace

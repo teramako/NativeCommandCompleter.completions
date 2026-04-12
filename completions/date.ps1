@@ -33,12 +33,12 @@ if ($LASTEXITCODE -eq 0) # GNU mkdir
 {
     Register-NativeCompleter -Name date -Description $msg.date -Parameters @(
         New-ParamCompleter -ShortName d -LongName date -Description $msg.gnu_date -VariableName 'STRING'
-        New-ParamCompleter -ShortName f -LongName file -Description $msg.gnu_file -Type File -VariableName 'DATEFILE'
+        New-ParamCompleter -ShortName f -LongName file -Description $msg.gnu_file -ArgumentType File -VariableName 'DATEFILE'
         New-ParamCompleter -ShortName I -LongName iso-8601 -Description $msg.gnu_iso8601 -Type FlagOrValue -Arguments "date","hours","minutes","seconds","ns" -VariableName 'FMT'
         New-ParamCompleter -LongName resolution -Description $msg.gnu_resolution
         New-ParamCompleter -ShortName R -LongName rfc-2822 -Description $msg.gnu_rfc2822
         New-ParamCompleter -LongName rfc-3339 -Description $msg.gnu_rfc3339 -Arguments "date","seconds","ns" -VariableName 'FMT'
-        New-ParamCompleter -ShortName r -LongName reference -Description $msg.gnu_reference -Type File -VariableName 'FILE'
+        New-ParamCompleter -ShortName r -LongName reference -Description $msg.gnu_reference -ArgumentType File -VariableName 'FILE'
         New-ParamCompleter -ShortName s -LongName set -Description $msg.gnu_set -VariableName 'STRING'
         New-ParamCompleter -ShortName u -LongName utc,universal -Description $msg.gnu_utc
         New-ParamCompleter -ShortName h -LongName help -Description $msg.gnu_help

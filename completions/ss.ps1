@@ -91,9 +91,9 @@ Register-NativeCompleter -Name ss -Description $msg.ss -Parameters @(
     New-ParamCompleter -ShortName M -LongName mptcp -Description $msg.mptcp
     New-ParamCompleter -LongName inet-sockopt -Description $msg.inetSockopt
     New-ParamCompleter -ShortName f -LongName family -Description $msg.family -VariableName 'FAMILY' -Arguments "unix", "inet", "inet6", "link", "netlink", "vsock", "tipc", "xdp"
-    New-ParamCompleter -ShortName A -LongName query, socket -Description $msg.query -Type List -VariableName '[!]QUERY' -Arguments @(
+    New-ParamCompleter -ShortName A -LongName query, socket -Description $msg.query -ArgumentType List -VariableName '[!]QUERY' -Arguments @(
         "all","inet","tcp","mptcp","udp","raw","unix","unix_dgram","unix_stream","unix_seqpacket","packet","packet_raw","packet_dgram","netlink","dccp","sctp","vsock_stream","vsock_dgram","tipc","xdp"
     )
-    New-ParamCompleter -ShortName D -LongName diag -Description $msg.filter -Type File -VariableName 'FILE'
-    New-ParamCompleter -ShortName F -LongName filter -Description $msg.filter -Type File -VariableName 'FILE'
+    New-ParamCompleter -ShortName D -LongName diag -Description $msg.filter -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -ShortName F -LongName filter -Description $msg.filter -ArgumentType File -VariableName 'FILE'
 ) -NoFileCompletions

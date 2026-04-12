@@ -114,7 +114,7 @@ $onlineDistributionCompleter = {
 }
 
 Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
-    New-ParamCompleter -LongName cd -Description $msg.cd -Type Directory
+    New-ParamCompleter -LongName cd -Description $msg.cd -ArgumentType Directory
     New-ParamCompleter -Name d -LongName distribution -Description $msg.distribution -VariableName 'distro' -ArgumentCompleter $distributionCompleter
     New-ParamCompleter -Name u -LongName user -Description $msg.user -VariableName 'username'
     New-ParamCompleter -Name e -LongName exec -Description $msg.exec -VariableName 'command'
@@ -126,9 +126,9 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
     New-CommandCompleter -Name '--install' -Description $msg.install -Parameters @(
         New-ParamCompleter -LongName enable-wsl1 -Description $msg.install_enableWsl1
         New-ParamCompleter -LongName fixed-vhd -Description $msg.install_fixedVhd
-        New-ParamCompleter -LongName from-file -Description $msg.install_fromFile -Type File -VariableName 'path'
+        New-ParamCompleter -LongName from-file -Description $msg.install_fromFile -ArgumentType File -VariableName 'path'
         New-ParamCompleter -LongName legacy -Description $msg.install_legacy
-        New-ParamCompleter -LongName location -Description $msg.install_location -Type Directory
+        New-ParamCompleter -LongName location -Description $msg.install_location -ArgumentType Directory
         New-ParamCompleter -LongName name -Description $msg.install_name -VariableName 'name'
         New-ParamCompleter -LongName no-distribution -Description $msg.install_noDistribution
         New-ParamCompleter -Name n -LongName no-launch -Description $msg.install_noLaunch
@@ -138,7 +138,7 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
     ) -NoFileCompletions -ArgumentCompleter $onlineDistributionCompleter
 
     New-CommandCompleter -Name '--manage' -Description $msg.manage -Parameters @(
-        New-ParamCompleter -LongName move -Description $msg.manage_move -Type Directory -VariableName 'location'
+        New-ParamCompleter -LongName move -Description $msg.manage_move -ArgumentType Directory -VariableName 'location'
         New-ParamCompleter -Name s -LongName set-sparse -Description $msg.manage_setSparse -Arguments "true", "false"
         New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -VariableName 'username'
         New-ParamCompleter -LongName resize -Description $msg.manage_resize -VariableName 'size'

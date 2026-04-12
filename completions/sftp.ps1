@@ -40,13 +40,13 @@ Register-NativeCompleter -Name sftp -Description $msg.sftp -Parameters @(
     New-ParamCompleter -ShortName A -Description $msg.forwardAgent
     New-ParamCompleter -ShortName a -Description $msg.attemptContinue
     New-ParamCompleter -ShortName B -Description $msg.bufferSize -VariableName 'buffer_size'
-    New-ParamCompleter -ShortName b -Description $msg.batchfile -Type File -VariableName 'batchfile'
+    New-ParamCompleter -ShortName b -Description $msg.batchfile -ArgumentType File -VariableName 'batchfile'
     New-ParamCompleter -ShortName c -Description $msg.ciphers -VariableName 'cipher_spec'
     New-ParamCompleter -ShortName C -Description $msg.compression
     New-ParamCompleter -ShortName D -Description $msg.directConnect -VariableName 'sftp_server_path'
-    New-ParamCompleter -ShortName F -Description $msg.configFile -Type File -VariableName 'ssh_config'
+    New-ParamCompleter -ShortName F -Description $msg.configFile -ArgumentType File -VariableName 'ssh_config'
     New-ParamCompleter -ShortName f -Description $msg.fsync
-    New-ParamCompleter -ShortName i -Description $msg.identity -Type File -VariableName 'identity_file'
+    New-ParamCompleter -ShortName i -Description $msg.identity -ArgumentType File -VariableName 'identity_file'
     New-ParamCompleter -ShortName J -Description $msg.jumpHost -VariableName 'destination'
     New-ParamCompleter -ShortName l -Description $msg.limitBandwidth -VariableName 'limit'
     New-ParamCompleter -ShortName N -Description $msg.noQuiet

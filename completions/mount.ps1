@@ -84,7 +84,7 @@ if ($LASTEXITCODE -eq 0) # GNU mount
         New-ParamCompleter -ShortName i -LongName internal-only -Description $msg.gnu_internal_only
         New-ParamCompleter -ShortName l -LongName show-labels -Description $msg.gnu_show_labels
         New-ParamCompleter -ShortName n -LongName no-mtab -Description $msg.gnu_no_mtab
-        New-ParamCompleter -ShortName o -LongName options -Description $msg.gnu_options -Type List -VariableName 'opts'
+        New-ParamCompleter -ShortName o -LongName options -Description $msg.gnu_options -ArgumentType List -VariableName 'opts'
         New-ParamCompleter -LongName options-mode -Description $msg.gnu_options_namespace -Arguments "ignore","append","prepend","replace" -VariableName 'mode'
         New-ParamCompleter -LongName options-source -Description $msg.gnu_options_source -Arguments "fstab","mtab","disable" -VariableName 'source'
         New-ParamCompleter -LongName options-source-force -Description $msg.gnu_options_source_force
@@ -92,14 +92,14 @@ if ($LASTEXITCODE -eq 0) # GNU mount
         New-ParamCompleter -ShortName R -LongName rbind -Description $msg.gnu_rbind
         New-ParamCompleter -ShortName s -Description $msg.gnu_sloppy
         New-ParamCompleter -LongName source -Description $msg.gnu_source -VariableName 'device'
-        New-ParamCompleter -LongName target -Description $msg.gnu_target -Type Directory -VariableName 'dir'
-        New-ParamCompleter -ShortName T -LongName fstab -Description $msg.gnu_fstab -Type File -VariableName 'file'
-        New-ParamCompleter -ShortName t -LongName types -Description $msg.gnu_types -Type List -VariableName 'fstype'
-        New-ParamCompleter -ShortName O -LongName test-opts -Description $msg.gnu_test_opts -Type List -VariableName 'opts'
+        New-ParamCompleter -LongName target -Description $msg.gnu_target -ArgumentType Directory -VariableName 'dir'
+        New-ParamCompleter -ShortName T -LongName fstab -Description $msg.gnu_fstab -ArgumentType File -VariableName 'file'
+        New-ParamCompleter -ShortName t -LongName types -Description $msg.gnu_types -ArgumentType List -VariableName 'fstype'
+        New-ParamCompleter -ShortName O -LongName test-opts -Description $msg.gnu_test_opts -ArgumentType List -VariableName 'opts'
         New-ParamCompleter -ShortName v -LongName verbose -Description $msg.gnu_verbose
         New-ParamCompleter -ShortName V -LongName version -Description $msg.gnu_version
         New-ParamCompleter -ShortName w -LongName rw -Description $msg.gnu_read_write
-        New-ParamCompleter -LongName namespace -Description $msg.gnu_namespace -Type File -VariableName 'file'
+        New-ParamCompleter -LongName namespace -Description $msg.gnu_namespace -ArgumentType File -VariableName 'file'
         New-ParamCompleter -ShortName A -LongName all-targets -Description $msg.gnu_all_targets
         New-ParamCompleter -LongName make-shared -Description $msg.gnu_make_shared
         New-ParamCompleter -LongName make-slave -Description $msg.gnu_make_slave
@@ -118,13 +118,13 @@ else # BSD mount
         New-ParamCompleter -ShortName a -Description $msg.bsd_async
         New-ParamCompleter -ShortName d -Description $msg.bsd_nodev
         New-ParamCompleter -ShortName e -Description $msg.bsd_noexec
-        New-ParamCompleter -ShortName F -Description $msg.bsd_fstab -Type File
+        New-ParamCompleter -ShortName F -Description $msg.bsd_fstab -ArgumentType File
         New-ParamCompleter -ShortName f -Description $msg.bsd_force
         New-ParamCompleter -ShortName l -Description $msg.bsd_late
-        New-ParamCompleter -ShortName o -Description $msg.bsd_options -Type List
+        New-ParamCompleter -ShortName o -Description $msg.bsd_options -ArgumentType List
         New-ParamCompleter -ShortName r -Description $msg.bsd_read_only
         New-ParamCompleter -ShortName s -Description $msg.bsd_nosuid
-        New-ParamCompleter -ShortName t -Description $msg.bsd_types -Type List -VariableName 'fstype'
+        New-ParamCompleter -ShortName t -Description $msg.bsd_types -ArgumentType List -VariableName 'fstype'
         New-ParamCompleter -ShortName u -Description $msg.bsd_update
         New-ParamCompleter -ShortName v -Description $msg.bsd_verbose
         New-ParamCompleter -ShortName w -Description $msg.bsd_read_write

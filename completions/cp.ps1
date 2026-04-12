@@ -111,7 +111,7 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName l -LongName link -Description $msg.gnu_link
         New-ParamCompleter -LongName strip-trailing-slashes -Description $msg.gnu_stripTrailingSlashes
         New-ParamCompleter -ShortName S -LongName suffix -Description $msg.gnu_suffix -VariableName 'SUFFIX'
-        New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.gnu_targetDirectory -Type Directory -VariableName 'DIRECTORY'
+        New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.gnu_targetDirectory -ArgumentType Directory -VariableName 'DIRECTORY'
         New-ParamCompleter -ShortName u -Description $msg.gnu_short_update
         New-ParamCompleter -LongName update -Description $msg.gnu_update -Type FlagOrValue -Arguments @(
             "older `t{0}" -f $msg.gnu_update_older
@@ -125,8 +125,8 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName n -LongName no-clobber -Description $msg.gnu_noClobber
         New-ParamCompleter -ShortName P -LongName no-dereference -Description $msg.gnu_noDereference
         New-ParamCompleter -ShortName p -Description $msg.gnu_short_p
-        New-ParamCompleter -LongName preserve -Description $msg.gnu_preserve -Arguments $attr_list_arguments -Type FlagOrValue,List -VariableName 'ATTR_LIST'
-        New-ParamCompleter -LongName no-preserve -Description $msg.gnu_noPreserve -Arguments $attr_list_arguments -Type List -VariableName 'ATTR_LIST'
+        New-ParamCompleter -LongName preserve -Description $msg.gnu_preserve -Arguments $attr_list_arguments -Type FlagOrValue -ArgumentType List -VariableName 'ATTR_LIST'
+        New-ParamCompleter -LongName no-preserve -Description $msg.gnu_noPreserve -Arguments $attr_list_arguments -ArgumentType List -VariableName 'ATTR_LIST'
         New-ParamCompleter -LongName parents -Description $msg.gnu_parents
         New-ParamCompleter -ShortName r,R -LongName recursive -Description $msg.gnu_recursive
         New-ParamCompleter -LongName reflink -Description $msg.gnu_reflink -Type FlagOrValue -Arguments @(

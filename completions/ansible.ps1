@@ -77,14 +77,14 @@ Register-NativeCompleter -Name ansible -Description $msg.ansible -Parameters @(
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
 
     # Target
-    New-ParamCompleter -ShortName i -LongName inventory, inventory-file -Description $msg.inventory -Type File     -VariableName 'INVENTORY'
+    New-ParamCompleter -ShortName i -LongName inventory, inventory-file -Description $msg.inventory -ArgumentType File     -VariableName 'INVENTORY'
     New-ParamCompleter -ShortName l -LongName limit, subset             -Description $msg.limit     -VariableName 'SUBSET'
     New-ParamCompleter -LongName list-hosts -Description $msg.list_hosts
 
     # Module
     New-ParamCompleter -ShortName m -LongName module-name -Description $msg.module_name  -VariableName 'MODULE_NAME'
     New-ParamCompleter -ShortName a -LongName args        -Description $msg.module_args  -VariableName 'MODULE_ARGS'
-    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -Type Directory -VariableName 'MODULE_PATH'
+    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -ArgumentType Directory -VariableName 'MODULE_PATH'
 
     # Execution
     New-ParamCompleter -ShortName e -LongName extra-vars -Description $msg.extra_vars   -VariableName 'EXTRA_VARS'
@@ -92,9 +92,9 @@ Register-NativeCompleter -Name ansible -Description $msg.ansible -Parameters @(
     New-ParamCompleter -ShortName C -LongName check      -Description $msg.check
     New-ParamCompleter -ShortName D -LongName diff       -Description $msg.diff
     New-ParamCompleter -ShortName o -LongName one-line   -Description $msg.one_line
-    New-ParamCompleter -ShortName t -LongName tree       -Description $msg.tree         -Type Directory -VariableName 'TREE'
+    New-ParamCompleter -ShortName t -LongName tree       -Description $msg.tree         -ArgumentType Directory -VariableName 'TREE'
     New-ParamCompleter -LongName task-timeout            -Description $msg.task_timeout -VariableName 'TASK_TIMEOUT'
-    New-ParamCompleter -LongName playbook-dir            -Description $msg.playbook_dir -Type Directory -VariableName 'BASEDIR'
+    New-ParamCompleter -LongName playbook-dir            -Description $msg.playbook_dir -ArgumentType Directory -VariableName 'BASEDIR'
 
     # Async
     New-ParamCompleter -ShortName B -LongName background -Description $msg.background -VariableName 'SECONDS'
@@ -104,7 +104,7 @@ Register-NativeCompleter -Name ansible -Description $msg.ansible -Parameters @(
     New-ParamCompleter -ShortName c -LongName connection -Description $msg.connection      -ArgumentCompleter $connectionCompleter -VariableName 'CONNECTION'
     New-ParamCompleter -ShortName u -LongName user       -Description $msg.user            -VariableName 'REMOTE_USER'
     New-ParamCompleter -ShortName T -LongName timeout    -Description $msg.timeout         -VariableName 'TIMEOUT'
-    New-ParamCompleter -LongName private-key, key-file   -Description $msg.private_key     -Type File     -VariableName 'PRIVATE_KEY_FILE'
+    New-ParamCompleter -LongName private-key, key-file   -Description $msg.private_key     -ArgumentType File     -VariableName 'PRIVATE_KEY_FILE'
     New-ParamCompleter -ShortName k -LongName ask-pass   -Description $msg.ask_pass
     New-ParamCompleter -LongName ssh-common-args         -Description $msg.ssh_common_args -VariableName 'SSH_COMMON_ARGS'
     New-ParamCompleter -LongName ssh-extra-args          -Description $msg.ssh_extra_args  -VariableName 'SSH_EXTRA_ARGS'
@@ -119,7 +119,7 @@ Register-NativeCompleter -Name ansible -Description $msg.ansible -Parameters @(
 
     # Vault
     New-ParamCompleter -LongName vault-id                             -Description $msg.vault_id        -VariableName 'VAULT_IDS'
-    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_pass_file -Type File     -VariableName 'VAULT_PASSWORD_FILES'
+    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_pass_file -ArgumentType File     -VariableName 'VAULT_PASSWORD_FILES'
     New-ParamCompleter -LongName ask-vault-pass, ask-vault-password   -Description $msg.ask_vault_pass
 ) -NoFileCompletions -ArgumentCompleter {
     param([int] $position, [int] $argIndex)

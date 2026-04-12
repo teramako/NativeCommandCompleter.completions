@@ -65,7 +65,7 @@ Register-NativeCompleter -Name ssh-keygen -Description $msg.ssh_keygen -Paramete
         "rsa`tRSA key"
     ) -VariableName 'type'
     New-ParamCompleter -ShortName C -Description $msg.comment -VariableName 'comment'
-    New-ParamCompleter -ShortName f -Description $msg.file -Type File -VariableName 'filename'
+    New-ParamCompleter -ShortName f -Description $msg.file -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -ShortName N -Description $msg.new_passphrase -VariableName 'new_passphrase'
     New-ParamCompleter -ShortName P -Description $msg.passphrase -VariableName 'passphrase'
     New-ParamCompleter -ShortName a -Description $msg.rounds -VariableName 'rounds'
@@ -83,7 +83,7 @@ Register-NativeCompleter -Name ssh-keygen -Description $msg.ssh_keygen -Paramete
     New-ParamCompleter -ShortName p -Description $msg.change_passphrase
     New-ParamCompleter -ShortName y -Description $msg.print_public
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName k -Description $msg.revoke -Type File -VariableName 'krl_file'
+    New-ParamCompleter -ShortName k -Description $msg.revoke -ArgumentType File -VariableName 'krl_file'
     New-ParamCompleter -ShortName R -Description $msg.remove_keys -VariableName 'hostname'
     New-ParamCompleter -ShortName Y -Description $msg.sign_file -Arguments "find-principals","check-novalidate","sign","verify"
     New-ParamCompleter -ShortName Q -Description $msg.check_krl
@@ -91,21 +91,21 @@ Register-NativeCompleter -Name ssh-keygen -Description $msg.ssh_keygen -Paramete
     New-ParamCompleter -ShortName v -Description $msg.verbose
     New-ParamCompleter -ShortName E -Description $msg.hash_function -Arguments "md5","sha256" -VariableName 'fingerprint_hash'
     New-ParamCompleter -ShortName m -Description $msg.convert_format -Arguments "RFC4716","PKCS8","PEM" -VariableName 'key_format'
-    New-ParamCompleter -ShortName D -Description $msg.show_certificate -Type File -VariableName 'pkcs11'
+    New-ParamCompleter -ShortName D -Description $msg.show_certificate -ArgumentType File -VariableName 'pkcs11'
     New-ParamCompleter -ShortName O -Description $msg.cert_option -VariableName 'option'
     New-ParamCompleter -ShortName z -Description $msg.serial_number -VariableName 'serial_number'
     New-ParamCompleter -ShortName I -Description $msg.identity_file -VariableName 'key_id'
-    New-ParamCompleter -ShortName n -Description $msg.principals_file -Type List -VariableName 'principals'
+    New-ParamCompleter -ShortName n -Description $msg.principals_file -ArgumentType List -VariableName 'principals'
     New-ParamCompleter -ShortName V -Description $msg.validity_interval -VariableName 'validity_interval'
     New-ParamCompleter -ShortName A -Description $msg.add_key
     New-ParamCompleter -ShortName h -Description $msg.add_host_keys
-    New-ParamCompleter -ShortName s -Description $msg.allowed_signers -Type File -VariableName 'ca_key'
+    New-ParamCompleter -ShortName s -Description $msg.allowed_signers -ArgumentType File -VariableName 'ca_key'
     New-ParamCompleter -ShortName U -Description $msg.find_principal
     New-ParamCompleter -ShortName Z -Description $msg.matching_principal -VariableName 'principal'
     New-ParamCompleter -ShortName w -Description $msg.namespace -VariableName 'provider'
     New-ParamCompleter -ShortName r -Description $msg.print_revoked
     New-ParamCompleter -ShortName g -Description $msg.attestation -Arguments "verify-required"
-    New-ParamCompleter -ShortName o -Description $msg.output_file -Type File -VariableName 'filename'
+    New-ParamCompleter -ShortName o -Description $msg.output_file -ArgumentType File -VariableName 'filename'
 ) -ArgumentCompleter {
     param([int] $position, [int] $argIndex)
     [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {

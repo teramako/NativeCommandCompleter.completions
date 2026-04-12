@@ -32,18 +32,18 @@ Register-NativeCompleter -Name ansible-inventory -Description $msg.ansible_inven
     New-ParamCompleter -LongName graph -Description $msg.graph
     New-ParamCompleter -LongName host -Description $msg.host -VariableName 'HOST'
     New-ParamCompleter -LongName list -Description $msg.list
-    New-ParamCompleter -LongName output -Description $msg.output -Type File -VariableName 'OUTPUT_FILE'
-    New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -Type Directory -VariableName 'BASEDIR'
+    New-ParamCompleter -LongName output -Description $msg.output -ArgumentType File -VariableName 'OUTPUT_FILE'
+    New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -ArgumentType Directory -VariableName 'BASEDIR'
     New-ParamCompleter -LongName vars -Description $msg.vars
     New-ParamCompleter -LongName toml -Description $msg.toml
     New-ParamCompleter -LongName yaml -Description $msg.yaml
     New-ParamCompleter -LongName vault-id -Description $msg.vault_id -VariableName 'VAULT_ID'
-    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -Type File -VariableName 'VAULT_PASSWORD_FILE'
+    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -ArgumentType File -VariableName 'VAULT_PASSWORD_FILE'
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -ShortName J -LongName ask-vault-password, ask-vault-pass -Description $msg.ask_vault_password
     New-ParamCompleter -ShortName e -LongName extra-vars -Description $msg.extra_vars -VariableName 'EXTRA_VARS'
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName i -LongName inventory, inventory-file -Description $msg.inventory -Type File -VariableName 'INVENTORY'
+    New-ParamCompleter -ShortName i -LongName inventory, inventory-file -Description $msg.inventory -ArgumentType File -VariableName 'INVENTORY'
     New-ParamCompleter -ShortName l -LongName limit -Description $msg.limit -VariableName 'SUBSET'
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
 ) -NoFileCompletions

@@ -102,7 +102,7 @@ Register-NativeCompleter -Name tcpdump -Description $msg.tcpdump -Parameters @(
     New-ParamCompleter -ShortName e -Description $msg.printLinkLevelHeader
     New-ParamCompleter -ShortName E -Description $msg.setIPsecDecryptOption -VariableName 'algo:secret'
     New-ParamCompleter -ShortName f -Description $msg.printIPv4AsNumeric
-    New-ParamCompleter -ShortName F -Description $msg.filterFile -Type File -VariableName 'file'
+    New-ParamCompleter -ShortName F -Description $msg.filterFile -ArgumentType File -VariableName 'file'
     New-ParamCompleter -ShortName G -Description $msg.rotateSeconds -VariableName 'rotate_seconds'
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
@@ -128,7 +128,7 @@ Register-NativeCompleter -Name tcpdump -Description $msg.tcpdump -Parameters @(
     New-ParamCompleter -LongName print -Description $msg.print
     New-ParamCompleter -ShortName Q -Description $msg.direction -Arguments "in","out","inout" -VariableName 'direction'
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName r -Description $msg.readFile -Type File -VariableName 'file'
+    New-ParamCompleter -ShortName r -Description $msg.readFile -ArgumentType File -VariableName 'file'
     New-ParamCompleter -ShortName S -LongName absolute-tcp-sequence-numbers -Description $msg.absoluteSequence
     New-ParamCompleter -ShortName s -LongName snapshot-length -Description $msg.snapshotLength -VariableName 'snaplen'
     New-ParamCompleter -ShortName T -Description $msg.type -VariableName 'type' -Arguments "vat","rtp","rtcp","cnfp","wb","aodv"
@@ -142,8 +142,8 @@ Register-NativeCompleter -Name tcpdump -Description $msg.tcpdump -Parameters @(
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -Name vv -Description $msg.verbose2
     New-ParamCompleter -Name vvv -Description $msg.verbose3
-    New-ParamCompleter -ShortName V -Description $msg.readListOfFilenames -Type File -VariableName 'file'
-    New-ParamCompleter -ShortName w -Description $msg.writeFile -Type File -VariableName 'file'
+    New-ParamCompleter -ShortName V -Description $msg.readListOfFilenames -ArgumentType File -VariableName 'file'
+    New-ParamCompleter -ShortName w -Description $msg.writeFile -ArgumentType File -VariableName 'file'
     New-ParamCompleter -ShortName W -Description $msg.filecount -VariableName 'filecount'
     New-ParamCompleter -ShortName x -Description $msg.hexDump
     New-ParamCompleter -Name xx -Description $msg.hexDump2

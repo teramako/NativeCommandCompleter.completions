@@ -44,9 +44,9 @@ Register-NativeCompleter -Name findstr -Description $msg.findstr -Style Windows 
     New-ParamCompleter -Name P -Description $msg.skip_binary
     New-ParamCompleter -Name OFF,OFFLINE -Description $msg.offline
     New-ParamCompleter -Name A -Description $msg.color -VariableName 'color'
-    New-ParamCompleter -Name F -Description $msg.file_list -Type File -VariableName 'file'
+    New-ParamCompleter -Name F -Description $msg.file_list -ArgumentType File -VariableName 'file'
     New-ParamCompleter -Name C -Description $msg.string -VariableName 'string'
-    New-ParamCompleter -Name G -Description $msg.strings_file -Type File -VariableName 'file'
+    New-ParamCompleter -Name G -Description $msg.strings_file -ArgumentType File -VariableName 'file'
     New-ParamCompleter -Name D -Description $msg.dir_list -VariableName 'dir_list'
     New-ParamCompleter -Name ? -Description $msg.help
 ) -ArgumentCompleter {

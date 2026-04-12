@@ -304,8 +304,8 @@ $terminalFeatures = @(
 
 $formatParam = New-ParamCompleter -ShortName F -Description $msg.format -VariableName 'format'
 $filterParam = New-ParamCompleter -ShortName f -Description $msg.filter -Type Required
-$startingDirectoryParam_c = New-ParamCompleter -ShortName c -Description $msg.startingDirectory -Type Directory -VariableName 'start-directory'
-$startingDirectoryParam_d = New-ParamCompleter -ShortName d -Description $msg.startingDirectory -Type Directory -VariableName 'start-directory'
+$startingDirectoryParam_c = New-ParamCompleter -ShortName c -Description $msg.startingDirectory -ArgumentType Directory -VariableName 'start-directory'
+$startingDirectoryParam_d = New-ParamCompleter -ShortName d -Description $msg.startingDirectory -ArgumentType Directory -VariableName 'start-directory'
 $setEnvironmentParam = New-ParamCompleter -ShortName e -Description $msg._setEnvironment -VariableName 'VARIABLE=name'
 $targetClientParam = New-ParamCompleter -ShortName t -Description $msg.targetClient -VariableName 'target-client' -ArgumentCompleter $clientCompleter
 $targetClientParam_c = New-ParamCompleter -ShortName c -Description $msg.targetClient -VariableName 'target-client' -ArgumentCompleter $clientCompleter
@@ -321,12 +321,12 @@ Register-NativeCompleter -Name tmux -Parameters @(
     New-ParamCompleter -ShortName C -Description $msg.tmux_control
     New-ParamCompleter -ShortName c -Description $msg.tmux_command -VariableName 'shell-command'
     New-ParamCompleter -ShortName D -Description $msg.tmux_noDaemon
-    New-ParamCompleter -ShortName f -Description $msg.tmux_configFile -Type File -VariableName 'file'
+    New-ParamCompleter -ShortName f -Description $msg.tmux_configFile -ArgumentType File -VariableName 'file'
     New-ParamCompleter -ShortName L -Description $msg.tmux_socketName -VariableName 'socket-name'
     New-ParamCompleter -ShortName l -Description $msg.tmux_loginShell
     New-ParamCompleter -ShortName N -Description $msg.tmux_noServer
-    New-ParamCompleter -ShortName S -Description $msg.tmux_socketPath -Type Directory -VariableName 'socket-path'
-    New-ParamCompleter -ShortName T -Description $msg.tmux_terminalFeatures -Type List -Arguments $terminalFeatures
+    New-ParamCompleter -ShortName S -Description $msg.tmux_socketPath -ArgumentType Directory -VariableName 'socket-path'
+    New-ParamCompleter -ShortName T -Description $msg.tmux_terminalFeatures -ArgumentType List -Arguments $terminalFeatures
     New-ParamCompleter -ShortName u -Description $msg.tmux_utf8
     New-ParamCompleter -ShortName V -Description $msg.tmux_version
     New-ParamCompleter -ShortName v -Description $msg.tmux_verbose
@@ -339,7 +339,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
     New-CommandCompleter -Name attach-session -Aliases attach -Description $msg.attachSession -Parameters @(
         New-ParamCompleter -ShortName d -Description $msg.attachSession_detach
         New-ParamCompleter -ShortName x -Description $msg.attachSession_sendSIGHUP
-        New-ParamCompleter -ShortName f -Description $msg.attachSession_flags -Type List -Arguments @(
+        New-ParamCompleter -ShortName f -Description $msg.attachSession_flags -ArgumentType List -Arguments @(
             "active-pane"
             "ignore-size"
             "no-output"
@@ -405,7 +405,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName P -Description $msg.newSession_printInfo
         $startingDirectoryParam_c
         $setEnvironmentParam
-        New-ParamCompleter -ShortName f -Description $msg.newSession_flags -Type List
+        New-ParamCompleter -ShortName f -Description $msg.newSession_flags -ArgumentType List
         New-ParamCompleter -ShortName F -Description $msg.format
         New-ParamCompleter -ShortName n -Description $msg.newSession_windowName -Type Required
         New-ParamCompleter -ShortName s -Description $msg.newSession_sessionName -Type Required
@@ -779,8 +779,8 @@ Register-NativeCompleter -Name tmux -Parameters @(
 
     # command-prompt
     New-CommandCompleter -Name command-prompt -Description $msg.commandPrompt -Parameters @(
-        New-ParamCompleter -ShortName I -Description $msg.commandPrompt_input -Type List -VariableName "inputs"
-        New-ParamCompleter -ShortName p -Description $msg.commandPrompt_prompt -Type List -VariableName "prompts"
+        New-ParamCompleter -ShortName I -Description $msg.commandPrompt_input -ArgumentType List -VariableName "inputs"
+        New-ParamCompleter -ShortName p -Description $msg.commandPrompt_prompt -ArgumentType List -VariableName "prompts"
         $targetClientParam
         $promptTypeParam
     ) -NoFileCompletions

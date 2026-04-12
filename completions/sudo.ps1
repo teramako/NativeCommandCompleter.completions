@@ -47,7 +47,7 @@ if ($IsWindows)
     $runNewWindowParam = New-ParamCompleter -ShortName N -LongName new-window -Description $msg.win_Run_NewWindow
     $runDisableInputParam = New-ParamCompleter -LongName disable-input -Description $msg.win_Run_DisableInput
     $runInlineParam = New-ParamCompleter -LongName inline -Description $msg.win_Run_Inline
-    $runChdirParam = New-ParamCompleter -ShortName D -LongName chdir -Description $msg.win_Run_Chdir -Type Directory
+    $runChdirParam = New-ParamCompleter -ShortName D -LongName chdir -Description $msg.win_Run_Chdir -ArgumentType Directory
 
     Register-NativeCompleter -Name sudo -Description 'Sudo for Windows' -DelegateArgumentIndex 0 -SubCommands @(
         New-CommandCompleter -Name run -Description $msg.win_Run -DelegateArgumentIndex 0 -Parameters @(
@@ -81,7 +81,7 @@ else
         New-ParamCompleter -ShortName P -Description $msg.gnu_preserve_groups
         New-ParamCompleter -ShortName S -Description $msg.gnu_stdin
         New-ParamCompleter -ShortName b -Description $msg.gnu_background
-        New-ParamCompleter -ShortName e -Description $msg.gnu_edit -Type File
+        New-ParamCompleter -ShortName e -Description $msg.gnu_edit -ArgumentType File
         New-ParamCompleter -ShortName g -Description $msg.gnu_group -ArgumentCompleter {
             Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
                 Where-Object Name -Like "$wordToComplete*" |

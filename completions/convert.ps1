@@ -294,14 +294,14 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName brightness-contrast -Description $msg.brightness_contrast -VariableName 'geometry'
     New-ParamCompleter -LongName cache -Description $msg.cache -VariableName 'threshold'
     New-ParamCompleter -LongName caption -Description $msg.caption -VariableName 'string'
-    New-ParamCompleter -LongName cdl -Description $msg.cdl -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName cdl -Description $msg.cdl -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName channel -Description $msg.channel -Arguments "red","green","blue","alpha","gray","cyan","magenta","yellow","black","opacity","index","RGB","RGBA","CMYK","CMYKA" -VariableName 'type'
     New-ParamCompleter -LongName charcoal -Description $msg.charcoal -Type FlagOrValue -VariableName 'radius'
     New-ParamCompleter -LongName chop -Description $msg.chop -VariableName 'geometry'
     New-ParamCompleter -LongName clamp -Description $msg.clamp
     New-ParamCompleter -LongName clahe -Description $msg.clahe -VariableName 'geometry'
     New-ParamCompleter -LongName clip -Description $msg.clip
-    New-ParamCompleter -LongName clip-mask -Description $msg.clip_mask -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName clip-mask -Description $msg.clip_mask -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName clip-path -Description $msg.clip_path -VariableName 'id'
     New-ParamCompleter -LongName clone -Description $msg.clone -VariableName 'index'
     New-ParamCompleter -LongName clut -Description $msg.clut
@@ -325,7 +325,7 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName copy -Description $msg.copy -VariableName 'geometry offset'
     New-ParamCompleter -LongName crop -Description $msg.crop -VariableName 'geometry'
     New-ParamCompleter -LongName cycle -Description $msg.cycle -VariableName 'amount'
-    New-ParamCompleter -LongName decipher -Description $msg.decipher -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName decipher -Description $msg.decipher -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName debug -Description $msg.debug -Arguments "All","Annotate","Blob","Cache","Coder","Configure","Deprecate","Draw","Exception","Locale","Module","Pixel","Resource","Trace","Transform","User","Wand","X11" -VariableName 'events'
     New-ParamCompleter -LongName define -Description $msg.define -VariableName 'format:option'
     New-ParamCompleter -LongName deconstruct -Description $msg.deconstruct
@@ -344,7 +344,7 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName duplicate -Description $msg.duplicate -VariableName 'count,indexes'
     New-ParamCompleter -LongName edge -Description $msg.edge -Type FlagOrValue -VariableName 'radius'
     New-ParamCompleter -LongName emboss -Description $msg.emboss -Type FlagOrValue -VariableName 'radius'
-    New-ParamCompleter -LongName encipher -Description $msg.encipher -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName encipher -Description $msg.encipher -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName encoding -Description $msg.encoding -VariableName 'type'
     New-ParamCompleter -LongName endian -Description $msg.endian -Arguments "MSB","LSB" -VariableName 'type'
     New-ParamCompleter -LongName enhance -Description $msg.enhance
@@ -407,7 +407,7 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName loop -Description $msg.loop -VariableName 'iterations'
     New-ParamCompleter -LongName lowlight-color -Description $msg.lowlight_color -VariableName 'color'
     New-ParamCompleter -LongName magnify -Description $msg.magnify
-    New-ParamCompleter -LongName map -Description $msg.map -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName map -Description $msg.map -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName mattecolor -Description $msg.mattecolor -VariableName 'color'
     New-ParamCompleter -LongName median -Description $msg.median -VariableName 'geometry'
     New-ParamCompleter -LongName mean-shift -Description $msg.mean_shift -VariableName 'geometry'
@@ -428,7 +428,7 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName orient -Description $msg.orient -Arguments "TopLeft","TopRight","BottomRight","BottomLeft","LeftTop","RightTop","RightBottom","LeftBottom" -VariableName 'type'
     New-ParamCompleter -LongName page -Description $msg.page -VariableName 'geometry'
     New-ParamCompleter -LongName paint -Description $msg.paint -VariableName 'radius'
-    New-ParamCompleter -LongName path -Description $msg.path -Type Directory -VariableName 'path'
+    New-ParamCompleter -LongName path -Description $msg.path -ArgumentType Directory -VariableName 'path'
     New-ParamCompleter -LongName perceptible -Description $msg.perceptible -VariableName 'epsilon'
     New-ParamCompleter -LongName ping -Description $msg.ping
     New-ParamCompleter -LongName pointsize -Description $msg.pointsize -VariableName 'value'
@@ -438,8 +438,8 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName precision -Description $msg.precision -VariableName 'value'
     New-ParamCompleter -LongName preview -Description $msg.preview -Arguments "Rotate","Shear","Roll","Hue","Saturation","Brightness","Gamma","Spiff","Dull","Grayscale","Quantize","Despeckle","ReduceNoise","AddNoise","Sharpen","Blur","Threshold","EdgeDetect","Spread","Solarize","Shade","Raise","Segment","Swirl","Implode","Wave","OilPaint","CharcoalDrawing","JPEG" -VariableName 'type'
     New-ParamCompleter -LongName print -Description $msg.print -VariableName 'string'
-    New-ParamCompleter -LongName process -Description $msg.process -Type File -VariableName 'image-filter'
-    New-ParamCompleter -LongName profile -Description $msg.profile -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName process -Description $msg.process -ArgumentType File -VariableName 'image-filter'
+    New-ParamCompleter -LongName profile -Description $msg.profile -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName quality -Description $msg.quality -VariableName 'value'
     New-ParamCompleter -LongName quantize -Description $msg.quantize -VariableName 'colorspace'
     New-ParamCompleter -LongName quiet -Description $msg.quiet
@@ -450,7 +450,7 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName red-primary -Description $msg.red_primary -VariableName 'point'
     New-ParamCompleter -LongName regard-warnings -Description $msg.regard_warnings
     New-ParamCompleter -LongName region -Description $msg.region -VariableName 'geometry'
-    New-ParamCompleter -LongName remap -Description $msg.remap -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName remap -Description $msg.remap -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName render -Description $msg.render
     New-ParamCompleter -LongName repage -Description $msg.repage -VariableName 'geometry'
     New-ParamCompleter -LongName resample -Description $msg.resample -VariableName 'geometry'
@@ -495,10 +495,10 @@ Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName swirl -Description $msg.swirl -VariableName 'degrees'
     New-ParamCompleter -LongName synchronize -Description $msg.synchronize
     New-ParamCompleter -LongName taint -Description $msg.taint
-    New-ParamCompleter -LongName texture -Description $msg.texture -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName texture -Description $msg.texture -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName threshold -Description $msg.threshold -VariableName 'value'
     New-ParamCompleter -LongName thumbnail -Description $msg.thumbnail -VariableName 'geometry'
-    New-ParamCompleter -LongName tile -Description $msg.tile -Type File -VariableName 'filename'
+    New-ParamCompleter -LongName tile -Description $msg.tile -ArgumentType File -VariableName 'filename'
     New-ParamCompleter -LongName tile-offset -Description $msg.tile_offset -VariableName 'geometry'
     New-ParamCompleter -LongName tint -Description $msg.tint -VariableName 'value'
     New-ParamCompleter -LongName transform -Description $msg.transform

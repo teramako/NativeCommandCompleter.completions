@@ -64,7 +64,7 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -LongName bs -Description $msg.bs -Style $kvStyle -VariableName 'BYTES'
     New-ParamCompleter -LongName cbs -Description $msg.cbs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName conv -Description $msg.conv -Style $kvStyle -Type List -VariableName 'CONVS' -Arguments @(
+    New-ParamCompleter -LongName conv -Description $msg.conv -Style $kvStyle -ArgumentType List -VariableName 'CONVS' -Arguments @(
         "ascii`t{0}" -f $msg.conv_ascii
         "ebcdic`t{0}" -f $msg.conv_ebcdic
         "ibm`t{0}" -f $msg.conv_ibm
@@ -84,8 +84,8 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
     )
     New-ParamCompleter -LongName count -Description $msg.count -Style $kvStyle -VariableName 'N'
     New-ParamCompleter -LongName ibs -Description $msg.ibs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName if -Description $msg.if -Style $kvStyle -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName iflag -Description $msg.iflag -Style $kvStyle -Type List -VariableName 'FLAGS' -Arguments @(
+    New-ParamCompleter -LongName if -Description $msg.if -Style $kvStyle -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -LongName iflag -Description $msg.iflag -Style $kvStyle -ArgumentType List -VariableName 'FLAGS' -Arguments @(
         "append`t{0}" -f $msg.flag_append
         "direct`t{0}" -f $msg.flag_direct
         "directory`t{0}" -f $msg.flag_directory
@@ -101,8 +101,8 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "skip_bytes`t{0}" -f $msg.flag_skip_bytes
     )
     New-ParamCompleter -LongName obs -Description $msg.obs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName of -Description $msg.of -Style $kvStyle -Type File -VariableName 'FILE'
-    New-ParamCompleter -LongName oflag -Description $msg.oflag -Style $kvStyle -Type List -VariableName 'FLAGS' -Arguments @(
+    New-ParamCompleter -LongName of -Description $msg.of -Style $kvStyle -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -LongName oflag -Description $msg.oflag -Style $kvStyle -ArgumentType List -VariableName 'FLAGS' -Arguments @(
         "append`t{0}" -f $msg.flag_append
         "direct`t{0}" -f $msg.flag_direct
         "directory`t{0}" -f $msg.flag_directory

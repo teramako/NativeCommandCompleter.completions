@@ -250,7 +250,7 @@ $refCompleter = {
 Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -ShortName v -LongName version -Description $msg._version
     New-ParamCompleter -ShortName h -LongName help -Description $msg._help
-    New-ParamCompleter -ShortName C -Description $msg._changeCurrentDir -Type Directory -VariableName 'path'
+    New-ParamCompleter -ShortName C -Description $msg._changeCurrentDir -ArgumentType Directory -VariableName 'path'
     New-ParamCompleter -ShortName c -Description $msg._configParam -VariableName 'name=value'
     New-ParamCompleter -LongName config-env -Description $msg._configEnv -VariableName 'name=envvar'
     New-ParamCompleter -LongName exec-path -Description $msg._execPath -Type FlagOrValue
@@ -259,8 +259,8 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -LongName info-path -Description $msg._infoPath
     New-ParamCompleter -ShortName p -LongName paginate -Description $msg._paginate
     New-ParamCompleter -ShortName P -LongName no-pager -Description $msg._noPager
-    New-ParamCompleter -LongName git-dir -Description $msg._gitDir -Type Directory -VariableName 'path'
-    New-ParamCompleter -LongName work-tree -Description $msg._workTree -Type Directory -VariableName 'path'
+    New-ParamCompleter -LongName git-dir -Description $msg._gitDir -ArgumentType Directory -VariableName 'path'
+    New-ParamCompleter -LongName work-tree -Description $msg._workTree -ArgumentType Directory -VariableName 'path'
     New-ParamCompleter -LongName namespace -Description $msg._namespace -VariableName 'namespace'
     New-ParamCompleter -LongName bare -Description $msg._bare
     New-ParamCompleter -LongName no-replace-objects -Description $msg._noReplaceObjects

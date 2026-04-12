@@ -62,7 +62,7 @@ Register-NativeCompleter -Name ansible-doc -Parameters @(
     New-ParamCompleter -LongName metadata-dump -Description $msg.metadata_dump
     New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -VariableName 'MODULE_PATH'
     New-ParamCompleter -LongName no-native-async -Description $msg.no_native_async
-    New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -Type Directory -VariableName 'BASEDIR'
+    New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -ArgumentType Directory -VariableName 'BASEDIR'
     New-ParamCompleter -ShortName r -LongName rotate-pages -Description $msg.rotate_pages
     New-ParamCompleter -ShortName s -LongName snippet -Description $msg.snippet
     New-ParamCompleter -ShortName t -LongName type -Description $msg.type -Arguments $pluginTypes -VariableName 'TARGET'

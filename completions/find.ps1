@@ -126,10 +126,10 @@ Register-NativeCompleter -Name find -Description $msg.find -Style Unix -Paramete
 
     # Tests
     New-ParamCompleter -Name amin -Description $msg.amin -VariableName 'N'
-    New-ParamCompleter -Name anewer -Description $msg.anewer -Type File -VariableName 'FILE'
+    New-ParamCompleter -Name anewer -Description $msg.anewer -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -Name atime -Description $msg.atime -VariableName 'N'
     New-ParamCompleter -Name cmin -Description $msg.cmin -VariableName 'N'
-    New-ParamCompleter -Name cnewer -Description $msg.cnewer -Type File -VariableName 'FILE'
+    New-ParamCompleter -Name cnewer -Description $msg.cnewer -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -Name ctime -Description $msg.ctime -VariableName 'N'
     New-ParamCompleter -Name empty -Description $msg.empty
     New-ParamCompleter -Name executable -Description $msg.executable
@@ -148,7 +148,7 @@ Register-NativeCompleter -Name find -Description $msg.find -Style Unix -Paramete
     New-ParamCompleter -Name mmin -Description $msg.mmin -VariableName 'N'
     New-ParamCompleter -Name mtime -Description $msg.mtime -VariableName 'N'
     New-ParamCompleter -Name name -Description $msg.name -VariableName 'PATTERN'
-    New-ParamCompleter -Name newer -Description $msg.newer -Type File -VariableName 'FILE'
+    New-ParamCompleter -Name newer -Description $msg.newer -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -Name newerXY -Description $msg.newerXY -VariableName 'REFERENCE'
     New-ParamCompleter -Name nogroup -Description $msg.nogroup
     New-ParamCompleter -Name nouser -Description $msg.nouser
@@ -157,7 +157,7 @@ Register-NativeCompleter -Name find -Description $msg.find -Style Unix -Paramete
     New-ParamCompleter -Name readable -Description $msg.readable
     New-ParamCompleter -Name regex -Description $msg.regex -VariableName 'PATTERN'
     New-ParamCompleter -Name regextype -Description $msg.regextype -Arguments "emacs","posix-awk","posix-basic","posix-egrep","posix-extended" -VariableName 'TYPE'
-    New-ParamCompleter -Name samefile -Description $msg.samefile -Type File -VariableName 'NAME'
+    New-ParamCompleter -Name samefile -Description $msg.samefile -ArgumentType File -VariableName 'NAME'
     New-ParamCompleter -Name size -Description $msg.size -VariableName 'N'
     New-ParamCompleter -Name true -Description $msg.true
     New-ParamCompleter -Name type -Description $msg.type -Arguments $typeArguments -VariableName 'C'
@@ -173,9 +173,9 @@ Register-NativeCompleter -Name find -Description $msg.find -Style Unix -Paramete
     New-ParamCompleter -Name delete -Description $msg.delete
     New-ParamCompleter -Name exec -Description $msg.exec -VariableName 'COMMAND ;'
     New-ParamCompleter -Name execdir -Description $msg.execdir -VariableName 'COMMAND ;'
-    New-ParamCompleter -Name fls -Description $msg.fls -Type File -VariableName 'FILE'
-    New-ParamCompleter -Name fprint -Description $msg.fprint -Type File -VariableName 'FILE'
-    New-ParamCompleter -Name fprint0 -Description $msg.fprint0 -Type File -VariableName 'FILE'
+    New-ParamCompleter -Name fls -Description $msg.fls -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -Name fprint -Description $msg.fprint -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -Name fprint0 -Description $msg.fprint0 -ArgumentType File -VariableName 'FILE'
     New-ParamCompleter -Name fprintf -Description $msg.fprintf -VariableName 'FILE FORMAT'
     New-ParamCompleter -Name ls -Description $msg.ls
     New-ParamCompleter -Name ok -Description $msg.ok -VariableName 'COMMAND ;'

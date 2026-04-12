@@ -55,11 +55,11 @@ Register-NativeCompleter -Name jq -Description $msg.jq -Parameters @(
     New-ParamCompleter -LongName unbuffered -Description $msg.unbuffered
     New-ParamCompleter -LongName stream -Description $msg.stream
     New-ParamCompleter -LongName seq -Description $msg.seq
-    New-ParamCompleter -ShortName f -LongName from-file -Description $msg.from_file -Type File -VariableName 'file'
+    New-ParamCompleter -ShortName f -LongName from-file -Description $msg.from_file -ArgumentType File -VariableName 'file'
     New-ParamCompleter -LongName arg -Description $msg.arg -VariableName 'name value'
     New-ParamCompleter -LongName argjson -Description $msg.argjson -VariableName 'name JSON'
-    New-ParamCompleter -LongName slurpfile -Description $msg.slurpfile -Type File -VariableName 'name file'
-    New-ParamCompleter -LongName rawfile -Description $msg.rawfile -Type File -VariableName 'name file'
+    New-ParamCompleter -LongName slurpfile -Description $msg.slurpfile -ArgumentType File -VariableName 'name file'
+    New-ParamCompleter -LongName rawfile -Description $msg.rawfile -ArgumentType File -VariableName 'name file'
     New-ParamCompleter -LongName args -Description $msg.args
     New-ParamCompleter -LongName jsonargs -Description $msg.jsonargs
     New-ParamCompleter -ShortName e -LongName exit-status -Description $msg.exit_status

@@ -66,19 +66,19 @@ Register-NativeCompleter -Name usermod -Description $msg.usermod -Parameters @(
     New-ParamCompleter -ShortName a -LongName append -Description $msg.append
     New-ParamCompleter -LongName badname -Description $msg.badname
     New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -VariableName 'COMMENT'
-    New-ParamCompleter -ShortName d -LongName home -Description $msg.home -Type Directory -VariableName 'HOME_DIR'
+    New-ParamCompleter -ShortName d -LongName home -Description $msg.home -ArgumentType Directory -VariableName 'HOME_DIR'
     New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -VariableName 'EXPIRE_DATE'
     New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -VariableName 'INACTIVE'
     New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GROUP' -ArgumentCompleter $groupCompleter
-    New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -Type List -VariableName 'GROUPS' -ArgumentCompleter $groupCompleter
+    New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -ArgumentType List -VariableName 'GROUPS' -ArgumentCompleter $groupCompleter
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName l -LongName login -Description $msg.login -VariableName 'NEW_LOGIN'
     New-ParamCompleter -ShortName L -LongName lock -Description $msg.lock
     New-ParamCompleter -ShortName m -LongName move-home -Description $msg.move_home
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
     New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Type Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Type Directory -VariableName 'PREFIX_DIR'
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'CHROOT_DIR'
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
     New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -VariableName 'SHELL'
     New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -VariableName 'UID'
     New-ParamCompleter -ShortName U -LongName unlock -Description $msg.unlock
