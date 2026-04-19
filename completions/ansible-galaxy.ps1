@@ -86,26 +86,26 @@ $signatureStatusCodes = 'EXPSIG','EXPKEYSIG','REVKEYSIG','BADSIG','ERRSIG','NO_P
 $helpParam                = New-ParamCompleter -ShortName h -LongName help -Description $msg.help
 $versionParam             = New-ParamCompleter -LongName version -Description $msg.version
 $verboseParam             = New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-$apiKeyParam              = New-ParamCompleter -LongName api-key, token -Description $msg.api_key -VariableName 'API_KEY'
+$apiKeyParam              = New-ParamCompleter -LongName api-key, token -Description $msg.api_key -Arguments @{ Name = 'API_KEY' }
 $ignoreCertsParam         = New-ParamCompleter -ShortName c -LongName ignore-certs -Description $msg.ignore_certs
-$timeoutParam             = New-ParamCompleter -LongName timeout -Description $msg.timeout -VariableName 'TIMEOUT'
-$serverParam              = New-ParamCompleter -ShortName s -LongName server -Description $msg.server -VariableName 'SERVER'
+$timeoutParam             = New-ParamCompleter -LongName timeout -Description $msg.timeout -Arguments @{ Name = 'TIMEOUT' }
+$serverParam              = New-ParamCompleter -ShortName s -LongName server -Description $msg.server -Arguments @{ Name = 'SERVER' }
 
 $noCacheParam             = New-ParamCompleter -LongName no-cache -Description $msg.no_cache
-$ignoreSignatureParam     = New-ParamCompleter -LongName ignore-signature-status-code -Description $msg.ignore_signature_status_code -Arguments $signatureStatusCodes -VariableName 'IGNORE_STATUS_CODE'
-$ignoreSignaturesParam    = New-ParamCompleter -LongName ignore-signature-status-codes -Description $msg.ignore_signature_status_code -Arguments $signatureStatusCodes -VariableName 'IGNORE_STATUS_CODE'
-$keyringParam             = New-ParamCompleter -LongName keyring -Description $msg.collection_keyring -ArgumentType File -VariableName 'KEYRING'
+$ignoreSignatureParam     = New-ParamCompleter -LongName ignore-signature-status-code  -Description $msg.ignore_signature_status_code -Arguments @{ Name = 'IGNORE_STATUS_CODE'; Candidates = $signatureStatusCodes }
+$ignoreSignaturesParam    = New-ParamCompleter -LongName ignore-signature-status-codes -Description $msg.ignore_signature_status_code -Arguments @{ Name = 'IGNORE_STATUS_CODE'; Candidates = $signatureStatusCodes }
+$keyringParam             = New-ParamCompleter -LongName keyring -Description $msg.collection_keyring -Arguments @{ Name = 'KEYRING'; Type = 'File' }
 $offlineParam             = New-ParamCompleter -LongName offline -Description $msg.offline
-$requiredValidSignatureCountParam = New-ParamCompleter -LongName required-valid-signature-count -Description $msg.required_valid_signature_count -VariableName 'REQUIRED_VALID_SIGNATURE_COUNT'
-$signatureParam           = New-ParamCompleter -LongName signature -Description $msg.signature -VariableName 'SIGNATURES'
+$requiredValidSignatureCountParam = New-ParamCompleter -LongName required-valid-signature-count -Description $msg.required_valid_signature_count -Arguments @{ Name = 'REQUIRED_VALID_SIGNATURE_COUNT' }
+$signatureParam           = New-ParamCompleter -LongName signature -Description $msg.signature -Arguments @{ Name = 'SIGNATURES' }
 $forceWithDepsParam       = New-ParamCompleter -LongName force-with-deps -Description $msg.force_with_deps
 $clearResponseCacheParam  = New-ParamCompleter -LongName clear-response-cache -Description $msg.clear_response_cache
 $forceParam               = New-ParamCompleter -ShortName f -LongName force -Description $msg.force
 $ignoreErrorsParam        = New-ParamCompleter -ShortName i -LongName ignore-errors -Description $msg.ignore_errors
 $noDepsParam              = New-ParamCompleter -ShortName n -LongName no-deps -Description $msg.no_deps
 $preParam                 = New-ParamCompleter -LongName pre -Description $msg.pre
-$requirementsFileParam    = New-ParamCompleter -ShortName r -LongName requirements-file -Description $msg.collection_requirements_file -ArgumentType File -VariableName 'REQUIREMENTS'
-$rolesPathParam           = New-ParamCompleter -ShortName p -LongName roles-path -Description $msg.roles_path -ArgumentType Directory -VariableName 'ROLES_PATH'
+$requirementsFileParam    = New-ParamCompleter -ShortName r -LongName requirements-file -Description $msg.collection_requirements_file -Arguments @{ Name = 'REQUIREMENTS'; Type = 'File' }
+$rolesPathParam           = New-ParamCompleter -ShortName p -LongName roles-path -Description $msg.roles_path -Arguments @{ Name = 'ROLES_PATH'; Type = 'Directory' }
 
 $commonParams = @(
     $apiKeyParam
@@ -134,33 +134,36 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
             $preParam
             $timeoutParam
             $noDepsParam
-            New-ParamCompleter -ShortName p -LongName download-path -Description $msg.collection_download_output_path -ArgumentType Directory -VariableName 'DOWNLOAD_PATH'
+            New-ParamCompleter -ShortName p -LongName download-path -Description $msg.collection_download_output_path -Arguments @{ Name = 'DOWNLOAD_PATH'; Type = 'Directory' }
             $requirementsFileParam
             $commonParams
         )
 
         New-CommandCompleter -Name init -Description $msg.collection_init -Parameters @(
-            New-ParamCompleter -LongName collection-skeleton -Description $msg.collection_init_collection_skeleton -ArgumentType Directory -VariableName 'COLLECTION_SKELETON'
-            New-ParamCompleter -LongName init-path -Description $msg.collection_init_init_path -ArgumentType Directory -VariableName 'INIT_PATH'
+            New-ParamCompleter -LongName collection-skeleton -Description $msg.collection_init_collection_skeleton -Arguments @{ Name = 'COLLECTION_SKELETON'; Type = 'Directory' }
+            New-ParamCompleter -LongName init-path -Description $msg.collection_init_init_path -Arguments @{ Name = 'INIT_PATH'; Type = 'Directory' }
             New-ParamCompleter -ShortName f -LongName force -Description $msg.force
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name build -Description $msg.collection_build -Parameters @(
-            New-ParamCompleter -LongName output-path -Description $msg.collection_build_output_path -ArgumentType Directory -VariableName 'OUTPUT_PATH'
+            New-ParamCompleter -LongName output-path -Description $msg.collection_build_output_path -Arguments @{ Name = 'OUTPUT_PATH'; Type = 'Directory' }
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name publish -Description $msg.collection_publish -Parameters @(
-            New-ParamCompleter -LongName import-timeout -Description $msg.collection_publish_import_timeout -VariableName 'IMPORT_TIMEOUT'
+            New-ParamCompleter -LongName import-timeout -Description $msg.collection_publish_import_timeout -Arguments @{ Name = 'IMPORT_TIMEOUT' }
             New-ParamCompleter -LongName no-wait -Description $msg.collection_publish_no_wait
             $commonParams
-        ) -ArgumentCompleter {
-            param([int] $position, [int] $argIndex)
-            if ($argIndex -eq 0) {
-                [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-                    $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.tar\.gz$'
-                })
+        ) -Arguments @{
+            Name = 'collection_path';
+            Script = {
+                param([int] $position, [int] $argIndex)
+                if ($argIndex -eq 0) {
+                    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+                        $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.tar\.gz$'
+                    })
+                }
             }
         }
 
@@ -177,15 +180,15 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
             New-ParamCompleter -ShortName U -LongName upgrade -Description $msg.collection_install_upgrade
             New-ParamCompleter -ShortName f -LongName force -Description $msg.force
             $noDepsParam
-            New-ParamCompleter -ShortName p -LongName collections-path -Description $msg.collection_install_collections_path -ArgumentType Directory -VariableName 'COLLECTIONS_PATH'
+            New-ParamCompleter -ShortName p -LongName collections-path -Description $msg.collection_install_collections_path -Arguments @{ Name = 'COLLECTIONS_PATH'; Type = 'Directory' }
             $requirementsFileParam
             $preParam
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name list -Description $msg.collection_list -Parameters @(
-            New-ParamCompleter -LongName format -Description $msg.format -Arguments 'human','yaml','json' -VariableName 'FORMAT'
-            New-ParamCompleter -ShortName p -LongName collections-path -Description $msg.collection_list_collections_path -ArgumentType Directory -VariableName 'COLLECTIONS_PATH'
+            New-ParamCompleter -LongName format -Description $msg.format -Arguments @{ Name = 'FORMAT'; Candidates = 'human','yaml','json'; }
+            New-ParamCompleter -ShortName p -LongName collections-path -Description $msg.collection_list_collections_path -Arguments @{ Name = 'COLLECTIONS_PATH'; Type = 'Directory' }
             $commonParams
         ) -NoFileCompletions
 
@@ -196,7 +199,7 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
             $offlineParam
             $requiredValidSignatureCountParam
             $signatureParam
-            New-ParamCompleter -ShortName p -LongName collections-path -Description $msg.collection_verify_collections_path -ArgumentType Directory -VariableName 'COLLECTIONS_PATH'
+            New-ParamCompleter -ShortName p -LongName collections-path -Description $msg.collection_verify_collections_path -Arguments @{ Name = 'COLLECTIONS_PATH'; Type = 'Directory' }
             $requirementsFileParam
             $commonParams
         ) -NoFileCompletions
@@ -208,11 +211,11 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
     New-CommandCompleter -Name role -Description $msg.role -Parameters $helpParam -SubCommands @(
 
         New-CommandCompleter -Name init -Description $msg.role_init -Parameters @(
-            New-ParamCompleter -LongName init-path -Description $msg.role_init_init_path -ArgumentType Directory -VariableName 'INIT_PATH'
+            New-ParamCompleter -LongName init-path -Description $msg.role_init_init_path -Arguments @{ Name = 'INIT_PATH'; Type = 'Directory' }
             $offlineParam
-            New-ParamCompleter -LongName role-skeleton -Description $msg.role_init_role_skeleton -ArgumentType Directory -VariableName 'ROLE_SKELETON'
+            New-ParamCompleter -LongName role-skeleton -Description $msg.role_init_role_skeleton -Arguments @{ Name = 'ROLE_SKELETON'; Type = 'Directory' }
             $forceParam
-            New-ParamCompleter -LongName type -Description $msg.role_init_type -Arguments 'container','apb','network' -VariableName 'TYPE'
+            New-ParamCompleter -LongName type -Description $msg.role_init_type -Arguments @{ Name = 'TYPE'; Candidates = 'container','apb','network'; } 
             $commonParams
         ) -NoFileCompletions
 
@@ -229,23 +232,23 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
         ) -NoFileCompletions
 
         New-CommandCompleter -Name search -Description $msg.role_search -Parameters @(
-            New-ParamCompleter -LongName author -Description $msg.role_search_author -VariableName 'AUTHOR'
-            New-ParamCompleter -LongName galaxy-tags -Description $msg.role_search_galaxy_tags -ArgumentType List -VariableName 'GALAXY_TAGS'
-            New-ParamCompleter -LongName platforms -Description $msg.role_search_platforms -ArgumentType List -VariableName 'PLATFORMS'
+            New-ParamCompleter -LongName author -Description $msg.role_search_author -Arguments @{ Name = 'AUTHOR' }
+            New-ParamCompleter -LongName galaxy-tags -Description $msg.role_search_galaxy_tags -Arguments @{ Name = 'GALAXY_TAGS'; List = $true; }
+            New-ParamCompleter -LongName platforms -Description $msg.role_search_platforms -Arguments @{ Name = 'PLATFORMS'; List = $true; }
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name import -Description $msg.role_import -Parameters @(
-            New-ParamCompleter -LongName branch -Description $msg.role_import_branch -VariableName 'BRANCH'
+            New-ParamCompleter -LongName branch -Description $msg.role_import_branch -Arguments @{ Name = 'BRANCH' }
             New-ParamCompleter -LongName no-wait -Description $msg.role_import_no_wait
-            New-ParamCompleter -LongName role-name -Description $msg.role_import_role_name -VariableName 'ROLE_NAME'
+            New-ParamCompleter -LongName role-name -Description $msg.role_import_role_name -Arguments @{ Name = 'ROLE_NAME' }
             New-ParamCompleter -LongName status -Description "Check the status of the most recent import request"
             $commonParams
         ) -NoFileCompletions
 
         New-CommandCompleter -Name setup -Description $msg.role_setup -Parameters @(
             New-ParamCompleter -LongName list -Description "List all GitHub integrations"
-            New-ParamCompleter -LongName remove -Description "Remove a GitHub integration" -VariableName 'REMOVE_ID'
+            New-ParamCompleter -LongName remove -Description "Remove a GitHub integration" -Arguments @{ Name = 'REMOVE_ID' }
             $rolesPathParam
             $commonParams
         ) -NoFileCompletions
@@ -263,7 +266,7 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
             New-ParamCompleter -ShortName g -LongName keep-scm-meta -Description $msg.role_install_keep_scm_meta
             $noDepsParam
             $rolesPathParam
-            New-ParamCompleter -ShortName r -LongName role-file -Description $msg.role_install_requirements_file -ArgumentType File -VariableName 'ROLE_FILE'
+            New-ParamCompleter -ShortName r -LongName role-file -Description $msg.role_install_requirements_file -Arguments @{ Name = 'ROLE_FILE'; Type = 'File' }
             $commonParams
         ) -NoFileCompletions
     )
