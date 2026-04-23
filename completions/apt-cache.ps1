@@ -48,7 +48,7 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$packageCompleter = {
+$packageCompleter = New-ArgumentCompleter -Name pkg -Nargs '1+' -Script {
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return }
     $q = ".*${wordToComplete}.*"
     try {
@@ -77,26 +77,26 @@ $packageCompleter = {
 
 Register-NativeCompleter -Name apt-cache -Description $msg.apt_cache -SubCommands @(
     New-CommandCompleter -Name gencaches -Description $msg.gencaches -NoFileCompletions
-    New-CommandCompleter -Name showpkg -Description $msg.showpkg -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name showsrc -Description $msg.showsrc -NoFileCompletions -ArgumentCompleter $packageCompleter
+    New-CommandCompleter -Name showpkg -Description $msg.showpkg -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name showsrc -Description $msg.showsrc -NoFileCompletions -Arguments $packageCompleter
     New-CommandCompleter -Name stats -Description $msg.stats -NoFileCompletions
     New-CommandCompleter -Name dump -Description $msg.dump -NoFileCompletions
     New-CommandCompleter -Name dumpavail -Description $msg.dumpavail -NoFileCompletions
     New-CommandCompleter -Name unmet -Description $msg.unmet -NoFileCompletions
     New-CommandCompleter -Name search -Description $msg.search -NoFileCompletions
-    New-CommandCompleter -Name show -Description $msg.show -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name depends -Description $msg.depends -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name rdepends -Description $msg.rdepends -NoFileCompletions -ArgumentCompleter $packageCompleter
+    New-CommandCompleter -Name show -Description $msg.show -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name depends -Description $msg.depends -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name rdepends -Description $msg.rdepends -NoFileCompletions -Arguments $packageCompleter
     New-CommandCompleter -Name pkgnames -Description $msg.pkgnames -NoFileCompletions
-    New-CommandCompleter -Name dotty -Description $msg.dotty -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name xvcg -Description $msg.xvcg -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name policy -Description $msg.policy -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name madison -Description $msg.madison -NoFileCompletions -ArgumentCompleter $packageCompleter
+    New-CommandCompleter -Name dotty -Description $msg.dotty -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name xvcg -Description $msg.xvcg -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name policy -Description $msg.policy -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name madison -Description $msg.madison -NoFileCompletions -Arguments $packageCompleter
 ) -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
-    New-ParamCompleter -ShortName p -LongName pkg-cache -Description $msg.pkg_cache -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -ShortName s -LongName src-cache -Description $msg.src_cache -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -ShortName p -LongName pkg-cache -Description $msg.pkg_cache -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -ShortName s -LongName src-cache -Description $msg.src_cache -Arguments @{ Name = 'FILE'; Type = 'File' }
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName i -LongName important -Description $msg.important
     New-ParamCompleter -LongName no-pre-depends -Description $msg.no_pre_depends
@@ -114,6 +114,6 @@ Register-NativeCompleter -Name apt-cache -Description $msg.apt_cache -SubCommand
     New-ParamCompleter -LongName all-names -Description $msg.all_names
     New-ParamCompleter -LongName recurse -Description $msg.recurse
     New-ParamCompleter -LongName installed -Description $msg.installed
-    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPT=VAL'
+    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -Arguments @{ Name = 'OPT=VAL' }
 ) -NoFileCompletions
