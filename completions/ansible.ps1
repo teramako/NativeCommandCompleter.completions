@@ -77,65 +77,67 @@ Register-NativeCompleter -Name ansible -Description $msg.ansible -Parameters @(
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
 
     # Target
-    New-ParamCompleter -ShortName i -LongName inventory, inventory-file -Description $msg.inventory -ArgumentType File     -VariableName 'INVENTORY'
-    New-ParamCompleter -ShortName l -LongName limit, subset             -Description $msg.limit     -VariableName 'SUBSET'
+    New-ParamCompleter -ShortName i -LongName inventory, inventory-file -Description $msg.inventory -Arguments @{ Name = 'INVENTORY'; Type = 'File' }
+    New-ParamCompleter -ShortName l -LongName limit, subset             -Description $msg.limit     -Arguments @{ Name = 'SUBSET' }
     New-ParamCompleter -LongName list-hosts -Description $msg.list_hosts
 
     # Module
-    New-ParamCompleter -ShortName m -LongName module-name -Description $msg.module_name  -VariableName 'MODULE_NAME'
-    New-ParamCompleter -ShortName a -LongName args        -Description $msg.module_args  -VariableName 'MODULE_ARGS'
-    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -ArgumentType Directory -VariableName 'MODULE_PATH'
+    New-ParamCompleter -ShortName m -LongName module-name -Description $msg.module_name -Arguments @{ Name = 'MODULE_NAME' }
+    New-ParamCompleter -ShortName a -LongName args        -Description $msg.module_args -Arguments @{ Name = 'MODULE_ARGS' }
+    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -Arguments @{ Name = 'MODULE_PATH'; Type = 'Directory' }
 
     # Execution
-    New-ParamCompleter -ShortName e -LongName extra-vars -Description $msg.extra_vars   -VariableName 'EXTRA_VARS'
-    New-ParamCompleter -ShortName f -LongName forks      -Description $msg.forks        -VariableName 'NUM'
+    New-ParamCompleter -ShortName e -LongName extra-vars -Description $msg.extra_vars   -Arguments @{ Name = 'EXTRA_VARS' }
+    New-ParamCompleter -ShortName f -LongName forks      -Description $msg.forks        -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -ShortName C -LongName check      -Description $msg.check
     New-ParamCompleter -ShortName D -LongName diff       -Description $msg.diff
     New-ParamCompleter -ShortName o -LongName one-line   -Description $msg.one_line
-    New-ParamCompleter -ShortName t -LongName tree       -Description $msg.tree         -ArgumentType Directory -VariableName 'TREE'
-    New-ParamCompleter -LongName task-timeout            -Description $msg.task_timeout -VariableName 'TASK_TIMEOUT'
-    New-ParamCompleter -LongName playbook-dir            -Description $msg.playbook_dir -ArgumentType Directory -VariableName 'BASEDIR'
+    New-ParamCompleter -ShortName t -LongName tree       -Description $msg.tree         -Arguments @{ Name = 'TREE'; Type = 'Directory' }
+    New-ParamCompleter -LongName task-timeout            -Description $msg.task_timeout -Arguments @{ Name = 'TASK_TIMEOUT' }
+    New-ParamCompleter -LongName playbook-dir            -Description $msg.playbook_dir -Arguments @{ Name = 'BASEDIR'; Type = 'Directory' }
 
     # Async
-    New-ParamCompleter -ShortName B -LongName background -Description $msg.background -VariableName 'SECONDS'
-    New-ParamCompleter -ShortName P -LongName poll       -Description $msg.poll       -VariableName 'POLL_INTERVAL'
+    New-ParamCompleter -ShortName B -LongName background -Description $msg.background   -Arguments @{ Name = 'SECONDS' }
+    New-ParamCompleter -ShortName P -LongName poll       -Description $msg.poll         -Arguments @{ Name = 'POLL_INTERVAL' }
 
     # Connection
-    New-ParamCompleter -ShortName c -LongName connection -Description $msg.connection      -ArgumentCompleter $connectionCompleter -VariableName 'CONNECTION'
-    New-ParamCompleter -ShortName u -LongName user       -Description $msg.user            -VariableName 'REMOTE_USER'
-    New-ParamCompleter -ShortName T -LongName timeout    -Description $msg.timeout         -VariableName 'TIMEOUT'
-    New-ParamCompleter -LongName private-key, key-file   -Description $msg.private_key     -ArgumentType File     -VariableName 'PRIVATE_KEY_FILE'
+    New-ParamCompleter -ShortName c -LongName connection -Description $msg.connection      -Arguments @{ Name = 'CONNECTION'; Script = $connectionCompleter }
+    New-ParamCompleter -ShortName u -LongName user       -Description $msg.user            -Arguments @{ Name = 'REMOTE_USER' }
+    New-ParamCompleter -ShortName T -LongName timeout    -Description $msg.timeout         -Arguments @{ Name = 'TIMEOUT' }
+    New-ParamCompleter -LongName private-key, key-file   -Description $msg.private_key     -Arguments @{ Name = 'PRIVATE_KEY_FILE'; Type = 'File' }
     New-ParamCompleter -ShortName k -LongName ask-pass   -Description $msg.ask_pass
-    New-ParamCompleter -LongName ssh-common-args         -Description $msg.ssh_common_args -VariableName 'SSH_COMMON_ARGS'
-    New-ParamCompleter -LongName ssh-extra-args          -Description $msg.ssh_extra_args  -VariableName 'SSH_EXTRA_ARGS'
-    New-ParamCompleter -LongName sftp-extra-args         -Description $msg.sftp_extra_args -VariableName 'SFTP_EXTRA_ARGS'
-    New-ParamCompleter -LongName scp-extra-args          -Description $msg.scp_extra_args  -VariableName 'SCP_EXTRA_ARGS'
+    New-ParamCompleter -LongName ssh-common-args         -Description $msg.ssh_common_args -Arguments @{ Name = 'SSH_COMMON_ARGS' }
+    New-ParamCompleter -LongName ssh-extra-args          -Description $msg.ssh_extra_args  -Arguments @{ Name = 'SSH_EXTRA_ARGS' }
+    New-ParamCompleter -LongName sftp-extra-args         -Description $msg.sftp_extra_args -Arguments @{ Name = 'SFTP_EXTRA_ARGS' }
+    New-ParamCompleter -LongName scp-extra-args          -Description $msg.scp_extra_args  -Arguments @{ Name = 'SCP_EXTRA_ARGS' }
 
     # Privilege escalation
     New-ParamCompleter -ShortName b -LongName become          -Description $msg.become
-    New-ParamCompleter -LongName become-method                -Description $msg.become_method -ArgumentCompleter $becomeCompleter -VariableName 'BECOME_METHOD'
-    New-ParamCompleter -LongName become-user                  -Description $msg.become_user   -VariableName 'BECOME_USER'
+    New-ParamCompleter -LongName become-method                -Description $msg.become_method -Arguments @{ Name = 'BECOME_METHOD'; Script = $becomeCompleter }
+    New-ParamCompleter -LongName become-user                  -Description $msg.become_user   -Arguments @{ Name = 'BECOME_USER' }
     New-ParamCompleter -ShortName K -LongName ask-become-pass -Description $msg.ask_become_pass
 
     # Vault
-    New-ParamCompleter -LongName vault-id                             -Description $msg.vault_id        -VariableName 'VAULT_IDS'
-    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_pass_file -ArgumentType File     -VariableName 'VAULT_PASSWORD_FILES'
+    New-ParamCompleter -LongName vault-id                             -Description $msg.vault_id        -Arguments @{ Name = 'VAULT_IDS' }
+    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_pass_file -Arguments @{ Name = 'VAULT_PASSWORD_FILES'; Type = 'File' }
     New-ParamCompleter -LongName ask-vault-pass, ask-vault-password   -Description $msg.ask_vault_pass
-) -NoFileCompletions -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    $q = "$wordToComplete*"
-    $cmdArgs = @("--list")
-    if ($this.BoundParameters["inventory"]) {
-        $cmdArgs += "--inventory", $this.BoundParameters["inventory"]
-    }
-    $inventory = ansible-inventory @cmdArgs | ConvertFrom-Json -AsHashtable
-    $groups = $inventory.Keys.Where({$_ -ne "_meta"}) | Sort-Object
-    $hosts = $groups | ForEach-Object { $inventory[$_].hosts } | Sort-Object -Unique
+) -NoFileCompletions -Arguments @{
+    Name = "host-pattern"
+    Script = { param([int] $position, [int] $argIndex)
+        $q = "$wordToComplete*"
+        $cmdArgs = @("--list")
+        if ($this.BoundParameters["inventory"]) {
+            $cmdArgs += "--inventory", $this.BoundParameters["inventory"]
+        }
+        $inventory = ansible-inventory @cmdArgs | ConvertFrom-Json -AsHashtable
+        $groups = $inventory.Keys.Where({$_ -ne "_meta"}) | Sort-Object
+        $hosts = $groups | ForEach-Object { $inventory[$_].hosts } | Sort-Object -Unique
 
-    foreach ($name in $groups.Where({$_ -like $q})) {
-        "{0}`tGroup" -f $name
-    }
-    foreach ($name in $hosts.Where({$_ -like $q})) {
-        "{0}`tHost" -f $name
+        foreach ($name in $groups.Where({$_ -like $q})) {
+            "{0}`tGroup" -f $name
+        }
+        foreach ($name in $hosts.Where({$_ -like $q})) {
+            "{0}`tHost" -f $name
+        }
     }
 }
