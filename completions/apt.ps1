@@ -71,7 +71,7 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$installedPackageCompleter = {
+$installedPackageCompleter = New-ArgumentCompleter -Name pkg -Nargs '1+' -Script {
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return $null }
     if (-not (Test-Path -LiteralPath '/var/lib/dpkg/status')) { return $null }
     $q = "*${wordToComplete}*"
@@ -94,7 +94,7 @@ $installedPackageCompleter = {
     }
 }
 
-$packageCompleter = {
+$packageCompleter = New-ArgumentCompleter -Name pkg -Nargs '1+' -Script {
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return }
     $q = ".*${wordToComplete}.*"
     try {
@@ -127,13 +127,13 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
     New-CommandCompleter -Name upgrade -Description $msg.upgrade -Parameters @(
         New-ParamCompleter -LongName with-new-pkgs
         New-ParamCompleter -LongName ignore-hold -Description $msg.ignoreHold
-    ) -NoFileCompletions -ArgumentCompleter $packageCompleter
+    ) -NoFileCompletions -Arguments $packageCompleter
     New-CommandCompleter -Name full-upgrade -Description $msg.fullUpgrade -Parameters @(
         New-ParamCompleter -LongName allow-downgrades -Description $msg.allowDowngrades
         New-ParamCompleter -LongName allow-remove-essential -Description $msg.allowRemoveEssential
         New-ParamCompleter -LongName allow-change-held-packages -Description $msg.allowChangeHeldPackages
         New-ParamCompleter -LongName ignore-hold -Description $msg.ignoreHold
-    ) -NoFileCompletions -ArgumentCompleter $packageCompleter
+    ) -NoFileCompletions -Arguments $packageCompleter
     New-CommandCompleter -Name install -Description $msg.install -Parameters @(
         New-ParamCompleter -LongName no-install-recommends -Description $msg.noInstallRecommends
         New-ParamCompleter -LongName install-suggests -Description $msg.installSuggests
@@ -144,7 +144,7 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
         New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
         New-ParamCompleter -ShortName s -LongName simulate, just-print, dry-run, recon, no-act -Description $msg.simulate
         New-ParamCompleter -ShortName y -LongName yes, assume-yes -Description $msg.assumeYes
-        New-ParamCompleter -ShortName t -LongName target-release -Description $msg.targetRelease -VariableName 'RELEASE'
+        New-ParamCompleter -ShortName t -LongName target-release -Description $msg.targetRelease -Arguments @{ Name = 'RELEASE' }
         New-ParamCompleter -LongName assume-no -Description $msg.assumeNo
         New-ParamCompleter -LongName reinstall -Description $msg.reinstall
         New-ParamCompleter -LongName no-upgrade -Description $msg.noUpgrade
@@ -155,34 +155,34 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
         New-ParamCompleter -LongName no-show-upgraded -Description $msg.noShowUpgraded
         New-ParamCompleter -LongName no-allow-insecure-repositories -Description $msg.noAllowInsecureRepositories
         New-ParamCompleter -LongName show-progress -Description $msg.showProgress
-        New-ParamCompleter -LongName with-source -Description $msg.withSource -VariableName 'FILE'
+        New-ParamCompleter -LongName with-source -Description $msg.withSource -Arguments @{ Name = 'FILE'; }
         New-ParamCompleter -LongName no-remove -Description $msg.noRemove
         New-ParamCompleter -LongName ignore-hold -Description $msg.ignoreHold
-    ) -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name reinstall -Description $msg.reinstall -NoFileCompletions -ArgumentCompleter $installedPackageCompleter
+    ) -Arguments $packageCompleter
+    New-CommandCompleter -Name reinstall -Description $msg.reinstall -NoFileCompletions -Arguments $installedPackageCompleter
     New-CommandCompleter -Name remove -Description $msg.remove -Parameters @(
         New-ParamCompleter -LongName purge -Description $msg.purge
-    ) -NoFileCompletions -ArgumentCompleter $installedPackageCompleter
+    ) -NoFileCompletions -Arguments $installedPackageCompleter
     New-CommandCompleter -Name purge -Description $msg.purge -Parameters @(
         New-ParamCompleter -LongName auto-remove -Description $msg._autoRemove
-    ) -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name autoremove -Description $msg.autoremove -NoFileCompletions -ArgumentCompleter $installedPackageCompleter
-    New-CommandCompleter -Name satisfy -Description $msg.satisfy -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name source -Description $msg.source -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name build-dep -Description $msg.buildDep -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name download -Description $msg.download -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name changelog -Description $msg.changelog -NoFileCompletions -ArgumentCompleter $packageCompleter
+    ) -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name autoremove -Description $msg.autoremove -NoFileCompletions -Arguments $installedPackageCompleter
+    New-CommandCompleter -Name satisfy -Description $msg.satisfy -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name source -Description $msg.source -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name build-dep -Description $msg.buildDep -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name download -Description $msg.download -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name changelog -Description $msg.changelog -NoFileCompletions -Arguments $packageCompleter
     New-CommandCompleter -Name clean -Description $msg.clean -NoFileCompletions
     New-CommandCompleter -Name distclean -Description $msg.distclean -NoFileCompletions
     New-CommandCompleter -Name autoclean -Description $msg.autoclean -NoFileCompletions
 
     # apt-cache(8)
     New-CommandCompleter -Name search -Description $msg.search -NoFileCompletions
-    New-CommandCompleter -Name show -Description $msg.show -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name showsrc -Description $msg.showsrc -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name depends -Description $msg.depends -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name rdepends -Description $msg.rdepends -NoFileCompletions -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name policy -Description $msg.policy -NoFileCompletions -ArgumentCompleter $packageCompleter
+    New-CommandCompleter -Name show -Description $msg.show -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name showsrc -Description $msg.showsrc -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name depends -Description $msg.depends -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name rdepends -Description $msg.rdepends -NoFileCompletions -Arguments $packageCompleter
+    New-CommandCompleter -Name policy -Description $msg.policy -NoFileCompletions -Arguments $packageCompleter
 
     New-CommandCompleter -Name list -Description $msg.list -Parameters @(
         New-ParamCompleter -ShortName a -LongName all-versions -Description $msg.allVersions
@@ -195,6 +195,6 @@ Register-NativeCompleter -Name apt -Description $msg.apt -SubCommands @(
 ) -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
-    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPTION'
+    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -Arguments @{ Name = 'OPTION' }
 ) -NoFileCompletions
