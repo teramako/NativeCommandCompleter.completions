@@ -19,8 +19,12 @@ Register-NativeCompleter -Name bunzip2 -Parameters @(
     New-ParamCompleter -ShortName k -LongName keep -Description $msg.keep
     New-ParamCompleter -ShortName s -LongName small -Description $msg.small
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-) -NoFileCompletions -ArgumentCompleter {
-    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-        $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
-    });
+) -NoFileCompletions -Arguments @{
+    Name = 'filename'
+    Nargs = '1+'
+    Script = {
+        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+            $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
+        });
+    }
 }
