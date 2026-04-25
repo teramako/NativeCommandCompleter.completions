@@ -268,264 +268,342 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
+$filenameArgument = New-ArgumentCompleter filename -Type File;
+$geometryArgument = New-ArgumentCompleter geometry
+$stringArgument = New-ArgumentCompleter string
+$valueArgument = New-ArgumentCompleter value
+$colorArgument = New-ArgumentCompleter color
+
 Register-NativeCompleter -Name convert -Description $msg.convert -Parameters @(
     New-ParamCompleter -LongName adjoin -Description $msg.adjoin
-    New-ParamCompleter -LongName affine -Description $msg.affine -VariableName 'matrix'
-    New-ParamCompleter -LongName alpha -Description $msg.alpha -Arguments "on","activate","off","deactivate","set","opaque","copy","transparent","extract","background","shape" -VariableName 'option'
-    New-ParamCompleter -LongName annotate -Description $msg.annotate -VariableName 'geometry text'
+    New-ParamCompleter -LongName affine -Description $msg.affine -Arguments @{ Name = 'matrix' }
+    New-ParamCompleter -LongName alpha -Description $msg.alpha -Arguments @{
+        Name = 'option';
+        Candidates = "on","activate","off","deactivate","set","opaque","copy","transparent","extract","background","shape"
+    }
+    New-ParamCompleter -LongName annotate -Description $msg.annotate -Arguments @{ Name = 'geometry-text' }
     New-ParamCompleter -LongName antialias -Description $msg.antialias
     New-ParamCompleter -LongName append -Description $msg.append
-    New-ParamCompleter -LongName attenuate -Description $msg.attenuate -VariableName 'value'
-    New-ParamCompleter -LongName authenticate -Description $msg.authenticate -VariableName 'password'
+    New-ParamCompleter -LongName attenuate -Description $msg.attenuate -Arguments $valueArgument
+    New-ParamCompleter -LongName authenticate -Description $msg.authenticate -Arguments @{ Name = 'password' }
     New-ParamCompleter -LongName auto-gamma -Description $msg.auto_gamma
     New-ParamCompleter -LongName auto-level -Description $msg.auto_level
     New-ParamCompleter -LongName auto-orient -Description $msg.auto_orient
-    New-ParamCompleter -LongName auto-threshold -Description $msg.auto_threshold -VariableName 'method'
-    New-ParamCompleter -LongName background -Description $msg.background -VariableName 'color'
-    New-ParamCompleter -LongName bench -Description $msg.bench -VariableName 'iterations'
-    New-ParamCompleter -LongName bias -Description $msg.bias -VariableName 'value'
+    New-ParamCompleter -LongName auto-threshold -Description $msg.auto_threshold -Arguments @{ Name = 'method' }
+    New-ParamCompleter -LongName background -Description $msg.background -Arguments $colorArgument
+    New-ParamCompleter -LongName bench -Description $msg.bench -Arguments @{ Name = 'iterations' }
+    New-ParamCompleter -LongName bias -Description $msg.bias -Arguments $valueArgument
     New-ParamCompleter -LongName black-point-compensation -Description $msg.black_point_compensation
-    New-ParamCompleter -LongName black-threshold -Description $msg.black_threshold -VariableName 'value'
-    New-ParamCompleter -LongName blue-primary -Description $msg.blue_primary -VariableName 'point'
-    New-ParamCompleter -LongName blue-shift -Description $msg.blue_shift -Type FlagOrValue -VariableName 'factor'
-    New-ParamCompleter -LongName blur -Description $msg.blur -VariableName 'geometry'
-    New-ParamCompleter -LongName border -Description $msg.border -VariableName 'geometry'
-    New-ParamCompleter -LongName bordercolor -Description $msg.bordercolor -VariableName 'color'
-    New-ParamCompleter -LongName brightness-contrast -Description $msg.brightness_contrast -VariableName 'geometry'
-    New-ParamCompleter -LongName cache -Description $msg.cache -VariableName 'threshold'
-    New-ParamCompleter -LongName caption -Description $msg.caption -VariableName 'string'
-    New-ParamCompleter -LongName cdl -Description $msg.cdl -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName channel -Description $msg.channel -Arguments "red","green","blue","alpha","gray","cyan","magenta","yellow","black","opacity","index","RGB","RGBA","CMYK","CMYKA" -VariableName 'type'
-    New-ParamCompleter -LongName charcoal -Description $msg.charcoal -Type FlagOrValue -VariableName 'radius'
-    New-ParamCompleter -LongName chop -Description $msg.chop -VariableName 'geometry'
+    New-ParamCompleter -LongName black-threshold -Description $msg.black_threshold -Arguments $valueArgument
+    New-ParamCompleter -LongName blue-primary -Description $msg.blue_primary -Arguments @{ Name = 'point' }
+    New-ParamCompleter -LongName blue-shift -Description $msg.blue_shift -Arguments @{ Name = 'factor'; Nargs = '?' }
+    New-ParamCompleter -LongName blur -Description $msg.blur -Arguments $geometryArgument
+    New-ParamCompleter -LongName border -Description $msg.border -Arguments $geometryArgument
+    New-ParamCompleter -LongName bordercolor -Description $msg.bordercolor -Arguments $colorArgument
+    New-ParamCompleter -LongName brightness-contrast -Description $msg.brightness_contrast -Arguments $geometryArgument
+    New-ParamCompleter -LongName cache -Description $msg.cache -Arguments @{ Name = 'threshold' }
+    New-ParamCompleter -LongName caption -Description $msg.caption -Arguments $stringArgument
+    New-ParamCompleter -LongName cdl -Description $msg.cdl -Arguments $filenameArgument
+    New-ParamCompleter -LongName channel -Description $msg.channel -Arguments @{
+        Name = 'type';
+        Candidates = "red","green","blue","alpha","gray","cyan","magenta","yellow","black","opacity","index","RGB","RGBA","CMYK","CMYKA"
+    }
+    New-ParamCompleter -LongName charcoal -Description $msg.charcoal -Arguments @{ Name = 'radius'; Nargs = '?' }
+    New-ParamCompleter -LongName chop -Description $msg.chop -Arguments $geometryArgument
     New-ParamCompleter -LongName clamp -Description $msg.clamp
-    New-ParamCompleter -LongName clahe -Description $msg.clahe -VariableName 'geometry'
+    New-ParamCompleter -LongName clahe -Description $msg.clahe -Arguments $geometryArgument
     New-ParamCompleter -LongName clip -Description $msg.clip
-    New-ParamCompleter -LongName clip-mask -Description $msg.clip_mask -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName clip-path -Description $msg.clip_path -VariableName 'id'
-    New-ParamCompleter -LongName clone -Description $msg.clone -VariableName 'index'
+    New-ParamCompleter -LongName clip-mask -Description $msg.clip_mask -Arguments $filenameArgument
+    New-ParamCompleter -LongName clip-path -Description $msg.clip_path -Arguments @{ Name = 'id' }
+    New-ParamCompleter -LongName clone -Description $msg.clone -Arguments @{ Name = 'index' }
     New-ParamCompleter -LongName clut -Description $msg.clut
     New-ParamCompleter -LongName coalesce -Description $msg.coalesce
-    New-ParamCompleter -LongName colorize -Description $msg.colorize -VariableName 'value'
-    New-ParamCompleter -LongName colormap -Description $msg.colormap -Arguments "shared","private" -VariableName 'type'
-    New-ParamCompleter -LongName color-matrix -Description $msg.color_matrix -VariableName 'matrix'
-    New-ParamCompleter -LongName colors -Description $msg.colors -VariableName 'value'
-    New-ParamCompleter -LongName colorspace -Description $msg.colorspace -Arguments "RGB","sRGB","Gray","Transparent","OHTA","XYZ","YCbCr","YCC","YIQ","YPbPr","YUV","CMYK","CMY" -VariableName 'type'
+    New-ParamCompleter -LongName colorize -Description $msg.colorize -Arguments $valueArgument
+    New-ParamCompleter -LongName colormap -Description $msg.colormap -Arguments @{ Name = 'type'; Candidates = "shared","private" }
+    New-ParamCompleter -LongName color-matrix -Description $msg.color_matrix -Arguments @{ Name = 'matrix' }
+    New-ParamCompleter -LongName colors -Description $msg.colors -Arguments $valueArgument
+    New-ParamCompleter -LongName colorspace -Description $msg.colorspace -Arguments @{
+        Name = 'type';
+        Candidates = "RGB","sRGB","Gray","Transparent","OHTA","XYZ","YCbCr","YCC","YIQ","YPbPr","YUV","CMYK","CMY"
+    }
     New-ParamCompleter -LongName combine -Description $msg.combine
-    New-ParamCompleter -LongName comment -Description $msg.comment -VariableName 'string'
+    New-ParamCompleter -LongName comment -Description $msg.comment -Arguments $stringArgument
     New-ParamCompleter -LongName compare -Description $msg.compare
-    New-ParamCompleter -LongName complex -Description $msg.complex -Arguments "add","conjugate","divide","magnitude","multiply","real","imaginary" -VariableName 'operator'
-    New-ParamCompleter -LongName compose -Description $msg.compose -VariableName 'operator'
+    New-ParamCompleter -LongName complex -Description $msg.complex -Arguments @{
+        Name = 'operator';
+        Candidates = "add","conjugate","divide","magnitude","multiply","real","imaginary"
+    }
+    New-ParamCompleter -LongName compose -Description $msg.compose -Arguments @{ Name = 'operator' }
     New-ParamCompleter -LongName composite -Description $msg.composite
-    New-ParamCompleter -LongName compress -Description $msg.compress -Arguments "None","BZip","Fax","Group4","JPEG","JPEG2000","Lossless","LZW","RLE","Zip","LZMA","ZSTD" -VariableName 'type'
-    New-ParamCompleter -LongName connected-components -Description $msg.connected_components -VariableName 'connectivity'
+    New-ParamCompleter -LongName compress -Description $msg.compress -Arguments @{
+        Name = 'type';
+        Candidates = "None","BZip","Fax","Group4","JPEG","JPEG2000","Lossless","LZW","RLE","Zip","LZMA","ZSTD"
+    }
+    New-ParamCompleter -LongName connected-components -Description $msg.connected_components -Arguments @{ Name = 'connectivity' }
     New-ParamCompleter -LongName contrast -Description $msg.contrast
-    New-ParamCompleter -LongName contrast-stretch -Description $msg.contrast_stretch -VariableName 'geometry'
-    New-ParamCompleter -LongName convolve -Description $msg.convolve -VariableName 'coefficients'
-    New-ParamCompleter -LongName copy -Description $msg.copy -VariableName 'geometry offset'
-    New-ParamCompleter -LongName crop -Description $msg.crop -VariableName 'geometry'
-    New-ParamCompleter -LongName cycle -Description $msg.cycle -VariableName 'amount'
-    New-ParamCompleter -LongName decipher -Description $msg.decipher -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName debug -Description $msg.debug -Arguments "All","Annotate","Blob","Cache","Coder","Configure","Deprecate","Draw","Exception","Locale","Module","Pixel","Resource","Trace","Transform","User","Wand","X11" -VariableName 'events'
-    New-ParamCompleter -LongName define -Description $msg.define -VariableName 'format:option'
+    New-ParamCompleter -LongName contrast-stretch -Description $msg.contrast_stretch -Arguments $geometryArgument
+    New-ParamCompleter -LongName convolve -Description $msg.convolve -Arguments @{ Name = 'coefficients' }
+    New-ParamCompleter -LongName copy -Description $msg.copy -Arguments @{ Name = 'geometry-offset' }
+    New-ParamCompleter -LongName crop -Description $msg.crop -Arguments $geometryArgument
+    New-ParamCompleter -LongName cycle -Description $msg.cycle -Arguments @{ Name = 'amount' }
+    New-ParamCompleter -LongName decipher -Description $msg.decipher -Arguments $filenameArgument
+    New-ParamCompleter -LongName debug -Description $msg.debug -Arguments @{
+        Name = 'events';
+        Candidates = "All","Annotate","Blob","Cache","Coder","Configure","Deprecate","Draw","Exception","Locale","Module","Pixel","Resource","Trace","Transform","User","Wand","X11"
+    }
+    New-ParamCompleter -LongName define -Description $msg.define -Arguments @{ Name = 'format:option' }
     New-ParamCompleter -LongName deconstruct -Description $msg.deconstruct
-    New-ParamCompleter -LongName delay -Description $msg.delay -VariableName 'value'
-    New-ParamCompleter -LongName delete -Description $msg.delete -VariableName 'index'
-    New-ParamCompleter -LongName density -Description $msg.density -VariableName 'geometry'
-    New-ParamCompleter -LongName depth -Description $msg.depth -VariableName 'value'
+    New-ParamCompleter -LongName delay -Description $msg.delay -Arguments $valueArgument
+    New-ParamCompleter -LongName delete -Description $msg.delete -Arguments @{ Name = 'index' }
+    New-ParamCompleter -LongName density -Description $msg.density -Arguments $geometryArgument
+    New-ParamCompleter -LongName depth -Description $msg.depth -Arguments $valueArgument
     New-ParamCompleter -LongName despeckle -Description $msg.despeckle
-    New-ParamCompleter -LongName direction -Description $msg.direction -Arguments "right-to-left","left-to-right" -VariableName 'type'
-    New-ParamCompleter -LongName display -Description $msg.display -VariableName 'server'
-    New-ParamCompleter -LongName dispose -Description $msg.dispose -Arguments "Undefined","None","Background","Previous" -VariableName 'method'
-    New-ParamCompleter -LongName distort -Description $msg.distort -VariableName 'method args'
-    New-ParamCompleter -LongName distribute-cache -Description $msg.distribute_cache -VariableName 'port'
-    New-ParamCompleter -LongName dither -Description $msg.dither -Arguments "None","FloydSteinberg","Riemersma" -VariableName 'method'
-    New-ParamCompleter -LongName draw -Description $msg.draw -VariableName 'string'
-    New-ParamCompleter -LongName duplicate -Description $msg.duplicate -VariableName 'count,indexes'
-    New-ParamCompleter -LongName edge -Description $msg.edge -Type FlagOrValue -VariableName 'radius'
-    New-ParamCompleter -LongName emboss -Description $msg.emboss -Type FlagOrValue -VariableName 'radius'
-    New-ParamCompleter -LongName encipher -Description $msg.encipher -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName encoding -Description $msg.encoding -VariableName 'type'
-    New-ParamCompleter -LongName endian -Description $msg.endian -Arguments "MSB","LSB" -VariableName 'type'
+    New-ParamCompleter -LongName direction -Description $msg.direction -Arguments @{ Name = 'type'; Candidates = "right-to-left","left-to-right" }
+    New-ParamCompleter -LongName display -Description $msg.display -Arguments @{ Name = 'server' }
+    New-ParamCompleter -LongName dispose -Description $msg.dispose -Arguments @{ Name = 'method'; Candidates = "Undefined","None","Background","Previous" }
+    New-ParamCompleter -LongName distort -Description $msg.distort -Arguments @{ Name = 'method-args' }
+    New-ParamCompleter -LongName distribute-cache -Description $msg.distribute_cache -Arguments @{ Name = 'port' }
+    New-ParamCompleter -LongName dither -Description $msg.dither -Arguments @{ Name = 'method'; Candidates = "None","FloydSteinberg","Riemersma" }
+    New-ParamCompleter -LongName draw -Description $msg.draw -Arguments $stringArgument
+    New-ParamCompleter -LongName duplicate -Description $msg.duplicate -Arguments @{ Name = 'count,indexes' }
+    New-ParamCompleter -LongName edge -Description $msg.edge -Arguments @{ Name = 'radius'; Nargs = '?' }
+    New-ParamCompleter -LongName emboss -Description $msg.emboss -Arguments @{ Name = 'radius'; Nargs = '?' }
+    New-ParamCompleter -LongName encipher -Description $msg.encipher -Arguments $filenameArgument
+    New-ParamCompleter -LongName encoding -Description $msg.encoding -Arguments @{ Name = 'type' }
+    New-ParamCompleter -LongName endian -Description $msg.endian -Arguments @{ Name = 'type'; Candidates = "MSB","LSB" }
     New-ParamCompleter -LongName enhance -Description $msg.enhance
     New-ParamCompleter -LongName equalize -Description $msg.equalize
-    New-ParamCompleter -LongName evaluate -Description $msg.evaluate -VariableName 'operator value'
-    New-ParamCompleter -LongName evaluate-sequence -Description $msg.evaluate_sequence -VariableName 'operator'
-    New-ParamCompleter -LongName extent -Description $msg.extent -VariableName 'geometry'
-    New-ParamCompleter -LongName extract -Description $msg.extract -VariableName 'geometry'
-    New-ParamCompleter -LongName family -Description $msg.family -VariableName 'name'
-    New-ParamCompleter -LongName features -Description $msg.features -VariableName 'distance'
+    New-ParamCompleter -LongName evaluate -Description $msg.evaluate -Arguments @{ Name = 'operator-value' }
+    New-ParamCompleter -LongName evaluate-sequence -Description $msg.evaluate_sequence -Arguments @{ Name = 'operator' }
+    New-ParamCompleter -LongName extent -Description $msg.extent -Arguments $geometryArgument
+    New-ParamCompleter -LongName extract -Description $msg.extract -Arguments $geometryArgument
+    New-ParamCompleter -LongName family -Description $msg.family -Arguments @{ Name = 'name' }
+    New-ParamCompleter -LongName features -Description $msg.features -Arguments @{ Name = 'distance' }
     New-ParamCompleter -LongName fft -Description $msg.fft
-    New-ParamCompleter -LongName fill -Description $msg.fill -VariableName 'color'
-    New-ParamCompleter -LongName filter -Description $msg.filter -Arguments "Point","Box","Triangle","Hermite","Hann","Hamming","Blackman","Gaussian","Quadratic","Cubic","Catrom","Mitchell","Jinc","Sinc","SincFast","Kaiser","Welch","Parzen","Bohman","Bartlett","Lagrange","Lanczos","LanczosSharp","Lanczos2","Lanczos2Sharp","Robidoux","RobidouxSharp","Cosine","Spline","LanczosRadius" -VariableName 'type'
+    New-ParamCompleter -LongName fill -Description $msg.fill -Arguments $colorArgument
+    New-ParamCompleter -LongName filter -Description $msg.filter -Arguments @{
+        Name = 'type';
+        Candidates = "Point","Box","Triangle","Hermite","Hann","Hamming","Blackman","Gaussian","Quadratic","Cubic","Catrom","Mitchell","Jinc","Sinc","SincFast","Kaiser","Welch","Parzen","Bohman","Bartlett","Lagrange","Lanczos","LanczosSharp","Lanczos2","Lanczos2Sharp","Robidoux","RobidouxSharp","Cosine","Spline","LanczosRadius"
+    }
     New-ParamCompleter -LongName flatten -Description $msg.flatten
     New-ParamCompleter -LongName flip -Description $msg.flip
-    New-ParamCompleter -LongName floodfill -Description $msg.floodfill -VariableName 'geometry color'
+    New-ParamCompleter -LongName floodfill -Description $msg.floodfill -Arguments @{ Name = 'geometry color' }
     New-ParamCompleter -LongName flop -Description $msg.flop
-    New-ParamCompleter -LongName font -Description $msg.font -VariableName 'name'
-    New-ParamCompleter -LongName foreground -Description $msg.foreground -VariableName 'color'
-    New-ParamCompleter -LongName format -Description $msg.format_option -VariableName 'string'
-    New-ParamCompleter -LongName frame -Description $msg.frame -VariableName 'geometry'
-    New-ParamCompleter -LongName function -Description $msg.function -VariableName 'name'
-    New-ParamCompleter -LongName fuzz -Description $msg.fuzz -VariableName 'distance'
-    New-ParamCompleter -LongName fx -Description $msg.fx -VariableName 'expression'
-    New-ParamCompleter -LongName gamma -Description $msg.gamma -VariableName 'value'
-    New-ParamCompleter -LongName gaussian-blur -Description $msg.gaussian_blur -VariableName 'geometry'
-    New-ParamCompleter -LongName geometry -Description $msg.geometry -VariableName 'geometry'
-    New-ParamCompleter -LongName gravity -Description $msg.gravity -Arguments "None","Center","East","Forget","NorthEast","North","NorthWest","SouthEast","South","SouthWest","West" -VariableName 'type'
-    New-ParamCompleter -LongName grayscale -Description $msg.grayscale -Arguments "Rec601Luma","Rec601Luminance","Rec709Luma","Rec709Luminance","Brightness","Lightness","Average","MS" -VariableName 'method'
-    New-ParamCompleter -LongName green-primary -Description $msg.green_primary -VariableName 'point'
+    New-ParamCompleter -LongName font -Description $msg.font -Arguments @{ Name = 'name' }
+    New-ParamCompleter -LongName foreground -Description $msg.foreground -Arguments $colorArgument
+    New-ParamCompleter -LongName format -Description $msg.format_option -Arguments $stringArgument
+    New-ParamCompleter -LongName frame -Description $msg.frame -Arguments $geometryArgument
+    New-ParamCompleter -LongName function -Description $msg.function -Arguments @{ Name = 'name' }
+    New-ParamCompleter -LongName fuzz -Description $msg.fuzz -Arguments @{ Name = 'distance' }
+    New-ParamCompleter -LongName fx -Description $msg.fx -Arguments @{ Name = 'expression' }
+    New-ParamCompleter -LongName gamma -Description $msg.gamma -Arguments $valueArgument
+    New-ParamCompleter -LongName gaussian-blur -Description $msg.gaussian_blur -Arguments $geometryArgument
+    New-ParamCompleter -LongName geometry -Description $msg.geometry -Arguments $geometryArgument
+    New-ParamCompleter -LongName gravity -Description $msg.gravity -Arguments @{
+        Name = 'type';
+        Candidates = "None","Center","East","Forget","NorthEast","North","NorthWest","SouthEast","South","SouthWest","West"
+    }
+    New-ParamCompleter -LongName grayscale -Description $msg.grayscale -Arguments @{
+        Name = 'method';
+        Candidates = "Rec601Luma","Rec601Luminance","Rec709Luma","Rec709Luminance","Brightness","Lightness","Average","MS"
+    }
+    New-ParamCompleter -LongName green-primary -Description $msg.green_primary -Arguments @{ Name = 'point' }
     New-ParamCompleter -LongName help -Description $msg.help
-    New-ParamCompleter -LongName highlight-color -Description $msg.highlight_color -VariableName 'color'
-    New-ParamCompleter -LongName hough-lines -Description $msg.hough_lines -VariableName 'geometry'
-    New-ParamCompleter -LongName iconGeometry -Description $msg.iconGeometry -VariableName 'geometry'
+    New-ParamCompleter -LongName highlight-color -Description $msg.highlight_color -Arguments $colorArgument
+    New-ParamCompleter -LongName hough-lines -Description $msg.hough_lines -Arguments $geometryArgument
+    New-ParamCompleter -LongName iconGeometry -Description $msg.iconGeometry -Arguments $geometryArgument
     New-ParamCompleter -LongName iconic -Description $msg.iconic
     New-ParamCompleter -LongName identify -Description $msg.identify
     New-ParamCompleter -LongName ift -Description $msg.ift
     New-ParamCompleter -LongName immutable -Description $msg.immutable
-    New-ParamCompleter -LongName implode -Description $msg.implode -VariableName 'amount'
-    New-ParamCompleter -LongName insert -Description $msg.insert -VariableName 'index'
-    New-ParamCompleter -LongName intensity -Description $msg.intensity -Arguments "Average","Brightness","Lightness","Mean","MS","Rec601Luma","Rec601Luminance","Rec709Luma","Rec709Luminance","RMS" -VariableName 'method'
-    New-ParamCompleter -LongName intent -Description $msg.intent -Arguments "Absolute","Perceptual","Relative","Saturation" -VariableName 'type'
-    New-ParamCompleter -LongName interlace -Description $msg.interlace -Arguments "None","Line","Plane","Partition","GIF","JPEG","PNG" -VariableName 'type'
-    New-ParamCompleter -LongName interpolate -Description $msg.interpolate -Arguments "Average","Average4","Average9","Average16","Background","Bilinear","Blend","Catrom","Integer","Mesh","Nearest","Spline" -VariableName 'method'
-    New-ParamCompleter -LongName interline-spacing -Description $msg.interline_spacing -VariableName 'value'
-    New-ParamCompleter -LongName interword-spacing -Description $msg.interword_spacing -VariableName 'value'
-    New-ParamCompleter -LongName kerning -Description $msg.kerning -VariableName 'value'
-    New-ParamCompleter -LongName kmeans -Description $msg.kmeans -VariableName 'geometry'
-    New-ParamCompleter -LongName kuwahara -Description $msg.kuwahara -VariableName 'geometry'
-    New-ParamCompleter -LongName label -Description $msg.label -VariableName 'string'
-    New-ParamCompleter -LongName lat -Description $msg.lat -VariableName 'geometry'
-    New-ParamCompleter -LongName layers -Description $msg.layers -Arguments "coalesce","compareAny","compareClear","compareOverlay","dispose","flatten","merge","mosaic","optimize","optimizeFrame","optimizePlus","optimizeTransparency","composite" -VariableName 'method'
-    New-ParamCompleter -LongName level -Description $msg.level -VariableName 'value'
-    New-ParamCompleter -LongName level-colors -Description $msg.level_colors -VariableName 'color,color'
-    New-ParamCompleter -LongName limit -Description $msg.limit -VariableName 'type value'
-    New-ParamCompleter -LongName linear-stretch -Description $msg.linear_stretch -VariableName 'geometry'
-    New-ParamCompleter -LongName liquid-rescale -Description $msg.liquid_rescale -VariableName 'geometry'
-    New-ParamCompleter -LongName list -Description $msg.list -Arguments "Align","Alpha","Boolean","Cache","Channel","Class","ClipPath","Coder","Color","Colorspace","Command","Compose","Compress","Configure","DataType","Debug","Decoration","Delegate","Direction","Dispose","Distort","Dither","Endian","Evaluate","FillRule","Filter","Font","Format","Function","Gradient","Gravity","Intensity","Intent","Interlace","Interpolate","Kernel","Layers","LineCap","LineJoin","List","Locale","LogEvent","Log","Magic","Method","Metric","Mime","Mode","Morphology","Noise","Orientation","PixelChannel","PixelIntensity","PixelMask","PixelTrait","Policy","PolicyDomain","PolicyRights","Preview","Primitive","QuantumFormat","Resource","SparseColor","Statistic","Storage","Stretch","Style","Threshold","Type","Units","Validate","VirtualPixel" -VariableName 'type'
-    New-ParamCompleter -LongName log -Description $msg.log -VariableName 'format'
-    New-ParamCompleter -LongName loop -Description $msg.loop -VariableName 'iterations'
-    New-ParamCompleter -LongName lowlight-color -Description $msg.lowlight_color -VariableName 'color'
+    New-ParamCompleter -LongName implode -Description $msg.implode -Arguments @{ Name = 'amount' }
+    New-ParamCompleter -LongName insert -Description $msg.insert -Arguments @{ Name = 'index' }
+    New-ParamCompleter -LongName intensity -Description $msg.intensity -Arguments @{
+        Name = 'method';
+        Candidates = "Average","Brightness","Lightness","Mean","MS","Rec601Luma","Rec601Luminance","Rec709Luma","Rec709Luminance","RMS"
+    }
+    New-ParamCompleter -LongName intent -Description $msg.intent -Arguments @{
+        Name = 'type';
+        Candidates = "Absolute","Perceptual","Relative","Saturation"
+    }
+    New-ParamCompleter -LongName interlace -Description $msg.interlace -Arguments @{
+        Name = 'type';
+        Candidates = "None","Line","Plane","Partition","GIF","JPEG","PNG"
+    }
+    New-ParamCompleter -LongName interpolate -Description $msg.interpolate -Arguments @{
+        Name = 'method';
+        Candidates = "Average","Average4","Average9","Average16","Background","Bilinear","Blend","Catrom","Integer","Mesh","Nearest","Spline"
+    }
+    New-ParamCompleter -LongName interline-spacing -Description $msg.interline_spacing -Arguments $valueArgument
+    New-ParamCompleter -LongName interword-spacing -Description $msg.interword_spacing -Arguments $valueArgument
+    New-ParamCompleter -LongName kerning -Description $msg.kerning -Arguments $valueArgument
+    New-ParamCompleter -LongName kmeans -Description $msg.kmeans -Arguments $geometryArgument
+    New-ParamCompleter -LongName kuwahara -Description $msg.kuwahara -Arguments $geometryArgument
+    New-ParamCompleter -LongName label -Description $msg.label -Arguments $stringArgument
+    New-ParamCompleter -LongName lat -Description $msg.lat -Arguments $geometryArgument
+    New-ParamCompleter -LongName layers -Description $msg.layers -Arguments @{
+        Name = 'method';
+        Candidates = "coalesce","compareAny","compareClear","compareOverlay","dispose","flatten","merge","mosaic","optimize","optimizeFrame","optimizePlus","optimizeTransparency","composite"
+    }
+    New-ParamCompleter -LongName level -Description $msg.level -Arguments $valueArgument
+    New-ParamCompleter -LongName level-colors -Description $msg.level_colors -Arguments @{ Name = 'color,color' }
+    New-ParamCompleter -LongName limit -Description $msg.limit -Arguments $valueArgument
+    New-ParamCompleter -LongName linear-stretch -Description $msg.linear_stretch -Arguments $geometryArgument
+    New-ParamCompleter -LongName liquid-rescale -Description $msg.liquid_rescale -Arguments $geometryArgument
+    New-ParamCompleter -LongName list -Description $msg.list -Arguments @{
+        Name = 'type';
+        Candidates = "Align","Alpha","Boolean","Cache","Channel","Class","ClipPath","Coder","Color","Colorspace","Command","Compose","Compress","Configure","DataType","Debug","Decoration","Delegate","Direction","Dispose","Distort","Dither","Endian","Evaluate","FillRule","Filter","Font","Format","Function","Gradient","Gravity","Intensity","Intent","Interlace","Interpolate","Kernel","Layers","LineCap","LineJoin","List","Locale","LogEvent","Log","Magic","Method","Metric","Mime","Mode","Morphology","Noise","Orientation","PixelChannel","PixelIntensity","PixelMask","PixelTrait","Policy","PolicyDomain","PolicyRights","Preview","Primitive","QuantumFormat","Resource","SparseColor","Statistic","Storage","Stretch","Style","Threshold","Type","Units","Validate","VirtualPixel"
+    }
+    New-ParamCompleter -LongName log -Description $msg.log -Arguments @{ Name = 'format' }
+    New-ParamCompleter -LongName loop -Description $msg.loop -Arguments @{ Name = 'iterations' }
+    New-ParamCompleter -LongName lowlight-color -Description $msg.lowlight_color -Arguments $colorArgument
     New-ParamCompleter -LongName magnify -Description $msg.magnify
-    New-ParamCompleter -LongName map -Description $msg.map -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName mattecolor -Description $msg.mattecolor -VariableName 'color'
-    New-ParamCompleter -LongName median -Description $msg.median -VariableName 'geometry'
-    New-ParamCompleter -LongName mean-shift -Description $msg.mean_shift -VariableName 'geometry'
-    New-ParamCompleter -LongName metric -Description $msg.metric -Arguments "AE","DSSIM","Fuzz","MAE","MEPP","MSE","NCC","PAE","PHASH","PSNR","RMSE","SSIM" -VariableName 'type'
-    New-ParamCompleter -LongName mode -Description $msg.mode -VariableName 'geometry'
-    New-ParamCompleter -LongName modulate -Description $msg.modulate -VariableName 'value'
+    New-ParamCompleter -LongName map -Description $msg.map -Arguments $filenameArgument
+    New-ParamCompleter -LongName mattecolor -Description $msg.mattecolor -Arguments $colorArgument
+    New-ParamCompleter -LongName median -Description $msg.median -Arguments $geometryArgument
+    New-ParamCompleter -LongName mean-shift -Description $msg.mean_shift -Arguments $geometryArgument
+    New-ParamCompleter -LongName metric -Description $msg.metric -Arguments @{
+        Name = 'type';
+        Candidates = "AE","DSSIM","Fuzz","MAE","MEPP","MSE","NCC","PAE","PHASH","PSNR","RMSE","SSIM"
+    }
+    New-ParamCompleter -LongName mode -Description $msg.mode -Arguments $geometryArgument
+    New-ParamCompleter -LongName modulate -Description $msg.modulate -Arguments $valueArgument
     New-ParamCompleter -LongName monitor -Description $msg.monitor
     New-ParamCompleter -LongName monochrome -Description $msg.monochrome
-    New-ParamCompleter -LongName morph -Description $msg.morph -VariableName 'value'
-    New-ParamCompleter -LongName morphology -Description $msg.morphology -VariableName 'method kernel'
-    New-ParamCompleter -LongName motion-blur -Description $msg.motion_blur -VariableName 'geometry'
+    New-ParamCompleter -LongName morph -Description $msg.morph -Arguments $valueArgument
+    New-ParamCompleter -LongName morphology -Description $msg.morphology -Arguments @{ Name = 'method-kernel' }
+    New-ParamCompleter -LongName motion-blur -Description $msg.motion_blur -Arguments $geometryArgument
     New-ParamCompleter -LongName name -Description $msg.name
     New-ParamCompleter -LongName negate -Description $msg.negate
-    New-ParamCompleter -LongName noise -Description $msg.noise -Arguments "Gaussian","Impulse","Laplacian","Multiplicative","Poisson","Random","Uniform" -VariableName 'type'
+    New-ParamCompleter -LongName noise -Description $msg.noise -Arguments @{
+        Name = 'type';
+        Candidates = "Gaussian","Impulse","Laplacian","Multiplicative","Poisson","Random","Uniform"
+    }
     New-ParamCompleter -LongName normalize -Description $msg.normalize
-    New-ParamCompleter -LongName opaque -Description $msg.opaque -VariableName 'color'
-    New-ParamCompleter -LongName ordered-dither -Description $msg.ordered_dither -VariableName 'NxN'
-    New-ParamCompleter -LongName orient -Description $msg.orient -Arguments "TopLeft","TopRight","BottomRight","BottomLeft","LeftTop","RightTop","RightBottom","LeftBottom" -VariableName 'type'
-    New-ParamCompleter -LongName page -Description $msg.page -VariableName 'geometry'
-    New-ParamCompleter -LongName paint -Description $msg.paint -VariableName 'radius'
-    New-ParamCompleter -LongName path -Description $msg.path -ArgumentType Directory -VariableName 'path'
-    New-ParamCompleter -LongName perceptible -Description $msg.perceptible -VariableName 'epsilon'
+    New-ParamCompleter -LongName opaque -Description $msg.opaque -Arguments $colorArgument
+    New-ParamCompleter -LongName ordered-dither -Description $msg.ordered_dither -Arguments @{ Name = 'NxN' }
+    New-ParamCompleter -LongName orient -Description $msg.orient -Arguments @{
+        Name = 'type';
+        Candidates = "TopLeft","TopRight","BottomRight","BottomLeft","LeftTop","RightTop","RightBottom","LeftBottom"
+    }
+    New-ParamCompleter -LongName page -Description $msg.page -Arguments $geometryArgument
+    New-ParamCompleter -LongName paint -Description $msg.paint -Arguments @{ Name = 'radius' }
+    New-ParamCompleter -LongName path -Description $msg.path -Arguments @{ Name = 'path'; Type = 'Directory' }
+    New-ParamCompleter -LongName perceptible -Description $msg.perceptible -Arguments @{ Name = 'epsilon' }
     New-ParamCompleter -LongName ping -Description $msg.ping
-    New-ParamCompleter -LongName pointsize -Description $msg.pointsize -VariableName 'value'
-    New-ParamCompleter -LongName polaroid -Description $msg.polaroid -Type FlagOrValue -VariableName 'angle'
-    New-ParamCompleter -LongName poly -Description $msg.poly -VariableName 'terms'
-    New-ParamCompleter -LongName posterize -Description $msg.posterize -VariableName 'levels'
-    New-ParamCompleter -LongName precision -Description $msg.precision -VariableName 'value'
-    New-ParamCompleter -LongName preview -Description $msg.preview -Arguments "Rotate","Shear","Roll","Hue","Saturation","Brightness","Gamma","Spiff","Dull","Grayscale","Quantize","Despeckle","ReduceNoise","AddNoise","Sharpen","Blur","Threshold","EdgeDetect","Spread","Solarize","Shade","Raise","Segment","Swirl","Implode","Wave","OilPaint","CharcoalDrawing","JPEG" -VariableName 'type'
-    New-ParamCompleter -LongName print -Description $msg.print -VariableName 'string'
-    New-ParamCompleter -LongName process -Description $msg.process -ArgumentType File -VariableName 'image-filter'
-    New-ParamCompleter -LongName profile -Description $msg.profile -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName quality -Description $msg.quality -VariableName 'value'
-    New-ParamCompleter -LongName quantize -Description $msg.quantize -VariableName 'colorspace'
+    New-ParamCompleter -LongName pointsize -Description $msg.pointsize -Arguments $valueArgument
+    New-ParamCompleter -LongName polaroid -Description $msg.polaroid -Arguments @{ Name = 'angle'; Nargs = '?' }
+    New-ParamCompleter -LongName poly -Description $msg.poly -Arguments @{ Name = 'terms' }
+    New-ParamCompleter -LongName posterize -Description $msg.posterize -Arguments @{ Name = 'levels' }
+    New-ParamCompleter -LongName precision -Description $msg.precision -Arguments $valueArgument
+    New-ParamCompleter -LongName preview -Description $msg.preview -Arguments @{
+        Name = 'type';
+        Candidates = "Rotate","Shear","Roll","Hue","Saturation","Brightness","Gamma","Spiff","Dull","Grayscale","Quantize","Despeckle","ReduceNoise","AddNoise","Sharpen","Blur","Threshold","EdgeDetect","Spread","Solarize","Shade","Raise","Segment","Swirl","Implode","Wave","OilPaint","CharcoalDrawing","JPEG"
+    }
+    New-ParamCompleter -LongName print -Description $msg.print -Arguments $stringArgument
+    New-ParamCompleter -LongName process -Description $msg.process -Arguments @{ Name = 'image-filter'; Type = 'File' }
+    New-ParamCompleter -LongName profile -Description $msg.profile -Arguments $filenameArgument
+    New-ParamCompleter -LongName quality -Description $msg.quality -Arguments $valueArgument
+    New-ParamCompleter -LongName quantize -Description $msg.quantize -Arguments @{ Name = 'colorspace' }
     New-ParamCompleter -LongName quiet -Description $msg.quiet
-    New-ParamCompleter -LongName radial-blur -Description $msg.radial_blur -VariableName 'angle'
-    New-ParamCompleter -LongName raise -Description $msg.raise -VariableName 'value'
-    New-ParamCompleter -LongName random-threshold -Description $msg.random_threshold -VariableName 'low,high'
-    New-ParamCompleter -LongName range-threshold -Description $msg.range_threshold -VariableName 'values'
-    New-ParamCompleter -LongName red-primary -Description $msg.red_primary -VariableName 'point'
+    New-ParamCompleter -LongName radial-blur -Description $msg.radial_blur -Arguments @{ Name = 'angle' }
+    New-ParamCompleter -LongName raise -Description $msg.raise -Arguments $valueArgument
+    New-ParamCompleter -LongName random-threshold -Description $msg.random_threshold -Arguments @{ Name = 'low,high' }
+    New-ParamCompleter -LongName range-threshold -Description $msg.range_threshold -Arguments @{ Name = 'values' }
+    New-ParamCompleter -LongName red-primary -Description $msg.red_primary -Arguments @{ Name = 'point' }
     New-ParamCompleter -LongName regard-warnings -Description $msg.regard_warnings
-    New-ParamCompleter -LongName region -Description $msg.region -VariableName 'geometry'
-    New-ParamCompleter -LongName remap -Description $msg.remap -ArgumentType File -VariableName 'filename'
+    New-ParamCompleter -LongName region -Description $msg.region -Arguments $geometryArgument
+    New-ParamCompleter -LongName remap -Description $msg.remap -Arguments $filenameArgument
     New-ParamCompleter -LongName render -Description $msg.render
-    New-ParamCompleter -LongName repage -Description $msg.repage -VariableName 'geometry'
-    New-ParamCompleter -LongName resample -Description $msg.resample -VariableName 'geometry'
-    New-ParamCompleter -LongName resize -Description $msg.resize -VariableName 'geometry'
+    New-ParamCompleter -LongName repage -Description $msg.repage -Arguments $geometryArgument
+    New-ParamCompleter -LongName resample -Description $msg.resample -Arguments $geometryArgument
+    New-ParamCompleter -LongName resize -Description $msg.resize -Arguments $geometryArgument
     New-ParamCompleter -LongName respect-parentheses -Description $msg.respect_parentheses
     New-ParamCompleter -LongName reverse -Description $msg.reverse
-    New-ParamCompleter -LongName roll -Description $msg.roll -VariableName 'geometry'
-    New-ParamCompleter -LongName rotate -Description $msg.rotate -VariableName 'degrees'
-    New-ParamCompleter -LongName sample -Description $msg.sample -VariableName 'geometry'
-    New-ParamCompleter -LongName sampling-factor -Description $msg.sampling_factor -VariableName 'geometry'
-    New-ParamCompleter -LongName scale -Description $msg.scale -VariableName 'geometry'
-    New-ParamCompleter -LongName scene -Description $msg.scene -VariableName 'value'
-    New-ParamCompleter -LongName seed -Description $msg.seed -VariableName 'value'
-    New-ParamCompleter -LongName segment -Description $msg.segment -VariableName 'values'
-    New-ParamCompleter -LongName selective-blur -Description $msg.selective_blur -VariableName 'geometry'
+    New-ParamCompleter -LongName roll -Description $msg.roll -Arguments $geometryArgument
+    New-ParamCompleter -LongName rotate -Description $msg.rotate -Arguments @{ Name = 'degrees' }
+    New-ParamCompleter -LongName sample -Description $msg.sample -Arguments $geometryArgument
+    New-ParamCompleter -LongName sampling-factor -Description $msg.sampling_factor -Arguments $geometryArgument
+    New-ParamCompleter -LongName scale -Description $msg.scale -Arguments $geometryArgument
+    New-ParamCompleter -LongName scene -Description $msg.scene -Arguments $valueArgument
+    New-ParamCompleter -LongName seed -Description $msg.seed -Arguments $valueArgument
+    New-ParamCompleter -LongName segment -Description $msg.segment -Arguments @{ Name = 'values' }
+    New-ParamCompleter -LongName selective-blur -Description $msg.selective_blur -Arguments $geometryArgument
     New-ParamCompleter -LongName separate -Description $msg.separate
-    New-ParamCompleter -LongName sepia-tone -Description $msg.sepia_tone -VariableName 'threshold'
-    New-ParamCompleter -LongName set -Description $msg.set -VariableName 'attribute value'
-    New-ParamCompleter -LongName shade -Description $msg.shade -VariableName 'degrees'
-    New-ParamCompleter -LongName shadow -Description $msg.shadow -VariableName 'geometry'
-    New-ParamCompleter -LongName sharpen -Description $msg.sharpen -VariableName 'geometry'
-    New-ParamCompleter -LongName shave -Description $msg.shave -VariableName 'geometry'
-    New-ParamCompleter -LongName shear -Description $msg.shear -VariableName 'geometry'
-    New-ParamCompleter -LongName sigmoidal-contrast -Description $msg.sigmoidal_contrast -VariableName 'geometry'
+    New-ParamCompleter -LongName sepia-tone -Description $msg.sepia_tone -Arguments @{ Name = 'threshold' }
+    New-ParamCompleter -LongName set -Description $msg.set -Arguments @{ Name = 'attribute-value' }
+    New-ParamCompleter -LongName shade -Description $msg.shade -Arguments @{ Name = 'degrees' }
+    New-ParamCompleter -LongName shadow -Description $msg.shadow -Arguments $geometryArgument
+    New-ParamCompleter -LongName sharpen -Description $msg.sharpen -Arguments $geometryArgument
+    New-ParamCompleter -LongName shave -Description $msg.shave -Arguments $geometryArgument
+    New-ParamCompleter -LongName shear -Description $msg.shear -Arguments $geometryArgument
+    New-ParamCompleter -LongName sigmoidal-contrast -Description $msg.sigmoidal_contrast -Arguments $geometryArgument
     New-ParamCompleter -LongName silent -Description $msg.silent
-    New-ParamCompleter -LongName similarity-threshold -Description $msg.similarity_threshold -VariableName 'value'
-    New-ParamCompleter -LongName size -Description $msg.size -VariableName 'geometry'
-    New-ParamCompleter -LongName sketch -Description $msg.sketch -VariableName 'geometry'
-    New-ParamCompleter -LongName smush -Description $msg.smush -VariableName 'offset'
-    New-ParamCompleter -LongName snaps -Description $msg.snaps -VariableName 'value'
-    New-ParamCompleter -LongName solarize -Description $msg.solarize -VariableName 'threshold'
-    New-ParamCompleter -LongName splice -Description $msg.splice -VariableName 'geometry'
-    New-ParamCompleter -LongName spread -Description $msg.spread -VariableName 'radius'
-    New-ParamCompleter -LongName statistic -Description $msg.statistic -VariableName 'type geometry'
-    New-ParamCompleter -LongName stretch -Description $msg.stretch -Arguments "Any","Condensed","Expanded","ExtraCondensed","ExtraExpanded","Normal","SemiCondensed","SemiExpanded","UltraCondensed","UltraExpanded" -VariableName 'type'
+    New-ParamCompleter -LongName similarity-threshold -Description $msg.similarity_threshold -Arguments $valueArgument
+    New-ParamCompleter -LongName size -Description $msg.size -Arguments $geometryArgument
+    New-ParamCompleter -LongName sketch -Description $msg.sketch -Arguments $geometryArgument
+    New-ParamCompleter -LongName smush -Description $msg.smush -Arguments @{ Name =  'offset' }
+    New-ParamCompleter -LongName snaps -Description $msg.snaps -Arguments $valueArgument
+    New-ParamCompleter -LongName solarize -Description $msg.solarize -Arguments @{ Name = 'threshold' }
+    New-ParamCompleter -LongName splice -Description $msg.splice -Arguments $geometryArgument
+    New-ParamCompleter -LongName spread -Description $msg.spread -Arguments @{ Name = 'radius' }
+    New-ParamCompleter -LongName statistic -Description $msg.statistic -Arguments $geometryArgument
+    New-ParamCompleter -LongName stretch -Description $msg.stretch -Arguments @{
+        Name = 'type';
+        Candidates = "Any","Condensed","Expanded","ExtraCondensed","ExtraExpanded","Normal","SemiCondensed","SemiExpanded","UltraCondensed","UltraExpanded"
+    }
     New-ParamCompleter -LongName strip -Description $msg.strip
-    New-ParamCompleter -LongName stroke -Description $msg.stroke -VariableName 'color'
-    New-ParamCompleter -LongName strokewidth -Description $msg.strokewidth -VariableName 'value'
-    New-ParamCompleter -LongName style -Description $msg.style -Arguments "Any","Italic","Normal","Oblique" -VariableName 'type'
+    New-ParamCompleter -LongName stroke -Description $msg.stroke -Arguments $colorArgument
+    New-ParamCompleter -LongName strokewidth -Description $msg.strokewidth -Arguments $valueArgument
+    New-ParamCompleter -LongName style -Description $msg.style -Arguments @{
+        Name = 'type';
+        Candidates = "Any","Italic","Normal","Oblique"
+    }
     New-ParamCompleter -LongName subimage-search -Description $msg.subimage_search
-    New-ParamCompleter -LongName swap -Description $msg.swap -VariableName 'indexes'
-    New-ParamCompleter -LongName swirl -Description $msg.swirl -VariableName 'degrees'
+    New-ParamCompleter -LongName swap -Description $msg.swap -Arguments @{ Name = 'indexes' }
+    New-ParamCompleter -LongName swirl -Description $msg.swirl -Arguments @{ Name = 'degrees' }
     New-ParamCompleter -LongName synchronize -Description $msg.synchronize
     New-ParamCompleter -LongName taint -Description $msg.taint
-    New-ParamCompleter -LongName texture -Description $msg.texture -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName threshold -Description $msg.threshold -VariableName 'value'
-    New-ParamCompleter -LongName thumbnail -Description $msg.thumbnail -VariableName 'geometry'
-    New-ParamCompleter -LongName tile -Description $msg.tile -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -LongName tile-offset -Description $msg.tile_offset -VariableName 'geometry'
-    New-ParamCompleter -LongName tint -Description $msg.tint -VariableName 'value'
+    New-ParamCompleter -LongName texture -Description $msg.texture -Arguments $filenameArgument
+    New-ParamCompleter -LongName threshold -Description $msg.threshold -Arguments $valueArgument
+    New-ParamCompleter -LongName thumbnail -Description $msg.thumbnail -Arguments $geometryArgument
+    New-ParamCompleter -LongName tile -Description $msg.tile -Arguments $filenameArgument
+    New-ParamCompleter -LongName tile-offset -Description $msg.tile_offset -Arguments $geometryArgument
+    New-ParamCompleter -LongName tint -Description $msg.tint -Arguments $valueArgument
     New-ParamCompleter -LongName transform -Description $msg.transform
-    New-ParamCompleter -LongName transparent -Description $msg.transparent -VariableName 'color'
-    New-ParamCompleter -LongName transparent-color -Description $msg.transparent_color -VariableName 'color'
+    New-ParamCompleter -LongName transparent -Description $msg.transparent -Arguments $colorArgument
+    New-ParamCompleter -LongName transparent-color -Description $msg.transparent_color -Arguments $colorArgument
     New-ParamCompleter -LongName transpose -Description $msg.transpose
     New-ParamCompleter -LongName transverse -Description $msg.transverse
-    New-ParamCompleter -LongName treedepth -Description $msg.treedepth -VariableName 'value'
+    New-ParamCompleter -LongName treedepth -Description $msg.treedepth -Arguments $valueArgument
     New-ParamCompleter -LongName trim -Description $msg.trim
-    New-ParamCompleter -LongName type -Description $msg.type -Arguments "Bilevel","Grayscale","GrayscaleMatte","Palette","PaletteMatte","TrueColor","TrueColorMatte","ColorSeparation","ColorSeparationMatte","Optimize" -VariableName 'type'
-    New-ParamCompleter -LongName undercolor -Description $msg.undercolor -VariableName 'color'
+    New-ParamCompleter -LongName type -Description $msg.type -Arguments @{
+        Name = 'type';
+        Candidates = "Bilevel","Grayscale","GrayscaleMatte","Palette","PaletteMatte","TrueColor","TrueColorMatte","ColorSeparation","ColorSeparationMatte","Optimize"
+    }
+    New-ParamCompleter -LongName undercolor -Description $msg.undercolor -Arguments $colorArgument
     New-ParamCompleter -LongName unique-colors -Description $msg.unique_colors
-    New-ParamCompleter -LongName units -Description $msg.units -Arguments "Undefined","PixelsPerInch","PixelsPerCentimeter" -VariableName 'type'
-    New-ParamCompleter -LongName unsharp -Description $msg.unsharp -VariableName 'geometry'
-    New-ParamCompleter -LongName update -Description $msg.update -VariableName 'seconds'
+    New-ParamCompleter -LongName units -Description $msg.units -Arguments @{
+        Name = 'type';
+        Candidates = "Undefined","PixelsPerInch","PixelsPerCentimeter"
+    }
+    New-ParamCompleter -LongName unsharp -Description $msg.unsharp -Arguments $geometryArgument
+    New-ParamCompleter -LongName update -Description $msg.update -Arguments @{ Name = 'seconds' }
     New-ParamCompleter -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName version -Description $msg.version
-    New-ParamCompleter -LongName view -Description $msg.view -VariableName 'string'
-    New-ParamCompleter -LongName vignette -Description $msg.vignette -VariableName 'geometry'
-    New-ParamCompleter -LongName virtual-pixel -Description $msg.virtual_pixel -Arguments "Background","Black","Constant","Dither","Edge","Gray","HorizontalTile","HorizontalTileEdge","Mirror","Random","Tile","Transparent","VerticalTile","VerticalTileEdge","White" -VariableName 'method'
-    New-ParamCompleter -LongName visual -Description $msg.visual -VariableName 'type'
-    New-ParamCompleter -LongName watermark -Description $msg.watermark -VariableName 'geometry'
-    New-ParamCompleter -LongName wave -Description $msg.wave -VariableName 'geometry'
-    New-ParamCompleter -LongName wavelet-denoise -Description $msg.wavelet_denoise -VariableName 'threshold'
-    New-ParamCompleter -LongName weight -Description $msg.weight -VariableName 'type'
-    New-ParamCompleter -LongName white-point -Description $msg.white_point -VariableName 'point'
-    New-ParamCompleter -LongName white-threshold -Description $msg.white_threshold -VariableName 'value'
-    New-ParamCompleter -LongName window -Description $msg.window -VariableName 'id'
-    New-ParamCompleter -LongName window-group -Description $msg.window_group -VariableName 'id'
+    New-ParamCompleter -LongName view -Description $msg.view -Arguments $stringArgument
+    New-ParamCompleter -LongName vignette -Description $msg.vignette -Arguments $geometryArgument
+    New-ParamCompleter -LongName virtual-pixel -Description $msg.virtual_pixel -Arguments @{
+        Name = 'method';
+        Candidates = "Background","Black","Constant","Dither","Edge","Gray","HorizontalTile","HorizontalTileEdge","Mirror","Random","Tile","Transparent","VerticalTile","VerticalTileEdge","White"
+    }
+    New-ParamCompleter -LongName visual -Description $msg.visual -Arguments @{ Name = 'type' }
+    New-ParamCompleter -LongName watermark -Description $msg.watermark -Arguments $geometryArgument
+    New-ParamCompleter -LongName wave -Description $msg.wave -Arguments $geometryArgument
+    New-ParamCompleter -LongName wavelet-denoise -Description $msg.wavelet_denoise -Arguments @{ Name = 'threshold' }
+    New-ParamCompleter -LongName weight -Description $msg.weight -Arguments @{ Name = 'type' }
+    New-ParamCompleter -LongName white-point -Description $msg.white_point -Arguments @{ Name = 'point' }
+    New-ParamCompleter -LongName white-threshold -Description $msg.white_threshold -Arguments $valueArgument
+    New-ParamCompleter -LongName window -Description $msg.window -Arguments @{ Name = 'id' }
+    New-ParamCompleter -LongName window-group -Description $msg.window_group -Arguments @{ Name = 'id' }
 )
