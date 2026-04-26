@@ -56,16 +56,16 @@ $pluginTypes = @(
 
 Register-NativeCompleter -Name ansible-doc -Parameters @(
     New-ParamCompleter -ShortName a -LongName all -Description $msg.all
-    New-ParamCompleter -ShortName e -LongName entry-point -Description $msg.entry_point -VariableName 'ENTRY_POINT'
+    New-ParamCompleter -ShortName e -LongName entry-point -Description $msg.entry_point -Arguments @{ Name = 'ENTRY_POINT' }
     New-ParamCompleter -ShortName j -LongName json -Description $msg.json
     New-ParamCompleter -ShortName l -LongName list -Description $msg.list
     New-ParamCompleter -LongName metadata-dump -Description $msg.metadata_dump
-    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -VariableName 'MODULE_PATH'
+    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -Arguments @{ Name = 'MODULE_PATH' }
     New-ParamCompleter -LongName no-native-async -Description $msg.no_native_async
-    New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -ArgumentType Directory -VariableName 'BASEDIR'
+    New-ParamCompleter -LongName playbook-dir -Description $msg.playbook_dir -Arguments @{ Name = 'BASEDIR'; Type = 'Directory' }
     New-ParamCompleter -ShortName r -LongName rotate-pages -Description $msg.rotate_pages
     New-ParamCompleter -ShortName s -LongName snippet -Description $msg.snippet
-    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -Arguments $pluginTypes -VariableName 'TARGET'
+    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -Arguments @{ Name = 'TARGET'; Candidates = $pluginTypes }
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help

@@ -4,6 +4,7 @@
 Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
+    awk                  = pattern scanning and text processing language
     assign               = Set variable VAR to value
     bignum               = Force arbitrary precision arithmetic on numbers
     characters_as_bytes  = Treat all input data as single-byte characters
@@ -35,35 +36,35 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-Register-NativeCompleter -Name awk -Description 'pattern scanning and text processing language' -Parameters @(
+Register-NativeCompleter -Name awk -Description $msg.awk -Parameters @(
     # Program specification
-    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'program-file'
-    New-ParamCompleter -ShortName e -LongName source -Description $msg.source -VariableName 'program-text'
-    New-ParamCompleter -ShortName E -LongName exec -Description $msg.exec -ArgumentType File -VariableName 'program-file'
+    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Arguments @{ Name = 'program-file'; Type = 'File' }
+    New-ParamCompleter -ShortName e -LongName source -Description $msg.source -Arguments @{ Name = 'program-text' }
+    New-ParamCompleter -ShortName E -LongName exec -Description $msg.exec -Arguments @{ Name = 'program-file'; Type = 'File' }
 
     # Variable assignment
-    New-ParamCompleter -ShortName v -LongName assign -Description $msg.assign -VariableName 'var=val'
+    New-ParamCompleter -ShortName v -LongName assign -Description $msg.assign -Arguments @{ Name = 'var=val' }
 
     # Field separator
-    New-ParamCompleter -ShortName F -LongName field-separator -Description $msg.field_separator -VariableName 'fs'
+    New-ParamCompleter -ShortName F -LongName field-separator -Description $msg.field_separator -Arguments @{ Name = 'fs' }
 
     # Debugging and optimization
-    New-ParamCompleter -ShortName D -LongName debug -Description $msg.debug -Type FlagOrValue -VariableName 'file'
-    New-ParamCompleter -ShortName d -LongName dump-variables -Description $msg.dump_variables -Type FlagOrValue -VariableName 'file'
-    New-ParamCompleter -ShortName o -LongName pretty-print -Description $msg.pretty_print -Type FlagOrValue -VariableName 'file'
-    New-ParamCompleter -ShortName p -LongName profile -Description $msg.profile -Type FlagOrValue -VariableName 'file'
+    New-ParamCompleter -ShortName D -LongName debug -Description $msg.debug -Arguments @{ Name = 'file'; Nargs = '?'; Type = 'File'}
+    New-ParamCompleter -ShortName d -LongName dump-variables -Description $msg.dump_variables -Arguments @{ Name = 'file'; Nargs = '?'; Type = 'File' }
+    New-ParamCompleter -ShortName o -LongName pretty-print -Description $msg.pretty_print -Arguments @{ Name = 'file'; Nargs = '?'; Type = 'File' }
+    New-ParamCompleter -ShortName p -LongName profile -Description $msg.profile -Arguments @{ Name = 'prof-file'; Nargs = '?'; Type = 'File' }
     New-ParamCompleter -ShortName O -LongName optimize -Description $msg.optimize
     New-ParamCompleter -ShortName s -LongName no-optimize -Description $msg.no_optimize
 
     # Warnings and compatibility
-    New-ParamCompleter -ShortName L -LongName lint -Description $msg.lint -Type FlagOrValue -Arguments "fatal","invalid","no-ext" -VariableName 'value'
+    New-ParamCompleter -ShortName L -LongName lint -Description $msg.lint -Arguments @{ Name = 'value'; Nargs = '?'; Candidates = "fatal","invalid","no-ext" }
     New-ParamCompleter -ShortName t -LongName lint-old -Description $msg.lint_old
     New-ParamCompleter -ShortName c -LongName traditional -Description $msg.traditional
     New-ParamCompleter -ShortName P -LongName posix -Description $msg.posix
 
     # Extensions and libraries
-    New-ParamCompleter -ShortName i -LongName include -Description $msg.include -ArgumentType File -VariableName 'source-file'
-    New-ParamCompleter -ShortName l -LongName load -Description $msg.load -ArgumentType File -VariableName 'extension'
+    New-ParamCompleter -ShortName i -LongName include -Description $msg.include -Arguments @{  Name = 'source-file'; Type = 'File' }
+    New-ParamCompleter -ShortName l -LongName load -Description $msg.load -Arguments @{ Name = 'extension'; Type = 'File' }
 
     # Data handling
     New-ParamCompleter -ShortName b -LongName characters-as-bytes -Description $msg.characters_as_bytes
@@ -78,21 +79,7 @@ Register-NativeCompleter -Name awk -Description 'pattern scanning and text proce
     New-ParamCompleter -ShortName C -LongName copyright -Description $msg.copyright
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-
-    # First non-option argument should be the AWK program if -f was not used
-    if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey('file') -and
-        -not $this.BoundParameters.ContainsKey('source') -and
-        -not $this.BoundParameters.ContainsKey('exec'))
-    {
-        if ([string]::IsNullOrEmpty($_))
-        {
-            "program`tAWK program text"
-        }
-        else
-        {
-            $null
-        }
-    }
+) -Arguments @{
+    Name = 'program-txt'
+    Nargs = '0+'
 }

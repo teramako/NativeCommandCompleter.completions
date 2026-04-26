@@ -62,9 +62,9 @@ $kvStyle = New-ParamStyle -ValueSeparator '=' -ValueStyle Adjacent
 Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
     New-ParamCompleter -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
-    New-ParamCompleter -LongName bs -Description $msg.bs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName cbs -Description $msg.cbs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName conv -Description $msg.conv -Style $kvStyle -ArgumentType List -VariableName 'CONVS' -Arguments @(
+    New-ParamCompleter -LongName bs -Description $msg.bs -Style $kvStyle -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter -LongName cbs -Description $msg.cbs -Style $kvStyle -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter -LongName conv -Description $msg.conv -Style $kvStyle -Arguments @{ Name = 'CONVS'; List = $true; Candidates = @(
         "ascii`t{0}" -f $msg.conv_ascii
         "ebcdic`t{0}" -f $msg.conv_ebcdic
         "ibm`t{0}" -f $msg.conv_ibm
@@ -81,11 +81,11 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "noerror`t{0}" -f $msg.conv_noerror
         "fdatasync`t{0}" -f $msg.conv_fdatasync
         "fsync`t{0}" -f $msg.conv_fsync
-    )
-    New-ParamCompleter -LongName count -Description $msg.count -Style $kvStyle -VariableName 'N'
-    New-ParamCompleter -LongName ibs -Description $msg.ibs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName if -Description $msg.if -Style $kvStyle -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName iflag -Description $msg.iflag -Style $kvStyle -ArgumentType List -VariableName 'FLAGS' -Arguments @(
+    ) }
+    New-ParamCompleter -LongName count -Description $msg.count -Style $kvStyle -Arguments @{ Name = 'N' }
+    New-ParamCompleter -LongName ibs -Description $msg.ibs -Style $kvStyle -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter -LongName if -Description $msg.if -Style $kvStyle -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName iflag -Description $msg.iflag -Style $kvStyle -Arguments @{ Name = 'FLAGS'; List = $true; Candidates = @(
         "append`t{0}" -f $msg.flag_append
         "direct`t{0}" -f $msg.flag_direct
         "directory`t{0}" -f $msg.flag_directory
@@ -99,10 +99,10 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "nofollow`t{0}" -f $msg.flag_nofollow
         "count_bytes`t{0}" -f $msg.flag_count_bytes
         "skip_bytes`t{0}" -f $msg.flag_skip_bytes
-    )
-    New-ParamCompleter -LongName obs -Description $msg.obs -Style $kvStyle -VariableName 'BYTES'
-    New-ParamCompleter -LongName of -Description $msg.of -Style $kvStyle -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName oflag -Description $msg.oflag -Style $kvStyle -ArgumentType List -VariableName 'FLAGS' -Arguments @(
+    ) }
+    New-ParamCompleter -LongName obs -Description $msg.obs -Style $kvStyle -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter -LongName of -Description $msg.of -Style $kvStyle -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName oflag -Description $msg.oflag -Style $kvStyle -Arguments @{ Name = 'FLAGS'; List = $true; Candidates = @(
         "append`t{0}" -f $msg.flag_append
         "direct`t{0}" -f $msg.flag_direct
         "directory`t{0}" -f $msg.flag_directory
@@ -114,12 +114,12 @@ Register-NativeCompleter -Name dd -Description $msg.dd -Parameters @(
         "noctty`t{0}" -f $msg.flag_noctty
         "nofollow`t{0}" -f $msg.flag_nofollow
         "seek_bytes`t{0}" -f $msg.flag_seek_bytes
-    )
-    New-ParamCompleter -LongName seek -Description $msg.seek -Style $kvStyle -VariableName 'N'
-    New-ParamCompleter -LongName skip -Description $msg.skip -Style $kvStyle -VariableName 'N'
-    New-ParamCompleter -LongName status -Description $msg.status -Style $kvStyle -VariableName 'LEVEL' -Arguments @(
+    ) }
+    New-ParamCompleter -LongName seek -Description $msg.seek -Style $kvStyle -Arguments @{ Name = 'N' }
+    New-ParamCompleter -LongName skip -Description $msg.skip -Style $kvStyle -Arguments @{ Name = 'N' }
+    New-ParamCompleter -LongName status -Description $msg.status -Style $kvStyle -Arguments @{ Name = 'LEVEL'; Candidates = @(
         "none`t{0}" -f $msg.status_none
         "noxfer`t{0}" -f $msg.status_noxfer
         "progress`t{0}" -f $msg.status_progress
-    )
+    ) }
 ) -NoFileCompletions

@@ -32,14 +32,14 @@ date --version 2>&1 | Out-Null
 if ($LASTEXITCODE -eq 0) # GNU mkdir
 {
     Register-NativeCompleter -Name date -Description $msg.date -Parameters @(
-        New-ParamCompleter -ShortName d -LongName date -Description $msg.gnu_date -VariableName 'STRING'
-        New-ParamCompleter -ShortName f -LongName file -Description $msg.gnu_file -ArgumentType File -VariableName 'DATEFILE'
-        New-ParamCompleter -ShortName I -LongName iso-8601 -Description $msg.gnu_iso8601 -Type FlagOrValue -Arguments "date","hours","minutes","seconds","ns" -VariableName 'FMT'
+        New-ParamCompleter -ShortName d -LongName date -Description $msg.gnu_date -Arguments @{ Name = 'STRING' }
+        New-ParamCompleter -ShortName f -LongName file -Description $msg.gnu_file -Arguments @{ Name = 'DATEFILE'; Type = 'File' }
+        New-ParamCompleter -ShortName I -LongName iso-8601 -Description $msg.gnu_iso8601 -Arguments @{ Name = 'FMT'; Nargs = '?'; Candidates = "date","hours","minutes","seconds","ns" }
         New-ParamCompleter -LongName resolution -Description $msg.gnu_resolution
         New-ParamCompleter -ShortName R -LongName rfc-2822 -Description $msg.gnu_rfc2822
-        New-ParamCompleter -LongName rfc-3339 -Description $msg.gnu_rfc3339 -Arguments "date","seconds","ns" -VariableName 'FMT'
-        New-ParamCompleter -ShortName r -LongName reference -Description $msg.gnu_reference -ArgumentType File -VariableName 'FILE'
-        New-ParamCompleter -ShortName s -LongName set -Description $msg.gnu_set -VariableName 'STRING'
+        New-ParamCompleter -LongName rfc-3339 -Description $msg.gnu_rfc3339 -Arguments @{ Name = 'FMT'; Candidates = "date","seconds","ns" }
+        New-ParamCompleter -ShortName r -LongName reference -Description $msg.gnu_reference -Arguments @{ Name = 'FILE'; Type = 'File' }
+        New-ParamCompleter -ShortName s -LongName set -Description $msg.gnu_set -Arguments @{ Name = 'STRING' }
         New-ParamCompleter -ShortName u -LongName utc,universal -Description $msg.gnu_utc
         New-ParamCompleter -ShortName h -LongName help -Description $msg.gnu_help
         New-ParamCompleter -ShortName v -LongName version -Description $msg.gnu_version
@@ -50,10 +50,10 @@ else
     Register-NativeCompleter -Name date -Description $msg.date -Parameters @(
         New-ParamCompleter -ShortName u -Description $msg.bsd_utc
         New-ParamCompleter -ShortName j -Description $msg.bsd_dontSet
-        New-ParamCompleter -ShortName r -Description $msg.bsd_mtimeOrTimestamp -VariableName 'FILE-OR-SECONDS'
-        New-ParamCompleter -ShortName v -Description $msg.bsd_adjust -VariableName '[+|-]val[y|m|w|d|H|M|S]'
+        New-ParamCompleter -ShortName r -Description $msg.bsd_mtimeOrTimestamp -Arguments @{ Name = 'FILE-OR-SECONDS' }
+        New-ParamCompleter -ShortName v -Description $msg.bsd_adjust -Arguments @{ Name = '[+|-]val[y|m|w|d|H|M|S]' }
         New-ParamCompleter -ShortName R -Description $msg.bsd_rfc2822
-        New-ParamCompleter -ShortName I -Description $msg.bsd_iso8601 -Arguments "date","hours","minutes","seconds" -VariableName 'FMT'
-        New-ParamCompleter -ShortName f -Description $msg.bsd_format -VariableName 'input_fmt'
+        New-ParamCompleter -ShortName I -Description $msg.bsd_iso8601 -Arguments @{ Name = 'FMT'; Candidates = "date","hours","minutes","seconds" }
+        New-ParamCompleter -ShortName f -Description $msg.bsd_format -Arguments @{ Name = 'input_fmt' }
     ) -NoFileCompletions
 }

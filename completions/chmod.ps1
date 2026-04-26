@@ -24,14 +24,21 @@ Register-NativeCompleter -Name chmod -Description $msg.chmod -Parameters @(
     New-ParamCompleter -LongName preserve-root -Description $msg.preserveRoot
     New-ParamCompleter -ShortName f -LongName silent, quiet -Description $msg.slient
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-    New-ParamCompleter -LongName reference -ArgumentType File -Description $msg.reference -VariableName 'RFILE'
+    New-ParamCompleter -LongName reference -Description $msg.reference -Arguments @{ Name = 'RFILE'; Type = 'File' }
     New-ParamCompleter -ShortName R -LongName recursive -Description $msg.recursive
     New-ParamCompleter -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey("reference"))
-    {
-        return $null
+) -NoFileCompletions -Arguments @{
+    Name = 'MODE'
+    Script = {
+        if ($this.BoundParameters.ContainsKey("reference")) {
+            [MT.Comp.Helper]::CompleteFilename($this, $true, $true);
+            return;
+        }
+        return $null;
     }
+}, @{
+    Name = 'FILE';
+    Nargs = '1+';
+    Type = 'File';
 }

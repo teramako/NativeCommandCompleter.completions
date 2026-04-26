@@ -441,293 +441,353 @@ $contextCompleter = {
 
 $commonRunParams = @(
     New-ParamCompleter -ShortName a -LongName attach                -Description $msg.container_run_attach              -Arguments "STDIN","STDOUT","STDERR"
-    New-ParamCompleter              -LongName blkio-weight          -Description $msg.container_run_blkio_weight        -VariableName 'WEIGHT'
-    New-ParamCompleter              -LongName cap-add               -Description $msg.container_run_cap_add             -VariableName 'LIST'
-    New-ParamCompleter              -LongName cap-drop              -Description $msg.container_run_cap_drop            -VariableName 'LIST'
-    New-ParamCompleter              -LongName cgroup-parent         -Description $msg.container_run_cgroup_parent       -VariableName 'STRING'
-    New-ParamCompleter              -LongName cgroupns              -Description $msg.container_run_cgroupns            -Arguments "host","private" -VariableName 'MODE'
-    New-ParamCompleter              -LongName cidfile               -Description $msg.container_run_cidfile             -ArgumentType File -VariableName 'STRING'
-    New-ParamCompleter              -LongName cpu-period            -Description $msg.container_run_cpu_period          -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-quota             -Description $msg.container_run_cpu_quota           -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-rt-period         -Description $msg.container_run_cpu_rt_period       -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-rt-runtime        -Description $msg.container_run_cpu_rt_runtime      -VariableName 'INT'
-    New-ParamCompleter -ShortName c -LongName cpu-shares            -Description $msg.container_run_cpu_shares          -VariableName 'INT'
-    New-ParamCompleter              -LongName cpus                  -Description $msg.container_run_cpus                -VariableName 'DECIMAL'
-    New-ParamCompleter              -LongName cpuset-cpus           -Description $msg.container_run_cpuset_cpus         -VariableName 'STRING'
-    New-ParamCompleter              -LongName cpuset-mems           -Description $msg.container_run_cpuset_mems         -VariableName 'STRING'
+    New-ParamCompleter              -LongName blkio-weight          -Description $msg.container_run_blkio_weight        -Arguments @{ Name = 'WEIGHT' }
+    New-ParamCompleter              -LongName cap-add               -Description $msg.container_run_cap_add             -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName cap-drop              -Description $msg.container_run_cap_drop            -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName cgroup-parent         -Description $msg.container_run_cgroup_parent       -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName cgroupns              -Description $msg.container_run_cgroupns            -Arguments @{ Name = 'MODE'; Candidates = "host","private" }
+    New-ParamCompleter              -LongName cidfile               -Description $msg.container_run_cidfile             -Arguments @{ Name = 'STRING'; Type = 'File' }
+    New-ParamCompleter              -LongName cpu-period            -Description $msg.container_run_cpu_period          -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-quota             -Description $msg.container_run_cpu_quota           -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-rt-period         -Description $msg.container_run_cpu_rt_period       -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-rt-runtime        -Description $msg.container_run_cpu_rt_runtime      -Arguments @{ Name = 'INT' }
+    New-ParamCompleter -ShortName c -LongName cpu-shares            -Description $msg.container_run_cpu_shares          -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpus                  -Description $msg.container_run_cpus                -Arguments @{ Name = 'DECIMAL' }
+    New-ParamCompleter              -LongName cpuset-cpus           -Description $msg.container_run_cpuset_cpus         -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName cpuset-mems           -Description $msg.container_run_cpuset_mems         -Arguments @{ Name = 'STRING' }
     New-ParamCompleter -ShortName d -LongName detach                -Description $msg.container_run_detach
-    New-ParamCompleter              -LongName detach-keys           -Description $msg.container_run_detach_keys         -VariableName 'STRING'
-    New-ParamCompleter              -LongName device                -Description $msg.container_run_device              -VariableName 'LIST'
-    New-ParamCompleter              -LongName device-cgroup-rule    -Description $msg.container_run_device_cgroup_rule  -VariableName 'LIST'
-    New-ParamCompleter              -LongName device-read-bps       -Description $msg.container_run_device_read_bps     -VariableName 'LIST'
-    New-ParamCompleter              -LongName device-read-iops      -Description $msg.container_run_device_read_iops    -VariableName 'LIST'
-    New-ParamCompleter              -LongName device-write-bps      -Description $msg.container_run_device_write_bps    -VariableName 'LIST'
-    New-ParamCompleter              -LongName device-write-iops     -Description $msg.container_run_device_write_iops   -VariableName 'LIST'
+    New-ParamCompleter              -LongName detach-keys           -Description $msg.container_run_detach_keys         -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName device                -Description $msg.container_run_device              -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName device-cgroup-rule    -Description $msg.container_run_device_cgroup_rule  -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName device-read-bps       -Description $msg.container_run_device_read_bps     -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName device-read-iops      -Description $msg.container_run_device_read_iops    -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName device-write-bps      -Description $msg.container_run_device_write_bps    -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName device-write-iops     -Description $msg.container_run_device_write_iops   -Arguments @{ Name = 'LIST' }
     New-ParamCompleter              -LongName disable-content-trust -Description $msg.container_run_disable_content_trust
-    New-ParamCompleter              -LongName dns                   -Description $msg.container_run_dns                 -VariableName 'LIST'
-    New-ParamCompleter              -LongName dns-option            -Description $msg.container_run_dns_option          -VariableName 'LIST'
-    New-ParamCompleter              -LongName dns-search            -Description $msg.container_run_dns_search          -VariableName 'LIST'
-    New-ParamCompleter              -LongName domainname            -Description $msg.container_run_domainname          -VariableName 'STRING'
-    New-ParamCompleter              -LongName entrypoint            -Description $msg.container_run_entrypoint          -VariableName 'STRING'
-    New-ParamCompleter -ShortName e -LongName env                   -Description $msg.container_run_env                 -VariableName 'LIST'
-    New-ParamCompleter              -LongName env-file              -Description $msg.container_run_env_file            -ArgumentType File -VariableName 'LIST'
-    New-ParamCompleter              -LongName expose                -Description $msg.container_run_expose              -VariableName 'LIST'
-    New-ParamCompleter              -LongName gpus                  -Description $msg.container_run_gpus                -VariableName 'GPU-REQUEST'
-    New-ParamCompleter              -LongName group-add             -Description $msg.container_run_group_add           -VariableName 'LIST'
-    New-ParamCompleter              -LongName health-cmd            -Description $msg.container_run_health_cmd          -VariableName 'STRING'
-    New-ParamCompleter              -LongName health-interval       -Description $msg.container_run_health_interval     -VariableName 'DURATION'
-    New-ParamCompleter              -LongName health-retries        -Description $msg.container_run_health_retries      -VariableName 'INT'
-    New-ParamCompleter              -LongName health-start-period   -Description $msg.container_run_health_start_period -VariableName 'DURATION'
-    New-ParamCompleter              -LongName health-timeout        -Description $msg.container_run_health_timeout      -VariableName 'DURATION'
-    New-ParamCompleter -ShortName h -LongName hostname              -Description $msg.container_run_hostname            -VariableName 'STRING'
+    New-ParamCompleter              -LongName dns                   -Description $msg.container_run_dns                 -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName dns-option            -Description $msg.container_run_dns_option          -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName dns-search            -Description $msg.container_run_dns_search          -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName domainname            -Description $msg.container_run_domainname          -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName entrypoint            -Description $msg.container_run_entrypoint          -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName e -LongName env                   -Description $msg.container_run_env                 -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName env-file              -Description $msg.container_run_env_file            -Arguments @{ Name = 'LIST'; Type = 'File' }
+    New-ParamCompleter              -LongName expose                -Description $msg.container_run_expose              -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName gpus                  -Description $msg.container_run_gpus                -Arguments @{ Name = 'GPU-REQUEST' }
+    New-ParamCompleter              -LongName group-add             -Description $msg.container_run_group_add           -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName health-cmd            -Description $msg.container_run_health_cmd          -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName health-interval       -Description $msg.container_run_health_interval     -Arguments @{ Name = 'DURATION' }
+    New-ParamCompleter              -LongName health-retries        -Description $msg.container_run_health_retries      -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName health-start-period   -Description $msg.container_run_health_start_period -Arguments @{ Name = 'DURATION' }
+    New-ParamCompleter              -LongName health-timeout        -Description $msg.container_run_health_timeout      -Arguments @{ Name = 'DURATION' }
+    New-ParamCompleter -ShortName h -LongName hostname              -Description $msg.container_run_hostname            -Arguments @{ Name = 'STRING' }
     New-ParamCompleter              -LongName init                  -Description $msg.container_run_init
     New-ParamCompleter -ShortName i -LongName interactive           -Description $msg.container_run_interactive
-    New-ParamCompleter              -LongName ip                    -Description $msg.container_run_ip                  -VariableName 'STRING'
-    New-ParamCompleter              -LongName ip6                   -Description $msg.container_run_ip6                 -VariableName 'STRING'
-    New-ParamCompleter              -LongName ipc                   -Description $msg.container_run_ipc                 -VariableName 'STRING'
-    New-ParamCompleter              -LongName isolation             -Description $msg.container_run_isolation           -Arguments "default","process","hyperv" -VariableName 'STRING'
-    New-ParamCompleter              -LongName kernel-memory         -Description $msg.container_run_kernel_memory       -VariableName 'BYTES'
-    New-ParamCompleter -ShortName l -LongName label                 -Description $msg.container_run_label               -VariableName 'LIST'
-    New-ParamCompleter              -LongName label-file            -Description $msg.container_run_label_file          -ArgumentType File -VariableName 'LIST'
-    New-ParamCompleter              -LongName link                  -Description $msg.container_run_link                -VariableName 'LIST'
-    New-ParamCompleter              -LongName link-local-ip         -Description $msg.container_run_link_local_ip       -VariableName 'LIST'
-    New-ParamCompleter              -LongName log-driver            -Description $msg.container_run_log_driver          -Arguments "json-file","syslog","journald","gelf","fluentd","awslogs","splunk","none" -VariableName 'STRING'
-    New-ParamCompleter              -LongName log-opt               -Description $msg.container_run_log_opt             -VariableName 'LIST'
-    New-ParamCompleter              -LongName mac-address           -Description $msg.container_run_mac_address         -VariableName 'STRING'
-    New-ParamCompleter -ShortName m -LongName memory                -Description $msg.container_run_memory              -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-reservation    -Description $msg.container_run_memory_reservation  -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-swap           -Description $msg.container_run_memory_swap         -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-swappiness     -Description $msg.container_run_memory_swappiness   -VariableName 'INT'
-    New-ParamCompleter              -LongName mount                 -Description $msg.container_run_mount               -VariableName 'MOUNT'
-    New-ParamCompleter              -LongName name                  -Description $msg.container_run_name                -VariableName 'STRING'
-    New-ParamCompleter              -LongName network               -Description $msg.container_run_network             -ArgumentCompleter $networkCompleter -VariableName 'NETWORK'
-    New-ParamCompleter              -LongName network-alias         -Description $msg.container_run_network_alias       -VariableName 'LIST'
+    New-ParamCompleter              -LongName ip                    -Description $msg.container_run_ip                  -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName ip6                   -Description $msg.container_run_ip6                 -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName ipc                   -Description $msg.container_run_ipc                 -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName isolation             -Description $msg.container_run_isolation           -Arguments @{ Name = 'STRING'; Candidates = "default","process","hyperv" }
+    New-ParamCompleter              -LongName kernel-memory         -Description $msg.container_run_kernel_memory       -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter -ShortName l -LongName label                 -Description $msg.container_run_label               -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName label-file            -Description $msg.container_run_label_file          -Arguments @{ Name = 'LIST'; Type = 'File' }
+    New-ParamCompleter              -LongName link                  -Description $msg.container_run_link                -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName link-local-ip         -Description $msg.container_run_link_local_ip       -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName log-driver            -Description $msg.container_run_log_driver          -Arguments @{ Name = 'STRING'; Candidates = "json-file","syslog","journald","gelf","fluentd","awslogs","splunk","none" }
+    New-ParamCompleter              -LongName log-opt               -Description $msg.container_run_log_opt             -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName mac-address           -Description $msg.container_run_mac_address         -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName m -LongName memory                -Description $msg.container_run_memory              -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-reservation    -Description $msg.container_run_memory_reservation  -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-swap           -Description $msg.container_run_memory_swap         -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-swappiness     -Description $msg.container_run_memory_swappiness   -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName mount                 -Description $msg.container_run_mount               -Arguments @{ Name = 'MOUNT' }
+    New-ParamCompleter              -LongName name                  -Description $msg.container_run_name                -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName network               -Description $msg.container_run_network             -Arguments @{ Name = 'NETWORK'; Script = $networkCompleter }
+    New-ParamCompleter              -LongName network-alias         -Description $msg.container_run_network_alias       -Arguments @{ Name = 'LIST' }
     New-ParamCompleter              -LongName no-healthcheck        -Description $msg.container_run_no_healthcheck
     New-ParamCompleter              -LongName oom-kill-disable      -Description $msg.container_run_oom_kill_disable
-    New-ParamCompleter              -LongName oom-score-adj         -Description $msg.container_run_oom_score_adj       -VariableName 'INT'
-    New-ParamCompleter              -LongName pid                   -Description $msg.container_run_pid                 -VariableName 'STRING'
-    New-ParamCompleter              -LongName pids-limit            -Description $msg.container_run_pids_limit          -VariableName 'INT'
-    New-ParamCompleter              -LongName platform              -Description $msg.container_run_platform            -VariableName 'STRING'
+    New-ParamCompleter              -LongName oom-score-adj         -Description $msg.container_run_oom_score_adj       -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName pid                   -Description $msg.container_run_pid                 -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName pids-limit            -Description $msg.container_run_pids_limit          -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName platform              -Description $msg.container_run_platform            -Arguments @{ Name = 'STRING' }
     New-ParamCompleter              -LongName privileged            -Description $msg.container_run_privileged
-    New-ParamCompleter -ShortName p -LongName publish               -Description $msg.container_run_publish             -VariableName 'LIST'
+    New-ParamCompleter -ShortName p -LongName publish               -Description $msg.container_run_publish             -Arguments @{ Name = 'LIST' }
     New-ParamCompleter -ShortName P -LongName publish-all           -Description $msg.container_run_publish_all
-    New-ParamCompleter              -LongName pull                  -Description $msg.container_run_pull                -Arguments "always","missing","never" -VariableName 'STRING'
+    New-ParamCompleter              -LongName pull                  -Description $msg.container_run_pull                -Arguments @{ Name = 'STRING'; Candidates = "always","missing","never" }
     New-ParamCompleter -ShortName q -LongName quiet                 -Description $msg.container_run_quiet
     New-ParamCompleter              -LongName read-only             -Description $msg.container_run_read_only
-    New-ParamCompleter              -LongName restart               -Description $msg.container_run_restart             -Arguments "no","always","on-failure","unless-stopped" -VariableName 'STRING'
+    New-ParamCompleter              -LongName restart               -Description $msg.container_run_restart            -Arguments @{ Name = 'STRING'; Candidates = "no","always","on-failure","unless-stopped" }
     New-ParamCompleter              -LongName rm                    -Description $msg.container_run_rm
-    New-ParamCompleter              -LongName runtime               -Description $msg.container_run_runtime             -VariableName 'STRING'
-    New-ParamCompleter              -LongName security-opt          -Description $msg.container_run_security_opt        -VariableName 'LIST'
-    New-ParamCompleter              -LongName shm-size              -Description $msg.container_run_shm_size            -VariableName 'BYTES'
+    New-ParamCompleter              -LongName runtime               -Description $msg.container_run_runtime             -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName security-opt          -Description $msg.container_run_security_opt        -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName shm-size              -Description $msg.container_run_shm_size            -Arguments @{ Name = 'BYTES' }
     New-ParamCompleter              -LongName sig-proxy             -Description $msg.container_run_sig_proxy
-    New-ParamCompleter              -LongName stop-signal           -Description $msg.container_run_stop_signal         -VariableName 'STRING'
-    New-ParamCompleter              -LongName stop-timeout          -Description $msg.container_run_stop_timeout        -VariableName 'INT'
-    New-ParamCompleter              -LongName storage-opt           -Description $msg.container_run_storage_opt         -VariableName 'LIST'
-    New-ParamCompleter              -LongName sysctl                -Description $msg.container_run_sysctl              -VariableName 'MAP'
-    New-ParamCompleter              -LongName tmpfs                 -Description $msg.container_run_tmpfs               -VariableName 'LIST'
+    New-ParamCompleter              -LongName stop-signal           -Description $msg.container_run_stop_signal         -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName stop-timeout          -Description $msg.container_run_stop_timeout        -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName storage-opt           -Description $msg.container_run_storage_opt         -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName sysctl                -Description $msg.container_run_sysctl              -Arguments @{ Name = 'MAP' }
+    New-ParamCompleter              -LongName tmpfs                 -Description $msg.container_run_tmpfs               -Arguments @{ Name = 'LIST' }
     New-ParamCompleter -ShortName t -LongName tty                   -Description $msg.container_run_tty
-    New-ParamCompleter              -LongName ulimit                -Description $msg.container_run_ulimit              -VariableName 'ULIMIT'
-    New-ParamCompleter -ShortName u -LongName user                  -Description $msg.container_run_user                -VariableName 'STRING'
-    New-ParamCompleter              -LongName userns                -Description $msg.container_run_userns              -VariableName 'STRING'
-    New-ParamCompleter              -LongName uts                   -Description $msg.container_run_uts                 -VariableName 'STRING'
-    New-ParamCompleter -ShortName v -LongName volume                -Description $msg.container_run_volume              -VariableName 'LIST'
-    New-ParamCompleter              -LongName volume-driver         -Description $msg.container_run_volume_driver       -VariableName 'STRING'
-    New-ParamCompleter              -LongName volumes-from          -Description $msg.container_run_volumes_from        -VariableName 'LIST'
-    New-ParamCompleter -ShortName w -LongName workdir               -Description $msg.container_run_workdir             -ArgumentType Directory -VariableName 'STRING'
+    New-ParamCompleter              -LongName ulimit                -Description $msg.container_run_ulimit              -Arguments @{ Name = 'ULIMIT' }
+    New-ParamCompleter -ShortName u -LongName user                  -Description $msg.container_run_user                -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName userns                -Description $msg.container_run_userns              -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName uts                   -Description $msg.container_run_uts                 -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName v -LongName volume                -Description $msg.container_run_volume              -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName volume-driver         -Description $msg.container_run_volume_driver       -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName volumes-from          -Description $msg.container_run_volumes_from        -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter -ShortName w -LongName workdir               -Description $msg.container_run_workdir             -Arguments @{ Name = 'STRING'; Type = 'Directory' }
 )
 
-$containerAttachCommand = New-CommandCompleter -Name attach  -Description $msg.container_attach  -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerCommitCommand = New-CommandCompleter -Name commit  -Description $msg.container_commit  -NoFileCompletions -ArgumentCompleter $allContainerCompleter -Parameters @(
-    New-ParamCompleter -ShortName a -LongName author   -Description $msg.container_commit_author  -VariableName 'STRING'
-    New-ParamCompleter -ShortName c -LongName change   -Description $msg.container_commit_change  -VariableName 'LIST'
-    New-ParamCompleter -ShortName m -LongName message  -Description $msg.container_commit_message -VariableName 'STRING'
+$containerAttachCommand = New-CommandCompleter -Name attach  -Description $msg.container_attach  -NoFileCompletions -Arguments @{ Name = 'CONTAINER'; Script = $containerCompleter }
+$containerCommitCommand = New-CommandCompleter -Name commit  -Description $msg.container_commit  -Parameters @(
+    New-ParamCompleter -ShortName a -LongName author   -Description $msg.container_commit_author  -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName c -LongName change   -Description $msg.container_commit_change  -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter -ShortName m -LongName message  -Description $msg.container_commit_message -Arguments @{ Name = 'STRING' }
     New-ParamCompleter              -LongName no-pause -Description $msg.container_commit_no_pause
-)
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $allContainerCompleter
+}
 $containerCpCommand = New-CommandCompleter -Name cp      -Description $msg.container_cp -Parameters @(
     New-ParamCompleter -ShortName a -LongName archive     -Description $msg.container_cp_archive
     New-ParamCompleter -ShortName L -LongName follow-link -Description $msg.container_cp_follow_link
     New-ParamCompleter -ShortName q -LongName quiet       -Description $msg.container_cp_quiet
 )
-$containerCreateCommand = New-CommandCompleter -Name create  -Description $msg.container_create  -Parameters $commonRunParams -ArgumentCompleter $imageCompleter
-$containerDiffCommand   = New-CommandCompleter -Name diff    -Description $msg.container_diff    -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerExecCommand   = New-CommandCompleter -Name exec    -Description $msg.container_exec    -NoFileCompletions -ArgumentCompleter $containerCompleter -Parameters @(
+$containerCreateCommand = New-CommandCompleter -Name create  -Description $msg.container_create  -Parameters $commonRunParams -Arguments @{
+    Name = 'IMAGE'; Script = $imageCompleter
+}
+$containerDiffCommand   = New-CommandCompleter -Name diff    -Description $msg.container_diff    -NoFileCompletions -Arguments @{ Name ='CONTAINER'; Script = $containerCompleter }
+$containerExecCommand   = New-CommandCompleter -Name exec    -Description $msg.container_exec    -Parameters @(
     New-ParamCompleter -ShortName d -LongName detach       -Description $msg.container_exec_detach
-    New-ParamCompleter              -LongName detach-keys  -Description $msg.container_exec_detach_keys -VariableName 'STRING'
-    New-ParamCompleter -ShortName e -LongName env          -Description $msg.container_exec_env         -VariableName 'LIST'
-    New-ParamCompleter              -LongName env-file     -Description $msg.container_exec_env_file    -ArgumentType File -VariableName 'LIST'
+    New-ParamCompleter              -LongName detach-keys  -Description $msg.container_exec_detach_keys -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName e -LongName env          -Description $msg.container_exec_env         -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName env-file     -Description $msg.container_exec_env_file    -Arguments @{ Name = 'LIST'; Type = 'File' }
     New-ParamCompleter -ShortName i -LongName interactive  -Description $msg.container_exec_interactive
     New-ParamCompleter              -LongName privileged   -Description $msg.container_exec_privileged
     New-ParamCompleter -ShortName t -LongName tty          -Description $msg.container_exec_tty
-    New-ParamCompleter -ShortName u -LongName user         -Description $msg.container_exec_user        -VariableName 'STRING'
-    New-ParamCompleter -ShortName w -LongName workdir      -Description $msg.container_exec_workdir     -ArgumentType Directory -VariableName 'STRING'
-)
+    New-ParamCompleter -ShortName u -LongName user         -Description $msg.container_exec_user        -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName w -LongName workdir      -Description $msg.container_exec_workdir     -Arguments @{ Name = 'STRING'; Type = 'Directory' }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $containerCompleter
+}, @{
+    Name = 'COMMAND';
+}, @{
+    Name = 'ARG'; Nargs = '0+';
+}
 $containerExportCommand = New-CommandCompleter -Name export  -Description $msg.container_export -Parameters @(
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.container_export_output -ArgumentType File -VariableName 'STRING'
-) -NoFileCompletions -ArgumentCompleter $allContainerCompleter
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.container_export_output -Arguments @{ Name = 'STRING'; Type = 'File' }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $allContainerCompleter
+}
 $containerKillCommand   = New-CommandCompleter -Name kill    -Description $msg.container_kill -Parameters @(
-    New-ParamCompleter -ShortName s -LongName signal -Description $msg.container_kill_signal -VariableName 'STRING'
-) -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerLogsCommand   = New-CommandCompleter -Name logs    -Description $msg.container_logs -NoFileCompletions -ArgumentCompleter $allContainerCompleter -Parameters @(
+    New-ParamCompleter -ShortName s -LongName signal -Description $msg.container_kill_signal -Arguments @{ Name = 'STRING' }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $containerCompleter
+}
+$containerLogsCommand   = New-CommandCompleter -Name logs    -Description $msg.container_logs -Parameters @(
     New-ParamCompleter              -LongName details    -Description $msg.container_logs_details
     New-ParamCompleter -ShortName f -LongName follow     -Description $msg.container_logs_follow
-    New-ParamCompleter              -LongName since      -Description $msg.container_logs_since      -VariableName 'STRING'
-    New-ParamCompleter -ShortName n -LongName tail       -Description $msg.container_logs_tail       -Arguments "all" -VariableName 'STRING'
+    New-ParamCompleter              -LongName since      -Description $msg.container_logs_since      -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName n -LongName tail       -Description $msg.container_logs_tail       -Arguments @{ Name = 'STRING'; Candidates = "all" }
     New-ParamCompleter -ShortName t -LongName timestamps -Description $msg.container_logs_timestamps
-    New-ParamCompleter              -LongName until      -Description $msg.container_logs_until      -VariableName 'STRING'
-)
+    New-ParamCompleter              -LongName until      -Description $msg.container_logs_until      -Arguments @{ Name = 'STRING' }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $allContainerCompleter
+}
 $containerPsParams = @(
     New-ParamCompleter -ShortName a -LongName all      -Description $msg.container_ps_all
-    New-ParamCompleter -ShortName f -LongName filter   -Description $msg.container_ps_filter   -VariableName 'FILTER'
-    New-ParamCompleter              -LongName format   -Description $msg.container_ps_format   -VariableName 'STRING'
-    New-ParamCompleter -ShortName n -LongName last     -Description $msg.container_ps_last     -VariableName 'INT'
+    New-ParamCompleter -ShortName f -LongName filter   -Description $msg.container_ps_filter   -Arguments @{ Name = 'FILTER' }
+    New-ParamCompleter              -LongName format   -Description $msg.container_ps_format   -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName n -LongName last     -Description $msg.container_ps_last     -Arguments @{ Name = 'INT' }
     New-ParamCompleter -ShortName l -LongName latest   -Description $msg.container_ps_latest
     New-ParamCompleter              -LongName no-trunc -Description $msg.container_ps_no_trunc
     New-ParamCompleter -ShortName q -LongName quiet    -Description $msg.container_ps_quiet
     New-ParamCompleter -ShortName s -LongName size     -Description $msg.container_ps_size
 )
-$containerPauseCommand   = New-CommandCompleter -Name pause   -Description $msg.container_pause   -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerPortCommand    = New-CommandCompleter -Name port    -Description $msg.container_port    -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerRenameCommand  = New-CommandCompleter -Name rename  -Description $msg.container_rename  -NoFileCompletions -ArgumentCompleter $allContainerCompleter
+$containerPauseCommand   = New-CommandCompleter -Name pause   -Description $msg.container_pause   -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $containerCompleter
+}
+$containerPortCommand    = New-CommandCompleter -Name port    -Description $msg.container_port    -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $containerCompleter 
+}, @{
+    name = 'PRIVATE_PORT[/PROTO]'; Nargs = '?'
+}
+$containerRenameCommand  = New-CommandCompleter -Name rename  -Description $msg.container_rename  -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $allContainerCompleter
+}, @{
+    Name = 'NEW_NAME'
+}
 $containerRestartCommand = New-CommandCompleter -Name restart -Description $msg.restart -Parameters @(
-    New-ParamCompleter -ShortName s -LongName signal  -Description $msg.restart_signal  -VariableName 'STRING'
-    New-ParamCompleter -ShortName t -LongName timeout -Description $msg.restart_timeout -VariableName 'INT'
-) -NoFileCompletions -ArgumentCompleter $containerCompleter
+    New-ParamCompleter -ShortName s -LongName signal  -Description $msg.restart_signal  -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName t -LongName timeout -Description $msg.restart_timeout -Arguments @{ Name = 'INT' }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $containerCompleter
+}
 $containerRmCommand      = New-CommandCompleter -Name rm      -Description $msg.container_rm -Parameters @(
     New-ParamCompleter -ShortName f -LongName force   -Description $msg.container_rm_force
     New-ParamCompleter -ShortName l -LongName link    -Description $msg.container_rm_link
     New-ParamCompleter -ShortName v -LongName volumes -Description $msg.container_rm_volumes
-) -NoFileCompletions -ArgumentCompleter $allContainerCompleter
-$containerRunCommand     = New-CommandCompleter -Name run     -Description $msg.container_run     -Parameters $commonRunParams -ArgumentCompleter $imageCompleter
-$containerStartCommand   = New-CommandCompleter -Name start   -Description $msg.container_start   -NoFileCompletions -ArgumentCompleter $allContainerCompleter
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $allContainerCompleter
+}
+$containerRunCommand     = New-CommandCompleter -Name run     -Description $msg.container_run     -Parameters $commonRunParams -Arguments @{
+    Name = 'IMAGE'; Script = $imageCompleter
+}
+$containerStartCommand   = New-CommandCompleter -Name start   -Description $msg.container_start   -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $allContainerCompleter
+}
 $containerStatsCommand   = New-CommandCompleter -Name stats   -Description $msg.container_stats   -Parameters @(
     New-ParamCompleter -ShortName a -LongName all       -Description $msg.container_stats_all
-    New-ParamCompleter -LongName format                 -Description $msg.container_stats_format    -VariableName 'STRING'
+    New-ParamCompleter -LongName format                 -Description $msg.container_stats_format    -Arguments @{ Name = 'STRING' }
     New-ParamCompleter -LongName no-stream              -Description $msg.container_stats_no_stream
     New-ParamCompleter -LongName no-trunc               -Description $msg.container_stats_no_trunc
-) -NoFileCompletions -ArgumentCompleter $containerCompleter
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '0+'; Script = $containerCompleter
+}
 $containerStopCommand    = New-CommandCompleter -Name stop    -Description $msg.container_stop -Parameters @(
-    New-ParamCompleter -ShortName s -LongName signal  -Description $msg.container_stop_signal  -VariableName 'STRING'
-    New-ParamCompleter -ShortName t -LongName timeout -Description $msg.container_stop_timeout -VariableName 'INT'
-) -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerTopCommand     = New-CommandCompleter -Name top     -Description $msg.container_top     -NoFileCompletions -ArgumentCompleter $containerCompleter
-$containerUnpauseCommand = New-CommandCompleter -Name unpause -Description $msg.container_unpause -NoFileCompletions -ArgumentCompleter $containerCompleter
+    New-ParamCompleter -ShortName s -LongName signal  -Description $msg.container_stop_signal  -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName t -LongName timeout -Description $msg.container_stop_timeout -Arguments @{ Name = 'INT' }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $containerCompleter
+}
+$containerTopCommand     = New-CommandCompleter -Name top     -Description $msg.container_top     -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Script = $containerCompleter
+}, @{
+    Name = 'ps-OPTIONS';
+}
+$containerUnpauseCommand = New-CommandCompleter -Name unpause -Description $msg.container_unpause -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $containerCompleter
+}
 $containerUpdateCommand  = New-CommandCompleter -Name update  -Description $msg.update            -Parameters @(
-    New-ParamCompleter              -LongName blkio-weight        -Description $msg.update_blkio_weight        -VariableName 'UINT16'
-    New-ParamCompleter              -LongName cpu-period          -Description $msg.update_cpu_period          -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-quota           -Description $msg.update_cpu_quota           -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-rt-period       -Description $msg.update_cpu_rt_period       -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-rt-runtime      -Description $msg.update_cpu_rt_runtime      -VariableName 'INT'
-    New-ParamCompleter -ShortName c -LongName cpu-shares          -Description $msg.update_cpu_shares          -VariableName 'INT'
-    New-ParamCompleter              -LongName cpus                -Description $msg.update_cpus                -VariableName 'DECIMAL'
-    New-ParamCompleter              -LongName cpuset-cpus         -Description $msg.update_cpuset_cpus         -VariableName 'STRING'
-    New-ParamCompleter              -LongName cpuset-mems         -Description $msg.update_cpuset_mems         -VariableName 'STRING'
-    New-ParamCompleter -ShortName m -LongName memory              -Description $msg.update_memory              -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-reservation  -Description $msg.update_memory_reservation  -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-swap         -Description $msg.update_memory_swap         -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-swappiness   -Description $msg.update_memory_swappiness   -VariableName 'INT'
-    New-ParamCompleter              -LongName pids-limit          -Description $msg.update_pids_limit          -VariableName 'INT'
-    New-ParamCompleter              -LongName restart             -Description $msg.update_restart             -Arguments "no","always","on-failure","unless-stopped" -VariableName 'STRING'
-) -NoFileCompletions -ArgumentCompleter $allContainerCompleter
-$containerWaitCommand    = New-CommandCompleter -Name wait    -Description $msg.container_wait    -NoFileCompletions -ArgumentCompleter $containerCompleter
+    New-ParamCompleter              -LongName blkio-weight        -Description $msg.update_blkio_weight        -Arguments @{ Name = 'UINT16' }
+    New-ParamCompleter              -LongName cpu-period          -Description $msg.update_cpu_period          -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-quota           -Description $msg.update_cpu_quota           -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-rt-period       -Description $msg.update_cpu_rt_period       -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-rt-runtime      -Description $msg.update_cpu_rt_runtime      -Arguments @{ Name = 'INT' }
+    New-ParamCompleter -ShortName c -LongName cpu-shares          -Description $msg.update_cpu_shares          -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpus                -Description $msg.update_cpus                -Arguments @{ Name = 'DECIMAL' }
+    New-ParamCompleter              -LongName cpuset-cpus         -Description $msg.update_cpuset_cpus         -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName cpuset-mems         -Description $msg.update_cpuset_mems         -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName m -LongName memory              -Description $msg.update_memory              -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-reservation  -Description $msg.update_memory_reservation  -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-swap         -Description $msg.update_memory_swap         -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-swappiness   -Description $msg.update_memory_swappiness   -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName pids-limit          -Description $msg.update_pids_limit          -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName restart             -Description $msg.update_restart             -Arguments @{ Name = 'STRING'; Candidates = "no","always","on-failure","unless-stopped" }
+) -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $allContainerCompleter
+}
+$containerWaitCommand    = New-CommandCompleter -Name wait    -Description $msg.container_wait    -NoFileCompletions -Arguments @{
+    Name = 'CONTAINER'; Nargs = '1+'; Script = $containerCompleter
+}
 
 $imageBuildCommand = New-CommandCompleter -Name build   -Description $msg.image_build -Parameters @(
-    New-ParamCompleter              -LongName add-host              -Description $msg.image_build_add_host      -VariableName 'LIST'
-    New-ParamCompleter              -LongName build-arg             -Description $msg.image_build_build_arg     -VariableName 'LIST'
-    New-ParamCompleter              -LongName cache-from            -Description $msg.image_build_cache_from    -VariableName 'STRINGS'
-    New-ParamCompleter              -LongName cgroup-parent         -Description $msg.image_build_cgroup_parent -VariableName 'STRING'
+    New-ParamCompleter              -LongName add-host              -Description $msg.image_build_add_host      -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName build-arg             -Description $msg.image_build_build_arg     -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName cache-from            -Description $msg.image_build_cache_from    -Arguments @{ Name = 'STRINGS' }
+    New-ParamCompleter              -LongName cgroup-parent         -Description $msg.image_build_cgroup_parent -Arguments @{ Name = 'STRING' }
     New-ParamCompleter              -LongName compress              -Description $msg.image_build_compress
-    New-ParamCompleter              -LongName cpu-period            -Description $msg.image_build_cpu_period    -VariableName 'INT'
-    New-ParamCompleter              -LongName cpu-quota             -Description $msg.image_build_cpu_quota     -VariableName 'INT'
-    New-ParamCompleter -ShortName c -LongName cpu-shares            -Description $msg.image_build_cpu_shares    -VariableName 'INT'
-    New-ParamCompleter              -LongName cpuset-cpus           -Description $msg.image_build_cpuset_cpus   -VariableName 'STRING'
-    New-ParamCompleter              -LongName cpuset-mems           -Description $msg.image_build_cpuset_mems   -VariableName 'STRING'
+    New-ParamCompleter              -LongName cpu-period            -Description $msg.image_build_cpu_period    -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpu-quota             -Description $msg.image_build_cpu_quota     -Arguments @{ Name = 'INT' }
+    New-ParamCompleter -ShortName c -LongName cpu-shares            -Description $msg.image_build_cpu_shares    -Arguments @{ Name = 'INT' }
+    New-ParamCompleter              -LongName cpuset-cpus           -Description $msg.image_build_cpuset_cpus   -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName cpuset-mems           -Description $msg.image_build_cpuset_mems   -Arguments @{ Name = 'STRING' }
     New-ParamCompleter              -LongName disable-content-trust -Description $msg.image_build_disable_content_trust
-    New-ParamCompleter -ShortName f -LongName file                  -Description $msg.image_build_file          -ArgumentType File -VariableName 'STRING'
+    New-ParamCompleter -ShortName f -LongName file                  -Description $msg.image_build_file          -Arguments @{ Name = 'STRING'; Type = 'File' }
     New-ParamCompleter              -LongName force-rm              -Description $msg.image_build_force_rm
-    New-ParamCompleter              -LongName iidfile               -Description $msg.image_build_iidfile       -ArgumentType File -VariableName 'STRING'
-    New-ParamCompleter              -LongName isolation             -Description $msg.image_build_isolation     -Arguments "default","process","hyperv" -VariableName 'STRING'
-    New-ParamCompleter              -LongName label                 -Description $msg.image_build_label         -VariableName 'LIST'
-    New-ParamCompleter -ShortName m -LongName memory                -Description $msg.image_build_memory        -VariableName 'BYTES'
-    New-ParamCompleter              -LongName memory-swap           -Description $msg.image_build_memory_swap   -VariableName 'BYTES'
-    New-ParamCompleter              -LongName network               -Description $msg.image_build_network       -ArgumentCompleter $networkCompleter -VariableName 'STRING'
+    New-ParamCompleter              -LongName iidfile               -Description $msg.image_build_iidfile       -Arguments @{ Name = 'STRING'; Type = 'File' }
+    New-ParamCompleter              -LongName isolation             -Description $msg.image_build_isolation     -Arguments @{ Name = 'STRING'; Candidates = "default","process","hyperv" }
+    New-ParamCompleter              -LongName label                 -Description $msg.image_build_label         -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter -ShortName m -LongName memory                -Description $msg.image_build_memory        -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName memory-swap           -Description $msg.image_build_memory_swap   -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter              -LongName network               -Description $msg.image_build_network       -Arguments @{ Name = 'STRING'; Script = $networkCompleter }
     New-ParamCompleter              -LongName no-cache              -Description $msg.image_build_no_cache
-    New-ParamCompleter -ShortName o -LongName output                -Description $msg.image_build_output        -VariableName 'STRINGARRAY'
-    New-ParamCompleter              -LongName platform              -Description $msg.image_build_platform      -VariableName 'STRING'
-    New-ParamCompleter              -LongName progress              -Description $msg.image_build_progress      -Arguments "auto","plain","tty" -VariableName 'STRING'
+    New-ParamCompleter -ShortName o -LongName output                -Description $msg.image_build_output        -Arguments @{ Name = 'STRINGARRAY' }
+    New-ParamCompleter              -LongName platform              -Description $msg.image_build_platform      -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName progress              -Description $msg.image_build_progress      -Arguments @{ Name = 'STRING'; Candidates = "auto","plain","tty" }
     New-ParamCompleter              -LongName pull                  -Description $msg.image_build_pull
     New-ParamCompleter -ShortName q -LongName quiet                 -Description $msg.image_build_quiet
     New-ParamCompleter              -LongName rm                    -Description $msg.image_build_rm
-    New-ParamCompleter              -LongName secret                -Description $msg.image_build_secret        -VariableName 'STRINGARRAY'
-    New-ParamCompleter              -LongName shm-size              -Description $msg.image_build_shm_size      -VariableName 'BYTES'
+    New-ParamCompleter              -LongName secret                -Description $msg.image_build_secret        -Arguments @{ Name = 'STRINGARRAY' }
+    New-ParamCompleter              -LongName shm-size              -Description $msg.image_build_shm_size      -Arguments @{ Name = 'BYTES' }
     New-ParamCompleter              -LongName squash                -Description $msg.image_build_squash
-    New-ParamCompleter              -LongName ssh                   -Description $msg.image_build_ssh           -VariableName 'STRINGARRAY'
-    New-ParamCompleter -ShortName t -LongName tag                   -Description $msg.image_build_tag           -VariableName 'LIST'
-    New-ParamCompleter              -LongName target                -Description $msg.image_build_target        -VariableName 'STRING'
-    New-ParamCompleter              -LongName ulimit                -Description $msg.image_build_ulimit        -VariableName 'ULIMIT'
+    New-ParamCompleter              -LongName ssh                   -Description $msg.image_build_ssh           -Arguments @{ Name = 'STRINGARRAY' }
+    New-ParamCompleter -ShortName t -LongName tag                   -Description $msg.image_build_tag           -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter              -LongName target                -Description $msg.image_build_target        -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName ulimit                -Description $msg.image_build_ulimit        -Arguments @{ Name = 'ULIMIT' }
 )
 $imageImportCommand = New-CommandCompleter -Name import  -Description $msg.image_import -Parameters @(
-    New-ParamCompleter -ShortName c -LongName change   -Description $msg.image_import_change   -VariableName 'LIST'
-    New-ParamCompleter -ShortName m -LongName message  -Description $msg.image_import_message  -VariableName 'STRING'
-    New-ParamCompleter              -LongName platform -Description $msg.image_import_platform -VariableName 'STRING'
+    New-ParamCompleter -ShortName c -LongName change   -Description $msg.image_import_change   -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter -ShortName m -LongName message  -Description $msg.image_import_message  -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName platform -Description $msg.image_import_platform -Arguments @{ Name = 'STRING' }
 )
 $imageHistoryCommand = New-CommandCompleter -Name history -Description $msg.image_history -Parameters @(
-    New-ParamCompleter              -LongName format   -Description $msg.image_history_format   -VariableName 'STRING'
+    New-ParamCompleter              -LongName format   -Description $msg.image_history_format   -Arguments @{ Name = 'STRING' }
     New-ParamCompleter -ShortName H -LongName human    -Description $msg.image_history_human
     New-ParamCompleter              -LongName no-trunc -Description $msg.image_history_no_trunc
     New-ParamCompleter -ShortName q -LongName quiet    -Description $msg.image_history_quiet
-) -NoFileCompletions -ArgumentCompleter $imageCompleter
+) -NoFileCompletions -Arguments @{
+    Name = 'IMAGE'; Script = $imageCompleter
+}
 $imageLoadCommand = New-CommandCompleter -Name load    -Description $msg.image_load -Parameters @(
-    New-ParamCompleter -ShortName i -LongName input -Description $msg.image_load_input -ArgumentType File -VariableName 'STRING'
+    New-ParamCompleter -ShortName i -LongName input -Description $msg.image_load_input -Arguments @{ Name = 'STRING'; Type = 'File' }
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.image_load_quiet
 )
 $imageLsParams = @(
     New-ParamCompleter -ShortName a -LongName all      -Description $msg.image_ls_all
     New-ParamCompleter              -LongName digests  -Description $msg.image_ls_digests
-    New-ParamCompleter -ShortName f -LongName filter   -Description $msg.image_ls_filter   -VariableName 'FILTER'
-    New-ParamCompleter              -LongName format   -Description $msg.image_ls_format   -VariableName 'STRING'
+    New-ParamCompleter -ShortName f -LongName filter   -Description $msg.image_ls_filter   -Arguments @{ Name = 'FILTER' }
+    New-ParamCompleter              -LongName format   -Description $msg.image_ls_format   -Arguments @{ Name = 'STRING' }
     New-ParamCompleter              -LongName no-trunc -Description $msg.image_ls_no_trunc
     New-ParamCompleter -ShortName q -LongName quiet    -Description $msg.image_ls_quiet
 )
-$imagePullCommand = New-CommandCompleter -Name pull    -Description $msg.image_pull -NoFileCompletions -ArgumentCompleter $imageCompleter -Parameters @(
+$imagePullCommand = New-CommandCompleter -Name pull    -Description $msg.image_pull -Parameters @(
     New-ParamCompleter -ShortName a -LongName all-tags              -Description $msg.image_pull_all_tags
     New-ParamCompleter              -LongName disable-content-trust -Description $msg.image_pull_disable_content_trust
-    New-ParamCompleter              -LongName platform              -Description $msg.image_pull_platform -VariableName 'STRING'
+    New-ParamCompleter              -LongName platform              -Description $msg.image_pull_platform -Arguments @{ Name = 'STRING' }
     New-ParamCompleter -ShortName q -LongName quiet                 -Description $msg.image_pull_quiet
-)
-$imagePushCommand = New-CommandCompleter -Name push    -Description $msg.image_push -NoFileCompletions -ArgumentCompleter $imageCompleter -Parameters @(
+) -NoFileCompletions -Arguments @{
+    Name = 'NAME[:TAG|@DIGEST]'; Script = $imageCompleter
+}
+$imagePushCommand = New-CommandCompleter -Name push    -Description $msg.image_push-Parameters @(
     New-ParamCompleter -ShortName a -LongName all-tags              -Description $msg.image_push_all_tags
     New-ParamCompleter              -LongName disable-content-trust -Description $msg.image_push_disable_content_trust
     New-ParamCompleter -ShortName q -LongName quiet                 -Description $msg.image_push_quiet
-)
+) -NoFileCompletions -Arguments @{
+    Name = 'NAME[:TAG]'; Script = $imageCompleter
+}
 $imageRmParams = @(
     New-ParamCompleter -ShortName f -LongName force    -Description $msg.image_rm_force
     New-ParamCompleter              -LongName no-prune -Description $msg.image_rm_no_prune
 )
-$imageSaveCommand = New-CommandCompleter -Name save    -Description $msg.image_save -NoFileCompletions -ArgumentCompleter $imageCompleter -Parameters @(
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.image_save_output -ArgumentType File -VariableName 'STRING'
-)
-$imageTagCommand = New-CommandCompleter -Name tag     -Description $msg.image_tag -NoFileCompletions -ArgumentCompleter $imageCompleter
+$imageSaveCommand = New-CommandCompleter -Name save    -Description $msg.image_save-Parameters @(
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.image_save_output -Arguments @{ Name = 'STRING'; Type = 'File' }
+) -NoFileCompletions -Arguments @{
+    Name = 'IMAGE'; Nargs = '1+'; Script = $imageCompleter
+}
+$imageTagCommand = New-CommandCompleter -Name tag     -Description $msg.image_tag -NoFileCompletions -Arguments @{
+    Name = 'SOURCE_IMAGE[:TAG]'; Script = $imageCompleter
+}, @{
+    Name = 'TARGET_IMAGE[:TAG]'; Script = $imageCompleter
+}
 
 $systemEventsCommand = New-CommandCompleter -Name events -Description $msg.system_events -NoFileCompletions -Parameters @(
-    New-ParamCompleter -ShortName f -LongName filter  -Description $msg.system_events_filter -VariableName 'FILTER'
-    New-ParamCompleter              -LongName format  -Description $msg.system_events_format -VariableName 'STRING'
-    New-ParamCompleter              -LongName since   -Description $msg.system_events_since  -VariableName 'STRING'
-    New-ParamCompleter              -LongName until   -Description $msg.system_events_until  -VariableName 'STRING'
+    New-ParamCompleter -ShortName f -LongName filter  -Description $msg.system_events_filter -Arguments @{ Name = 'FILTER' }
+    New-ParamCompleter              -LongName format  -Description $msg.system_events_format -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName since   -Description $msg.system_events_since  -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter              -LongName until   -Description $msg.system_events_until  -Arguments @{ Name = 'STRING' }
 )
 $systemInfoCommand = New-CommandCompleter -Name info   -Description $msg.system_info -NoFileCompletions -Parameters @(
-    New-ParamCompleter -ShortName f -LongName format -Description $msg.system_info_format -VariableName 'STRING'
+    New-ParamCompleter -ShortName f -LongName format -Description $msg.system_info_format -Arguments @{ Name = 'STRING' }
 )
 
 Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
-    New-ParamCompleter              -LongName config        -Description $msg.global_config    -ArgumentType Directory -VariableName 'STRING'
-    New-ParamCompleter -ShortName c -LongName context       -Description $msg.global_context   -ArgumentCompleter $contextCompleter -VariableName 'STRING'
+    New-ParamCompleter              -LongName config        -Description $msg.global_config    -Arguments @{ Name = 'STRING'; Type = 'Directory' }
+    New-ParamCompleter -ShortName c -LongName context       -Description $msg.global_context   -Arguments @{ Name = 'STRING'; Script = $contextCompleter }
     New-ParamCompleter -ShortName D -LongName debug         -Description $msg.global_debug
-    New-ParamCompleter -ShortName H -LongName host          -Description $msg.global_host      -VariableName 'LIST'
-    New-ParamCompleter -ShortName l -LongName log-level     -Description $msg.global_log_level -Arguments "debug","info","warn","error","fatal" -VariableName 'STRING'
+    New-ParamCompleter -ShortName H -LongName host          -Description $msg.global_host      -Arguments @{ Name = 'LIST' }
+    New-ParamCompleter -ShortName l -LongName log-level     -Description $msg.global_log_level -Arguments @{ Name = 'STRING'; Candidates = "debug","info","warn","error","fatal" }
     New-ParamCompleter              -LongName tls           -Description $msg.global_tls
-    New-ParamCompleter              -LongName tlscacert     -Description $msg.global_tlscacert -ArgumentType File -VariableName 'STRING'
-    New-ParamCompleter              -LongName tlscert       -Description $msg.global_tlscert   -ArgumentType File -VariableName 'STRING'
-    New-ParamCompleter              -LongName tlskey        -Description $msg.global_tlskey    -ArgumentType File -VariableName 'STRING'
+    New-ParamCompleter              -LongName tlscacert     -Description $msg.global_tlscacert -Arguments @{ Name = 'STRING'; Type = 'File' }
+    New-ParamCompleter              -LongName tlscert       -Description $msg.global_tlscert   -Arguments @{ Name = 'STRING'; Type = 'File' }
+    New-ParamCompleter              -LongName tlskey        -Description $msg.global_tlskey    -Arguments @{ Name = 'STRING'; Type = 'File' }
     New-ParamCompleter              -LongName tlsverify     -Description $msg.global_tlsverify
     New-ParamCompleter -ShortName v -LongName version       -Description $msg.global_version
 ) -SubCommands @(
@@ -752,10 +812,12 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
         $containerDiffCommand
         $containerExecCommand
         $containerExportCommand
-        New-CommandCompleter -Name inspect -Description $msg.container_inspect -NoFileCompletions -ArgumentCompleter $allContainerCompleter -Parameters @(
-            New-ParamCompleter -ShortName f -LongName format -Description $msg.inspect_format -VariableName 'STRING'
+        New-CommandCompleter -Name inspect -Description $msg.container_inspect-Parameters @(
+            New-ParamCompleter -ShortName f -LongName format -Description $msg.inspect_format -Arguments @{ Name = 'STRING' }
             New-ParamCompleter -ShortName s -LongName size   -Description $msg.inspect_size
-        )
+        ) -NoFileCompletions -Arguments @{
+            Name = 'CONTAINER'; Nargs = '1+'; Script = $allContainerCompleter 
+        }
         $containerKillCommand
         $containerLogsCommand
         New-CommandCompleter -Name ls      -Description $msg.container_ps -NoFileCompletions -Parameters $containerPsParams
@@ -763,7 +825,7 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
         $containerPortCommand
         New-CommandCompleter -Name prune   -Description $msg.container_prune -Parameters @(
             New-ParamCompleter -ShortName f -LongName force  -Description $msg.container_prune_force
-            New-ParamCompleter              -LongName filter -Description $msg.container_prune_filter -VariableName 'FILTER'
+            New-ParamCompleter              -LongName filter -Description $msg.container_prune_filter -Arguments @{ Name = 'FILTER' }
         ) -NoFileCompletions
         $containerRenameCommand
         $containerRestartCommand
@@ -782,72 +844,96 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
         New-CommandCompleter -Name create  -Description $msg.context_create
         New-CommandCompleter -Name export  -Description $msg.context_export
         New-CommandCompleter -Name import  -Description $msg.context_import
-        New-CommandCompleter -Name inspect -Description $msg.context_inspect -NoFileCompletions -ArgumentCompleter $contextCompleter
+        New-CommandCompleter -Name inspect -Description $msg.context_inspect -NoFileCompletions -Arguments @{
+            Name = 'CONTEXT'; Nargs = '1+'; Script = $contextCompleter
+        }
         New-CommandCompleter -Name ls      -Description $msg.context_ls      -NoFileCompletions
-        New-CommandCompleter -Name rm      -Description $msg.context_rm      -NoFileCompletions -ArgumentCompleter $contextCompleter
+        New-CommandCompleter -Name rm      -Description $msg.context_rm      -NoFileCompletions -Arguments @{
+            Name = 'CONTEXT'; Nargs = '1+'; Script = $contextCompleter
+        }
         New-CommandCompleter -Name show    -Description $msg.context_show    -NoFileCompletions
-        New-CommandCompleter -Name update  -Description $msg.context_update  -NoFileCompletions -ArgumentCompleter $contextCompleter
-        New-CommandCompleter -Name use     -Description $Msg.context_use     -NoFileCompletions -ArgumentCompleter $contextCompleter
+        New-CommandCompleter -Name update  -Description $msg.context_update  -NoFileCompletions -Arguments @{
+            Name = 'CONTEXT'; Script = $contextCompleter
+        }
+        New-CommandCompleter -Name use     -Description $Msg.context_use     -NoFileCompletions -Arguments @{
+            Name = 'CONTEXT'; Script = $contextCompleter
+        }
     ) -NoFileCompletions
 
     New-CommandCompleter -Name image -Description $msg.image -SubCommands @(
         $imageBuildCommand
         $imageHistoryCommand
         $imageImportCommand
-        New-CommandCompleter -Name inspect -Description $msg.image_inspect -NoFileCompletions -ArgumentCompleter $imageCompleter -Parameters @(
-            New-ParamCompleter -ShortName f -LongName format   -Description $msg.inspect_format   -VariableName 'STRING'
-            New-ParamCompleter              -LongName platform -Description $msg.inspect_platform -VariableName 'STRING'
-        )
+        New-CommandCompleter -Name inspect -Description $msg.image_inspect-Parameters @(
+            New-ParamCompleter -ShortName f -LongName format   -Description $msg.inspect_format   -Arguments @{ Name = 'STRING' }
+            New-ParamCompleter              -LongName platform -Description $msg.inspect_platform -Arguments @{ Name = 'STRING' }
+        ) -NoFileCompletions -Arguments @{
+            Name = 'IMAGE'; Nargs = '1+'; Script = $imageCompleter
+        }
         $imageLoadCommand
         New-CommandCompleter -Name ls      -Description $msg.image_ls -NoFileCompletions -Parameters $imageLsParams
         New-CommandCompleter -Name prune   -Description $msg.image_prune -Parameters @(
             New-ParamCompleter -ShortName a -LongName all    -Description $msg.image_prune_all
-            New-ParamCompleter              -LongName filter -Description $msg.image_prune_filter -VariableName 'FILTER'
+            New-ParamCompleter              -LongName filter -Description $msg.image_prune_filter -Arguments @{ Name = 'FILTER' }
             New-ParamCompleter -ShortName f -LongName force  -Description $msg.image_prune_force
         ) -NoFileCompletions
         $imagePullCommand
         $imagePushCommand
-        New-CommandCompleter -Name rm      -Description $msg.image_rm -Parameters $imageRmParams -NoFileCompletions -ArgumentCompleter $imageCompleter
+        New-CommandCompleter -Name rm      -Description $msg.image_rm -Parameters $imageRmParams -NoFileCompletions -Arguments @{
+            Name = 'IMAGE'; Nargs = '1+'; Script = $imageCompleter
+        }
         $imageSaveCommand
         $imageTagCommand
     ) -NoFileCompletions
 
     New-CommandCompleter -Name network -Description $msg.network -SubCommands @(
-        New-CommandCompleter -Name connect    -Description $msg.network_connect    -NoFileCompletions -ArgumentCompleter $networkCompleter
+        New-CommandCompleter -Name connect    -Description $msg.network_connect    -NoFileCompletions -Arguments @{
+            Name = 'NETWORK'; Script = $networkCompleter
+        }, @{
+            Name = 'CONTAINER'; Script = $containerCompleter
+        }
         New-CommandCompleter -Name create     -Description $msg.network_create     -NoFileCompletions -Parameters @(
             New-ParamCompleter              -LongName attachable   -Description $msg.network_create_attachable
-            New-ParamCompleter              -LongName aux-address  -Description $msg.network_create_aux_address  -VariableName 'MAP'
-            New-ParamCompleter              -LongName config-from  -Description $msg.network_create_config_from  -VariableName 'NETWORK'
+            New-ParamCompleter              -LongName aux-address  -Description $msg.network_create_aux_address  -Arguments @{ Name = 'MAP' }
+            New-ParamCompleter              -LongName config-from  -Description $msg.network_create_config_from  -Arguments @{ Name = 'NETWORK' }
             New-ParamCompleter              -LongName config-only  -Description $msg.network_create_config_only
-            New-ParamCompleter -ShortName d -LongName driver       -Description $msg.network_create_driver       -Arguments "bridge","host","overlay","macvlan","none" -VariableName 'STRING'
-            New-ParamCompleter              -LongName gateway      -Description $msg.network_create_gateway      -VariableName 'STRINGS'
+            New-ParamCompleter -ShortName d -LongName driver       -Description $msg.network_create_driver       -Arguments @{ Name = 'STRING'; Candidates = "bridge","host","overlay","macvlan","none" }
+            New-ParamCompleter              -LongName gateway      -Description $msg.network_create_gateway      -Arguments @{ Name = 'STRINGS' }
             New-ParamCompleter              -LongName ingress      -Description $msg.network_create_ingress
             New-ParamCompleter              -LongName internal     -Description $msg.network_create_internal
-            New-ParamCompleter              -LongName ip-range     -Description $msg.network_create_ip_range     -VariableName 'STRINGS'
-            New-ParamCompleter              -LongName ipam-driver  -Description $msg.network_create_ipam_driver  -VariableName 'STRING'
-            New-ParamCompleter              -LongName ipam-opt     -Description $msg.network_create_ipam_opt     -VariableName 'MAP'
+            New-ParamCompleter              -LongName ip-range     -Description $msg.network_create_ip_range     -Arguments @{ Name = 'STRINGS' }
+            New-ParamCompleter              -LongName ipam-driver  -Description $msg.network_create_ipam_driver  -Arguments @{ Name = 'STRING' }
+            New-ParamCompleter              -LongName ipam-opt     -Description $msg.network_create_ipam_opt     -Arguments @{ Name = 'MAP' }
             New-ParamCompleter              -LongName ipv6         -Description $msg.network_create_ipv6
-            New-ParamCompleter              -LongName label        -Description $msg.network_create_label        -VariableName 'LIST'
-            New-ParamCompleter -ShortName o -LongName opt          -Description $msg.network_create_opt          -VariableName 'MAP'
-            New-ParamCompleter              -LongName scope        -Description $msg.network_create_scope        -Arguments "local","swarm","global" -VariableName 'STRING'
-            New-ParamCompleter              -LongName subnet       -Description $msg.network_create_subnet       -VariableName 'STRINGS'
+            New-ParamCompleter              -LongName label        -Description $msg.network_create_label        -Arguments @{ Name = 'LIST' }
+            New-ParamCompleter -ShortName o -LongName opt          -Description $msg.network_create_opt          -Arguments @{ Name = 'MAP' }
+            New-ParamCompleter              -LongName scope        -Description $msg.network_create_scope        -Arguments @{ Name = 'STRING'; Candidates = "local","swarm","global" }
+            New-ParamCompleter              -LongName subnet       -Description $msg.network_create_subnet       -Arguments @{ Name = 'STRINGS' }
         )
-        New-CommandCompleter -Name disconnect -Description $msg.network_disconnect -NoFileCompletions -ArgumentCompleter $networkCompleter
-        New-CommandCompleter -Name inspect    -Description $msg.network_inspect    -NoFileCompletions -ArgumentCompleter $networkCompleter -Parameters @(
-            New-ParamCompleter -ShortName f -LongName format  -Description $msg.inspect_format -VariableName 'STRING'
+        New-CommandCompleter -Name disconnect -Description $msg.network_disconnect -NoFileCompletions -Arguments @{
+            Name = 'NETWORK'; Script = $networkCompleter
+        }, @{
+            Name = 'CONTAINER'; Script = $containerCompleter
+        }
+        New-CommandCompleter -Name inspect    -Description $msg.network_inspect    -Parameters @(
+            New-ParamCompleter -ShortName f -LongName format  -Description $msg.inspect_format -Arguments @{ Name = 'STRING' }
             New-ParamCompleter              -LongName verbose -Description $msg.inspect_verbose
-        )
+        ) -NoFileCompletions -Arguments @{
+            Name = 'NETWORK'; Nargs = '1+'; Script = $networkCompleter
+        }
         New-CommandCompleter -Name ls         -Description $msg.network_ls         -NoFileCompletions -Parameters @(
-            New-ParamCompleter -ShortName f -LongName filter   -Description $msg.network_ls_filter   -VariableName 'FILTER'
-            New-ParamCompleter              -LongName format   -Description $msg.network_ls_format   -VariableName 'STRING'
+            New-ParamCompleter -ShortName f -LongName filter   -Description $msg.network_ls_filter   -Arguments @{ Name = 'FILTER' }
+            New-ParamCompleter              -LongName format   -Description $msg.network_ls_format   -Arguments @{ Name = 'STRING' }
             New-ParamCompleter              -LongName no-trunc -Description $msg.network_ls_no_trunc
             New-ParamCompleter -ShortName q -LongName quiet    -Description $msg.network_ls_quiet
         )
         New-CommandCompleter -Name prune      -Description $msg.network_prune      -NoFileCompletions -Parameters @(
-            New-ParamCompleter              -LongName filter -Description $msg.network_prune_filter -VariableName 'FILTER'
+            New-ParamCompleter              -LongName filter -Description $msg.network_prune_filter -Arguments @{ Name = 'FILTER' }
             New-ParamCompleter -ShortName f -LongName force  -Description $msg.network_prune_force
         )
-        New-CommandCompleter -Name rm         -Description $msg.network_rm         -NoFileCompletions -ArgumentCompleter $networkCompleter
+        New-CommandCompleter -Name rm         -Description $msg.network_rm         -NoFileCompletions -Arguments @{
+            Name = 'NETWORK'; Nargs = '1+'; Script = $networkCompleter
+        }
     ) -NoFileCompletions
 
     New-CommandCompleter -Name plugin -Description $msg.plugin -SubCommands @(
@@ -865,14 +951,14 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
 
     New-CommandCompleter -Name system -Description $msg.system -SubCommands @(
         New-CommandCompleter -Name df     -Description $msg.system_df -NoFileCompletions -Parameters @(
-            New-ParamCompleter              -LongName format  -Description $msg.system_df_format -VariableName 'STRING'
+            New-ParamCompleter              -LongName format  -Description $msg.system_df_format -Arguments @{ Name = 'STRING' }
             New-ParamCompleter -ShortName v -LongName verbose -Description $msg.system_df_verbose
         )
         $systemEventsCommand
         $systemInfoCommand
         New-CommandCompleter -Name prune  -Description $msg.system_prune -NoFileCompletions -Parameters @(
             New-ParamCompleter -ShortName a -LongName all     -Description $msg.system_prune_all
-            New-ParamCompleter              -LongName filter  -Description $msg.system_prune_filter  -VariableName 'FILTER'
+            New-ParamCompleter              -LongName filter  -Description $msg.system_prune_filter  -Arguments @{ Name = 'FILTER' }
             New-ParamCompleter -ShortName f -LongName force   -Description $msg.system_prune_force
             New-ParamCompleter              -LongName volumes -Description $msg.system_prune_volumes
         )
@@ -880,27 +966,31 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
 
     New-CommandCompleter -Name volume -Description $msg.volume -SubCommands @(
         New-CommandCompleter -Name create   -Description $msg.volume_create -NoFileCompletions -Parameters @(
-            New-ParamCompleter -ShortName d -LongName driver -Description $msg.volume_create_driver -VariableName 'STRING'
-            New-ParamCompleter              -LongName label  -Description $msg.volume_create_label  -VariableName 'LIST'
-            New-ParamCompleter              -LongName name   -Description $msg.volume_create_name   -VariableName 'STRING'
-            New-ParamCompleter -ShortName o -LongName opt    -Description $msg.volume_create_opt    -VariableName 'MAP'
+            New-ParamCompleter -ShortName d -LongName driver -Description $msg.volume_create_driver -Arguments @{ Name = 'STRING' }
+            New-ParamCompleter              -LongName label  -Description $msg.volume_create_label  -Arguments @{ Name = 'LIST' }
+            New-ParamCompleter              -LongName name   -Description $msg.volume_create_name   -Arguments @{ Name = 'STRING' }
+            New-ParamCompleter -ShortName o -LongName opt    -Description $msg.volume_create_opt    -Arguments @{ Name = 'MAP' }
         )
-        New-CommandCompleter -Name inspect  -Description $msg.volume_inspect -NoFileCompletions -ArgumentCompleter $volumeCompleter -Parameters @(
-            New-ParamCompleter -ShortName f -LongName format -Description $msg.inspect_format -VariableName 'STRING'
-        )
+        New-CommandCompleter -Name inspect  -Description $msg.volume_inspect -Parameters @(
+            New-ParamCompleter -ShortName f -LongName format -Description $msg.inspect_format -Arguments @{ Name = 'STRING' }
+        ) -NoFileCompletions -Arguments @{
+            Name = 'VOLUME'; Nargs = '1+'; Script = $volumeCompleter
+        }
         New-CommandCompleter -Name ls       -Description $msg.volume_ls -NoFileCompletions -Parameters @(
-            New-ParamCompleter -ShortName f -LongName filter   -Description $msg.volume_ls_filter   -VariableName 'FILTER'
-            New-ParamCompleter              -LongName format   -Description $msg.volume_ls_format   -VariableName 'STRING'
+            New-ParamCompleter -ShortName f -LongName filter   -Description $msg.volume_ls_filter   -Arguments @{ Name = 'FILTER' }
+            New-ParamCompleter              -LongName format   -Description $msg.volume_ls_format   -Arguments @{ Name = 'STRING' }
             New-ParamCompleter -ShortName q -LongName quiet    -Description $msg.volume_ls_quiet
         )
         New-CommandCompleter -Name prune    -Description $msg.volume_prune -NoFileCompletions -Parameters @(
             New-ParamCompleter -ShortName a -LongName all    -Description $msg.volume_prune_all
-            New-ParamCompleter              -LongName filter -Description $msg.volume_prune_filter -VariableName 'FILTER'
+            New-ParamCompleter              -LongName filter -Description $msg.volume_prune_filter -Arguments @{ Name = 'FILTER' }
             New-ParamCompleter -ShortName f -LongName force  -Description $msg.volume_prune_force
         )
-        New-CommandCompleter -Name rm       -Description $msg.volume_rm -NoFileCompletions -ArgumentCompleter $volumeCompleter -Parameters @(
+        New-CommandCompleter -Name rm       -Description $msg.volume_rm -Parameters @(
             New-ParamCompleter -ShortName f -LongName force -Description $msg.volume_rm_force
-        )
+        ) -NoFileCompletions -Arguments @{
+            Name = 'VOLUME'; Nargs = '1+'; Script = $volumeCompleter
+        }
     ) -NoFileCompletions
 
     #
@@ -922,18 +1012,18 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
     $systemInfoCommand
 
     New-CommandCompleter -Name inspect -Description $msg.inspect -NoFileCompletions -Parameters @(
-        New-ParamCompleter -ShortName f -LongName format -Description $msg.inspect_format -VariableName 'STRING'
+        New-ParamCompleter -ShortName f -LongName format -Description $msg.inspect_format -Arguments @{ Name = 'STRING' }
         New-ParamCompleter -ShortName s -LongName size   -Description $msg.inspect_size
-        New-ParamCompleter              -LongName type   -Description $msg.inspect_type   -Arguments "container","image","network","node","plugin","secret","service","task","volume" -VariableName 'STRING'
+        New-ParamCompleter              -LongName type   -Description $msg.inspect_type   -Arguments @{ Name = 'STRING'; Candidates = "container","image","network","node","plugin","secret","service","task","volume" }
     )
 
     $containerKillCommand
     $imageLoadCommand
 
     New-CommandCompleter -Name login   -Description $msg.login   -NoFileCompletions -Parameters @(
-        New-ParamCompleter -ShortName p -LongName password       -Description $msg.login_password       -VariableName 'STRING'
+        New-ParamCompleter -ShortName p -LongName password       -Description $msg.login_password       -Arguments @{ Name = 'STRING' }
         New-ParamCompleter              -LongName password-stdin -Description $msg.login_password_stdin
-        New-ParamCompleter -ShortName u -LongName username       -Description $msg.login_username       -VariableName 'STRING'
+        New-ParamCompleter -ShortName u -LongName username       -Description $msg.login_username       -Arguments @{ Name = 'STRING' }
     )
 
     New-CommandCompleter -Name logout  -Description $msg.logout  -NoFileCompletions
@@ -956,14 +1046,16 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
     $containerRenameCommand
     $containerRestartCommand
     $containerRmCommand
-    New-CommandCompleter -Name rmi     -Description $msg.image_rm -Parameters $imageRmParams -NoFileCompletions -ArgumentCompleter $imageCompleter
+    New-CommandCompleter -Name rmi     -Description $msg.image_rm -Parameters $imageRmParams -NoFileCompletions -Arguments @{
+        Name = 'IMAGE'; Nargs = '1+'; Script = $imageCompleter
+    }
     $containerRunCommand
     $imageSaveCommand
 
     New-CommandCompleter -Name search  -Description $msg.search  -NoFileCompletions -Parameters @(
-        New-ParamCompleter -ShortName f -LongName filter   -Description $msg.search_filter   -VariableName 'FILTER'
-        New-ParamCompleter              -LongName format   -Description $msg.search_format   -VariableName 'STRING'
-        New-ParamCompleter              -LongName limit    -Description $msg.search_limit    -VariableName 'INT'
+        New-ParamCompleter -ShortName f -LongName filter   -Description $msg.search_filter   -Arguments @{ Name = 'FILTER' }
+        New-ParamCompleter              -LongName format   -Description $msg.search_format   -Arguments @{ Name = 'STRING' }
+        New-ParamCompleter              -LongName limit    -Description $msg.search_limit    -Arguments @{ Name = 'INT' }
         New-ParamCompleter              -LongName no-trunc -Description $msg.search_no_trunc
     )
 
@@ -976,7 +1068,7 @@ Register-NativeCompleter -Name docker -Description $msg.docker -Parameters @(
     $containerUpdateCommand
 
     New-CommandCompleter -Name version -Description $msg.version -NoFileCompletions -Parameters @(
-        New-ParamCompleter -ShortName f -LongName format -Description $msg.version_format -VariableName 'STRING'
+        New-ParamCompleter -ShortName f -LongName format -Description $msg.version_format -Arguments @{ Name = 'STRING' }
     )
 
     $containerWaitCommand
