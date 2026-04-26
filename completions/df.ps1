@@ -39,26 +39,26 @@ df --version 2>&1 | Out-Null
 if ($LASTEXITCODE -eq 0) # GNU df
 {
     $fieldList = "source","fstype","itotal","iused","iavail","ipcent","size","used","avail","pcent","file","target" 
-    $typeCompleter = {
-        df --output=fstype | Sort-Object -Unique | Where-Object { $_ -like "$wordToComplete*" }
+    $typeArgument = New-ArgumentCompleter TYPE -Script {
+        df --output=fstype | Select-Object -Skip 1 | Sort-Object -Unique | Where-Object { $_ -like "$wordToComplete*" }
     }
 
     Register-NativeCompleter -Name df -Description $msg.df -Parameters @(
         New-ParamCompleter -ShortName a -LongName all -Description $msg.gnu_all
-        New-ParamCompleter -ShortName B -LongName block-size -Description $msg.gnu_blockSize -VariableName 'SIZE'
+        New-ParamCompleter -ShortName B -LongName block-size -Description $msg.gnu_blockSize -Arguments @{ Name = 'SIZE' }
         New-ParamCompleter -ShortName h -LongName human-readable -Description $msg.gnu_humanReadable
         New-ParamCompleter -ShortName H -LongName si -Description $msg.gnu_si
         New-ParamCompleter -ShortName i -LongName inodes -Description $msg.gnu_inodes
         New-ParamCompleter -ShortName k -Description $msg.gnu_kibibytes
         New-ParamCompleter -ShortName l -LongName local -Description $msg.gnu_local
         New-ParamCompleter -LongName no-sync -Description $msg.gnu_noSync
-        New-ParamCompleter -LongName output -Description $msg.gnu_output -Type FlagOrValue -ArgumentType List -Arguments $fieldList -VariableName 'FIELD'
+        New-ParamCompleter -LongName output -Description $msg.gnu_output -Arguments @{ Name = 'FIELD'; Nargs = '?'; List = $true; Candidates = $fieldList }
         New-ParamCompleter -ShortName P -LongName portability -Description $msg.gnu_portability
         New-ParamCompleter -LongName sync -Description $msg.gnu_sync
         New-ParamCompleter -LongName total -Description $msg.gnu_total
-        New-ParamCompleter -ShortName t -LongName type -Description $msg.gnu_type -VariableName 'TYPE' -ArgumentCompleter $typeCompleter
+        New-ParamCompleter -ShortName t -LongName type -Description $msg.gnu_type -Arguments $typeArgument
         New-ParamCompleter -ShortName T -LongName print-type -Description $msg.gnu_printType
-        New-ParamCompleter -ShortName x -LongName exclude-type -Description $msg.gnu_excludeType -VariableName 'TYPE' -ArgumentCompleter $typeCompleter
+        New-ParamCompleter -ShortName x -LongName exclude-type -Description $msg.gnu_excludeType -Arguments $typeArgument
         New-ParamCompleter -LongName help -Description $msg.gnu_help
         New-ParamCompleter -LongName version -Description $msg.gnu_version
     )
@@ -66,7 +66,7 @@ if ($LASTEXITCODE -eq 0) # GNU df
 else # BSD df
 {
     Register-NativeCompleter -Name df -Description $msg.df -Parameters @(
-        New-ParamCompleter -ShortName b -Description $msg.bsd_blockSize -VariableName 'SIZE'
+        New-ParamCompleter -ShortName b -Description $msg.bsd_blockSize -Arguments @{ Name = 'SIZE' }
         New-ParamCompleter -ShortName g -Description $msg.bsd_humanReadable
         New-ParamCompleter -ShortName H -Description $msg.bsd_si
         New-ParamCompleter -ShortName i -Description $msg.bsd_inodes
