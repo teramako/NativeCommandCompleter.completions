@@ -42,7 +42,7 @@ Register-NativeCompleter -Name file -Parameters @(
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
     New-ParamCompleter -ShortName z -LongName uncompress -Description $msg.uncompress
     New-ParamCompleter -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName f -LongName files-from -Description $msg.filesFrom -VariableName 'namefile'
-    New-ParamCompleter -ShortName F -LongName separator -Description $msg.separator -VariableName 'separator'
-    New-ParamCompleter -ShortName m -LongName magic-file -Description $msg.magicFile -VariableName 'magicfiles'
+    New-ParamCompleter -ShortName f -LongName files-from -Description $msg.filesFrom -Arguments @{ Name = 'namefile'; Type = 'File' }
+    New-ParamCompleter -ShortName F -LongName separator -Description $msg.separator -Arguments @{ Name = 'separator' }
+    New-ParamCompleter -ShortName m -LongName magic-file -Description $msg.magicFile -Arguments @{ Name = 'magicfiles' }
 )
