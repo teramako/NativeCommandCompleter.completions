@@ -109,64 +109,68 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
+$codecArgument       = New-ArgumentCompleter codec
+$bitrageArgument     = New-ArgumentCompleter bitrate
+$filtergraphArgument = New-ArgumentCompleter filtergraph
+
 Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Parameters @(
     # Main options
-    New-ParamCompleter -Name f -Description $msg.format -VariableName 'fmt'
-    New-ParamCompleter -Name i -Description $msg.input_file -ArgumentType File -VariableName 'input'
+    New-ParamCompleter -Name f -Description $msg.format -Arguments @{ Name = 'fmt' }
+    New-ParamCompleter -Name i -Description $msg.input_file -Arguments @{ Name = 'input'; Type = 'File' }
     New-ParamCompleter -Name y -Description $msg.overwrite
     New-ParamCompleter -Name n -Description $msg.no_overwrite
 
     # Codec options
-    New-ParamCompleter -Name c -Description $msg.codec -VariableName 'codec'
-    New-ParamCompleter -Name codec -Description $msg.codec -VariableName 'codec'
-    New-ParamCompleter -Name acodec -Description $msg.acodec -VariableName 'codec'
-    New-ParamCompleter -Name vcodec -Description $msg.vcodec -VariableName 'codec'
-    New-ParamCompleter -Name scodec -Description $msg.scodec -VariableName 'codec'
-    New-ParamCompleter -Name dcodec -Description $msg.dcodec -VariableName 'codec'
+    New-ParamCompleter -Name c -Description $msg.codec -Arguments $codecArgument
+    New-ParamCompleter -Name codec -Description $msg.codec -Arguments $codecArgument
+    New-ParamCompleter -Name acodec -Description $msg.acodec -Arguments $codecArgument
+    New-ParamCompleter -Name vcodec -Description $msg.vcodec -Arguments $codecArgument
+    New-ParamCompleter -Name scodec -Description $msg.scodec -Arguments $codecArgument
+    New-ParamCompleter -Name dcodec -Description $msg.dcodec -Arguments $codecArgument
 
     # Bitrate options
-    New-ParamCompleter -Name b -Description $msg.bitrate -VariableName 'bitrate'
-    New-ParamCompleter -Name ab -Description $msg.bitrate_audio -VariableName 'bitrate'
-    New-ParamCompleter -Name vb -Description $msg.bitrate_video -VariableName 'bitrate'
+    New-ParamCompleter -Name b -Description $msg.bitrate -Arguments $bitrageArgument
+    New-ParamCompleter -Name ab -Description $msg.bitrate_audio -Arguments $bitrageArgument
+    New-ParamCompleter -Name vb -Description $msg.bitrate_video -Arguments $bitrageArgument
 
     # Filter options
-    New-ParamCompleter -Name filter -Description $msg.filter -VariableName 'filtergraph'
-    New-ParamCompleter -Name af -Description $msg.filter_audio -VariableName 'filtergraph'
-    New-ParamCompleter -Name vf -Description $msg.filter_video -VariableName 'filtergraph'
-    New-ParamCompleter -Name filter_complex -Description $msg.filter_complex -VariableName 'filtergraph'
+    New-ParamCompleter -Name filter -Description $msg.filter -Arguments $filtergraphArgument
+    New-ParamCompleter -Name af -Description $msg.filter_audio -Arguments $filtergraphArgument
+    New-ParamCompleter -Name vf -Description $msg.filter_video -Arguments $filtergraphArgument
+    New-ParamCompleter -Name filter_complex -Description $msg.filter_complex -Arguments $filtergraphArgument
 
     # Frame options
-    New-ParamCompleter -Name frames -Description $msg.frames -VariableName 'number'
-    New-ParamCompleter -Name r -Description $msg.frame_rate -VariableName 'rate'
-    New-ParamCompleter -Name s -Description $msg.video_size -VariableName 'size'
-    New-ParamCompleter -Name aspect -Description $msg.aspect_ratio -VariableName 'aspect'
-    New-ParamCompleter -Name pix_fmt -Description $msg.pixel_format -VariableName 'format'
+    New-ParamCompleter -Name frames -Description $msg.frames -Arguments @{ Name = 'number' }
+    New-ParamCompleter -Name r -Description $msg.frame_rate -Arguments @{ Name = 'rate' }
+    New-ParamCompleter -Name s -Description $msg.video_size -Arguments @{ Name = 'size' }
+    New-ParamCompleter -Name aspect -Description $msg.aspect_ratio -Arguments @{ Name = 'aspect' }
+    New-ParamCompleter -Name pix_fmt -Description $msg.pixel_format -Arguments @{ Name = 'format' }
 
     # Audio options
-    New-ParamCompleter -Name ar -Description $msg.sample_rate -VariableName 'rate'
-    New-ParamCompleter -Name ac -Description $msg.channels -VariableName 'channels'
-    New-ParamCompleter -Name sample_fmt -Description $msg.sample_format -VariableName 'format'
-    New-ParamCompleter -Name channel_layout -Description $msg.channel_layout -VariableName 'layout'
+    New-ParamCompleter -Name ar -Description $msg.sample_rate -Arguments @{ Name = 'rate' }
+    New-ParamCompleter -Name ac -Description $msg.channels -Arguments @{ Name = 'channels' }
+    New-ParamCompleter -Name sample_fmt -Description $msg.sample_format -Arguments @{ Name = 'format' }
+    New-ParamCompleter -Name channel_layout -Description $msg.channel_layout -Arguments @{ Name = 'layout' }
 
     # Quality options
-    New-ParamCompleter -Name q -Description $msg.quality -VariableName 'quality'
-    New-ParamCompleter -Name qscale -Description $msg.quality -VariableName 'quality'
+    New-ParamCompleter -Name q -Description $msg.quality -Arguments @{ Name = 'quality' }
+    New-ParamCompleter -Name qscale -Description $msg.quality -Arguments @{ Name = 'quality' }
 
     # Time options
-    New-ParamCompleter -Name ss -Description $msg.start_time -VariableName 'position'
-    New-ParamCompleter -Name t -Description $msg.duration -VariableName 'duration'
-    New-ParamCompleter -Name to -Description $msg.duration -VariableName 'position'
-    New-ParamCompleter -Name timestamp -Description $msg.timestamp -VariableName 'date'
+    New-ParamCompleter -Name ss -Description $msg.start_time -Arguments @{ Name = 'position' }
+    New-ParamCompleter -Name t -Description $msg.duration -Arguments @{ Name = 'duration' }
+    New-ParamCompleter -Name to -Description $msg.duration -Arguments @{ Name = 'position' }
+    New-ParamCompleter -Name timestamp -Description $msg.timestamp -Arguments @{ Name = 'date' }
 
     # Metadata options
-    New-ParamCompleter -Name metadata -Description $msg.metadata -VariableName 'key=value'
-    New-ParamCompleter -Name disposition -Description $msg.disposition -VariableName 'value'
-    New-ParamCompleter -Name program -Description $msg.program -VariableName 'title=program'
+    New-ParamCompleter -Name metadata -Description $msg.metadata -Arguments @{ Name = 'key=value' }
+    New-ParamCompleter -Name disposition -Description $msg.disposition -Arguments @{ Name = 'value' }
+    New-ParamCompleter -Name program -Description $msg.program -Arguments @{ Name = 'title=program' }
 
     # Stream selection
-    New-ParamCompleter -Name map -Description $msg.map -VariableName 'stream'
-    New-ParamCompleter -Name map_chapters -Description $msg.map_chapters -VariableName 'input'
-    New-ParamCompleter -Name map_metadata -Description $msg.map_metadata -VariableName 'spec'
+    New-ParamCompleter -Name map -Description $msg.map -Arguments @{ Name = 'stream' }
+    New-ParamCompleter -Name map_chapters -Description $msg.map_chapters -Arguments @{ Name = 'input' }
+    New-ParamCompleter -Name map_metadata -Description $msg.map_metadata -Arguments @{ Name = 'spec' }
 
     # Stream disable
     New-ParamCompleter -Name an -Description $msg.an
@@ -175,40 +179,40 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name dn -Description $msg.dn
 
     # Advanced options
-    New-ParamCompleter -Name threads -Description $msg.threads -VariableName 'count'
-    New-ParamCompleter -Name preset -Description $msg.preset -VariableName 'preset'
-    New-ParamCompleter -Name target -Description $msg.target -VariableName 'type'
-    New-ParamCompleter -Name pass -Description $msg.pass -VariableName 'n'
-    New-ParamCompleter -Name passlogfile -Description $msg.passlogfile -ArgumentType File -VariableName 'prefix'
+    New-ParamCompleter -Name threads -Description $msg.threads -Arguments @{ Name = 'count' }
+    New-ParamCompleter -Name preset -Description $msg.preset -Arguments @{ Name = 'preset' }
+    New-ParamCompleter -Name target -Description $msg.target -Arguments @{ Name = 'type' }
+    New-ParamCompleter -Name pass -Description $msg.pass -Arguments @{ Name = 'n' }
+    New-ParamCompleter -Name passlogfile -Description $msg.passlogfile -Arguments @{ Name = 'prefix'; Type = 'File' }
     New-ParamCompleter -Name shortest -Description $msg.shortest
     New-ParamCompleter -Name accurate_seek -Description $msg.accurate_seek
     New-ParamCompleter -Name seek_timestamp -Description $msg.seek_timestamp
-    New-ParamCompleter -Name thread_queue_size -Description $msg.thread_queue_size -VariableName 'size'
-    New-ParamCompleter -Name stream_loop -Description $msg.stream_loop -VariableName 'count'
-    New-ParamCompleter -Name loop -Description $msg.loop_output -VariableName 'count'
+    New-ParamCompleter -Name thread_queue_size -Description $msg.thread_queue_size -Arguments @{ Name = 'size' }
+    New-ParamCompleter -Name stream_loop -Description $msg.stream_loop -Arguments @{ Name = 'count' }
+    New-ParamCompleter -Name loop -Description $msg.loop_output -Arguments @{ Name = 'count' }
 
     # Sync options
-    New-ParamCompleter -Name vsync -Description $msg.video_sync -VariableName 'method'
-    New-ParamCompleter -Name async -Description $msg.audio_sync -VariableName 'samples'
+    New-ParamCompleter -Name vsync -Description $msg.video_sync -Arguments @{ Name = 'method' }
+    New-ParamCompleter -Name async -Description $msg.audio_sync -Arguments @{ Name = 'samples' }
 
     # Format options
-    New-ParamCompleter -Name fmt -Description $msg.input_format -VariableName 'format'
+    New-ParamCompleter -Name fmt -Description $msg.input_format -Arguments @{ Name = 'format' }
 
     # Statistics and logging
     New-ParamCompleter -Name stats -Description $msg.stats
-    New-ParamCompleter -Name progress -Description $msg.progress -VariableName 'url'
+    New-ParamCompleter -Name progress -Description $msg.progress -Arguments @{ Name = 'url' }
     New-ParamCompleter -Name stdin -Description $msg.stdin
-    New-ParamCompleter -Name debug -Description $msg.debug -VariableName 'flags'
-    New-ParamCompleter -Name loglevel -Description $msg.loglevel -VariableName 'level'
+    New-ParamCompleter -Name debug -Description $msg.debug -Arguments @{ Name = 'flags' }
+    New-ParamCompleter -Name loglevel -Description $msg.loglevel -Arguments @{ Name = 'level' }
     New-ParamCompleter -Name report -Description $msg.report
     New-ParamCompleter -Name vstats -Description $msg.vstats
-    New-ParamCompleter -Name vstats_file -Description $msg.vstats_file -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -Name vstats_version -Description $msg.vstats_version -VariableName 'version'
+    New-ParamCompleter -Name vstats_file -Description $msg.vstats_file -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -Name vstats_version -Description $msg.vstats_version -Arguments @{ Name = 'version' }
 
     # Benchmark options
     New-ParamCompleter -Name benchmark -Description $msg.benchmark
     New-ParamCompleter -Name benchmark_all -Description $msg.benchmark_all
-    New-ParamCompleter -Name timelimit -Description $msg.timelimit -VariableName 'duration'
+    New-ParamCompleter -Name timelimit -Description $msg.timelimit -Arguments @{ Name = 'duration' }
 
     # Debug options
     New-ParamCompleter -Name dump -Description $msg.dump
@@ -216,14 +220,14 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
 
     # Other options
     New-ParamCompleter -Name re -Description $msg.re
-    New-ParamCompleter -Name stream_group -Description $msg.stream_group -VariableName 'spec'
-    New-ParamCompleter -Name max_alloc -Description $msg.max_alloc -VariableName 'bytes'
-    New-ParamCompleter -Name cpuflags -Description $msg.cpuflags -VariableName 'flags'
-    New-ParamCompleter -Name cpucount -Description $msg.cpucount -VariableName 'count'
+    New-ParamCompleter -Name stream_group -Description $msg.stream_group -Arguments @{ Name = 'spec' }
+    New-ParamCompleter -Name max_alloc -Description $msg.max_alloc -Arguments @{ Name = 'bytes' }
+    New-ParamCompleter -Name cpuflags -Description $msg.cpuflags -Arguments @{ Name = 'flags' }
+    New-ParamCompleter -Name cpucount -Description $msg.cpucount -Arguments @{ Name = 'count' }
 
     # Display options
     New-ParamCompleter -Name hide_banner -Description $msg.hide_banner
-    New-ParamCompleter -Name h -Description $msg.help -Type FlagOrValue -VariableName 'topic'
+    New-ParamCompleter -Name h -Description $msg.help -Arguments @{ Name = 'topic'; Nargs = '?' }
     New-ParamCompleter -Name version -Description $msg.version
     New-ParamCompleter -Name formats -Description $msg.formats
     New-ParamCompleter -Name devices -Description $msg.devices
@@ -238,7 +242,7 @@ Register-NativeCompleter -Name ffmpeg -Description $msg.ffmpeg -Style Unix -Para
     New-ParamCompleter -Name sample_fmts -Description $msg.sample_fmts
     New-ParamCompleter -Name dispositions -Description $msg.dispositions
     New-ParamCompleter -Name colors -Description $msg.colors
-    New-ParamCompleter -Name sources -Description $msg.sources -VariableName 'device'
-    New-ParamCompleter -Name sinks -Description $msg.sinks -VariableName 'device'
+    New-ParamCompleter -Name sources -Description $msg.sources -Arguments @{ Name = 'device' }
+    New-ParamCompleter -Name sinks -Description $msg.sinks -Arguments @{ Name = 'device' }
     New-ParamCompleter -Name hwaccels -Description $msg.hwaccels
 )
