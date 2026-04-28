@@ -55,61 +55,57 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name ssh-keygen -Description $msg.ssh_keygen -Parameters @(
-    New-ParamCompleter -ShortName b -Description $msg.bits -VariableName 'bits'
-    New-ParamCompleter -ShortName t -Description $msg.type -Arguments @(
-        "dsa`tDSA key"
-        "ecdsa`tECDSA key"
-        "ecdsa-sk`tECDSA security key"
-        "ed25519`tEd25519 key"
-        "ed25519-sk`tEd25519 security key"
-        "rsa`tRSA key"
-    ) -VariableName 'type'
-    New-ParamCompleter -ShortName C -Description $msg.comment -VariableName 'comment'
-    New-ParamCompleter -ShortName f -Description $msg.file -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -ShortName N -Description $msg.new_passphrase -VariableName 'new_passphrase'
-    New-ParamCompleter -ShortName P -Description $msg.passphrase -VariableName 'passphrase'
-    New-ParamCompleter -ShortName a -Description $msg.rounds -VariableName 'rounds'
-    New-ParamCompleter -ShortName G -Description $msg.generate -VariableName 'output_file'
-    New-ParamCompleter -ShortName T -Description $msg.screen -VariableName 'output_file'
+    New-ParamCompleter -ShortName b -Description $msg.bits -Arguments @{ Name = 'bits' }
+    New-ParamCompleter -ShortName t -Description $msg.type -Arguments @{
+        Name = 'type'; Candidates = @(
+            "dsa`tDSA key"
+            "ecdsa`tECDSA key"
+            "ecdsa-sk`tECDSA security key"
+            "ed25519`tEd25519 key"
+            "ed25519-sk`tEd25519 security key"
+            "rsa`tRSA key"
+        )
+    }
+    New-ParamCompleter -ShortName C -Description $msg.comment -Arguments @{ Name = 'comment' }
+    New-ParamCompleter -ShortName f -Description $msg.file -Arguments @{ Name = 'filename'; Type = 'File' }
+    New-ParamCompleter -ShortName N -Description $msg.new_passphrase -Arguments @{ Name = 'new_passphrase' }
+    New-ParamCompleter -ShortName P -Description $msg.passphrase -Arguments @{ Name = 'passphrase' }
+    New-ParamCompleter -ShortName a -Description $msg.rounds -Arguments @{ Name = 'rounds' }
+    New-ParamCompleter -ShortName G -Description $msg.generate -Arguments @{ Name = 'output_file' }
+    New-ParamCompleter -ShortName T -Description $msg.screen -Arguments @{ Name = 'output_file' }
     New-ParamCompleter -ShortName M -Description $msg.test_primality -Arguments "generate","screen"
     New-ParamCompleter -ShortName l -Description $msg.fingerprint
     New-ParamCompleter -ShortName H -Description $msg.hash_known_hosts
     New-ParamCompleter -ShortName i -Description $msg.import_key
     New-ParamCompleter -ShortName e -Description $msg.export_key
-    New-ParamCompleter -ShortName F -Description $msg.find_host -VariableName 'hostname'
+    New-ParamCompleter -ShortName F -Description $msg.find_host -Arguments @{ Name = 'hostname' }
     New-ParamCompleter -ShortName L -Description $msg.list_fingerprints
     New-ParamCompleter -ShortName B -Description $msg.print_bubblebabble
     New-ParamCompleter -ShortName c -Description $msg.change_comment
     New-ParamCompleter -ShortName p -Description $msg.change_passphrase
     New-ParamCompleter -ShortName y -Description $msg.print_public
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName k -Description $msg.revoke -ArgumentType File -VariableName 'krl_file'
-    New-ParamCompleter -ShortName R -Description $msg.remove_keys -VariableName 'hostname'
+    New-ParamCompleter -ShortName k -Description $msg.revoke -Arguments @{ Name = 'krl_file'; Type = 'File' }
+    New-ParamCompleter -ShortName R -Description $msg.remove_keys -Arguments @{ Name = 'hostname' }
     New-ParamCompleter -ShortName Y -Description $msg.sign_file -Arguments "find-principals","check-novalidate","sign","verify"
     New-ParamCompleter -ShortName Q -Description $msg.check_krl
     New-ParamCompleter -ShortName u -Description $msg.update_krl
     New-ParamCompleter -ShortName v -Description $msg.verbose
-    New-ParamCompleter -ShortName E -Description $msg.hash_function -Arguments "md5","sha256" -VariableName 'fingerprint_hash'
-    New-ParamCompleter -ShortName m -Description $msg.convert_format -Arguments "RFC4716","PKCS8","PEM" -VariableName 'key_format'
-    New-ParamCompleter -ShortName D -Description $msg.show_certificate -ArgumentType File -VariableName 'pkcs11'
-    New-ParamCompleter -ShortName O -Description $msg.cert_option -VariableName 'option'
-    New-ParamCompleter -ShortName z -Description $msg.serial_number -VariableName 'serial_number'
-    New-ParamCompleter -ShortName I -Description $msg.identity_file -VariableName 'key_id'
-    New-ParamCompleter -ShortName n -Description $msg.principals_file -ArgumentType List -VariableName 'principals'
-    New-ParamCompleter -ShortName V -Description $msg.validity_interval -VariableName 'validity_interval'
+    New-ParamCompleter -ShortName E -Description $msg.hash_function -Arguments @{ Name = 'fingerprint_hash'; Candidates = "md5","sha256" }
+    New-ParamCompleter -ShortName m -Description $msg.convert_format -Arguments @{ Name = 'key_format'; Candidates = "RFC4716","PKCS8","PEM" }
+    New-ParamCompleter -ShortName D -Description $msg.show_certificate -Arguments @{ Name = 'pkcs11'; Type = 'File' }
+    New-ParamCompleter -ShortName O -Description $msg.cert_option -Arguments @{ Name = 'option' }
+    New-ParamCompleter -ShortName z -Description $msg.serial_number -Arguments @{ Name = 'serial_number' }
+    New-ParamCompleter -ShortName I -Description $msg.identity_file -Arguments @{ Name = 'key_id' }
+    New-ParamCompleter -ShortName n -Description $msg.principals_file -Arguments @{ Name = 'principals'; List = $true }
+    New-ParamCompleter -ShortName V -Description $msg.validity_interval -Arguments @{ Name = 'validity_interval' }
     New-ParamCompleter -ShortName A -Description $msg.add_key
     New-ParamCompleter -ShortName h -Description $msg.add_host_keys
-    New-ParamCompleter -ShortName s -Description $msg.allowed_signers -ArgumentType File -VariableName 'ca_key'
+    New-ParamCompleter -ShortName s -Description $msg.allowed_signers -Arguments @{ Name = 'ca_key'; Type = 'File' }
     New-ParamCompleter -ShortName U -Description $msg.find_principal
-    New-ParamCompleter -ShortName Z -Description $msg.matching_principal -VariableName 'principal'
-    New-ParamCompleter -ShortName w -Description $msg.namespace -VariableName 'provider'
+    New-ParamCompleter -ShortName Z -Description $msg.matching_principal -Arguments @{ Name = 'principal' }
+    New-ParamCompleter -ShortName w -Description $msg.namespace -Arguments @{ Name = 'provider' }
     New-ParamCompleter -ShortName r -Description $msg.print_revoked
     New-ParamCompleter -ShortName g -Description $msg.attestation -Arguments "verify-required"
-    New-ParamCompleter -ShortName o -Description $msg.output_file -ArgumentType File -VariableName 'filename'
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-        $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or
-        $_.Extension -match '^\.(pub|pem|ppk)?$'
-    })
-}
+    New-ParamCompleter -ShortName o -Description $msg.output_file -Arguments @{ Name = 'filename'; Type = 'File' }
+)
