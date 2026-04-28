@@ -236,9 +236,9 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-CommandCompleter -Name suspend-then-hibernate -Description $msg.suspend_then_hibernate -NoFileCompletions
     New-CommandCompleter -Name cancel -Description $msg.cancel -NoFileCompletions
 ) -Parameters @(
-    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -ArgumentType List -VariableName 'TYPE' -Arguments $typeValues
-    New-ParamCompleter -LongName state -Description $msg.state -ArgumentType List -VariableName 'STATE' -Arguments $stateValues
-    New-ParamCompleter -ShortName p -LongName property -Description $msg.property -ArgumentType List -VariableName 'NAME'
+    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -Arguments @{ Name = 'TYPE'; List = $true; Candidates = $typeValues }
+    New-ParamCompleter -LongName state -Description $msg.state -Arguments @{ Name = 'STATE'; List = $true; Candidates = $stateValues }
+    New-ParamCompleter -ShortName p -LongName property -Description $msg.property -Arguments @{ Name = 'NAME'; List = $true }
     New-ParamCompleter -ShortName a -LongName all -Description $msg.all
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
     New-ParamCompleter -LongName reverse -Description $msg.reverse
@@ -249,20 +249,20 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-ParamCompleter -ShortName l -LongName full -Description $msg.full
     New-ParamCompleter -LongName value -Description $msg.value
     New-ParamCompleter -LongName show-types -Description $msg.show_types
-    New-ParamCompleter -LongName job-mode -Description $msg.job_mode -Arguments $jobModeValues -VariableName 'MODE'
+    New-ParamCompleter -LongName job-mode -Description $msg.job_mode -Arguments @{ Name = 'MODE'; Candidates = $jobModeValues }
     New-ParamCompleter -LongName fail -Description $msg.fail
     New-ParamCompleter -LongName ignore-dependencies -Description $msg.ignore_dependencies
     New-ParamCompleter -ShortName i -LongName ignore-inhibitors -Description $msg.ignore_inhibitors
     New-ParamCompleter -LongName skip-redirect -Description $msg.skip_redirect
-    New-ParamCompleter -LongName kill-mode -Description $msg.kill_mode -Arguments "control-group","process","mixed","none" -VariableName 'MODE'
-    New-ParamCompleter -LongName kill-value -Description $msg.kill_value -VariableName 'VALUE'
-    New-ParamCompleter -ShortName s -LongName signal -Description $msg.signal -VariableName 'SIGNAL'
-    New-ParamCompleter -LongName what -Description $msg.what -ArgumentType List -Arguments "configuration","state","cache","logs","runtime","fdstore","all" -VariableName 'RESOURCES'
+    New-ParamCompleter -LongName kill-mode -Description $msg.kill_mode -Arguments @{ Name = 'MODE'; Candidates = "control-group","process","mixed","none" }
+    New-ParamCompleter -LongName kill-value -Description $msg.kill_value -Arguments @{ Name = 'VALUE' }
+    New-ParamCompleter -ShortName s -LongName signal -Description $msg.signal -Arguments @{ Name = 'SIGNAL' }
+    New-ParamCompleter -LongName what -Description $msg.what -Arguments @{ Name = 'RESOURCES'; List = $true; Candidates = "configuration","state","cache","logs","runtime","fdstore","all" }
     New-ParamCompleter -LongName now -Description $msg.now
     New-ParamCompleter -LongName dry-run -Description $msg.dry_run
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName f -LongName force -Description $msg.force
-    New-ParamCompleter -LongName message -Description $msg.message -VariableName 'MESSAGE'
+    New-ParamCompleter -LongName message -Description $msg.message -Arguments @{ Name = 'MESSAGE' }
     New-ParamCompleter -LongName no-wall -Description $msg.no_wall
     New-ParamCompleter -LongName no-reload -Description $msg.no_reload
     New-ParamCompleter -LongName no-legend -Description $msg.no_legend
@@ -272,23 +272,23 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-ParamCompleter -LongName user -Description $msg.user
     New-ParamCompleter -LongName global -Description $msg.global
     New-ParamCompleter -LongName runtime -Description $msg.runtime
-    New-ParamCompleter -ShortName n -LongName lines -Description $msg.lines -VariableName 'INTEGER'
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments $outputModeValues -VariableName 'MODE'
+    New-ParamCompleter -ShortName n -LongName lines -Description $msg.lines -Arguments @{ Name = 'INTEGER' }
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments @{ Name = 'MODE'; Candidates = $outputModeValues }
     New-ParamCompleter -LongName firmware-setup -Description $msg.firmware_setup
-    New-ParamCompleter -LongName boot-loader-menu -Description $msg.boot_loader_menu -VariableName 'TIMEOUT'
-    New-ParamCompleter -LongName boot-loader-entry -Description $msg.boot_loader_entry -VariableName 'ID'
+    New-ParamCompleter -LongName boot-loader-menu -Description $msg.boot_loader_menu -Arguments @{ Name = 'TIMEOUT' }
+    New-ParamCompleter -LongName boot-loader-entry -Description $msg.boot_loader_entry -Arguments @{ Name = 'ID' }
     New-ParamCompleter -LongName plain -Description $msg.plain
-    New-ParamCompleter -LongName timestamp -Description $msg.timestamp -Arguments "pretty","unix","us","utc","us+utc" -VariableName 'FORMAT'
+    New-ParamCompleter -LongName timestamp -Description $msg.timestamp -Arguments @{ Name = 'FORMAT'; Candidates = "pretty","unix","us","utc","us+utc" }
     New-ParamCompleter -LongName read-only -Description $msg.read_only
     New-ParamCompleter -LongName mkdir -Description $msg.mkdir
     New-ParamCompleter -LongName marked -Description $msg.marked
-    New-ParamCompleter -LongName when -Description $msg.when -Arguments "active","inactive","condition" -VariableName 'CONDITION'
-    New-ParamCompleter -LongName preset-mode -Description $msg.preset_mode -Arguments "full","enable-only","disable-only" -VariableName 'MODE'
-    New-ParamCompleter -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'PATH'
-    New-ParamCompleter -LongName image -Description $msg.image -ArgumentType File -VariableName 'PATH'
-    New-ParamCompleter -LongName image-policy -Description $msg.image_policy -VariableName 'POLICY'
-    New-ParamCompleter -ShortName H -LongName host -Description $msg.host -VariableName 'HOST'
-    New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -VariableName 'CONTAINER'
+    New-ParamCompleter -LongName when -Description $msg.when -Arguments @{ Name = 'CONDITION'; Candidates = "active","inactive","condition" }
+    New-ParamCompleter -LongName preset-mode -Description $msg.preset_mode -Arguments @{ Name = 'MODE'; Candidates = "full","enable-only","disable-only" }
+    New-ParamCompleter -LongName root -Description $msg.root -Arguments @{ Name = 'PATH'; Type = 'Directory' }
+    New-ParamCompleter -LongName image -Description $msg.image -Arguments @{ Name = 'PATH'; Type = 'File' }
+    New-ParamCompleter -LongName image-policy -Description $msg.image_policy -Arguments @{ Name = 'POLICY' }
+    New-ParamCompleter -ShortName H -LongName host -Description $msg.host -Arguments @{ Name = 'HOST' }
+    New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -Arguments @{ Name = 'CONTAINER' }
     New-ParamCompleter -LongName wait -Description $msg.wait
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help_cmd
