@@ -74,7 +74,7 @@ Register-NativeCompleter -Name ss -Description $msg.ss -Parameters @(
     New-ParamCompleter -ShortName E -LongName events -Description $msg.events
     New-ParamCompleter -ShortName Z -LongName context -Description $msg.context
     New-ParamCompleter -ShortName z -LongName contexts -Description $msg.contexts
-    New-ParamCompleter -ShortName N -LongName net -Description $msg.net -VariableName 'NSNAME'
+    New-ParamCompleter -ShortName N -LongName net -Description $msg.net -Arguments @{ Name = 'NSNAME' }
     New-ParamCompleter -ShortName b -LongName bpf -Description $msg.bpf
     New-ParamCompleter -ShortName '4' -LongName ipv4 -Description $msg.ipv4
     New-ParamCompleter -ShortName '6' -LongName ipv6 -Description $msg.ipv6
@@ -90,10 +90,12 @@ Register-NativeCompleter -Name ss -Description $msg.ss -Parameters @(
     New-ParamCompleter -LongName xdp -Description $msg.xdp
     New-ParamCompleter -ShortName M -LongName mptcp -Description $msg.mptcp
     New-ParamCompleter -LongName inet-sockopt -Description $msg.inetSockopt
-    New-ParamCompleter -ShortName f -LongName family -Description $msg.family -VariableName 'FAMILY' -Arguments "unix", "inet", "inet6", "link", "netlink", "vsock", "tipc", "xdp"
-    New-ParamCompleter -ShortName A -LongName query, socket -Description $msg.query -ArgumentType List -VariableName '[!]QUERY' -Arguments @(
-        "all","inet","tcp","mptcp","udp","raw","unix","unix_dgram","unix_stream","unix_seqpacket","packet","packet_raw","packet_dgram","netlink","dccp","sctp","vsock_stream","vsock_dgram","tipc","xdp"
-    )
-    New-ParamCompleter -ShortName D -LongName diag -Description $msg.filter -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -ShortName F -LongName filter -Description $msg.filter -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -ShortName f -LongName family -Description $msg.family -Arguments @{ Name = 'FAMILY'; Candidates = "unix", "inet", "inet6", "link", "netlink", "vsock", "tipc", "xdp" }
+    New-ParamCompleter -ShortName A -LongName query, socket -Description $msg.query -Arguments @{
+        Name = '[!]QUERY'; List = $true; Candidates = @(
+            "all","inet","tcp","mptcp","udp","raw","unix","unix_dgram","unix_stream","unix_seqpacket","packet","packet_raw","packet_dgram","netlink","dccp","sctp","vsock_stream","vsock_dgram","tipc","xdp"
+        )
+    }
+    New-ParamCompleter -ShortName D -LongName diag -Description $msg.filter -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -ShortName F -LongName filter -Description $msg.filter -Arguments @{ Name = 'FILE'; Type = 'File' }
 ) -NoFileCompletions
