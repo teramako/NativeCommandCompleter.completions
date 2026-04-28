@@ -105,37 +105,37 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
-    New-ParamCompleter -ShortName A -LongName after-context -Description $msg.afterContext -VariableName 'NUM'
-    New-ParamCompleter -ShortName B -LongName before-context -Description $msg.beforeContext -VariableName 'NUM'
-    New-ParamCompleter -ShortName C -LongName context -Description $msg.context -VariableName 'NUM'
+    New-ParamCompleter -ShortName A -LongName after-context -Description $msg.afterContext -Arguments @{ Name = 'NUM' }
+    New-ParamCompleter -ShortName B -LongName before-context -Description $msg.beforeContext -Arguments @{ Name = 'NUM' }
+    New-ParamCompleter -ShortName C -LongName context -Description $msg.context -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName binary -Description $msg.binary
     New-ParamCompleter -LongName block-buffered -Description $msg.blockBuffered
     New-ParamCompleter -ShortName b -LongName byte-offset -Description $msg.byteOffset
     New-ParamCompleter -ShortName s -LongName case-sensitive -Description $msg.caseSensitive
-    New-ParamCompleter -LongName color -Description $msg.color -Arguments 'never','auto','always','ansi' -VariableName 'WHEN'
-    New-ParamCompleter -LongName colors -Description $msg.colors -VariableName 'COLOR_SPEC'
+    New-ParamCompleter -LongName color -Description $msg.color -Arguments @{ Name = 'WHEN'; Candidates = 'never','auto','always','ansi' }
+    New-ParamCompleter -LongName colors -Description $msg.colors -Arguments @{ Name = 'COLOR_SPEC' }
     New-ParamCompleter -LongName column -Description $msg.column
-    New-ParamCompleter -LongName context-separator -Description $msg.contextSeparator -VariableName 'SEPARATOR'
+    New-ParamCompleter -LongName context-separator -Description $msg.contextSeparator -Arguments @{ Name = 'SEPARATOR' }
     New-ParamCompleter -ShortName c -LongName count -Description $msg.count
     New-ParamCompleter -LongName count-matches -Description $msg.countMatches
     New-ParamCompleter -LongName crlf -Description $msg.crlf
     New-ParamCompleter -LongName debug -Description $msg.debug
-    New-ParamCompleter -LongName dfa-size-limit -Description $msg.dfaSizeLimit -VariableName 'NUM+SUFFIX?'
-    New-ParamCompleter -ShortName E -LongName encoding -Description $msg.encoding -VariableName 'ENCODING'
-    New-ParamCompleter -LongName engine -Description $msg.engine -Arguments 'default','pcre2','auto' -VariableName 'ENGINE'
-    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'PATTERNFILE'
+    New-ParamCompleter -LongName dfa-size-limit -Description $msg.dfaSizeLimit -Arguments @{ Name = 'NUM+SUFFIX?' }
+    New-ParamCompleter -ShortName E -LongName encoding -Description $msg.encoding -Arguments @{ Name = 'ENCODING' }
+    New-ParamCompleter -LongName engine -Description $msg.engine -Arguments @{ Name = 'ENGINE'; Candidates = 'default','pcre2','auto' }
+    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Arguments @{ Name = 'PATTERNFILE'; Type = 'File' }
     New-ParamCompleter -LongName files -Description $msg.files
     New-ParamCompleter -ShortName l -LongName files-with-matches -Description $msg.filesWithMatches
     New-ParamCompleter -LongName files-without-match -Description $msg.filesWithoutMatch
     New-ParamCompleter -ShortName F -LongName fixed-strings -Description $msg.fixedStrings
     New-ParamCompleter -ShortName L -LongName follow -Description $msg.follow
-    New-ParamCompleter -ShortName g -LongName glob -Description $msg.glob -VariableName 'GLOB'
+    New-ParamCompleter -ShortName g -LongName glob -Description $msg.glob -Arguments @{ Name = 'GLOB' }
     New-ParamCompleter -LongName glob-case-insensitive -Description $msg.globCaseInsensitive
     New-ParamCompleter -LongName heading -Description $msg.heading
     New-ParamCompleter -LongName hidden -Description $msg.hidden
-    New-ParamCompleter -LongName iglob -Description $msg.iglob -VariableName 'GLOB'
+    New-ParamCompleter -LongName iglob -Description $msg.iglob -Arguments @{ Name = 'GLOB' }
     New-ParamCompleter -ShortName i -LongName ignore-case -Description $msg.ignoreCase
-    New-ParamCompleter -LongName ignore-file -Description $msg.ignoreFile -ArgumentType File -VariableName 'PATH'
+    New-ParamCompleter -LongName ignore-file -Description $msg.ignoreFile -Arguments @{ Name = 'PATH'; Type = 'File' }
     New-ParamCompleter -LongName ignore-file-case-insensitive -Description $msg.ignoreFileCaseInsensitive
     New-ParamCompleter -LongName include-zero -Description $msg.includeZero
     New-ParamCompleter -ShortName v -LongName invert-match -Description $msg.invertMatch
@@ -143,11 +143,11 @@ Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
     New-ParamCompleter -LongName line-buffered -Description $msg.lineBuffered
     New-ParamCompleter -ShortName n -LongName line-number -Description $msg.lineNumber
     New-ParamCompleter -ShortName x -LongName line-regexp -Description $msg.lineRegexp
-    New-ParamCompleter -ShortName M -LongName max-columns -Description $msg.maxColumns -VariableName 'NUM'
+    New-ParamCompleter -ShortName M -LongName max-columns -Description $msg.maxColumns -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName max-columns-preview -Description $msg.maxColumnsPreview
-    New-ParamCompleter -ShortName m -LongName max-count -Description $msg.maxCount -VariableName 'NUM'
-    New-ParamCompleter -LongName max-depth -Description $msg.maxDepth -VariableName 'NUM'
-    New-ParamCompleter -LongName max-filesize -Description $msg.maxFilesize -VariableName 'NUM+SUFFIX?'
+    New-ParamCompleter -ShortName m -LongName max-count -Description $msg.maxCount -Arguments @{ Name = 'NUM' }
+    New-ParamCompleter -LongName max-depth -Description $msg.maxDepth -Arguments @{ Name = 'NUM' }
+    New-ParamCompleter -LongName max-filesize -Description $msg.maxFilesize -Arguments @{ Name = 'NUM+SUFFIX?' }
     New-ParamCompleter -LongName mmap -Description $msg.mmap
     New-ParamCompleter -ShortName U -LongName multiline -Description $msg.multiline
     New-ParamCompleter -LongName multiline-dotall -Description $msg.multilineDotall
@@ -170,47 +170,43 @@ Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
     New-ParamCompleter -LongName null-data -Description $msg.nullData
     New-ParamCompleter -LongName one-file-system -Description $msg.oneFileSystem
     New-ParamCompleter -ShortName o -LongName only-matching -Description $msg.onlyMatching
-    New-ParamCompleter -LongName path-separator -Description $msg.pathSeparator -VariableName 'SEPARATOR'
+    New-ParamCompleter -LongName path-separator -Description $msg.pathSeparator -Arguments @{ Name = 'SEPARATOR' }
     New-ParamCompleter -LongName passthru -Description $msg.passthru
     New-ParamCompleter -ShortName P -LongName pcre2 -Description $msg.pcre2
-    New-ParamCompleter -LongName pre -Description $msg.pre -VariableName 'COMMAND'
-    New-ParamCompleter -LongName pre-glob -Description $msg.preGlob -VariableName 'GLOB'
+    New-ParamCompleter -LongName pre -Description $msg.pre -Arguments @{ Name = 'COMMAND' }
+    New-ParamCompleter -LongName pre-glob -Description $msg.preGlob -Arguments @{ Name = 'GLOB' }
     New-ParamCompleter -ShortName p -LongName pretty -Description $msg.pretty
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
-    New-ParamCompleter -LongName regex-size-limit -Description $msg.regexSizeLimit -VariableName 'NUM+SUFFIX?'
-    New-ParamCompleter -ShortName e -LongName regexp -Description $msg.regexp -VariableName 'PATTERN'
-    New-ParamCompleter -ShortName r -LongName replace -Description $msg.replace -VariableName 'REPLACEMENT'
+    New-ParamCompleter -LongName regex-size-limit -Description $msg.regexSizeLimit -Arguments @{ Name = 'NUM+SUFFIX?' }
+    New-ParamCompleter -ShortName e -LongName regexp -Description $msg.regexp -Arguments @{ Name = 'PATTERN' }
+    New-ParamCompleter -ShortName r -LongName replace -Description $msg.replace -Arguments @{ Name = 'REPLACEMENT' }
     New-ParamCompleter -ShortName z -LongName search-zip -Description $msg.searchZip
     New-ParamCompleter -ShortName S -LongName smart-case -Description $msg.smartCase
-    New-ParamCompleter -LongName sort -Description $msg.sort -Arguments 'none','path','modified','accessed','created' -VariableName 'SORTBY'
-    New-ParamCompleter -LongName sortr -Description $msg.sortr -Arguments 'none','path','modified','accessed','created' -VariableName 'SORTBY'
+    New-ParamCompleter -LongName sort -Description $msg.sort -Arguments @{ Name = 'SORTBY'; Candidates = 'none','path','modified','accessed','created' }
+    New-ParamCompleter -LongName sortr -Description $msg.sortr -Arguments @{ Name = 'SORTBY'; Candidates = 'none','path','modified','accessed','created' }
     New-ParamCompleter -LongName stats -Description $msg.stats
     New-ParamCompleter -ShortName a -LongName text -Description $msg.text
-    New-ParamCompleter -ShortName j -LongName threads -Description $msg.threads -VariableName 'NUM'
+    New-ParamCompleter -ShortName j -LongName threads -Description $msg.threads -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName trace -Description $msg.trace
     New-ParamCompleter -LongName trim -Description $msg.trim
-    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -VariableName 'TYPE'
-    New-ParamCompleter -LongName type-add -Description $msg.typeAdd -VariableName 'TYPESPEC'
-    New-ParamCompleter -LongName type-clear -Description $msg.typeClear -VariableName 'TYPE'
+    New-ParamCompleter -ShortName t -LongName type -Description $msg.type -Arguments @{ Name = 'TYPE' }
+    New-ParamCompleter -LongName type-add -Description $msg.typeAdd -Arguments @{ Name = 'TYPESPEC' }
+    New-ParamCompleter -LongName type-clear -Description $msg.typeClear -Arguments @{ Name = 'TYPE' }
     New-ParamCompleter -LongName type-list -Description $msg.typeList
-    New-ParamCompleter -ShortName T -LongName type-not -Description $msg.typeNot -VariableName 'TYPE'
+    New-ParamCompleter -ShortName T -LongName type-not -Description $msg.typeNot -Arguments @{ Name = 'TYPE' }
     New-ParamCompleter -ShortName u -LongName unrestricted -Description $msg.unrestricted
     New-ParamCompleter -LongName vimgrep -Description $msg.vimgrep
     New-ParamCompleter -ShortName H -LongName with-filename -Description $msg.withFilename
     New-ParamCompleter -ShortName w -LongName word-regexp -Description $msg.wordRegexp
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey("regexp") -and -not $this.BoundParameters.ContainsKey("file"))
-    {
-        if ([string]::IsNullOrEmpty($_))
-        {
-            "pattern`tSpecify a search pattern"
-        }
-        else
-        {
-            $null
-        }
+) -NoFileCompletions -Arguments @{
+    Name = 'PATTERN'
+    Script = {
+        if ($this.BoundParameters.ContainsKey("regexp") -or $this.BoundParameters.ContainsKey("file")) {
+            [MT.Comp.Helper]::CompleteFilename($this);
+        } else { $null }
     }
+}, @{
+    Name = 'PATH'; Nargs = '0+'; Type = 'File'
 }
