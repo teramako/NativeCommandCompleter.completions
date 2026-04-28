@@ -250,18 +250,18 @@ $refCompleter = {
 Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -ShortName v -LongName version -Description $msg._version
     New-ParamCompleter -ShortName h -LongName help -Description $msg._help
-    New-ParamCompleter -ShortName C -Description $msg._changeCurrentDir -ArgumentType Directory -VariableName 'path'
-    New-ParamCompleter -ShortName c -Description $msg._configParam -VariableName 'name=value'
-    New-ParamCompleter -LongName config-env -Description $msg._configEnv -VariableName 'name=envvar'
-    New-ParamCompleter -LongName exec-path -Description $msg._execPath -Type FlagOrValue
+    New-ParamCompleter -ShortName C -Description $msg._changeCurrentDir -Arguments @{ Name = 'path'; Type = 'Directory' }
+    New-ParamCompleter -ShortName c -Description $msg._configParam -Arguments @{ Name = 'name=value' }
+    New-ParamCompleter -LongName config-env -Description $msg._configEnv -Arguments @{ Name = 'name=envvar' }
+    New-ParamCompleter -LongName exec-path -Description $msg._execPath -Arguments @{ Name ='path'; Type = 'File' }
     New-ParamCompleter -LongName html-path -Description $msg._htmlPath
     New-ParamCompleter -LongName man-path -Description $msg._manPath
     New-ParamCompleter -LongName info-path -Description $msg._infoPath
     New-ParamCompleter -ShortName p -LongName paginate -Description $msg._paginate
     New-ParamCompleter -ShortName P -LongName no-pager -Description $msg._noPager
-    New-ParamCompleter -LongName git-dir -Description $msg._gitDir -ArgumentType Directory -VariableName 'path'
-    New-ParamCompleter -LongName work-tree -Description $msg._workTree -ArgumentType Directory -VariableName 'path'
-    New-ParamCompleter -LongName namespace -Description $msg._namespace -VariableName 'namespace'
+    New-ParamCompleter -LongName git-dir -Description $msg._gitDir -Arguments @{ Name = 'path'; Type = 'Directory' }
+    New-ParamCompleter -LongName work-tree -Description $msg._workTree -Arguments @{ Name = 'path'; Type = 'Directory' }
+    New-ParamCompleter -LongName namespace -Description $msg._namespace -Arguments @{ Name = 'namespace' }
     New-ParamCompleter -LongName bare -Description $msg._bare
     New-ParamCompleter -LongName no-replace-objects -Description $msg._noReplaceObjects
     New-ParamCompleter -LongName literal-pathspecs -Description $msg._literalPathspecs
@@ -269,7 +269,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-ParamCompleter -LongName noglob-pathspecs -Description $msg._noglobPathspecs
     New-ParamCompleter -LongName icase-pathspecs -Description $msg._icasePathspecs
     New-ParamCompleter -LongName no-optional-locks -Description $msg._noOptionalLocks
-    New-ParamCompleter -LongName list-cmds -Description $msg._listCmds -VariableName 'group'
+    New-ParamCompleter -LongName list-cmds -Description $msg._listCmds -Arguments @{ Name = 'group' }
 ) -SubCommands @(
     # Main porcelain commands
     New-CommandCompleter -Name add -Description $msg.add -Parameters @(
@@ -282,17 +282,17 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name am -Description $msg.am
     New-CommandCompleter -Name archive -Description $msg.archive
     New-CommandCompleter -Name bisect -Description $msg.bisect
-    New-CommandCompleter -Name branch -Description $msg.branch -ArgumentCompleter $branchCompleter
+    New-CommandCompleter -Name branch -Description $msg.branch -NoFileCompletions -Arguments @{ Name = 'branch-name'; Script = $branchCompleter }
     New-CommandCompleter -Name bundle -Description $msg.bundle
-    New-CommandCompleter -Name checkout -Description $msg.checkout -ArgumentCompleter $allBranchCompleter
-    New-CommandCompleter -Name cherry-pick -Description $msg.cherryPick -ArgumentCompleter $refCompleter
+    New-CommandCompleter -Name checkout -Description $msg.checkout -NoFileCompletions -Arguments @{ Name = 'branch'; Script = $allBranchCompleter }
+    New-CommandCompleter -Name cherry-pick -Description $msg.cherryPick -NoFileCompletions -Arguments @{ Name = 'commit'; Script = $refCompleter }
     New-CommandCompleter -Name citool -Description $msg.citool
     New-CommandCompleter -Name clean -Description $msg.clean
     New-CommandCompleter -Name clone -Description $msg.clone
     New-CommandCompleter -Name commit -Description $msg.commit
     New-CommandCompleter -Name describe -Description $msg.describe
     New-CommandCompleter -Name diff -Description $msg.diff
-    New-CommandCompleter -Name fetch -Description $msg.fetch -ArgumentCompleter $remoteCompleter
+    New-CommandCompleter -Name fetch -Description $msg.fetch -NoFileCompletions -Arguments @{ Name = 'repository'; Script = $remoteCompleter }
     New-CommandCompleter -Name format-patch -Description $msg.formatPatch
     New-CommandCompleter -Name gc -Description $msg.gc
     New-CommandCompleter -Name gitk -Description $msg.gitk
@@ -302,32 +302,32 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name log -Description $msg.log -Parameters @(
         New-ParamCompleter -ShortName g -LongName graph -Description $msg.log_graph
         New-ParamCompleter -ShortName p -LongName patch -Description $msg.log_patch
-        New-ParamCompleter -ShortName n -LongName max-count -Description $msg.log_maxCount -VariableName 'NUM'
+        New-ParamCompleter -ShortName n -LongName max-count -Description $msg.log_maxCount -Arguments @{ Name = 'NUM' }
         New-ParamCompleter -LongName stat -Description $msg.log_stat
-        New-ParamCompleter -LongName since, after -Description $msg.log_since -VariableName 'date'
-        New-ParamCompleter -LongName 'until', before -Description $msg.log_until -VariableName 'date'
-        New-ParamCompleter -LongName author, committer -Description $msg.log_author -VariableName 'pattern'
+        New-ParamCompleter -LongName since, after -Description $msg.log_since -Arguments @{ Name = 'date' }
+        New-ParamCompleter -LongName 'until', before -Description $msg.log_until -Arguments @{ Name = 'date' }
+        New-ParamCompleter -LongName author, committer -Description $msg.log_author -Arguments @{ Name = 'pattern' }
     )
     New-CommandCompleter -Name maintenance -Description $msg.maintenance
-    New-CommandCompleter -Name merge -Description $msg.merge -ArgumentCompleter $branchCompleter
+    New-CommandCompleter -Name merge -Description $msg.merge -NoFileCompletions -Arguments @{ Name = 'commit'; Nargs = '1+'; Script = $branchCompleter }
     New-CommandCompleter -Name mv -Description $msg.mv
     New-CommandCompleter -Name notes -Description $msg.notes
-    New-CommandCompleter -Name pull -Description $msg.pull -ArgumentCompleter $remoteCompleter
-    New-CommandCompleter -Name push -Description $msg.push -ArgumentCompleter $remoteCompleter
+    New-CommandCompleter -Name pull -Description $msg.pull -NoFileCompletions -Arguments @{ Name = 'repository'; Script = $remoteCompleter }
+    New-CommandCompleter -Name push -Description $msg.push -NoFileCompletions -Arguments @{ Name = 'repository'; Script = $remoteCompleter }
     New-CommandCompleter -Name range-diff -Description $msg.rangeDiff
-    New-CommandCompleter -Name rebase -Description $msg.rebase -ArgumentCompleter $branchCompleter
-    New-CommandCompleter -Name reset -Description $msg.reset -ArgumentCompleter $refCompleter
+    New-CommandCompleter -Name rebase -Description $msg.rebase -NoFileCompletions -Arguments @{ Name = 'upstream'; Script =  $branchCompleter }, @{ Name = 'branch'; Nargs = '?'; Script = $branchCompleter }
+    New-CommandCompleter -Name reset -Description $msg.reset -NoFileCompletions -Arguments @{ Name = 'commit'; Script = $refCompleter }
     New-CommandCompleter -Name restore -Description $msg.restore
-    New-CommandCompleter -Name revert -Description $msg.revert -ArgumentCompleter $refCompleter
+    New-CommandCompleter -Name revert -Description $msg.revert -NoFileCompletions -Arguments @{ Name = 'commit'; Script = $refCompleter }
     New-CommandCompleter -Name rm -Description $msg.rm
     New-CommandCompleter -Name shortlog -Description $msg.shortlog
-    New-CommandCompleter -Name show -Description $msg.show -ArgumentCompleter $refCompleter
+    New-CommandCompleter -Name show -Description $msg.show -NoFileCompletions -Arguments @{ Name = 'object'; Script = $refCompleter }
     New-CommandCompleter -Name sparse-checkout -Description $msg.sparseCheckout
     New-CommandCompleter -Name stash -Description $msg.stash
     New-CommandCompleter -Name status -Description $msg.status
     New-CommandCompleter -Name submodule -Description $msg.submodule
-    New-CommandCompleter -Name switch -Description $msg.switch -ArgumentCompleter $branchCompleter
-    New-CommandCompleter -Name tag -Description $msg.tag -ArgumentCompleter $tagCompleter
+    New-CommandCompleter -Name switch -Description $msg.switch -NoFileCompletions -Arguments @{ Name = 'branch'; Script = $branchCompleter }
+    New-CommandCompleter -Name tag -Description $msg.tag -NoFileCompletions -Arguments @{ Name = 'tagname'; Script = $tagCompleter }
     New-CommandCompleter -Name worktree -Description $msg.worktree
 
     # Ancillary Commands / Manipulators
@@ -339,7 +339,7 @@ Register-NativeCompleter -Name git -Description $msg.git -Parameters @(
     New-CommandCompleter -Name pack-refs -Description $msg.packRefs
     New-CommandCompleter -Name prune -Description $msg.prune
     New-CommandCompleter -Name reflog -Description $msg.reflog
-    New-CommandCompleter -Name remote -Description $msg.remote -ArgumentCompleter $remoteCompleter
+    New-CommandCompleter -Name remote -Description $msg.remote
     New-CommandCompleter -Name repack -Description $msg.repack
     New-CommandCompleter -Name replace -Description $msg.replace
 
