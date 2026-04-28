@@ -18,12 +18,12 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name ssh-copy-id -Description $msg.ssh_copy_id -Parameters @(
-    New-ParamCompleter -ShortName i -Description $msg.identity -ArgumentType File -VariableName 'identity_file'
+    New-ParamCompleter -ShortName i -Description $msg.identity -Arguments @{ Name = 'identity_file'; Type = 'File' }
     New-ParamCompleter -ShortName f -Description $msg.force
     New-ParamCompleter -ShortName n -Description $msg.dryrun
     New-ParamCompleter -ShortName s -Description $msg.sftp
-    New-ParamCompleter -ShortName p -Description $msg.port -VariableName 'port'
-    New-ParamCompleter -ShortName o -Description $msg.option -VariableName 'ssh_option'
+    New-ParamCompleter -ShortName p -Description $msg.port -Arguments @{ Name = 'port' }
+    New-ParamCompleter -ShortName o -Description $msg.option -Arguments @{ Name = 'ssh_option' }
     New-ParamCompleter -ShortName x -Description $msg.debug
     New-ParamCompleter -ShortName h -Description $msg.help
 ) -NoFileCompletions
