@@ -24,18 +24,20 @@ Register-NativeCompleter -Name ssh-keyscan -Description $msg.ssh_keyscan -Parame
     New-ParamCompleter -ShortName '6' -Description $msg.ipv6
     New-ParamCompleter -ShortName c -Description $msg.certificate
     New-ParamCompleter -ShortName D -Description $msg.print_SSHFP_DNS
-    New-ParamCompleter -ShortName f -Description $msg.file -ArgumentType File -VariableName 'file'
+    New-ParamCompleter -ShortName f -Description $msg.file -Arguments @{ Name = 'file'; Type = 'File' }
     New-ParamCompleter -ShortName H -Description $msg.hash_hosts
-    New-ParamCompleter -ShortName p -Description $msg.port -VariableName 'port'
-    New-ParamCompleter -ShortName T -Description $msg.timeout -VariableName 'timeout'
-    New-ParamCompleter -ShortName t -Description $msg.type -ArgumentType List -Arguments @(
-        "dsa"
-        "ecdsa"
-        "ecdsa-sha2-nistp256"
-        "ecdsa-sha2-nistp384"
-        "ecdsa-sha2-nistp521"
-        "ed25519"
-        "rsa"
-    ) -VariableName 'type'
+    New-ParamCompleter -ShortName p -Description $msg.port -Arguments @{ Name = 'port' }
+    New-ParamCompleter -ShortName T -Description $msg.timeout -Arguments @{ Name = 'timeout' }
+    New-ParamCompleter -ShortName t -Description $msg.type -Arguments @{
+        Name = 'type'; List = $true; Candidates = @(
+            "dsa"
+            "ecdsa"
+            "ecdsa-sha2-nistp256"
+            "ecdsa-sha2-nistp384"
+            "ecdsa-sha2-nistp521"
+            "ed25519"
+            "rsa"
+        )
+    }
     New-ParamCompleter -ShortName v -Description $msg.verbose
 ) -NoFileCompletions
