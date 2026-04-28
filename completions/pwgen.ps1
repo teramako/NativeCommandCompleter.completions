@@ -32,9 +32,9 @@ Register-NativeCompleter -Name pwgen -Parameters @(
     New-ParamCompleter -ShortName s -LongName secure        -Description $msg.secure
     New-ParamCompleter -ShortName B -LongName ambiguous     -Description $msg.ambiguous
     New-ParamCompleter -ShortName v -LongName no-vowels     -Description $msg.no_vowels
-    New-ParamCompleter -ShortName H -LongName sha1          -Description $msg.sha1 -ArgumentType File -VariableName 'path/to/file[#seed]'
-    New-ParamCompleter -ShortName r -LongName remove-chars  -Description $msg.remove_chars -VariableName 'chars'
-    New-ParamCompleter -ShortName N -LongName num-passwords -Description $msg.num_passwords -VariableName 'num'
+    New-ParamCompleter -ShortName H -LongName sha1          -Description $msg.sha1 -Arguments @{ Name = 'path/to/file[#seed]'; Type = 'File' }
+    New-ParamCompleter -ShortName r -LongName remove-chars  -Description $msg.remove_chars -Arguments @{ Name = 'chars' }
+    New-ParamCompleter -ShortName N -LongName num-passwords -Description $msg.num_passwords -Arguments @{ Name = 'num' }
     New-ParamCompleter -ShortName '1'                       -Description $msg.one_per_line
     New-ParamCompleter -ShortName C                         -Description $msg.columns
     New-ParamCompleter -ShortName a -LongName alt-phonics   -Description $msg.alt_phonics
