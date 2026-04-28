@@ -39,31 +39,30 @@ Register-NativeCompleter -Name sftp -Description $msg.sftp -Parameters @(
     New-ParamCompleter -ShortName '6' -Description $msg.ipv6
     New-ParamCompleter -ShortName A -Description $msg.forwardAgent
     New-ParamCompleter -ShortName a -Description $msg.attemptContinue
-    New-ParamCompleter -ShortName B -Description $msg.bufferSize -VariableName 'buffer_size'
-    New-ParamCompleter -ShortName b -Description $msg.batchfile -ArgumentType File -VariableName 'batchfile'
-    New-ParamCompleter -ShortName c -Description $msg.ciphers -VariableName 'cipher_spec'
+    New-ParamCompleter -ShortName B -Description $msg.bufferSize -Arguments @{ Name = 'buffer_size' }
+    New-ParamCompleter -ShortName b -Description $msg.batchfile -Arguments @{ Name = 'batchfile'; Type = 'File' }
+    New-ParamCompleter -ShortName c -Description $msg.ciphers -Arguments @{ Name = 'cipher_spec' }
     New-ParamCompleter -ShortName C -Description $msg.compression
-    New-ParamCompleter -ShortName D -Description $msg.directConnect -VariableName 'sftp_server_path'
-    New-ParamCompleter -ShortName F -Description $msg.configFile -ArgumentType File -VariableName 'ssh_config'
+    New-ParamCompleter -ShortName D -Description $msg.directConnect -Arguments @{ Name = 'sftp_server_path' }
+    New-ParamCompleter -ShortName F -Description $msg.configFile -Arguments @{ Name = 'ssh_config'; Type = 'File' }
     New-ParamCompleter -ShortName f -Description $msg.fsync
-    New-ParamCompleter -ShortName i -Description $msg.identity -ArgumentType File -VariableName 'identity_file'
-    New-ParamCompleter -ShortName J -Description $msg.jumpHost -VariableName 'destination'
-    New-ParamCompleter -ShortName l -Description $msg.limitBandwidth -VariableName 'limit'
+    New-ParamCompleter -ShortName i -Description $msg.identity -Arguments @{ Name = 'identity_file'; Type = 'File' }
+    New-ParamCompleter -ShortName J -Description $msg.jumpHost -Arguments @{ Name = 'destination' }
+    New-ParamCompleter -ShortName l -Description $msg.limitBandwidth -Arguments @{ Name = 'limit' }
     New-ParamCompleter -ShortName N -Description $msg.noQuiet
-    New-ParamCompleter -ShortName o -Description $msg.sshOption -VariableName 'ssh_option'
-    New-ParamCompleter -ShortName P -Description $msg.port -VariableName 'port'
+    New-ParamCompleter -ShortName o -Description $msg.sshOption -Arguments @{ Name = 'ssh_option' }
+    New-ParamCompleter -ShortName P -Description $msg.port -Arguments @{ Name = 'port' }
     New-ParamCompleter -ShortName p -Description $msg.preserveTimes
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName R -Description $msg.requests -VariableName 'num_requests'
+    New-ParamCompleter -ShortName R -Description $msg.requests -Arguments @{ Name = 'num_requests' }
     New-ParamCompleter -ShortName r -Description $msg.recursiveCopy
-    New-ParamCompleter -ShortName S -Description $msg.program -VariableName 'program'
-    New-ParamCompleter -ShortName s -Description $msg.subsystem -VariableName 'subsystem'
+    New-ParamCompleter -ShortName S -Description $msg.program -Arguments @{ Name = 'program' }
+    New-ParamCompleter -ShortName s -Description $msg.subsystem -Arguments @{ Name = 'subsystem' }
     New-ParamCompleter -ShortName v -Description $msg.verbose
-    New-ParamCompleter -ShortName X -Description $msg.sftpOption -VariableName 'sftp_option'
-) -NoFileCompletions -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0)
-    {
+    New-ParamCompleter -ShortName X -Description $msg.sftpOption -Arguments @{ Name = 'sftp_option' }
+) -NoFileCompletions -Arguments @{
+    Name = 'destination'
+    Script = {
         $configFile = $this.BoundParameters["F"] ?? '~/.ssh/config'
         if (-not (Test-Path $configFile)) { return }
         Get-Content ~/.ssh/config | ForEach-Object {
