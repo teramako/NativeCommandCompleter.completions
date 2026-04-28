@@ -39,20 +39,20 @@ Register-NativeCompleter -Name scp -Description $msg.scp -Parameters @(
     New-ParamCompleter -ShortName A -Description $msg.forwardAgent
     New-ParamCompleter -ShortName B -Description $msg.batchMode
     New-ParamCompleter -ShortName C -Description $msg.compression
-    New-ParamCompleter -ShortName c -Description $msg.cipher -VariableName 'cipher'
-    New-ParamCompleter -ShortName D -Description $msg.directConnect -VariableName 'sftp_server_path'
-    New-ParamCompleter -ShortName F -Description $msg.config -ArgumentType File -VariableName 'ssh_config'
-    New-ParamCompleter -ShortName i -Description $msg.identityFile -ArgumentType File -VariableName 'identity_file'
-    New-ParamCompleter -ShortName J -Description $msg.jumpHost -VariableName 'destination'
-    New-ParamCompleter -ShortName l -Description $msg.limit -VariableName 'limit'
+    New-ParamCompleter -ShortName c -Description $msg.cipher -Arguments @{ Name = 'cipher' }
+    New-ParamCompleter -ShortName D -Description $msg.directConnect -Arguments @{ Name = 'sftp_server_path' }
+    New-ParamCompleter -ShortName F -Description $msg.config -Arguments @{ Name = 'ssh_config'; Type = 'File' }
+    New-ParamCompleter -ShortName i -Description $msg.identityFile -Arguments @{ Name = 'identity_file'; Type = 'File' }
+    New-ParamCompleter -ShortName J -Description $msg.jumpHost -Arguments @{ Name = 'destination' }
+    New-ParamCompleter -ShortName l -Description $msg.limit -Arguments @{ Name = 'limit' }
     New-ParamCompleter -ShortName O -Description $msg.useSCP
-    New-ParamCompleter -ShortName o -Description $msg.sshOption -VariableName 'ssh_option'
-    New-ParamCompleter -ShortName P -Description $msg.port -VariableName 'port'
+    New-ParamCompleter -ShortName o -Description $msg.sshOption -Arguments @{ Name = 'ssh_option' }
+    New-ParamCompleter -ShortName P -Description $msg.port -Arguments @{ Name = 'port' }
     New-ParamCompleter -ShortName p -Description $msg.preserve
     New-ParamCompleter -ShortName q -Description $msg.quiet
     New-ParamCompleter -ShortName r -Description $msg.recursive
-    New-ParamCompleter -ShortName S -Description $msg.program -VariableName 'program'
+    New-ParamCompleter -ShortName S -Description $msg.program -Arguments @{ Name = 'program' }
     New-ParamCompleter -ShortName T -Description $msg.noStrictChecking
     New-ParamCompleter -ShortName v -Description $msg.verbose
-    New-ParamCompleter -ShortName X -Description $msg.sftpOption -VariableName 'sftp_option'
+    New-ParamCompleter -ShortName X -Description $msg.sftpOption -Arguments @{ Name = 'sftp_option' }
 )
