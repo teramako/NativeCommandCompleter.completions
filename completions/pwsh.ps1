@@ -39,21 +39,23 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name pwsh -Description 'PowerShell' -Parameters @(
-    New-ParamCompleter -Name File,f -Description $msg.File -ArgumentType File
-    New-ParamCompleter -Name Command,c -Description $msg.Command -VariableName 'script-block|string'
-    New-ParamCompleter -Name ConfigurationName,config -Description $msg.ConfigurationName -VariableName 'string'
-    New-ParamCompleter -Name ConfigurationFile -Description $msg.ConfigurationFile -ArgumentType File -VariableName 'filePath'
-    New-ParamCompleter -Name CustomPipeName -Description $msg.CustomPipeName -VariableName 'string'
-    New-ParamCompleter -Name EncodedCommand,e,ec -Description $msg.EncodedCommand -VariableName 'base64-string'
-    New-ParamCompleter -Name ExecutionPolicy,ex,ep -Description $msg.ExecutionPolicy -Arguments @(
-        "AllSigned`t{0}" -f $msg.ExecutionPolicy_AllSigned
-        "Bypass`t{0}" -f $msg.ExecutionPolicy_Bypass
-        "RemoteSigned`t{0}" -f $msg.ExecutionPolicy_RemoteSigned
-        "Restricted`t{0}" -f $msg.ExecutionPolicy_Restricted
-        "Undefined`t{0}" -f $msg.ExecutionPolicy_Undefined
-        "Unrestricted`t{0}" -f $msg.ExecutionPolicy_Unrestricted
-    ) -VariableName 'policy'
-    New-ParamCompleter -Name InputFormat,inp,'if' -Description $msg.InputFormat -Arguments "Text", "XML" -VariableName 'format'
+    New-ParamCompleter -Name File,f -Description $msg.File -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -Name Command,c -Description $msg.Command -Arguments @{ Name = 'script-block|string' }
+    New-ParamCompleter -Name ConfigurationName,config -Description $msg.ConfigurationName -Arguments @{ Name = 'string' }
+    New-ParamCompleter -Name ConfigurationFile -Description $msg.ConfigurationFile -Arguments @{ Name = 'filePath'; Type = 'File' }
+    New-ParamCompleter -Name CustomPipeName -Description $msg.CustomPipeName -Arguments @{ Name = 'string' }
+    New-ParamCompleter -Name EncodedCommand,e,ec -Description $msg.EncodedCommand -Arguments @{ Name = 'base64-string' }
+    New-ParamCompleter -Name ExecutionPolicy,ex,ep -Description $msg.ExecutionPolicy -Arguments @{
+        Name = 'policy'; Candidates = @(
+            "AllSigned`t{0}" -f $msg.ExecutionPolicy_AllSigned
+            "Bypass`t{0}" -f $msg.ExecutionPolicy_Bypass
+            "RemoteSigned`t{0}" -f $msg.ExecutionPolicy_RemoteSigned
+            "Restricted`t{0}" -f $msg.ExecutionPolicy_Restricted
+            "Undefined`t{0}" -f $msg.ExecutionPolicy_Undefined
+            "Unrestricted`t{0}" -f $msg.ExecutionPolicy_Unrestricted
+        )
+    }
+    New-ParamCompleter -Name InputFormat,inp,'if' -Description $msg.InputFormat -Arguments @{ Name = 'format'; Candidates = "Text", "XML" }
     New-ParamCompleter -Name Interactive,i -Description $msg.Interactive
     New-ParamCompleter -Name Login,l -Description $msg.Login
     New-ParamCompleter -Name MTA -Description $msg.MTA
@@ -62,12 +64,12 @@ Register-NativeCompleter -Name pwsh -Description 'PowerShell' -Parameters @(
     New-ParamCompleter -Name NonInteractive,noni -Description $msg.NonInteractive
     New-ParamCompleter -Name NoProfile,nop -Description $msg.NoProfile
     New-ParamCompleter -Name NoProfileLoadTime -Description $msg.NoProfileLoadTime
-    New-ParamCompleter -Name OutputFormat,o,of -Description $msg.OutputFormat -Arguments "Text", "XML" -VariableName 'format'
-    New-ParamCompleter -Name SettingsFile,settings -Description $msg.SettingsFile -ArgumentType File -VariableName 'filePath'
+    New-ParamCompleter -Name OutputFormat,o,of -Description $msg.OutputFormat -Arguments @{ Name = 'format'; Candidates = "Text", "XML" }
+    New-ParamCompleter -Name SettingsFile,settings -Description $msg.SettingsFile -Arguments @{ Name = 'filePath'; Type = 'File' }
     New-ParamCompleter -Name SSHServerMode,sshs -Description $msg.SSHServerMode
     New-ParamCompleter -Name STA -Description $msg.STA
     New-ParamCompleter -Name Version,v -Description $msg.Version
-    New-ParamCompleter -Name WindowStyle,w -Description $msg.WindowStyle -Arguments "Normal", "Minimized", "Maximized", "Hidden" -VariableName 'style'
-    New-ParamCompleter -Name WorkingDirectory,wd -Description $msg.WorkingDirectory -ArgumentType Directory -VariableName 'directoryPath'
+    New-ParamCompleter -Name WindowStyle,w -Description $msg.WindowStyle -Arguments @{ Name = 'style'; Candidates = "Normal", "Minimized", "Maximized", "Hidden" }
+    New-ParamCompleter -Name WorkingDirectory,wd -Description $msg.WorkingDirectory -Arguments @{ Name = 'directoryPath'; Type = 'Directory' }
     New-ParamCompleter -Name Help,? -Description $msg.Help
 )
