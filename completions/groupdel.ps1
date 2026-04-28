@@ -15,18 +15,18 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 Register-NativeCompleter -Name groupdel -Description $msg.groupdel -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Arguments @{ Name = 'CHROOT_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Arguments @{ Name = 'PREFIX_DIR'; Type = 'Directory' }
     New-ParamCompleter -LongName extrausers -Description $msg.extrausers
-) -ArgumentCompleter {
-    if (Test-Path -LiteralPath '/etc/group') {
-        Get-Content -LiteralPath '/etc/group' | ForEach-Object {
-            if ($_ -match '^([^:]+):') {
-                $group = $Matches[1]
-                if ($group -like "$wordToComplete*") {
-                    $group
+) -NoFileCompletions -Arguments @{
+    Name = 'GROUP';
+    Script = {
+        if (Test-Path -LiteralPath '/etc/group') {
+            Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
+                Where-Object Name -Like "$wordToComplete*" |
+                ForEach-Object {
+                    "{0}`tGID: {1}" -f $_.Name, $_.GID
                 }
-            }
         }
     }
 }
