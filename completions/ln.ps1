@@ -30,16 +30,18 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name ln -Description $msg.ln -Parameters @(
-    New-ParamCompleter -LongName backup -Description $msg.backup -Type FlagOrValue -Arguments @(
-        "none `t{0}" -f $msg.backup_none
-        "off `t{0}" -f $msg.backup_none
-        "numbered `t{0}" -f $msg.backup_numbered
-        "t `t{0}" -f $msg.backup_numbered
-        "existing `t{0}" -f $msg.backup_existing
-        "nil `t{0}" -f $msg.backup_existing
-        "simple `t{0}" -f $msg.backup_simple
-        "never `t{0}" -f $msg.backup_simple
-    ) -VariableName 'CONTROL'
+    New-ParamCompleter -LongName backup -Description $msg.backup -Arguments @{
+        Name = 'CONTROL'; Nargs = '?'; Candidates = @(
+            "none `t{0}" -f $msg.backup_none
+            "off `t{0}" -f $msg.backup_none
+            "numbered `t{0}" -f $msg.backup_numbered
+            "t `t{0}" -f $msg.backup_numbered
+            "existing `t{0}" -f $msg.backup_existing
+            "nil `t{0}" -f $msg.backup_existing
+            "simple `t{0}" -f $msg.backup_simple
+            "never `t{0}" -f $msg.backup_simple
+        )
+    }
     New-ParamCompleter -ShortName b -Description $msg.short_backup
     New-ParamCompleter -ShortName d -LongName directory -Description $msg.directory
     New-ParamCompleter -ShortName f -LongName force -Description $msg.force
@@ -49,8 +51,8 @@ Register-NativeCompleter -Name ln -Description $msg.ln -Parameters @(
     New-ParamCompleter -ShortName P -LongName physical -Description $msg.physical
     New-ParamCompleter -ShortName r -LongName relative -Description $msg.relative
     New-ParamCompleter -ShortName s -LongName symbolic -Description $msg.symbolic
-    New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -VariableName 'SUFFIX'
-    New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.targetDirectory -ArgumentType Directory -VariableName 'DIRECTORY'
+    New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -Arguments @{ Name = 'SUFFIX' }
+    New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.targetDirectory -Arguments @{ Name = 'DIRECTORY'; Type = 'Directory' }
     New-ParamCompleter -ShortName T -LongName no-target-directory -Description $msg.noTargetDirectory
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName help -Description $msg.help
