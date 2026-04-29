@@ -203,45 +203,33 @@ $sessionCompleter = {
         }
     }
 }
-$directionCompleter = {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0) { "right", "left", "up", "down" | Where-Object { $_ -like "$wordToComplete*" } }
-}
-$resizeCompleter = {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0) { "right","left","up","down","+","-" | Where-Object { $_ -like "$wordToComplete*" } }
-}
-$modeCompleter = {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0) { "locked", "pane", "tab", "resize", "move", "search", "session", "tmux" | Where-Object { $_ -like "$wordToComplete*" } }
-}
 
 # Shared pane parameters used in multiple subcommands
 $floatingParam      = New-ParamCompleter -ShortName f -LongName floating   -Description $msg.floating
 $inPlaceParam       = New-ParamCompleter -ShortName i -LongName in-place   -Description $msg.in_place
-$directionParam     = New-ParamCompleter -ShortName d -LongName direction  -Description $msg.direction  -Arguments $directionArguments -VariableName 'DIRECTION'
-$cwdParam           = New-ParamCompleter              -LongName cwd        -Description $msg.cwd        -ArgumentType Directory        -VariableName 'CWD'
-$nameParam          = New-ParamCompleter -ShortName n -LongName name       -Description $msg.name       -VariableName 'NAME'
-$xParam             = New-ParamCompleter -ShortName x -LongName x          -Description $msg.x          -VariableName 'X'
-$yParam             = New-ParamCompleter -ShortName y -LongName y          -Description $msg.y          -VariableName 'Y'
-$widthParam         = New-ParamCompleter              -LongName width      -Description $msg.width      -VariableName 'WIDTH'
-$heightParam        = New-ParamCompleter              -LongName height     -Description $msg.height     -VariableName 'HEIGHT'
-$pinnedParam        = New-ParamCompleter              -LongName pinned     -Description $msg.pinned     -Arguments $trueFalseArguments -VariableName 'PINNED'
-$borderlessParam    = New-ParamCompleter -ShortName b -LongName borderless -Description $msg.borderless -Arguments $trueFalseArguments -VariableName 'BORDERLESS'
+$directionParam     = New-ParamCompleter -ShortName d -LongName direction  -Description $msg.direction  -Arguments @{ Name = 'DIRECTION'; Candidates = $directionArguments }
+$cwdParam           = New-ParamCompleter              -LongName cwd        -Description $msg.cwd        -Arguments @{ Name = 'CWD'; Type = 'Directory' }
+$nameParam          = New-ParamCompleter -ShortName n -LongName name       -Description $msg.name       -Arguments @{ Name = 'NAME' }
+$xParam             = New-ParamCompleter -ShortName x -LongName x          -Description $msg.x          -Arguments @{ Name = 'X' }
+$yParam             = New-ParamCompleter -ShortName y -LongName y          -Description $msg.y          -Arguments @{ Name = 'Y' }
+$widthParam         = New-ParamCompleter              -LongName width      -Description $msg.width      -Arguments @{ Name = 'WIDTH' }
+$heightParam        = New-ParamCompleter              -LongName height     -Description $msg.height     -Arguments @{ Name = 'HEIGHT' }
+$pinnedParam        = New-ParamCompleter              -LongName pinned     -Description $msg.pinned     -Arguments @{ Name = 'PINNED'; Candidates = $trueFalseArguments }
+$borderlessParam    = New-ParamCompleter -ShortName b -LongName borderless -Description $msg.borderless -Arguments @{ Name = 'BORDERLESS'; Candidates = $trueFalseArguments }
 $nearCurrentParam   = New-ParamCompleter              -LongName near-current-pane   -Description $msg.near_current_pane
 $closeReplacedParam = New-ParamCompleter              -LongName close-replaced-pane -Description $msg.close_replaced_pane
 $helpParam          = New-ParamCompleter -ShortName h -LongName help       -Description $msg.help
 
 Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
-    New-ParamCompleter -ShortName c -LongName config      -Description $msg.config     -ArgumentType File       -VariableName 'CONFIG'
-    New-ParamCompleter              -LongName config-dir  -Description $msg.config_dir -ArgumentType Directory  -VariableName 'CONFIG_DIR'
-    New-ParamCompleter              -LongName data-dir    -Description $msg.data_dir   -ArgumentType Directory  -VariableName 'DATA_DIR'
+    New-ParamCompleter -ShortName c -LongName config      -Description $msg.config     -Arguments @{ Name = 'CONFIG'; Type = 'File' }
+    New-ParamCompleter              -LongName config-dir  -Description $msg.config_dir -Arguments @{ Name = 'CONFIG_DIR'; Type = 'Directory' }
+    New-ParamCompleter              -LongName data-dir    -Description $msg.data_dir   -Arguments @{ Name = 'DATA_DIR'; Type = 'Directory' }
     New-ParamCompleter -ShortName d -LongName debug       -Description $msg.debug
     New-ParamCompleter -ShortName h -LongName help        -Description $msg.help
-    New-ParamCompleter -ShortName l -LongName layout      -Description $msg.layout     -ArgumentType File       -VariableName 'LAYOUT'
-    New-ParamCompleter              -LongName max-panes   -Description $msg.max_panes  -VariableName 'MAX_PANES'
-    New-ParamCompleter -ShortName n -LongName new-session-with-layout -Description $msg.new_session_with_layout -VariableName 'LAYOUT_STRING'
-    New-ParamCompleter -ShortName s -LongName session     -Description $msg.session    -VariableName 'SESSION'  -ArgumentCompleter $sessionCompleter
+    New-ParamCompleter -ShortName l -LongName layout      -Description $msg.layout     -Arguments @{ Name = 'LAYOUT'; Type = 'File' }
+    New-ParamCompleter              -LongName max-panes   -Description $msg.max_panes  -Arguments @{ Name = 'MAX_PANES' }
+    New-ParamCompleter -ShortName n -LongName new-session-with-layout -Description $msg.new_session_with_layout -Arguments @{ Name = 'LAYOUT_STRING' }
+    New-ParamCompleter -ShortName s -LongName session     -Description $msg.session    -Arguments @{ Name = 'SESSION'; Script = $sessionCompleter }
     New-ParamCompleter -ShortName v -LongName version     -Description $msg.version
 ) -SubCommands @(
 
@@ -250,12 +238,12 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
         $helpParam
     ) -SubCommands @(
         New-CommandCompleter -Name change-floating-pane-coordinates -Description $msg.action_change_floating_coords -Parameters @(
-            New-ParamCompleter -ShortName p -LongName pane-id -Description $msg.action_change_floating_pane_id -VariableName 'PANE_ID'
-            New-ParamCompleter              -LongName height  -Description $msg.action_change_floating_height  -VariableName 'HEIGHT'
-            New-ParamCompleter              -LongName width   -Description $msg.action_change_floating_width   -VariableName 'WIDTH'
-            New-ParamCompleter -ShortName x -LongName x       -Description $msg.action_change_floating_x       -VariableName 'X'
-            New-ParamCompleter -ShortName y -LongName y       -Description $msg.action_change_floating_y       -VariableName 'Y'
-            New-ParamCompleter              -LongName pinned  -Description $msg.action_change_floating_pinned  -Arguments $trueFalseArguments -VariableName 'PINNED'
+            New-ParamCompleter -ShortName p -LongName pane-id -Description $msg.action_change_floating_pane_id -Arguments @{ Name = 'PANE_ID' }
+            New-ParamCompleter              -LongName height  -Description $msg.action_change_floating_height  -Arguments @{ Name = 'HEIGHT' }
+            New-ParamCompleter              -LongName width   -Description $msg.action_change_floating_width   -Arguments @{ Name = 'WIDTH' }
+            New-ParamCompleter -ShortName x -LongName x       -Description $msg.action_change_floating_x       -Arguments @{ Name = 'X' }
+            New-ParamCompleter -ShortName y -LongName y       -Description $msg.action_change_floating_y       -Arguments @{ Name = 'Y' }
+            New-ParamCompleter              -LongName pinned  -Description $msg.action_change_floating_pinned  -Arguments @{ Name = 'PINNED'; Candidates = $trueFalseArguments }
             $helpParam
         ) -NoFileCompletions
         New-CommandCompleter -Name clear       -Description $msg.action_clear       -Parameters $helpParam -NoFileCompletions
@@ -266,7 +254,7 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
         New-CommandCompleter -Name edit        -Description $msg.action_edit -Parameters @(
             $directionParam
             $floatingParam
-            New-ParamCompleter -ShortName l -LongName line-number -Description $msg.edit_line_number -VariableName 'LINE_NUMBER'
+            New-ParamCompleter -ShortName l -LongName line-number -Description $msg.edit_line_number -Arguments @{ Name = 'LINE_NUMBER' }
             $helpParam
         )
         New-CommandCompleter -Name edit-scrollback      -Description $msg.action_edit_scrollback      -Parameters $helpParam -NoFileCompletions
@@ -290,23 +278,23 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
             $helpParam
         ) -NoFileCompletions
         New-CommandCompleter -Name list-clients        -Description $msg.action_list_clients        -Parameters $helpParam -NoFileCompletions
-        New-CommandCompleter -Name move-focus          -Description $msg.action_move_focus          -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $directionCompleter
-        New-CommandCompleter -Name move-focus-or-tab   -Description $msg.action_move_focus_or_tab   -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $directionCompleter
-        New-CommandCompleter -Name move-pane           -Description $msg.action_move_pane           -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $directionCompleter
+        New-CommandCompleter -Name move-focus          -Description $msg.action_move_focus          -Parameters $helpParam -NoFileCompletions -Arguments @{ Name = 'DIRECTION'; Candidates = $directionArguments }
+        New-CommandCompleter -Name move-focus-or-tab   -Description $msg.action_move_focus_or_tab   -Parameters $helpParam -NoFileCompletions -Arguments @{ Name = 'DIRECTION'; Candidates = $directionArguments }
+        New-CommandCompleter -Name move-pane           -Description $msg.action_move_pane           -Parameters $helpParam -NoFileCompletions -Arguments @{ Name = 'DIRECTION'; Nargs = '?'; Candidates = $directionArguments }
         New-CommandCompleter -Name move-pane-backwards -Description $msg.action_move_pane_backwards -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name new-pane            -Description $msg.action_new_pane            -Parameters @(
             New-ParamCompleter -ShortName c -LongName close-on-exit   -Description $msg.action_new_pane_close_on_exit
             $cwdParam
-            New-ParamCompleter -ShortName d -LongName direction       -Description $msg.action_new_pane_direction -Arguments $directionArguments -VariableName 'DIRECTION'
+            New-ParamCompleter -ShortName d -LongName direction       -Description $msg.action_new_pane_direction -Arguments @{ Name = 'DIRECTION'; Candidates = $directionArguments }
             New-ParamCompleter -ShortName f -LongName floating        -Description $msg.action_new_pane_floating
-            New-ParamCompleter -ShortName n -LongName name            -Description $msg.action_new_pane_name      -VariableName 'NAME'
+            New-ParamCompleter -ShortName n -LongName name            -Description $msg.action_new_pane_name      -Arguments @{ Name = 'NAME' }
             New-ParamCompleter -ShortName s -LongName start-suspended -Description $msg.action_new_pane_suspended
             $helpParam
         )
         New-CommandCompleter -Name new-tab -Description $msg.action_new_tab -Parameters @(
-            New-ParamCompleter -ShortName c -LongName cwd    -Description $msg.action_new_tab_cwd    -ArgumentType Directory -VariableName 'CWD'
-            New-ParamCompleter -ShortName l -LongName layout -Description $msg.action_new_tab_layout -ArgumentType File      -VariableName 'LAYOUT'
-            New-ParamCompleter -ShortName n -LongName name   -Description $msg.action_new_tab_name   -VariableName 'NAME'
+            New-ParamCompleter -ShortName c -LongName cwd    -Description $msg.action_new_tab_cwd    -Arguments @{ Name = 'CWD'; Type = 'Directory' }
+            New-ParamCompleter -ShortName l -LongName layout -Description $msg.action_new_tab_layout -Arguments @{ Name = 'LAYOUT'; Type = 'File' }
+            New-ParamCompleter -ShortName n -LongName name   -Description $msg.action_new_tab_name   -Arguments @{ Name = 'NAME' }
             $helpParam
         )
         New-CommandCompleter -Name page-scroll-down              -Description $msg.action_page_scroll_down        -Parameters $helpParam -NoFileCompletions
@@ -314,14 +302,18 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
         New-CommandCompleter -Name query-tab-names               -Description $msg.action_query_tab_names         -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name rename-pane                   -Description $msg.action_rename_pane             -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name rename-tab                    -Description $msg.action_rename_tab              -Parameters $helpParam -NoFileCompletions
-        New-CommandCompleter -Name resize                        -Description $msg.action_resize                  -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $resizeCompleter
+        New-CommandCompleter -Name resize                        -Description $msg.action_resize                  -Parameters $helpParam -NoFileCompletions -Arguments @{
+            Name = 'RESIZE'; Candidates = "+10","-10"
+        }, @{
+            Name = 'DIRECTION'; Nargs = '?'; Candidates = $directionArguments
+        }
         New-CommandCompleter -Name scroll-down                   -Description $msg.action_scroll_down             -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name scroll-to-bottom              -Description $msg.action_scroll_to_bottom        -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name scroll-to-top                 -Description $msg.action_scroll_to_top           -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name scroll-up                     -Description $msg.action_scroll_up               -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name stack-panes                   -Description $msg.action_stack_panes             -Parameters $helpParam
         New-CommandCompleter -Name start-or-reload-plugin        -Description $msg.action_start_or_reload_plugin  -Parameters $helpParam -NoFileCompletions
-        New-CommandCompleter -Name switch-mode                   -Description $msg.action_switch_mode             -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $modeCompleter
+        New-CommandCompleter -Name switch-mode                   -Description $msg.action_switch_mode             -Parameters $helpParam -NoFileCompletions -Arguments @{ Name = 'INPUT_MODE'; Candidates = $modeArguments }
         New-CommandCompleter -Name toggle-active-sync-tab        -Description $msg.action_toggle_active_sync_tab  -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name toggle-floating-panes         -Description $msg.action_toggle_floating_panes   -Parameters $helpParam -NoFileCompletions
         New-CommandCompleter -Name toggle-fullscreen             -Description $msg.action_toggle_fullscreen       -Parameters $helpParam -NoFileCompletions
@@ -338,32 +330,36 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
     # attach
     New-CommandCompleter -Name attach -Aliases a -Description $msg.attach -Parameters @(
         New-ParamCompleter -ShortName c -LongName create        -Description $msg.attach_create_if_not_exists
-        New-ParamCompleter -ShortName i -LongName index         -Description $msg.attach_index         -VariableName 'INDEX'
+        New-ParamCompleter -ShortName i -LongName index         -Description $msg.attach_index         -Arguments @{ Name = 'INDEX' }
         New-ParamCompleter -ShortName r -LongName read-only     -Description $msg.attach_read_only
         $helpParam
     ) -NoFileCompletions -SubCommands @(
         New-CommandCompleter -Name options -Description $msg.options -Parameters @(
-            New-ParamCompleter -LongName attach-to-session   -Description $msg.opt_attach_to_session  -Arguments $trueFalseArguments -VariableName 'BOOL'
-            New-ParamCompleter -LongName copy-clipboard      -Description $msg.opt_copy_clipboard     -Arguments $clipboardArguments -VariableName 'CLIPBOARD'
-            New-ParamCompleter -LongName copy-command        -Description $msg.opt_copy_command       -VariableName 'COMMAND'
-            New-ParamCompleter -LongName copy-on-select      -Description $msg.opt_copy_on_select     -Arguments $trueFalseArguments -VariableName 'BOOL'
-            New-ParamCompleter -LongName default-layout      -Description $msg.opt_default_layout     -VariableName 'LAYOUT'
-            New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments $modeArguments      -VariableName 'MODE'
-            New-ParamCompleter -LongName default-shell       -Description $msg.opt_default_shell      -VariableName 'SHELL'
-            New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -ArgumentType Directory        -VariableName 'DIR'
-            New-ParamCompleter -LongName mirror-session      -Description $msg.opt_mirror_session     -Arguments $trueFalseArguments -VariableName 'BOOL'
-            New-ParamCompleter -LongName mouse-mode          -Description $msg.opt_mouse_mode         -Arguments $trueFalseArguments -VariableName 'BOOL'
-            New-ParamCompleter -LongName on-force-close      -Description $msg.opt_on_force_close     -Arguments $onForceCloseArgs   -VariableName 'BEHAVIOR'
-            New-ParamCompleter -LongName pane-frames         -Description $msg.opt_pane_frames        -Arguments $trueFalseArguments -VariableName 'BOOL'
-            New-ParamCompleter -LongName scroll-buffer-size  -Description $msg.opt_scroll_buffer_size -VariableName 'SIZE'
-            New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -ArgumentType File             -VariableName 'PATH'
-            New-ParamCompleter -LongName session-name        -Description $msg.opt_session_name       -VariableName 'NAME'
-            New-ParamCompleter -LongName simplified-ui       -Description $msg.opt_simplified_ui      -Arguments $trueFalseArguments -VariableName 'BOOL'
-            New-ParamCompleter -LongName theme               -Description $msg.opt_theme              -VariableName 'THEME'
-            New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -ArgumentType Directory        -VariableName 'DIR'
+            New-ParamCompleter -LongName attach-to-session   -Description $msg.opt_attach_to_session  -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+            New-ParamCompleter -LongName copy-clipboard      -Description $msg.opt_copy_clipboard     -Arguments @{ Name = 'CLIPBOARD'; Candidates = $clipboardArguments }
+            New-ParamCompleter -LongName copy-command        -Description $msg.opt_copy_command       -Arguments @{ Name = 'COMMAND' }
+            New-ParamCompleter -LongName copy-on-select      -Description $msg.opt_copy_on_select     -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+            New-ParamCompleter -LongName default-layout      -Description $msg.opt_default_layout     -Arguments @{ Name = 'LAYOUT' }
+            New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments @{ Name = 'MODE'; Candidates = $modeArguments }
+            New-ParamCompleter -LongName default-shell       -Description $msg.opt_default_shell      -Arguments @{ Name = 'SHELL' }
+            New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -Arguments @{ Name = 'DIR'; Type = 'Directory' }
+            New-ParamCompleter -LongName mirror-session      -Description $msg.opt_mirror_session     -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+            New-ParamCompleter -LongName mouse-mode          -Description $msg.opt_mouse_mode         -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+            New-ParamCompleter -LongName on-force-close      -Description $msg.opt_on_force_close     -Arguments @{ Name = 'BEHAVIOR'; Candidates = $onForceCloseArgs }
+            New-ParamCompleter -LongName pane-frames         -Description $msg.opt_pane_frames        -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+            New-ParamCompleter -LongName scroll-buffer-size  -Description $msg.opt_scroll_buffer_size -Arguments @{ Name = 'SIZE' }
+            New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -Arguments @{ Name = 'PATH'; Type = 'File' }
+            New-ParamCompleter -LongName session-name        -Description $msg.opt_session_name       -Arguments @{ Name = 'NAME' }
+            New-ParamCompleter -LongName simplified-ui       -Description $msg.opt_simplified_ui      -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+            New-ParamCompleter -LongName theme               -Description $msg.opt_theme              -Arguments @{ Name = 'THEME' }
+            New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -Arguments @{ Name = 'DIR'; Type = 'Directory' }
             $helpParam
         ) -NoFileCompletions
-    ) -ArgumentCompleter $sessionCompleter
+    ) -Arguments @{
+        Name = 'SESSION_NAME'; Script = $sessionCompleter
+    }, @{
+        Name = 'SUBCOMMAND'; Nargs = '?'
+    }
 
     # delete-all-sessions
     New-CommandCompleter -Name delete-all-sessions -Description $msg.delete_all_sessions -Parameters @(
@@ -375,7 +371,9 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
     New-CommandCompleter -Name delete-session -Description $msg.delete_session -Parameters @(
         New-ParamCompleter -ShortName f -LongName force -Description $msg.kill_force
         $helpParam
-    ) -NoFileCompletions -ArgumentCompleter $sessionCompleter
+    ) -NoFileCompletions -Arguments @{
+        Name = 'TARGET_SESSION'; Script = $sessionCompleter
+    }
 
     # edit
     New-CommandCompleter -Name edit -Description $msg.edit -Parameters @(
@@ -386,7 +384,7 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
         $floatingParam
         $heightParam
         $inPlaceParam
-        New-ParamCompleter -ShortName l -LongName line-number -Description $msg.edit_line_number -VariableName 'LINE_NUMBER'
+        New-ParamCompleter -ShortName l -LongName line-number -Description $msg.edit_line_number -Arguments @{ Name = 'LINE_NUMBER' }
         $nearCurrentParam
         $pinnedParam
         $widthParam
@@ -402,7 +400,9 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
     ) -NoFileCompletions
 
     # kill-session
-    New-CommandCompleter -Name kill-session -Aliases k -Description $msg.kill_session -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $sessionCompleter
+    New-CommandCompleter -Name kill-session -Aliases k -Description $msg.kill_session -Parameters $helpParam -NoFileCompletions -Arguments @{
+        Name = 'TARGET_SESSION'; Script = $sessionCompleter
+    }
 
     # list-aliases
     New-CommandCompleter -Name list-aliases -Description $msg.list_aliases -Parameters $helpParam -NoFileCompletions
@@ -416,44 +416,44 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
 
     # options
     New-CommandCompleter -Name options -Description $msg.options -Parameters @(
-        New-ParamCompleter -LongName attach-to-session   -Description $msg.opt_attach_to_session  -Arguments $trueFalseArguments -VariableName 'BOOL'
-        New-ParamCompleter -LongName copy-clipboard      -Description $msg.opt_copy_clipboard     -Arguments $clipboardArguments -VariableName 'CLIPBOARD'
-        New-ParamCompleter -LongName copy-command        -Description $msg.opt_copy_command       -VariableName 'COMMAND'
-        New-ParamCompleter -LongName copy-on-select      -Description $msg.opt_copy_on_select     -Arguments $trueFalseArguments -VariableName 'BOOL'
-        New-ParamCompleter -LongName default-layout      -Description $msg.opt_default_layout     -VariableName 'LAYOUT'
-        New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments $modeArguments      -VariableName 'MODE'
-        New-ParamCompleter -LongName default-shell       -Description $msg.opt_default_shell      -VariableName 'SHELL'
-        New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -ArgumentType Directory        -VariableName 'DIR'
-        New-ParamCompleter -LongName mirror-session      -Description $msg.opt_mirror_session     -Arguments $trueFalseArguments -VariableName 'BOOL'
-        New-ParamCompleter -LongName mouse-mode          -Description $msg.opt_mouse_mode         -Arguments $trueFalseArguments -VariableName 'BOOL'
-        New-ParamCompleter -LongName on-force-close      -Description $msg.opt_on_force_close     -Arguments $onForceCloseArgs   -VariableName 'BEHAVIOR'
-        New-ParamCompleter -LongName pane-frames         -Description $msg.opt_pane_frames        -Arguments $trueFalseArguments -VariableName 'BOOL'
-        New-ParamCompleter -LongName scroll-buffer-size  -Description $msg.opt_scroll_buffer_size -VariableName 'SIZE'
-        New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -ArgumentType File             -VariableName 'PATH'
-        New-ParamCompleter -LongName session-name        -Description $msg.opt_session_name       -VariableName 'NAME'
-        New-ParamCompleter -LongName simplified-ui       -Description $msg.opt_simplified_ui      -Arguments $trueFalseArguments -VariableName 'BOOL'
-        New-ParamCompleter -LongName theme               -Description $msg.opt_theme              -VariableName 'THEME'
-        New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -ArgumentType Directory        -VariableName 'DIR'
+        New-ParamCompleter -LongName attach-to-session   -Description $msg.opt_attach_to_session  -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+        New-ParamCompleter -LongName copy-clipboard      -Description $msg.opt_copy_clipboard     -Arguments @{ Name = 'CLIPBOARD'; Candidates = $clipboardArguments }
+        New-ParamCompleter -LongName copy-command        -Description $msg.opt_copy_command       -Arguments @{ Name = 'COMMAND' }
+        New-ParamCompleter -LongName copy-on-select      -Description $msg.opt_copy_on_select     -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+        New-ParamCompleter -LongName default-layout      -Description $msg.opt_default_layout     -Arguments @{ Name = 'LAYOUT' }
+        New-ParamCompleter -LongName default-mode        -Description $msg.opt_default_mode       -Arguments @{ Name = 'MODE'; Candidates = $modeArguments }
+        New-ParamCompleter -LongName default-shell       -Description $msg.opt_default_shell      -Arguments @{ Name = 'SHELL' }
+        New-ParamCompleter -LongName layout-dir          -Description $msg.opt_layout_dir         -Arguments @{ Name = 'DIR'; Type = 'Directory' }
+        New-ParamCompleter -LongName mirror-session      -Description $msg.opt_mirror_session     -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+        New-ParamCompleter -LongName mouse-mode          -Description $msg.opt_mouse_mode         -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+        New-ParamCompleter -LongName on-force-close      -Description $msg.opt_on_force_close     -Arguments @{ Name = 'BEHAVIOR'; Candidates = $onForceCloseArgs }
+        New-ParamCompleter -LongName pane-frames         -Description $msg.opt_pane_frames        -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+        New-ParamCompleter -LongName scroll-buffer-size  -Description $msg.opt_scroll_buffer_size -Arguments @{ Name = 'SIZE' }
+        New-ParamCompleter -LongName scrollback-editor   -Description $msg.opt_scrollback_editor  -Arguments @{ Name = 'PATH'; Type = 'File' }
+        New-ParamCompleter -LongName session-name        -Description $msg.opt_session_name       -Arguments @{ Name = 'NAME' }
+        New-ParamCompleter -LongName simplified-ui       -Description $msg.opt_simplified_ui      -Arguments @{ Name = 'BOOL'; Candidates = $trueFalseArguments }
+        New-ParamCompleter -LongName theme               -Description $msg.opt_theme              -Arguments @{ Name = 'THEME' }
+        New-ParamCompleter -LongName theme-dir           -Description $msg.opt_theme_dir          -Arguments @{ Name = 'DIR'; Type = 'Directory' }
         $helpParam
     ) -NoFileCompletions
 
     # pipe
     New-CommandCompleter -Name pipe -Description $msg.pipe -Parameters @(
-        New-ParamCompleter -ShortName a -LongName args              -Description $msg.pipe_args    -VariableName 'ARGS'
-        New-ParamCompleter -ShortName n -LongName name              -Description $msg.pipe_name    -VariableName 'NAME'
-        New-ParamCompleter -ShortName p -LongName payload           -Description $msg.pipe_payload -VariableName 'PAYLOAD'
-        New-ParamCompleter              -LongName plugin            -Description $msg.pipe_plugin  -VariableName 'PLUGIN_URL'
+        New-ParamCompleter -ShortName a -LongName args              -Description $msg.pipe_args    -Arguments @{ Name = 'ARGS' }
+        New-ParamCompleter -ShortName n -LongName name              -Description $msg.pipe_name    -Arguments @{ Name = 'NAME' }
+        New-ParamCompleter -ShortName p -LongName payload           -Description $msg.pipe_payload -Arguments @{ Name = 'PAYLOAD' }
+        New-ParamCompleter              -LongName plugin            -Description $msg.pipe_plugin  -Arguments @{ Name = 'PLUGIN_URL' }
         New-ParamCompleter              -LongName skip-plugin-cache -Description $msg.pipe_skip_plugin_cache
         $helpParam
     ) -NoFileCompletions
 
     # plugin
     New-CommandCompleter -Name plugin -Description $msg.plugin -Parameters @(
-        New-ParamCompleter -ShortName c -LongName configuration     -Description $msg.plugin_configuration -VariableName 'KEY=VALUE'
+        New-ParamCompleter -ShortName c -LongName configuration     -Description $msg.plugin_configuration -Arguments @{ Name = 'KEY=VALUE' }
         New-ParamCompleter -ShortName f -LongName floating          -Description $msg.plugin_floating
         New-ParamCompleter -ShortName i -LongName in-place          -Description $msg.plugin_in_place
         New-ParamCompleter              -LongName skip-plugin-cache -Description $msg.plugin_skip_plugin_cache
-        New-ParamCompleter -ShortName u -LongName url               -Description $msg.plugin_url -VariableName 'URL'
+        New-ParamCompleter -ShortName u -LongName url               -Description $msg.plugin_url -Arguments @{ Name = 'URL' }
         $helpParam
     ) -NoFileCompletions
 
@@ -487,15 +487,17 @@ Register-NativeCompleter -Name zellij -Description $msg.zellij -Parameters @(
         New-ParamCompleter -LongName check               -Description $msg.setup_check
         New-ParamCompleter -LongName clean               -Description $msg.setup_clean
         New-ParamCompleter -LongName dump-config         -Description $msg.setup_dump_config
-        New-ParamCompleter -LongName dump-layout         -Description $msg.setup_dump_layout         -VariableName 'LAYOUT'
-        New-ParamCompleter -LongName dump-swap-layout    -Description $msg.setup_dump_swap_layout    -VariableName 'LAYOUT'
-        New-ParamCompleter -LongName generate-auto-start -Description $msg.setup_generate_auto_start -Arguments $shellArguments -VariableName 'SHELL'
-        New-ParamCompleter -LongName generate-completion -Description $msg.setup_generate_completion -Arguments $shellArguments -VariableName 'SHELL'
+        New-ParamCompleter -LongName dump-layout         -Description $msg.setup_dump_layout         -Arguments @{ Name = 'LAYOUT' }
+        New-ParamCompleter -LongName dump-swap-layout    -Description $msg.setup_dump_swap_layout    -Arguments @{ Name = 'LAYOUT' }
+        New-ParamCompleter -LongName generate-auto-start -Description $msg.setup_generate_auto_start -Arguments @{ Name = 'SHELL'; Candidates = $shellArguments }
+        New-ParamCompleter -LongName generate-completion -Description $msg.setup_generate_completion -Arguments @{ Name = 'SHELL'; Candidates = $shellArguments }
         $helpParam
     ) -NoFileCompletions
 
     # watch
-    New-CommandCompleter -Name watch -Description $msg.watch -Parameters $helpParam -NoFileCompletions -ArgumentCompleter $sessionCompleter
+    New-CommandCompleter -Name watch -Description $msg.watch -Parameters $helpParam -NoFileCompletions -Arguments @{
+        Name = 'SESSION_NAME'; Script = $sessionCompleter
+    }
 
     # help
     New-CommandCompleter -Name help -Description $msg.help -NoFileCompletions
