@@ -26,12 +26,14 @@ if ($LASTEXITCODE -eq 0) # GNU tee
         New-ParamCompleter -ShortName a -LongName append -Description $msg.append
         New-ParamCompleter -ShortName i -LongName ignore-interrupts -Description $msg.ignoreInterrupts
         New-ParamCompleter -ShortName p -Description $msg.pipe
-        New-ParamCompleter -LongName output-error -Description $msg.outputError -Type FlagOrValue -Arguments @(
-            "warn`t{0}" -f $msg.outputError_warn
-            "warn-nopipe`t{0}" -f $msg.outputError_warnNopipe
-            "exit`t{0}" -f $msg.outputError_exit
-            "exit-nopipe`t{0}" -f $msg.outputError_exitNopipe
-        ) -VariableName 'MODE'
+        New-ParamCompleter -LongName output-error -Description $msg.outputError -Arguments @{
+            Name = 'MODE'; Nargs = '?'; Candidates = @(
+                "warn`t{0}" -f $msg.outputError_warn
+                "warn-nopipe`t{0}" -f $msg.outputError_warnNopipe
+                "exit`t{0}" -f $msg.outputError_exit
+                "exit-nopipe`t{0}" -f $msg.outputError_exitNopipe
+            )
+        }
         New-ParamCompleter -LongName help -Description $msg.help
         New-ParamCompleter -LongName version -Description $msg.version
     )
