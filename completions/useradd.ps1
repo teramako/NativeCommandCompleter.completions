@@ -62,29 +62,29 @@ $shellCompleter = {
 
 Register-NativeCompleter -Name useradd -Description $msg.useradd -Parameters @(
     New-ParamCompleter -LongName badname -Description $msg.badname
-    New-ParamCompleter -ShortName b -LongName base-dir -Description $msg.base_dir -ArgumentType Directory -VariableName 'BASE_DIR'
-    New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -VariableName 'COMMENT'
-    New-ParamCompleter -ShortName d -LongName home-dir -Description $msg.home_dir -ArgumentType Directory -VariableName 'HOME_DIR'
+    New-ParamCompleter -ShortName b -LongName base-dir -Description $msg.base_dir -Arguments @{ Name = 'BASE_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName c -LongName comment -Description $msg.comment -Arguments @{ Name = 'COMMENT' }
+    New-ParamCompleter -ShortName d -LongName home-dir -Description $msg.home_dir -Arguments @{ Name = 'HOME_DIR'; Type = 'Directory' }
     New-ParamCompleter -ShortName D -LongName defaults -Description $msg.defaults
-    New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -VariableName 'EXPIRE_DATE'
-    New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -VariableName 'INACTIVE'
+    New-ParamCompleter -ShortName e -LongName expiredate -Description $msg.expiredate -Arguments @{ Name = 'EXPIRE_DATE' }
+    New-ParamCompleter -ShortName f -LongName inactive -Description $msg.inactive -Arguments @{ Name = 'INACTIVE' }
     New-ParamCompleter -ShortName F -LongName add-subids-for-system -Description $msg.add_subids_for_system
-    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GROUP' -ArgumentCompleter $groupCompleter
-    New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -ArgumentType List -VariableName 'GROUPS' -ArgumentCompleter $groupCompleter
-    New-ParamCompleter -ShortName k -LongName skel -Description $msg.skel -ArgumentType Directory -VariableName 'SKEL_DIR'
-    New-ParamCompleter -ShortName K -LongName key -Description $msg.key -VariableName 'KEY=VALUE'
+    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -Arguments @{ Name = 'GROUP'; Script = $groupCompleter }
+    New-ParamCompleter -ShortName G -LongName groups -Description $msg.groups -Arguments @{ Name = 'GROUPS'; List = $true; Script = $groupCompleter }
+    New-ParamCompleter -ShortName k -LongName skel -Description $msg.skel -Arguments @{ Name = 'SKEL_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName K -LongName key -Description $msg.key -Arguments @{ Name = 'KEY=VALUE' }
     New-ParamCompleter -ShortName l -LongName no-log-init -Description $msg.no_log_init
     New-ParamCompleter -ShortName m -LongName create-home -Description $msg.create_home
     New-ParamCompleter -ShortName M -LongName no-create-home -Description $msg.no_create_home
     New-ParamCompleter -ShortName N -LongName no-user-group -Description $msg.no_user_group
     New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
-    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
+    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -Arguments @{ Name = 'PASSWORD' }
     New-ParamCompleter -ShortName r -LongName system -Description $msg.system
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root_dir -ArgumentType Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
-    New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -VariableName 'SHELL' -ArgumentCompleter $shellCompleter
-    New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -VariableName 'UID'
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root_dir -Arguments @{ Name = 'CHROOT_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Arguments @{ Name = 'PREFIX_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName s -LongName shell -Description $msg.shell -Arguments @{ Name = 'SHELL'; Script = $shellCompleter }
+    New-ParamCompleter -ShortName u -LongName uid -Description $msg.uid -Arguments @{ Name = 'UID' }
     New-ParamCompleter -ShortName U -LongName user-group -Description $msg.user_group
-    New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux_user -VariableName 'SEUSER'
+    New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux_user -Arguments @{ Name = 'SEUSER' }
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
 ) -NoFileCompletions
