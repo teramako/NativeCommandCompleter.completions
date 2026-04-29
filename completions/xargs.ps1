@@ -40,20 +40,20 @@ if ($LASTEXITCODE -eq 0) # GNU xargs
 {
     Register-NativeCompleter -Name xargs -Description $msg.xargs -Parameters @(
         New-ParamCompleter -ShortName '0' -LongName null -Description $msg.null
-        New-ParamCompleter -ShortName a -LongName arg-file -Description $msg.arg_file -ArgumentType File -VariableName 'file'
-        New-ParamCompleter -ShortName d -LongName delimiter -Description $msg.delimiter -VariableName 'delim'
-        New-ParamCompleter -ShortName E -Description $msg.eof -VariableName 'eof-str'
-        New-ParamCompleter -ShortName e -LongName eof -Description $msg.eof -Type FlagOrValue -VariableName 'eof-str'
-        New-ParamCompleter -ShortName I -Description $msg.replace -VariableName 'replace-str'
-        New-ParamCompleter -ShortName i -LongName replace -Description $msg.replace -Type FlagOrValue -VariableName 'replace-str'
-        New-ParamCompleter -ShortName L -Description $msg.max_lines -VariableName 'max-lines'
-        New-ParamCompleter -ShortName l -LongName max-lines -Description $msg.max_lines -Type FlagOrValue -VariableName 'max-lines'
-        New-ParamCompleter -ShortName n -LongName max-args -Description $msg.max_args -VariableName 'max-args'
-        New-ParamCompleter -ShortName P -LongName max-procs -Description $msg.max_procs -VariableName 'max-procs'
+        New-ParamCompleter -ShortName a -LongName arg-file -Description $msg.arg_file -Arguments @{ Name = 'file'; Type = 'File' }
+        New-ParamCompleter -ShortName d -LongName delimiter -Description $msg.delimiter -Arguments @{ Name = 'delim' }
+        New-ParamCompleter -ShortName E -Description $msg.eof -Arguments @{ Name = 'eof-str' }
+        New-ParamCompleter -ShortName e -LongName eof -Description $msg.eof -Arguments @{ Name = 'eof-str'; Nargs = '?' }
+        New-ParamCompleter -ShortName I -Description $msg.replace -Arguments @{ Name = 'replace-str' }
+        New-ParamCompleter -ShortName i -LongName replace -Description $msg.replace -Arguments @{ Name = 'replace-str'; Nargs = '?' }
+        New-ParamCompleter -ShortName L -Description $msg.max_lines -Arguments @{ Name = 'max-lines' }
+        New-ParamCompleter -ShortName l -LongName max-lines -Description $msg.max_lines -Arguments @{ Name = 'max-lines'; Nargs = '?' }
+        New-ParamCompleter -ShortName n -LongName max-args -Description $msg.max_args -Arguments @{ Name = 'max-args' }
+        New-ParamCompleter -ShortName P -LongName max-procs -Description $msg.max_procs -Arguments @{ Name = 'max-procs' }
         New-ParamCompleter -ShortName p -LongName interactive -Description $msg.interactive
-        New-ParamCompleter -LongName process-slot-var -Description $msg.process_slot_var -VariableName 'name'
+        New-ParamCompleter -LongName process-slot-var -Description $msg.process_slot_var -Arguments @{ Name = 'name' }
         New-ParamCompleter -ShortName r -LongName no-run-if-empty -Description $msg.no_run_if_empty
-        New-ParamCompleter -ShortName s -LongName max-chars -Description $msg.max_chars -VariableName 'max-chars'
+        New-ParamCompleter -ShortName s -LongName max-chars -Description $msg.max_chars -Arguments @{ Name = 'max-chars' }
         New-ParamCompleter -LongName show-limits -Description $msg.show_limits
         New-ParamCompleter -ShortName t -LongName verbose -Description $msg.verbose
         New-ParamCompleter -ShortName x -LongName exit -Description $msg.exit
@@ -65,17 +65,17 @@ else # BSD xargs
 {
     Register-NativeCompleter -Name xargs -Description $msg.xargs -Parameters @(
         New-ParamCompleter -ShortName '0' -Description $msg.delimiter_print0
-        New-ParamCompleter -ShortName E -Description $msg.eof -VariableName 'eofstr'
-        New-ParamCompleter -ShortName I -Description $msg.replace -VariableName 'replstr'
-        New-ParamCompleter -ShortName J -Description $msg.bsd_insert_pos -VariableName 'replstr'
-        New-ParamCompleter -ShortName L -Description $msg.max_lines -VariableName 'number'
-        New-ParamCompleter -ShortName n -Description $msg.max_args -VariableName 'number'
+        New-ParamCompleter -ShortName E -Description $msg.eof -Arguments @{ Name = 'eofstr' }
+        New-ParamCompleter -ShortName I -Description $msg.replace -Arguments @{ Name = 'replstr' }
+        New-ParamCompleter -ShortName J -Description $msg.bsd_insert_pos -Arguments @{ Name = 'replstr' }
+        New-ParamCompleter -ShortName L -Description $msg.max_lines -Arguments @{ Name = 'number' }
+        New-ParamCompleter -ShortName n -Description $msg.max_args -Arguments @{ Name = 'number' }
         New-ParamCompleter -ShortName o -Description $msg.bsd_open_stdin
-        New-ParamCompleter -ShortName P -Description $msg.max_procs -VariableName 'maxprocs'
+        New-ParamCompleter -ShortName P -Description $msg.max_procs -Arguments @{ Name = 'maxprocs' }
         New-ParamCompleter -ShortName p -Description $msg.interactive
-        New-ParamCompleter -ShortName R -Description $msg.bsd_replace_args -VariableName 'replacements'
+        New-ParamCompleter -ShortName R -Description $msg.bsd_replace_args -Arguments @{ Name = 'replacements' }
         New-ParamCompleter -ShortName r -Description $msg.no_run_if_empty
-        New-ParamCompleter -ShortName s -Description $msg.bsd_size -VariableName 'size'
+        New-ParamCompleter -ShortName s -Description $msg.bsd_size -Arguments @{ Name = 'size' }
         New-ParamCompleter -ShortName t -Description $msg.bsd_trace
         New-ParamCompleter -ShortName x -Description $msg.exit
     ) -DelegateArgumentIndex 0
