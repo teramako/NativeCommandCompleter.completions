@@ -91,47 +91,47 @@ $interfaceCompleter = {
 Register-NativeCompleter -Name tcpdump -Description $msg.tcpdump -Parameters @(
     New-ParamCompleter -ShortName A -Description $msg.dumpASCII
     New-ParamCompleter -ShortName b -Description $msg.printAsNumberInBGP
-    New-ParamCompleter -ShortName B -LongName buffer-size -Description $msg.bufferSize -VariableName 'buffer_size'
-    New-ParamCompleter -ShortName c -Description $msg.exitAfterCount -VariableName 'count'
+    New-ParamCompleter -ShortName B -LongName buffer-size -Description $msg.bufferSize -Arguments @{ Name = 'buffer_size' }
+    New-ParamCompleter -ShortName c -Description $msg.exitAfterCount -Arguments @{ Name = 'count' }
     New-ParamCompleter -LongName count -Description $msg.count
-    New-ParamCompleter -ShortName C -Description $msg.maxFileSize -VariableName 'file_size'
+    New-ParamCompleter -ShortName C -Description $msg.maxFileSize -Arguments @{ Name = 'file_size' }
     New-ParamCompleter -ShortName d -Description $msg.dumpPacket
     New-ParamCompleter -Name dd -Description $msg.dumpPacketAsCFormat
     New-ParamCompleter -Name ddd -Description $msg.dumpPacketAsDecimalFormat
     New-ParamCompleter -ShortName D -LongName list-interfaces -Description $msg.listInterfaces
     New-ParamCompleter -ShortName e -Description $msg.printLinkLevelHeader
-    New-ParamCompleter -ShortName E -Description $msg.setIPsecDecryptOption -VariableName 'algo:secret'
+    New-ParamCompleter -ShortName E -Description $msg.setIPsecDecryptOption -Arguments @{ Name = 'algo:secret' }
     New-ParamCompleter -ShortName f -Description $msg.printIPv4AsNumeric
-    New-ParamCompleter -ShortName F -Description $msg.filterFile -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -ShortName G -Description $msg.rotateSeconds -VariableName 'rotate_seconds'
+    New-ParamCompleter -ShortName F -Description $msg.filterFile -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -ShortName G -Description $msg.rotateSeconds -Arguments @{ Name = 'rotate_seconds' }
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -ShortName H -Description $msg.detect802_11sHeaders
-    New-ParamCompleter -ShortName i -LongName interface -Description $msg.interface -VariableName 'interface' -ArgumentCompleter $interfaceCompleter
+    New-ParamCompleter -ShortName i -LongName interface -Description $msg.interface -Arguments @{ Name = 'interface'; Script = $interfaceCompleter }
     New-ParamCompleter -ShortName I -LongName monitor-mode -Description $msg.monitor
     New-ParamCompleter -LongName immediate-mode -Description $msg.immediateMode
-    New-ParamCompleter -ShortName j -LongName list-time-stamp-types -Description $msg.timestampType -VariableName 'tstamp_type' -Arguments "host","host_lowprec","host_hiprec","adapter","adapter_unsynced"
+    New-ParamCompleter -ShortName j -LongName list-time-stamp-types -Description $msg.timestampType -Arguments @{ Name = 'tstamp_type'; Candidates = "host","host_lowprec","host_hiprec","adapter","adapter_unsynced" }
     New-ParamCompleter -ShortName J -Description $msg.listTimestampTypes
-    New-ParamCompleter -LongName time-stamp-precision -Description $msg.timestampPrecision -VariableName 'tstamp_precision' -Arguments "micro","nano"
+    New-ParamCompleter -LongName time-stamp-precision -Description $msg.timestampPrecision -Arguments @{ Name = 'tstamp_precision'; Candidates = "micro","nano" }
     New-ParamCompleter -LongName micro -Description $msg.micro
     New-ParamCompleter -LongName nano -Description $msg.nano
     New-ParamCompleter -ShortName K -Description $msg.dontVerifyChecksum
     New-ParamCompleter -ShortName l -Description $msg.line_buffered
     New-ParamCompleter -ShortName L -LongName list-data-link-types -Description $msg.listDataLinkTypes
-    New-ParamCompleter -ShortName m -Description $msg.loadModule -VariableName 'module'
-    New-ParamCompleter -ShortName M -Description $msg.secret -VariableName 'secret'
+    New-ParamCompleter -ShortName m -Description $msg.loadModule -Arguments @{ Name = 'module' }
+    New-ParamCompleter -ShortName M -Description $msg.secret -Arguments @{ Name = 'secret' }
     New-ParamCompleter -ShortName n -Description $msg.dontConvertAddresses
     New-ParamCompleter -ShortName N -Description $msg.dontConvertDomainName
     New-ParamCompleter -ShortName '#' -LongName number -Description $msg.printOptionalNumber
     New-ParamCompleter -ShortName O -LongName no-optimize -Description $msg.noOptimize
     New-ParamCompleter -ShortName p -LongName no-promiscuous-mode -Description $msg.noPromiscuousMode
     New-ParamCompleter -LongName print -Description $msg.print
-    New-ParamCompleter -ShortName Q -Description $msg.direction -Arguments "in","out","inout" -VariableName 'direction'
+    New-ParamCompleter -ShortName Q -Description $msg.direction -Arguments @{ Name = 'direction'; Candidates = "in","out","inout" }
     New-ParamCompleter -ShortName q -Description $msg.quiet
-    New-ParamCompleter -ShortName r -Description $msg.readFile -ArgumentType File -VariableName 'file'
+    New-ParamCompleter -ShortName r -Description $msg.readFile -Arguments @{ Name = 'file'; Type = 'File' }
     New-ParamCompleter -ShortName S -LongName absolute-tcp-sequence-numbers -Description $msg.absoluteSequence
-    New-ParamCompleter -ShortName s -LongName snapshot-length -Description $msg.snapshotLength -VariableName 'snaplen'
-    New-ParamCompleter -ShortName T -Description $msg.type -VariableName 'type' -Arguments "vat","rtp","rtcp","cnfp","wb","aodv"
+    New-ParamCompleter -ShortName s -LongName snapshot-length -Description $msg.snapshotLength -Arguments @{ Name = 'snaplen' }
+    New-ParamCompleter -ShortName T -Description $msg.type -Arguments @{ Name = 'type'; Candidates = "vat","rtp","rtcp","cnfp","wb","aodv" }
     New-ParamCompleter -ShortName t -Description $msg.timestamp
     New-ParamCompleter -Name tt -Description $msg.timestampAsEpoch
     New-ParamCompleter -Name ttt -Description $msg.timestampAsDelta
@@ -142,14 +142,14 @@ Register-NativeCompleter -Name tcpdump -Description $msg.tcpdump -Parameters @(
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -Name vv -Description $msg.verbose2
     New-ParamCompleter -Name vvv -Description $msg.verbose3
-    New-ParamCompleter -ShortName V -Description $msg.readListOfFilenames -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -ShortName w -Description $msg.writeFile -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -ShortName W -Description $msg.filecount -VariableName 'filecount'
+    New-ParamCompleter -ShortName V -Description $msg.readListOfFilenames -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -ShortName w -Description $msg.writeFile -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -ShortName W -Description $msg.filecount -Arguments @{ Name = 'filecount' }
     New-ParamCompleter -ShortName x -Description $msg.hexDump
     New-ParamCompleter -Name xx -Description $msg.hexDump2
     New-ParamCompleter -ShortName X -Description $msg.hexDumpASCII
     New-ParamCompleter -Name XX -Description $msg.hexDumpASCII2
-    New-ParamCompleter -ShortName y -Description $msg.linkType -VariableName 'datalinktype'
-    New-ParamCompleter -ShortName z -Description $msg.postrotateCommand -VariableName 'postrotate-command'
-    New-ParamCompleter -ShortName Z -Description $msg.relinquishPrivileges -VariableName 'user'
+    New-ParamCompleter -ShortName y -Description $msg.linkType -Arguments @{ Name = 'datalinktype' }
+    New-ParamCompleter -ShortName z -Description $msg.postrotateCommand -Arguments @{ Name = 'postrotate-command' }
+    New-ParamCompleter -ShortName Z -Description $msg.relinquishPrivileges -Arguments @{ Name = 'user' }
 )
