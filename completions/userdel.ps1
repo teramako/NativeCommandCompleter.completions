@@ -19,20 +19,23 @@ Register-NativeCompleter -Name userdel -Description $msg.userdel -Parameters @(
     New-ParamCompleter -ShortName f -LongName force -Description $msg.force
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName r -LongName remove -Description $msg.remove
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Arguments @{ Name = 'CHROOT_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Arguments @{ Name = 'PREFIX_DIR'; Type = 'Directory' }
     New-ParamCompleter -ShortName Z -LongName selinux-user -Description $msg.selinux
-) -NoFileCompletions -ArgumentCompleter {
-    if (Test-Path -LiteralPath '/etc/passwd') {
-        Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
-            Where-Object Name -Like "$wordToComplete*" |
-            ForEach-Object {
-                $comment = ($_.Comment -Split ',')[0]
-                if ($comment) {
-                    "{0}`t{1}" -f $_.Name, $comment
-                } else {
-                    $_.Name
+) -NoFileCompletions -Arguments @{
+    Name = 'LOGIN';
+    Script = {
+        if (Test-Path -LiteralPath '/etc/passwd') {
+            Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
+                Where-Object Name -Like "$wordToComplete*" |
+                ForEach-Object {
+                    $comment = ($_.Comment -Split ',')[0]
+                    if ($comment) {
+                        "{0}`t{1}" -f $_.Name, $comment
+                    } else {
+                        $_.Name
+                    }
                 }
-            }
+        }
     }
 }
