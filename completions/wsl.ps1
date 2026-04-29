@@ -73,7 +73,7 @@ $distributionCompleter = {
         wsl --list --quiet | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | ForEach-Object {
             $name = $_.Trim()
             if ($name -like "$wordToComplete*") {
-                $name
+                "$name`tDistribution"
             }
         }
     }
@@ -114,43 +114,43 @@ $onlineDistributionCompleter = {
 }
 
 Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
-    New-ParamCompleter -LongName cd -Description $msg.cd -ArgumentType Directory
-    New-ParamCompleter -Name d -LongName distribution -Description $msg.distribution -VariableName 'distro' -ArgumentCompleter $distributionCompleter
-    New-ParamCompleter -Name u -LongName user -Description $msg.user -VariableName 'username'
-    New-ParamCompleter -Name e -LongName exec -Description $msg.exec -VariableName 'command'
+    New-ParamCompleter -LongName cd -Description $msg.cd -Arguments @{ Name = 'dir'; Type = 'Directory' }
+    New-ParamCompleter -Name d -LongName distribution -Description $msg.distribution -Arguments @{ Name = 'distro'; Script = $distributionCompleter }
+    New-ParamCompleter -Name u -LongName user -Description $msg.user -Arguments @{ Name = 'username' }
+    New-ParamCompleter -Name e -LongName exec -Description $msg.exec -Arguments @{ Name = 'command' }
     New-ParamCompleter -LongName system -Description $msg.systemDistribution
-    New-ParamCompleter -LongName shell-type -Description $msg.shellType -Arguments "standard","login","none" -VariableName 'type'
+    New-ParamCompleter -LongName shell-type -Description $msg.shellType -Arguments @{ Name = 'type'; Candidates = "standard","login","none" }
 ) -SubCommands @(
     New-CommandCompleter -Name '--help' -Description $msg.help -NoFileCompletions
 
     New-CommandCompleter -Name '--install' -Description $msg.install -Parameters @(
         New-ParamCompleter -LongName enable-wsl1 -Description $msg.install_enableWsl1
         New-ParamCompleter -LongName fixed-vhd -Description $msg.install_fixedVhd
-        New-ParamCompleter -LongName from-file -Description $msg.install_fromFile -ArgumentType File -VariableName 'path'
+        New-ParamCompleter -LongName from-file -Description $msg.install_fromFile -Arguments @{ Name = 'path'; Type = 'File' }
         New-ParamCompleter -LongName legacy -Description $msg.install_legacy
-        New-ParamCompleter -LongName location -Description $msg.install_location -ArgumentType Directory
-        New-ParamCompleter -LongName name -Description $msg.install_name -VariableName 'name'
+        New-ParamCompleter -LongName location -Description $msg.install_location -Arguments @{ Name = 'location'; Type = 'Directory' }
+        New-ParamCompleter -LongName name -Description $msg.install_name -Arguments @{ Name = 'name' }
         New-ParamCompleter -LongName no-distribution -Description $msg.install_noDistribution
         New-ParamCompleter -Name n -LongName no-launch -Description $msg.install_noLaunch
-        New-ParamCompleter -LongName version -Description $msg.install_version -VariableName 'version'
-        New-ParamCompleter -LongName vhd-size -Description $msg.install_vhdSize -VariableName 'size'
+        New-ParamCompleter -LongName version -Description $msg.install_version -Arguments @{ Name = 'version' }
+        New-ParamCompleter -LongName vhd-size -Description $msg.install_vhdSize -Arguments @{ Name = 'size' }
         New-ParamCompleter -LongName web-download -Description $msg.install_webDownload
     ) -NoFileCompletions -ArgumentCompleter $onlineDistributionCompleter
 
     New-CommandCompleter -Name '--manage' -Description $msg.manage -Parameters @(
-        New-ParamCompleter -LongName move -Description $msg.manage_move -ArgumentType Directory -VariableName 'location'
+        New-ParamCompleter -LongName move -Description $msg.manage_move -Arguments @{ Name = 'location'; Type = 'Directory' }
         New-ParamCompleter -Name s -LongName set-sparse -Description $msg.manage_setSparse -Arguments "true", "false"
-        New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -VariableName 'username'
-        New-ParamCompleter -LongName resize -Description $msg.manage_resize -VariableName 'size'
+        New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -Arguments @{ Name = 'username' }
+        New-ParamCompleter -LongName resize -Description $msg.manage_resize -Arguments @{ Name = 'size' }
     ) -NoFileCompletions -ArgumentCompleter $distributionCompleter
 
     New-CommandCompleter -Name '--mount' -Description $msg.mount -Parameters @(
         New-ParamCompleter -LongName vhd -Description $msg.mount_vhd
         New-ParamCompleter -LongName bare -Description $msg.mount_bare
-        New-ParamCompleter -LongName name -Description $msg.mount_name -VariableName 'name'
-        New-ParamCompleter -LongName type -Description $msg.mount_type -VariableName 'filesystem'
-        New-ParamCompleter -LongName options -Description $msg.mount_options -VariableName 'options'
-        New-ParamCompleter -LongName partition -Description $msg.mount_partition -VariableName 'index'
+        New-ParamCompleter -LongName name -Description $msg.mount_name -Arguments @{ Name = 'name' }
+        New-ParamCompleter -LongName type -Description $msg.mount_type -Arguments @{ Name = 'filesystem' }
+        New-ParamCompleter -LongName options -Description $msg.mount_options -Arguments @{ Name = 'options' }
+        New-ParamCompleter -LongName partition -Description $msg.mount_partition -Arguments @{ Name = 'index' }
     ) -NoFileCompletions
 
     New-CommandCompleter -Name '--set-default-version' -Description $msg.setDefaultVersion -NoFileCompletions
@@ -172,43 +172,28 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
     New-CommandCompleter -Name '--version' -Aliases '-v' -Description $msg.version -NoFileCompletions
 
     New-CommandCompleter -Name '--export' -Description $msg.export -Parameters @(
-        New-ParamCompleter -LongName format -Description $msg.export_format -Arguments "tar", "tar.gz", "tar.xz", "vhd" -VariableName 'format'
-    ) -ArgumentCompleter {
-        param([int] $position, [int] $argIndex)
-        if ($argIndex -eq 0) {
-            wsl --list --quiet | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | ForEach-Object {
-                $name = $_.Trim()
-                if ($name -like "$wordToComplete*") {
-                    "{0}`tDistribution" -f $name
-                }
-            }
-        }
+        New-ParamCompleter -LongName format -Description $msg.export_format -Arguments @{ Name = 'format'; Candidates = "tar", "tar.gz", "tar.xz", "vhd" }
+    ) -Arguments @{
+        Name = 'distribution'; Script = $distributionCompleter
+    }, @{
+        Name = 'destination'; Type = 'File'
     }
 
     New-CommandCompleter -Name '--import' -Description $msg.import -Parameters @(
-        New-ParamCompleter -LongName version -Description $msg.import_version -Arguments "1","2" -VariableName 'version'
+        New-ParamCompleter -LongName version -Description $msg.import_version -Arguments @{ Name = 'version'; Candidates = "1","2" }
         New-ParamCompleter -LongName vhd -Description $msg.import_vhd
-    ) -NoFileCompletions -ArgumentCompleter {
-        param([int] $position, [int] $argIndex)
-        switch ($argIndex) {
-            1 {
-                # Import location
-                [MT.Comp.Helper]::CompleteFilename($this, $false, $true);
-            }
-            2 {
-                # File
-                [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
-            }
-            default { $null }
-        }
+    ) -NoFileCompletions -Arguments @{
+        Name = 'distribution'
+    }, @{
+        Name = 'install-location'; Type = 'Directory'
+    }, @{
+        Name = 'file'; Type = 'File'
     }
 
-    New-CommandCompleter -Name '--import-in-place' -Description $msg.importInPlace -NoFileCompletions -ArgumentCompleter {
-        param([int] $position, [int] $argIndex)
-        if ($argIndex -eq 1) {
-            # File
-            [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
-        }
+    New-CommandCompleter -Name '--import-in-place' -Description $msg.importInPlace -NoFileCompletions -Arguments @{
+        Name = 'distribution';
+    }, @{
+        Name = 'file'; Type = 'File'
     }
 
     New-CommandCompleter -Name '--list' -Aliases '-l' -Description $msg.list -Parameters @(
@@ -219,11 +204,11 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
         New-ParamCompleter -Name o -LongName online -Description $msg.list_online
     ) -NoFileCompletions
 
-    New-CommandCompleter -Name '--set-default' -Aliases '-s' -Description $msg.setDefault -NoFileCompletions -ArgumentCompleter $distributionCompleter
+    New-CommandCompleter -Name '--set-default' -Aliases '-s' -Description $msg.setDefault -NoFileCompletions -Arguments @{ Name = 'distribution'; Script = $distributionCompleter }
 
-    New-CommandCompleter -Name '--set-version' -Description $msg.setVersion -NoFileCompletions -ArgumentCompleter $distributionCompleter
+    New-CommandCompleter -Name '--set-version' -Description $msg.setVersion -NoFileCompletions -Arguments @{ Name = 'distribution'; Script = $distributionCompleter }
 
-    New-CommandCompleter -Name '--terminate' -Aliases '-t' -Description $msg.terminate -NoFileCompletions -ArgumentCompleter $runningDistributionCompleter
+    New-CommandCompleter -Name '--terminate' -Aliases '-t' -Description $msg.terminate -NoFileCompletions -Arguments @{ Name = 'distribution'; Script = $runningDistributionCompleter }
 
-    New-CommandCompleter -Name '--unregister' -Description $msg.unregister -NoFileCompletions -ArgumentCompleter $distributionCompleter
+    New-CommandCompleter -Name '--unregister' -Description $msg.unregister -NoFileCompletions -Arguments @{ Name = 'distribution'; Script = $distributionCompleter }
 )
