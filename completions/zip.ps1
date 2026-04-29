@@ -58,8 +58,8 @@ Register-NativeCompleter -Name zip -Parameters @(
     New-ParamCompleter -ShortName z -Description $msg.archive_comment
     New-ParamCompleter -ShortName '@' -Description $msg.names_stdin
     New-ParamCompleter -ShortName o -Description $msg.latest_time
-    New-ParamCompleter -ShortName x -Description $msg.exclude -Type Required
-    New-ParamCompleter -ShortName i -Description $msg.include -Type Required
+    New-ParamCompleter -ShortName x -Description $msg.exclude -Arguments @{ Name = 'files' }
+    New-ParamCompleter -ShortName i -Description $msg.include -Arguments @{ Name = 'files' }
     New-ParamCompleter -ShortName F -Description $msg.fix
     New-ParamCompleter -Name FF -Description $msg.fixfix
     New-ParamCompleter -ShortName A -Description $msg.adjust_sfx
@@ -69,6 +69,6 @@ Register-NativeCompleter -Name zip -Parameters @(
     New-ParamCompleter -ShortName y -Description $msg.symlinks
     New-ParamCompleter -ShortName R -Description $msg.recurse_patterns
     New-ParamCompleter -ShortName e -Description $msg.encrypt
-    New-ParamCompleter -ShortName n -Description $msg.suffixes -Type Required
+    New-ParamCompleter -ShortName n -Description $msg.suffixes -Arguments @{ Name = 'suffixes' }
     New-ParamCompleter -ShortName h -Description $msg.help
 )
