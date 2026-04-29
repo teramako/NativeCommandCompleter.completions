@@ -62,7 +62,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
-    New-ParamCompleter -ShortName c -Description $msg.command -VariableName 'command'
+    New-ParamCompleter -ShortName c -Description $msg.command -Arguments @{ Name = 'command' }
     New-ParamCompleter -ShortName A -Description $msg.arabic_mode
     New-ParamCompleter -ShortName b -Description $msg.binary_mode
     New-ParamCompleter -ShortName C -Description $msg.compatible_mode
@@ -72,46 +72,46 @@ Register-NativeCompleter -Name vim -Description $msg.vim -Parameters @(
     New-ParamCompleter -ShortName E -Description $msg.exim_mode
     New-ParamCompleter -ShortName g -Description $msg.gui_mode
     New-ParamCompleter -ShortName H -Description $msg.hebrew_mode
-    New-ParamCompleter -ShortName i -Description $msg.viminfo -ArgumentType File -VariableName 'viminfo'
+    New-ParamCompleter -ShortName i -Description $msg.viminfo -Arguments @{ Name = 'viminfo'; Type = 'File' }
     New-ParamCompleter -ShortName l -Description $msg.lisp_mode
     New-ParamCompleter -ShortName L -Description $msg.list_swap
     New-ParamCompleter -ShortName m -Description $msg.disable_modify
     New-ParamCompleter -ShortName M -Description $msg.disallow_modify
     New-ParamCompleter -ShortName n -Description $msg.no_swap
     New-ParamCompleter -ShortName N -Description $msg.no_compatible
-    New-ParamCompleter -ShortName o -Description $msg.horizontally_split -Type FlagOrValue -VariableName 'N'
-    New-ParamCompleter -ShortName O -Description $msg.vertical_split -Type FlagOrValue -VariableName 'N'
-    New-ParamCompleter -ShortName p -Description $msg.open_tab -Type FlagOrValue -VariableName 'N'
-    New-ParamCompleter -ShortName r -Description $msg.recovery -ArgumentType File -VariableName 'file.swp'
+    New-ParamCompleter -ShortName o -Description $msg.horizontally_split -Arguments @{ Name = 'N'; Nargs = '?' }
+    New-ParamCompleter -ShortName O -Description $msg.vertical_split -Arguments @{ Name = 'N'; Nargs = '?' }
+    New-ParamCompleter -ShortName p -Description $msg.open_tab -Arguments @{ Name = 'N'; Nargs = '?' }
+    New-ParamCompleter -ShortName r -Description $msg.recovery -Arguments @{ Name = 'file.swp'; Type = 'File' }
     New-ParamCompleter -ShortName R -Description $msg.readonly_mode
-    New-ParamCompleter -ShortName s -Description $msg.source -ArgumentType File -VariableName 'scriptin'
-    New-ParamCompleter -ShortName S -Description $msg.source_after_load -ArgumentType File -VariableName 'source'
-    New-ParamCompleter -ShortName T -Description $msg.terminal -VariableName 'terminal'
-    New-ParamCompleter -ShortName u -Description $msg.vimrc -ArgumentType File -VariableName 'vimrc'
-    New-ParamCompleter -ShortName U -Description $msg.gvimrc -ArgumentType File -VariableName 'gvimrc'
+    New-ParamCompleter -ShortName s -Description $msg.source -Arguments @{ Name = 'scriptin'; Type = 'File' }
+    New-ParamCompleter -ShortName S -Description $msg.source_after_load -Arguments @{ Name = 'source'; Type = 'File' }
+    New-ParamCompleter -ShortName T -Description $msg.terminal -Arguments @{ Name = 'terminal' }
+    New-ParamCompleter -ShortName u -Description $msg.vimrc -Arguments @{ Name = 'vimrc'; Type = 'File' }
+    New-ParamCompleter -ShortName U -Description $msg.gvimrc -Arguments @{ Name = 'gvimrc'; Type = 'File' }
     New-ParamCompleter -ShortName v -Description $msg.vi_mode
-    New-ParamCompleter -ShortName V -Description $msg.verbose_mode -Type FlagOrValue -VariableName 'N'
-    New-ParamCompleter -ShortName w -Description $msg.write_script -ArgumentType File -VariableName 'scriptout'
-    New-ParamCompleter -ShortName W -Description $msg.write_script2 -ArgumentType File -VariableName 'scriptout'
+    New-ParamCompleter -ShortName V -Description $msg.verbose_mode -Arguments @{ Name = 'N'; Nargs = '?' }
+    New-ParamCompleter -ShortName w -Description $msg.write_script -Arguments @{ Name = 'scriptout'; Type = 'File' }
+    New-ParamCompleter -ShortName W -Description $msg.write_script2 -Arguments @{ Name = 'scriptout'; Type = 'File' }
     New-ParamCompleter -ShortName x -Description $msg.encrypt
     New-ParamCompleter -ShortName X -Description $msg.no_XServer
     New-ParamCompleter -ShortName Y -Description $msg.no_wayland
     New-ParamCompleter -ShortName y -Description $msg.easy_mode
     New-ParamCompleter -ShortName Z -Description $msg.restrict_mode
     New-ParamCompleter -LongName clean -Description $msg.clean
-    New-ParamCompleter -LongName cmd -Description $msg.command_before_load -VariableName 'command'
+    New-ParamCompleter -LongName cmd -Description $msg.command_before_load -Arguments @{ Name = 'command' }
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName literal -Description $msg.literal
     New-ParamCompleter -LongName noplugin -Description $msg.noplugin
-    New-ParamCompleter -LongName remote -Description $msg.remote -VariableName 'files'
-    New-ParamCompleter -LongName remote-expr -Description $msg.remote_expr -VariableName 'expr'
-    New-ParamCompleter -LongName remote-send -Description $msg.remote_send -VariableName 'keys'
-    New-ParamCompleter -LongName remote-silent -Description $msg.remote_silent -VariableName 'files'
-    New-ParamCompleter -LongName remote-wait -Description $msg.remote_wait -VariableName 'files'
-    New-ParamCompleter -LongName remote-wait-silent -Description $msg.remote_wait_silent -VariableName 'files'
+    New-ParamCompleter -LongName remote -Description $msg.remote -Arguments @{ Name = 'files' }
+    New-ParamCompleter -LongName remote-expr -Description $msg.remote_expr -Arguments @{ Name = 'expr' }
+    New-ParamCompleter -LongName remote-send -Description $msg.remote_send -Arguments @{ Name = 'keys' }
+    New-ParamCompleter -LongName remote-silent -Description $msg.remote_silent -Arguments @{ Name = 'files' }
+    New-ParamCompleter -LongName remote-wait -Description $msg.remote_wait -Arguments @{ Name = 'files' }
+    New-ParamCompleter -LongName remote-wait-silent -Description $msg.remote_wait_silent -Arguments @{ Name = 'files' }
     New-ParamCompleter -LongName serverlist -Description $msg.serverlist
-    New-ParamCompleter -LongName servername -Description $msg.servername -VariableName 'name'
-    New-ParamCompleter -LongName startuptime -Description $msg.startuptime -ArgumentType File -VariableName 'file'
+    New-ParamCompleter -LongName servername -Description $msg.servername -Arguments @{ Name = 'name' }
+    New-ParamCompleter -LongName startuptime -Description $msg.startuptime -Arguments @{ Name = 'file'; Type = 'File' }
     New-ParamCompleter -LongName ttyfail -Description $msg.ttyfail
     New-ParamCompleter -LongName version -Description $msg.version
 )

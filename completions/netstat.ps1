@@ -74,19 +74,16 @@ if ($IsWindows)
         New-ParamCompleter -ShortName f -Description $msg.win_fully_qualified
         New-ParamCompleter -ShortName n -Description $msg.win_numeric
         New-ParamCompleter -ShortName o -Description $msg.win_owner_pid
-        New-ParamCompleter -ShortName p -Description $msg.win_protocol -Arguments "TCP","UDP","TCPv6","UDPv6","IP","IPv6","ICMP","ICMPv6" -VariableName 'protocol'
+        New-ParamCompleter -ShortName p -Description $msg.win_protocol -Arguments @{ Name = 'protocol'; Candidates = "TCP","UDP","TCPv6","UDPv6","IP","IPv6","ICMP","ICMPv6" }
         New-ParamCompleter -ShortName r -Description $msg.win_route_table
         New-ParamCompleter -ShortName s -Description $msg.win_statistics
         New-ParamCompleter -ShortName t -Description $msg.win_offload_state
         New-ParamCompleter -ShortName x -Description $msg.win_template
         New-ParamCompleter -ShortName y -Description $msg.win_template
         New-ParamCompleter -ShortName '?' -Description $msg.help
-    ) -NoFileCompletions -ArgumentCompleter {
-        param([int] $position, [int] $argIndex)
-        if ($argIndex -eq 0 -and [string]::IsNullOrEmpty($_))
-        {
-            "interval`tRedisplay statistics at specified intervals"
-        }
+    ) -NoFileCompletions -Arguments @{
+        Name = 'interval'; Nargs = '?'; Description = 'Redisplay statistics at specified intervals'
+        Candidates = '1', '10', '60'
     }
 }
 else
@@ -109,7 +106,7 @@ else
             New-ParamCompleter -LongName numeric-hosts -Description $msg.numeric_hosts
             New-ParamCompleter -LongName numeric-ports -Description $msg.numeric_ports
             New-ParamCompleter -LongName numeric-users -Description $msg.numeric_users
-            New-ParamCompleter -ShortName A -LongName protocol -Description $msg.protocol -ArgumentType List -Arguments "inet","inet6","unix","ipx","ax25","netrom","ddp","bluetooth" -VariableName 'family'
+            New-ParamCompleter -ShortName A -LongName protocol -Description $msg.protocol -Arguments @{ Name = 'family'; List = $true; Candidates = "inet","inet6","unix","ipx","ax25","netrom","ddp","bluetooth" }
             New-ParamCompleter -ShortName c -LongName continuous -Description $msg.continuous
             New-ParamCompleter -ShortName e -LongName extend -Description $msg.extend
             New-ParamCompleter -ShortName o -LongName timers -Description $msg.timers
@@ -145,10 +142,10 @@ else
             New-ParamCompleter -ShortName g -Description $msg.bsd_multicast
             New-ParamCompleter -ShortName l -Description $msg.listening
             New-ParamCompleter -ShortName n -Description $msg.bsd_numeric_ports
-            New-ParamCompleter -ShortName p -Description $msg.bsd_protocol -VariableName 'protocol'
+            New-ParamCompleter -ShortName p -Description $msg.bsd_protocol -Arguments @{ Name = 'protocol' }
             New-ParamCompleter -ShortName v -Description $msg.verbose
-            New-ParamCompleter -ShortName w -Description $msg.bsd_wait -VariableName 'wait'
-            New-ParamCompleter -ShortName f -Description $msg.protocol -Arguments "inet","inet6","unix","link" -VariableName 'address_family'
+            New-ParamCompleter -ShortName w -Description $msg.bsd_wait -Arguments @{ Name = 'wait' }
+            New-ParamCompleter -ShortName f -Description $msg.protocol -Arguments @{ Name = 'address_family'; Candidates = "inet","inet6","unix","link" }
         ) -NoFileCompletions
     }
 }

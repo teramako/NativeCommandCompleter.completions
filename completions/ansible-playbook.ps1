@@ -108,41 +108,44 @@ Register-NativeCompleter -Name ansible-playbook -Description $msg.ansible_playbo
     New-ParamCompleter -ShortName k -LongName ask-pass -Description $msg.ask_pass
     New-ParamCompleter -LongName ask-vault-password, ask-vault-pass -Description $msg.ask_vault_password
     New-ParamCompleter -ShortName b -LongName become -Description $msg.become
-    New-ParamCompleter -LongName become-method -Description $msg.become_method -VariableName 'BECOME_METHOD' -ArgumentCompleter $becomeCompleter
-    New-ParamCompleter -LongName become-user -Description $msg.become_user -VariableName 'BECOME_USER'
+    New-ParamCompleter -LongName become-method -Description $msg.become_method -Arguments @{ Name = 'BECOME_METHOD'; Script =  $becomeCompleter }
+    New-ParamCompleter -LongName become-user -Description $msg.become_user -Arguments @{ Name = 'BECOME_USER'; }
     New-ParamCompleter -ShortName C -LongName check -Description $msg.check
-    New-ParamCompleter -ShortName c -LongName connection -Description $msg.connection -VariableName 'CONNECTION' -ArgumentCompleter $connectionCompleter
+    New-ParamCompleter -ShortName c -LongName connection -Description $msg.connection -Arguments @{ Name = 'CONNECTION'; Script = $connectionCompleter }
     New-ParamCompleter -ShortName D -LongName diff -Description $msg.diff
-    New-ParamCompleter -ShortName e -LongName extra-vars -Description $msg.extra_vars -VariableName 'EXTRA_VARS' -ArgumentCompleter $extraVarsCompleter
+    New-ParamCompleter -ShortName e -LongName extra-vars -Description $msg.extra_vars -Arguments @{ Name = 'EXTRA_VARS'; Script =  $extraVarsCompleter }
     New-ParamCompleter -LongName flush-cache -Description $msg.flush_cache
     New-ParamCompleter -LongName force-handlers -Description $msg.force_handlers
-    New-ParamCompleter -ShortName f -LongName forks -Description $msg.forks -VariableName 'FORKS'
+    New-ParamCompleter -ShortName f -LongName forks -Description $msg.forks -Arguments @{ Name = 'FORKS'; }
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName i -LongName inventory -Description $msg.inventory -ArgumentType File -VariableName 'INVENTORY'
-    New-ParamCompleter -ShortName l -LongName limit -Description $msg.limit -ArgumentType List -VariableName 'SUBSET' -ArgumentCompleter $hostsCompleter
+    New-ParamCompleter -ShortName i -LongName inventory -Description $msg.inventory -Arguments @{ Name = 'INVENTORY'; Type = 'File' }
+    New-ParamCompleter -ShortName l -LongName limit -Description $msg.limit -Arguments @{ Name = 'SUBSET'; List = $true; Script = $hostsCompleter }
     New-ParamCompleter -LongName list-hosts -Description $msg.list_hosts
     New-ParamCompleter -LongName list-tags -Description $msg.list_tags
     New-ParamCompleter -LongName list-tasks -Description $msg.list_tasks
-    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -VariableName 'MODULE_PATH'
-    New-ParamCompleter -LongName private-key, key-file -Description $msg.private_key -ArgumentType File -VariableName 'PRIVATE_KEY_FILE'
-    New-ParamCompleter -LongName scp-extra-args -Description $msg.scp_extra_args -VariableName 'SCP_EXTRA_ARGS'
-    New-ParamCompleter -LongName sftp-extra-args -Description $msg.sftp_extra_args -VariableName 'SFTP_EXTRA_ARGS'
-    New-ParamCompleter -LongName skip-tags -Description $msg.skip_tags -VariableName 'SKIP_TAGS'
-    New-ParamCompleter -LongName ssh-common-args -Description $msg.ssh_common_args -VariableName 'SSH_COMMON_ARGS'
-    New-ParamCompleter -LongName ssh-extra-args -Description $msg.ssh_extra_args -VariableName 'SSH_EXTRA_ARGS'
-    New-ParamCompleter -LongName start-at-task -Description $msg.start_at_task -VariableName 'START_AT_TASK'
+    New-ParamCompleter -ShortName M -LongName module-path -Description $msg.module_path -Arguments @{ Name = 'MODULE_PATH' }
+    New-ParamCompleter -LongName private-key, key-file -Description $msg.private_key -Arguments @{ Name = 'PRIVATE_KEY_FILE'; Type = 'File' }
+    New-ParamCompleter -LongName scp-extra-args -Description $msg.scp_extra_args -Arguments @{ Name = 'SCP_EXTRA_ARGS' }
+    New-ParamCompleter -LongName sftp-extra-args -Description $msg.sftp_extra_args -Arguments @{ Name = 'SFTP_EXTRA_ARGS' }
+    New-ParamCompleter -LongName skip-tags -Description $msg.skip_tags -Arguments @{ Name = 'SKIP_TAGS' }
+    New-ParamCompleter -LongName ssh-common-args -Description $msg.ssh_common_args -Arguments @{ Name = 'SSH_COMMON_ARGS' }
+    New-ParamCompleter -LongName ssh-extra-args -Description $msg.ssh_extra_args -Arguments @{ Name = 'SSH_EXTRA_ARGS' }
+    New-ParamCompleter -LongName start-at-task -Description $msg.start_at_task -Arguments @{ Name = 'START_AT_TASK' }
     New-ParamCompleter -LongName step -Description $msg.step
     New-ParamCompleter -LongName syntax-check -Description $msg.syntax_check
-    New-ParamCompleter -ShortName t -LongName tags -Description $msg.tags -VariableName 'TAGS'
-    New-ParamCompleter -ShortName T -LongName timeout -Description $msg.timeout -VariableName 'TIMEOUT'
-    New-ParamCompleter -ShortName u -LongName user -Description $msg.user -VariableName 'REMOTE_USER'
-    New-ParamCompleter -LongName vault-id -Description $msg.vault_id -VariableName 'VAULT_IDS'
-    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -ArgumentType File -VariableName 'VAULT_PASSWORD_FILES'
+    New-ParamCompleter -ShortName t -LongName tags -Description $msg.tags -Arguments @{ Name = 'TAGS' }
+    New-ParamCompleter -ShortName T -LongName timeout -Description $msg.timeout -Arguments @{ Name = 'TIMEOUT' }
+    New-ParamCompleter -ShortName u -LongName user -Description $msg.user -Arguments @{ Name = 'REMOTE_USER' }
+    New-ParamCompleter -LongName vault-id -Description $msg.vault_id -Arguments @{ Name = 'VAULT_IDS' }
+    New-ParamCompleter -LongName vault-password-file, vault-pass-file -Description $msg.vault_password_file -Arguments @{ Name = 'VAULT_PASSWORD_FILES'; Type = 'File' }
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName version -Description $msg.version
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-        $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.ya?ml$'
-    })
+) -Arguments @{
+    Name = 'playbook';
+    Nargs = '1+';
+    Script = { param([int] $position, [int] $argIndex)
+        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+            $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.ya?ml$'
+        })
+    }
 }

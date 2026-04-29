@@ -33,29 +33,33 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 if ($IsLinux)
 {
     Register-NativeCompleter -Name mv -Parameters @(
-        New-ParamCompleter -LongName backup -Description $msg.backup -Arguments @(
-            "none `t{0}" -f $msg.backup_none
-            "off `t{0}" -f $msg.backup_none
-            "numbered `t{0}" -f $msg.backup_numbered
-            "t `t{0}" -f $msg.backup_numbered
-            "existing `t{0}" -f $msg.backup_existing
-            "nil `t{0}" -f $msg.backup_existing
-            "simple `t{0}" -f $msg.backup_simple
-            "never `t{0}" -f $msg.backup_simple
-        ) -VariableName 'CONTROL'
+        New-ParamCompleter -LongName backup -Description $msg.backup -Arguments @{
+            Name = 'CONTROL'; Candidates = @(
+                "none `t{0}" -f $msg.backup_none
+                "off `t{0}" -f $msg.backup_none
+                "numbered `t{0}" -f $msg.backup_numbered
+                "t `t{0}" -f $msg.backup_numbered
+                "existing `t{0}" -f $msg.backup_existing
+                "nil `t{0}" -f $msg.backup_existing
+                "simple `t{0}" -f $msg.backup_simple
+                "never `t{0}" -f $msg.backup_simple
+            )
+        }
         New-ParamCompleter -ShortName b -Description $msg.short_backup
         New-ParamCompleter -ShortName f -LongName force -Description $msg.force
         New-ParamCompleter -ShortName i -LongName interactive -Description $msg.interactive
         New-ParamCompleter -ShortName n -LongName no-clobber -Description $msg.noClobber
         New-ParamCompleter -LongName strip-trailing-slashes -Description $msg.stripTrailingSlashes
-        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -VariableName 'SUFFIX'
-        New-ParamCompleter -ShortName t -LongName target-directory -ArgumentType Directory -Description $msg.targetDirectory -VariableName 'DIRECTORY'
+        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -Arguments @{ Name = 'SUFFIX' }
+        New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.targetDirectory -Arguments @{ Name = 'DIRECTORY'; Type = 'Directory' }
         New-ParamCompleter -ShortName T -LongName no-target-directory -Description $msg.noTargetDirectory
-        New-ParamCompleter -LongName update -Description $msg.update -Type FlagOrValue -Arguments @(
-            "all `t{0}" -f $msg.update_all
-            "none `t{0}" -f $msg.update_none
-            "older `t{0}" -f $msg.update_older
-        ) -VariableName 'UPDATE'
+        New-ParamCompleter -LongName update -Description $msg.update -Arguments @{
+            Name = 'UPDATE'; Nargs = '?'; Candidates = @(
+                "all `t{0}" -f $msg.update_all
+                "none `t{0}" -f $msg.update_none
+                "older `t{0}" -f $msg.update_older
+            )
+        }
         New-ParamCompleter -ShortName u -Description $msg.short_updateOlder
         New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
         New-ParamCompleter -ShortName Z -LongName context -Description $msg.context

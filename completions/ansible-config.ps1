@@ -24,11 +24,15 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $helpParam = New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-$configFileParam = New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -ArgumentType File -VariableName 'CONFIG_FILE'
+$configFileParam = New-ParamCompleter -ShortName c -LongName config-file -Description $msg.config_file -Arguments @{ Name = 'CONFIG_FILE'; Type = 'File' }
 $verboseParam = New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
 $quietParam = New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
-$formatParam = New-ParamCompleter -ShortName f -LongName format -Description $msg.format -Arguments "ini","toml","env" -VariableName 'FORMAT'
-$typeParam = New-ParamCompleter -ShortName t -LongName type -Description $msg.type_filter -Arguments "all","base","become","cache","callback","cliconf","connection","httpapi","inventory","lookup","netconf","shell","vars" -VariableName 'TYPE'
+$formatParam = New-ParamCompleter -ShortName f -LongName format -Description $msg.format -Arguments @{
+    Name = 'FORMAT'; Candidates = "ini","toml","env"
+}
+$typeParam = New-ParamCompleter -ShortName t -LongName type -Description $msg.type_filter -Arguments @{
+    Name = 'TYPE'; Candidates = "all","base","become","cache","callback","cliconf","connection","httpapi","inventory","lookup","netconf","shell","vars"
+}
 
 Register-NativeCompleter -Name ansible-config -Description $msg.ansible_config -Parameters @(
     $configFileParam

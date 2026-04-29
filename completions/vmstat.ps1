@@ -35,13 +35,15 @@ Register-NativeCompleter -Name vmstat -Description $msg.vmstat -Parameters @(
     New-ParamCompleter -ShortName s -LongName stats -Description $msg.slab
     New-ParamCompleter -ShortName d -LongName disk -Description $msg.disk
     New-ParamCompleter -ShortName D -LongName disk-sum -Description $msg.diskSum
-    New-ParamCompleter -ShortName p -LongName partition -Description $msg.partition -VariableName 'device'
-    New-ParamCompleter -ShortName S -LongName unit -Description $msg.unit -Arguments @(
-        "k`t{0}" -f $msg.unit_k
-        "K`t{0}" -f $msg.unit_Kib
-        "m`t{0}" -f $msg.unit_m
-        "M`t{0}" -f $msg.unit_Mib
-    ) -VariableName 'UNIT'
+    New-ParamCompleter -ShortName p -LongName partition -Description $msg.partition -Arguments @{ Name = 'device' }
+    New-ParamCompleter -ShortName S -LongName unit -Description $msg.unit -Arguments @{
+        Name = 'UNIT'; Candidates = @(
+            "k`t{0}" -f $msg.unit_k
+            "K`t{0}" -f $msg.unit_Kib
+            "m`t{0}" -f $msg.unit_m
+            "M`t{0}" -f $msg.unit_Mib
+        )
+    }
     New-ParamCompleter -ShortName t -LongName timestamp -Description $msg.timestamp
     New-ParamCompleter -ShortName w -LongName wide -Description $msg.wide
     New-ParamCompleter -ShortName y -LongName no-first -Description $msg.noFirst

@@ -29,11 +29,11 @@ if ($IsLinux)
     Register-NativeCompleter -Name sed -Description $msg.sed -Parameters @(
         New-ParamCompleter -ShortName n -LongName quiet, slient -Description $msg.quiet
         New-ParamCompleter -LongName debug -Description $msg.debug
-        New-ParamCompleter -ShortName e -LongName expression -Description $msg.expression -VariableName script
-        New-ParamCompleter -ShortName f -LongName file -ArgumentType File -Description $msg.file -VariableName 'script-file'
+        New-ParamCompleter -ShortName e -LongName expression -Description $msg.expression -Arguments @{ Name = 'script' }
+        New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Arguments @{ Name = 'script-file'; Type = 'File' }
         New-ParamCompleter -LongName follow-symlinks -Description $msg.followSymlinks
-        New-ParamCompleter -ShortName i -LongName in-place -Type FlagOrValue -Description $msg."inPlace" -VariableName 'SUFFIX'
-        New-ParamCompleter -ShortName l -LongName line-length -Description $msg."lineLength" -VariableName 'N'
+        New-ParamCompleter -ShortName i -LongName in-place -Description $msg."inPlace" -Arguments @{ Name = 'SUFFIX'; Nargs = '?' }
+        New-ParamCompleter -ShortName l -LongName line-length -Description $msg."lineLength" -Arguments @{ Name = 'N' }
         New-ParamCompleter -LongName posix -Description $msg.posix
         New-ParamCompleter -ShortName E,r -LongName regexp-extended -Description $msg.regexpExtended
         New-ParamCompleter -ShortName s -LongName separate -Description $msg.separate
@@ -42,18 +42,15 @@ if ($IsLinux)
         New-ParamCompleter -ShortName z -LongName null-data -Description $msg.nullData
         New-ParamCompleter -LongName help -Description $msg.help
         New-ParamCompleter -LongName version -Description $msg.version
-    ) -ArgumentCompleter {
-        param([int] $position, [int] $argIndex)
-        if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey("expression"))
-        {
-            if ([string]::IsNullOrEmpty($_))
+    ) -Arguments @{
+        Name = 'script'; Nargs = '?'
+        Script = {
+            if ($this.BoundParameters.ContainsKey("expression"))
             {
-                "pattern`tSpecify a pattern"
-            }
-            else
-            {
-                $null
-            }
+                [MT.Comp.Helper]::CompleteFilename($this);
+            } else { $null }
         }
+    }, @{
+        Name = 'file'; Nargs = '0+'; Type = 'File'
     }
 }

@@ -77,13 +77,13 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$serviceCompleter = {
+$serviceArgument = New-ArgumentCompleter service -Script {
     Get-Service | Where-Object Name -Like "$wordToComplete*" | ForEach-Object {
         "{0}`t{1}" -f $_.Name, $_.DisplayName
     }
 }
 
-$typeArguments = @(
+$typeArgument = New-ArgumentCompleter type -Candidates @(
     "own`t{0}" -f $msg.type_own
     "share`t{0}" -f $msg.type_share
     "interact`t{0}" -f $msg.type_interact
@@ -97,7 +97,7 @@ $typeArguments = @(
     "pktmonsvc_template`t{0}" -f $msg.type_pktmonsvc_template
 )
 
-$startArguments = @(
+$startArgument = New-ArgumentCompleter start -Candidates @(
     "boot`t{0}" -f $msg.start_boot
     "system`t{0}" -f $msg.start_system
     "auto`t{0}" -f $msg.start_auto
@@ -106,98 +106,98 @@ $startArguments = @(
     "delayed-auto`t{0}" -f $msg.start_delayed
 )
 
-$errorArguments = @(
+$errorArgument = New-ArgumentCompleter error -Candidates @(
     "normal`t{0}" -f $msg.error_normal
     "severe`t{0}" -f $msg.error_severe
     "critical`t{0}" -f $msg.error_critical
     "ignore`t{0}" -f $msg.error_ignore
 )
 
-$stateArguments = @(
+$stateArgument = New-ArgumentCompleter state -Candidates @(
     "all`t{0}" -f $msg.state_all
     "active`t{0}" -f $msg.state_active
     "inactive`t{0}" -f $msg.state_inactive
 )
 
 Register-NativeCompleter -Name sc -Description $msg.sc -Style Windows -Parameters @(
-    New-ParamCompleter -LongName server -Description $msg.server -VariableName 'ServerName'
+    New-ParamCompleter -LongName server -Description $msg.server -Arguments @{ Name = 'ServerName' }
 ) -SubCommands @(
     New-CommandCompleter -Name query -Description $msg.query -Parameters @(
-        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
-        New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArguments -VariableName 'state'
-        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -VariableName 'BufferSize'
-        New-ParamCompleter -LongName ri -Description $msg.ri -VariableName 'ResumeIndex'
-        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'GroupName'
-    ) -ArgumentCompleter $serviceCompleter
+        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArgument
+        New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArgument
+        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -Arguments @{ Name = 'BufferSize' }
+        New-ParamCompleter -LongName ri -Description $msg.ri -Arguments @{ Name = 'ResumeIndex' }
+        New-ParamCompleter -LongName group -Description $msg.group -Arguments @{ Name = 'GroupName' }
+    ) -Arguments $serviceArgument
 
     New-CommandCompleter -Name queryex -Description $msg.queryex -Parameters @(
-        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
-        New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArguments -VariableName 'state'
-        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -VariableName 'BufferSize'
-        New-ParamCompleter -LongName ri -Description $msg.ri -VariableName 'ResumeIndex'
-        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'GroupName'
-    ) -ArgumentCompleter $serviceCompleter
+        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArgument
+        New-ParamCompleter -LongName state -Description $msg.state_all -Arguments $stateArgument
+        New-ParamCompleter -LongName bufsize -Description $msg.bufsize -Arguments @{ Name = 'BufferSize' }
+        New-ParamCompleter -LongName ri -Description $msg.ri -Arguments @{ Name = 'ResumeIndex' }
+        New-ParamCompleter -LongName group -Description $msg.group -Arguments @{ Name = 'GroupName' }
+    ) -Arguments $serviceArgument
 
-    New-CommandCompleter -Name start -Description $msg.start -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name pause -Description $msg.pause -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name interrogate -Description $msg.interrogate -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name continue -Description $msg.continue -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name stop -Description $msg.stop -ArgumentCompleter $serviceCompleter
+    New-CommandCompleter -Name start -Description $msg.start -Arguments $serviceArgument
+    New-CommandCompleter -Name pause -Description $msg.pause -Arguments $serviceArgument
+    New-CommandCompleter -Name interrogate -Description $msg.interrogate -Arguments $serviceArgument
+    New-CommandCompleter -Name continue -Description $msg.continue -Arguments $serviceArgument
+    New-CommandCompleter -Name stop -Description $msg.stop -Arguments $serviceArgument
 
     New-CommandCompleter -Name config -Description $msg.config -Parameters @(
-        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
-        New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArguments -VariableName 'start'
-        New-ParamCompleter -LongName error -Description $msg.error_normal -Arguments $errorArguments -VariableName 'error'
-        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -VariableName 'BinaryPathName'
-        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'LoadOrderGroup'
-        New-ParamCompleter -LongName tag -Description 'TagId' -Arguments "yes","no" -VariableName 'yes/no'
-        New-ParamCompleter -LongName depend -Description 'Dependencies' -VariableName 'Dependencies'
-        New-ParamCompleter -LongName obj -Description 'AccountName' -VariableName 'AccountName'
-        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -VariableName 'DisplayName'
-        New-ParamCompleter -LongName password -Description 'Password' -VariableName 'Password'
-    ) -ArgumentCompleter $serviceCompleter
+        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArgument
+        New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArgument
+        New-ParamCompleter -LongName error -Description $msg.error_normal -Arguments $errorArgument
+        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -Arguments @{ Name = 'BinaryPathName' }
+        New-ParamCompleter -LongName group -Description $msg.group -Arguments @{ Name = 'LoadOrderGroup' }
+        New-ParamCompleter -LongName tag -Description 'TagId' -Arguments @{ Name = 'yes/no'; Candidates = "yes","no" }
+        New-ParamCompleter -LongName depend -Description 'Dependencies' -Arguments @{ Name = 'Dependencies' }
+        New-ParamCompleter -LongName obj -Description 'AccountName' -Arguments @{ Name = 'AccountName' }
+        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -Arguments @{ Name = 'DisplayName' }
+        New-ParamCompleter -LongName password -Description 'Password' -Arguments @{ Name = 'Password' }
+    ) -Arguments $serviceArgument
 
-    New-CommandCompleter -Name description -Description $msg.description -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name failure -Description $msg.failure -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name failureflag -Description $msg.failureflag -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name sidtype -Description $msg.sidtype -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name privs -Description $msg.privs -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name managedaccount -Description $msg.managedaccount -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qc -Description $msg.qc -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qdescription -Description $msg.qdescription -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qfailure -Description $msg.qfailure -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qfailureflag -Description $msg.qfailureflag -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qsidtype -Description $msg.qsidtype -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qprivs -Description $msg.qprivs -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qtriggerinfo -Description $msg.qtriggerinfo -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qpreferrednode -Description $msg.qpreferrednode -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qmanagedaccount -Description $msg.qmanagedaccount -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name qprotection -Description $msg.qprotection -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name quserservice -Description $msg.quserservice -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name delete -Description $msg.delete -ArgumentCompleter $serviceCompleter
+    New-CommandCompleter -Name description -Description $msg.description -Arguments $serviceArgument
+    New-CommandCompleter -Name failure -Description $msg.failure -Arguments $serviceArgument
+    New-CommandCompleter -Name failureflag -Description $msg.failureflag -Arguments $serviceArgument
+    New-CommandCompleter -Name sidtype -Description $msg.sidtype -Arguments $serviceArgument
+    New-CommandCompleter -Name privs -Description $msg.privs -Arguments $serviceArgument
+    New-CommandCompleter -Name managedaccount -Description $msg.managedaccount -Arguments $serviceArgument
+    New-CommandCompleter -Name qc -Description $msg.qc -Arguments $serviceArgument
+    New-CommandCompleter -Name qdescription -Description $msg.qdescription -Arguments $serviceArgument
+    New-CommandCompleter -Name qfailure -Description $msg.qfailure -Arguments $serviceArgument
+    New-CommandCompleter -Name qfailureflag -Description $msg.qfailureflag -Arguments $serviceArgument
+    New-CommandCompleter -Name qsidtype -Description $msg.qsidtype -Arguments $serviceArgument
+    New-CommandCompleter -Name qprivs -Description $msg.qprivs -Arguments $serviceArgument
+    New-CommandCompleter -Name qtriggerinfo -Description $msg.qtriggerinfo -Arguments $serviceArgument
+    New-CommandCompleter -Name qpreferrednode -Description $msg.qpreferrednode -Arguments $serviceArgument
+    New-CommandCompleter -Name qmanagedaccount -Description $msg.qmanagedaccount -Arguments $serviceArgument
+    New-CommandCompleter -Name qprotection -Description $msg.qprotection -Arguments $serviceArgument
+    New-CommandCompleter -Name quserservice -Description $msg.quserservice -Arguments $serviceArgument
+    New-CommandCompleter -Name delete -Description $msg.delete -Arguments $serviceArgument
 
     New-CommandCompleter -Name create -Description $msg.create -Parameters @(
-        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArguments -VariableName 'type'
-        New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArguments -VariableName 'start'
-        New-ParamCompleter -LongName error -Description $msg.error_normal -Arguments $errorArguments -VariableName 'error'
-        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -VariableName 'BinaryPathName'
-        New-ParamCompleter -LongName group -Description $msg.group -VariableName 'LoadOrderGroup'
-        New-ParamCompleter -LongName tag -Description 'TagId' -Arguments "yes","no" -VariableName 'yes/no'
-        New-ParamCompleter -LongName depend -Description 'Dependencies' -VariableName 'Dependencies'
-        New-ParamCompleter -LongName obj -Description 'AccountName' -VariableName 'AccountName'
-        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -VariableName 'DisplayName'
-        New-ParamCompleter -LongName password -Description 'Password' -VariableName 'Password'
+        New-ParamCompleter -LongName type -Description $msg.type_own -Arguments $typeArgument
+        New-ParamCompleter -LongName start -Description $msg.start_auto -Arguments $startArgument
+        New-ParamCompleter -LongName error -Description $msg.error_normal -Arguments $errorArgument
+        New-ParamCompleter -LongName binPath -Description 'BinaryPathName' -Arguments @{ Name = 'BinaryPathName' }
+        New-ParamCompleter -LongName group -Description $msg.group -Arguments @{ Name = 'LoadOrderGroup' }
+        New-ParamCompleter -LongName tag -Description 'TagId' -Arguments @{ Name = 'yes/no'; Candidates = "yes","no" }
+        New-ParamCompleter -LongName depend -Description 'Dependencies' -Arguments @{ Name = 'Dependencies' }
+        New-ParamCompleter -LongName obj -Description 'AccountName' -Arguments @{ Name = 'AccountName' }
+        New-ParamCompleter -LongName DisplayName -Description 'DisplayName' -Arguments @{ Name = 'DisplayName' }
+        New-ParamCompleter -LongName password -Description 'Password' -Arguments @{ Name = 'Password' }
     ) -NoFileCompletions
 
-    New-CommandCompleter -Name control -Description $msg.control -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name sdshow -Description $msg.sdshow -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name sdset -Description $msg.sdset -ArgumentCompleter $serviceCompleter
+    New-CommandCompleter -Name control -Description $msg.control -Arguments $serviceArgument
+    New-CommandCompleter -Name sdshow -Description $msg.sdshow -Arguments $serviceArgument
+    New-CommandCompleter -Name sdset -Description $msg.sdset -Arguments $serviceArgument
     New-CommandCompleter -Name showsid -Description $msg.showsid -NoFileCompletions
-    New-CommandCompleter -Name triggerinfo -Description $msg.triggerinfo -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name preferrednode -Description $msg.preferrednode -ArgumentCompleter $serviceCompleter
-    New-CommandCompleter -Name GetDisplayName -Description $msg.GetDisplayName -ArgumentCompleter $serviceCompleter
+    New-CommandCompleter -Name triggerinfo -Description $msg.triggerinfo -Arguments $serviceArgument
+    New-CommandCompleter -Name preferrednode -Description $msg.preferrednode -Arguments $serviceArgument
+    New-CommandCompleter -Name GetDisplayName -Description $msg.GetDisplayName -Arguments $serviceArgument
     New-CommandCompleter -Name GetKeyName -Description $msg.GetKeyName -NoFileCompletions
-    New-CommandCompleter -Name EnumDepend -Description $msg.EnumDepend -ArgumentCompleter $serviceCompleter
+    New-CommandCompleter -Name EnumDepend -Description $msg.EnumDepend -Arguments $serviceArgument
     New-CommandCompleter -Name boot -Description $msg.boot -NoFileCompletions
     New-CommandCompleter -Name Lock -Description $msg.Lock -NoFileCompletions
     New-CommandCompleter -Name QueryLock -Description $msg.QueryLock -NoFileCompletions

@@ -45,7 +45,7 @@ Register-NativeCompleter -Name lsblk -Description $msg.lsblk -Parameters @(
     New-ParamCompleter -ShortName d -LongName nodeps -Description $msg.nodeps
     New-ParamCompleter -ShortName D -LongName discard -Description $msg.discard
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -VariableName 'list'
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments @{ Name = 'list' }
     New-ParamCompleter -ShortName O -LongName output-all -Description $msg.output_all
     New-ParamCompleter -ShortName p -LongName paths -Description $msg.paths
     New-ParamCompleter -ShortName P -LongName pairs -Description $msg.pairs
@@ -53,35 +53,39 @@ Register-NativeCompleter -Name lsblk -Description $msg.lsblk -Parameters @(
     New-ParamCompleter -ShortName s -LongName inverse -Description $msg.inverse
     New-ParamCompleter -ShortName f -LongName fs -Description $msg.fs
     New-ParamCompleter -ShortName i -LongName ascii -Description $msg.ascii
-    New-ParamCompleter -ShortName I -LongName include -Description $msg.include -VariableName 'list'
-    New-ParamCompleter -ShortName e -LongName exclude -Description $msg.exclude -VariableName 'list'
+    New-ParamCompleter -ShortName I -LongName include -Description $msg.include -Arguments @{ Name = 'list' }
+    New-ParamCompleter -ShortName e -LongName exclude -Description $msg.exclude -Arguments @{ Name = 'list' }
     New-ParamCompleter -ShortName S -LongName scsi -Description $msg.scsi
     New-ParamCompleter -ShortName J -LongName json -Description $msg.json
     New-ParamCompleter -ShortName l -LongName list -Description $msg.list
     New-ParamCompleter -ShortName T -LongName tree -Description $msg.tree
     New-ParamCompleter -ShortName n -LongName noheadings -Description $msg.noheadings
-    New-ParamCompleter -ShortName x -LongName sort -Description $msg.sort -VariableName 'column'
-    New-ParamCompleter -LongName sysroot -Description $msg.sysroot -ArgumentType Directory -VariableName 'directory'
+    New-ParamCompleter -ShortName x -LongName sort -Description $msg.sort -Arguments @{ Name = 'column' }
+    New-ParamCompleter -LongName sysroot -Description $msg.sysroot -Arguments @{ Name = 'directory'; Type = 'Directory' }
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
     New-ParamCompleter -ShortName t -LongName topology -Description $msg.topology
     New-ParamCompleter -ShortName m -LongName perms -Description $msg.perms
-    New-ParamCompleter -LongName dedup -Description $msg.dedup -VariableName 'column'
+    New-ParamCompleter -LongName dedup -Description $msg.dedup -Arguments @{ Name = 'column' }
     New-ParamCompleter -ShortName M -LongName merge -Description $msg.merge
     New-ParamCompleter -ShortName z -LongName zoned -Description $msg.zoned
-) -ArgumentCompleter {
-    if ([System.IO.Path]::IsPathRooted($wordToComplete))
-    {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-            $_.Attributes.HasFlag([System.IO.FileAttributes]::Normal) -and
-            $_.Name -match '^(sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+|loop[0-9]+)'
-        })
-    }
-    else
-    {
-        [MT.Comp.Helper]::CompleteFilename('/dev/', $this.CurrentDirectory.Path, $false, $false, {
-            $_.Attributes.HasFlag([System.IO.FileAttributes]::Normal) -and
-            $_.Name -match '^(sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+|loop[0-9]+)' -and
-            $_.Name -like "$wordToComplete*"
-        })
+) -NoFileCompletions -Arguments @{
+    Name = 'device';
+    Nargs = '0+';
+    Script = {
+        if ([System.IO.Path]::IsPathRooted($wordToComplete))
+        {
+            [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+                $_.Attributes.HasFlag([System.IO.FileAttributes]::Normal) -and
+                $_.Name -match '^(sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+|loop[0-9]+)'
+            })
+        }
+        else
+        {
+            [MT.Comp.Helper]::CompleteFilename('/dev/', $this.CurrentDirectory.Path, $false, $false, {
+                $_.Attributes.HasFlag([System.IO.FileAttributes]::Normal) -and
+                $_.Name -match '^(sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+|loop[0-9]+)' -and
+                $_.Name -like "$wordToComplete*"
+            })
+        }
     }
 }

@@ -37,26 +37,29 @@ Register-NativeCompleter -Name umount -Description $msg.umount -Parameters @(
     New-ParamCompleter -ShortName l -LongName lazy -Description $msg.lazy
     New-ParamCompleter -ShortName n -LongName no-mtab -Description $msg.no_mtab
     New-ParamCompleter -LongName no-canonicalize -Description $msg.no_canonicalize
-    New-ParamCompleter -ShortName O -LongName test-opts -Description $msg.test_opts -VariableName 'list'
-    New-ParamCompleter -ShortName o -LongName options -Description $msg.options -ArgumentType List -VariableName 'list'
+    New-ParamCompleter -ShortName O -LongName test-opts -Description $msg.test_opts -Arguments @{ Name = 'list' }
+    New-ParamCompleter -ShortName o -LongName options -Description $msg.options -Arguments @{ Name = 'list'; List = $true }
     New-ParamCompleter -ShortName R -LongName recursive -Description $msg.recursive
     New-ParamCompleter -ShortName r -LongName read-only -Description $msg.read_only
-    New-ParamCompleter -ShortName t -LongName types -Description $msg.types -ArgumentType List -VariableName 'list'
+    New-ParamCompleter -ShortName t -LongName types -Description $msg.types -Arguments @{ Name = 'list'; List = $true }
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
-) -ArgumentCompleter {
-    # Complete mounted filesystems
-    $q = "$wordToComplete*"
-    if (Test-Path /proc/mounts) {
-        Get-Content /proc/mounts | ForEach-Object {
-            $fields = $_ -split '\s+'
-            if ($fields.Count -ge 2) {
-                $mountpoint = $fields[1]
-                $device = $fields[0]
-                if ($mountpoint -like $q) {
-                    "{0}`t{1}" -f $mountpoint, $device
+) -Arguments @{
+    Name = 'directory|device'
+    Script = {
+        # Complete mounted filesystems
+        $q = "$wordToComplete*"
+        if (Test-Path /proc/mounts) {
+            Get-Content /proc/mounts | ForEach-Object {
+                $fields = $_ -split '\s+'
+                if ($fields.Count -ge 2) {
+                    $mountpoint = $fields[1]
+                    $device = $fields[0]
+                    if ($mountpoint -like $q) {
+                        "{0}`t{1}" -f $mountpoint, $device
+                    }
                 }
             }
         }

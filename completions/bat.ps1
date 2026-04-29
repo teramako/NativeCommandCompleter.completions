@@ -66,50 +66,50 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$themeCompleter = {
+$themeArgument= New-ArgumentCompleter -Name theme -Script {
     bat --list-themes | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object { "'{0}'" -f $_ }
 }
-$languageCompleter = {
+$languageArgument = New-ArgumentCompleter -Name language -Script {
     bat --list-languages | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object { "'{0}'`t{1}" -f ($_ -split ':') }
 }
+$whenArgument = New-ArgumentCompleter -Name when -Candidates @("auto", "never", "always")
 
-$whenArguments = "auto", "never", "always"
 $stylesArguments = "default", "auto", "full", "plain", "changes", "header", "header-filename", "header-filesize", "grid", "rule", "numbers", "snip"
 
 Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter -ShortName A -LongName show-all -Description $msg.show_all
-    New-ParamCompleter              -LongName nonprintable-notation -Description $msg.nonprintable_notation -VariableName 'notation' -Arguments "caret", "unicode"
-    New-ParamCompleter              -LongName binary                -Description $msg.binary -VariableName 'behavior' -Arguments "no-printing", "as-text"
-    New-ParamCompleter              -LongName completion            -Description $msg.completion -VariableName 'SHELL' -Arguments "bash", "fish", "zsh", "ps1"
+    New-ParamCompleter              -LongName nonprintable-notation -Description $msg.nonprintable_notation -Arguments @{ Name = 'notation'; Candidates = "caret", "unicode" }
+    New-ParamCompleter              -LongName binary                -Description $msg.binary -Arguments @{ Name = 'behavior'; Candidates = "no-printing", "as-text" }
+    New-ParamCompleter              -LongName completion            -Description $msg.completion -Arguments @{ Name = 'SHELL'; Candidates = "bash", "fish", "zsh", "ps1" }
     New-ParamCompleter -ShortName p -LongName plain                 -Description $msg.plain
-    New-ParamCompleter -ShortName l -LongName language              -Description $msg.language -VariableName 'language' -ArgumentCompleter $languageCompleter
-    New-ParamCompleter -ShortName H -LongName highlight-line        -Description $msg.highlight_line -VariableName 'N:M'
-    New-ParamCompleter              -LongName file-name             -Description $msg.file_name -ArgumentType File -VariableName 'name'
+    New-ParamCompleter -ShortName l -LongName language              -Description $msg.language -Arguments $languageArgument
+    New-ParamCompleter -ShortName H -LongName highlight-line        -Description $msg.highlight_line -Arguments @{ Name = 'N:M' }
+    New-ParamCompleter              -LongName file-name             -Description $msg.file_name -Arguments @{ Name = 'name'; Type = 'File' }
     New-ParamCompleter -ShortName d -LongName diff                  -Description $msg.diff
-    New-ParamCompleter              -LongName diff-context          -Description $msg.diff_context -VariableName 'N'
-    New-ParamCompleter              -LongName tabs                  -Description $msg.tabs -VariableName 'T'
-    New-ParamCompleter              -LongName wrap                  -Description $msg.wrap -VariableName 'mode' -Arguments "auto", "never", "character"
+    New-ParamCompleter              -LongName diff-context          -Description $msg.diff_context -Arguments @{ Name = 'N' }
+    New-ParamCompleter              -LongName tabs                  -Description $msg.tabs -Arguments @{ Name = 'T' }
+    New-ParamCompleter              -LongName wrap                  -Description $msg.wrap -Arguments @{ Name = 'mode'; Candidates = "auto", "never", "character" }
     New-ParamCompleter -ShortName S -LongName chop-long-lines       -Description $msg.chop_long_lines
-    New-ParamCompleter              -LongName terminal-width        -Description $msg.terminal_width -VariableName 'width'
+    New-ParamCompleter              -LongName terminal-width        -Description $msg.terminal_width -Arguments @{ Name = 'width' }
     New-ParamCompleter -ShortName n -LongName number                -Description $msg.number
-    New-ParamCompleter              -LongName color                 -Description $msg.color -VariableName 'when' -Arguments $whenArguments
-    New-ParamCompleter              -LongName italic-text           -Description $msg.italic_text -VariableName 'when' -Arguments 'always', 'never'
-    New-ParamCompleter              -LongName decorations           -Description $msg.decorations -VariableName 'when' -Arguments $whenArguments
+    New-ParamCompleter              -LongName color                 -Description $msg.color -Arguments $whenArgument
+    New-ParamCompleter              -LongName italic-text           -Description $msg.italic_text -Arguments @{ Name = 'when'; Candidates = 'always', 'never' }
+    New-ParamCompleter              -LongName decorations           -Description $msg.decorations -Arguments $whenArgument
     New-ParamCompleter -ShortName f -LongName force-colorization    -Description $msg.force_colorization
-    New-ParamCompleter              -LongName paging                -Description $msg.paging -VariableName 'when' -Arguments $whenArguments
+    New-ParamCompleter              -LongName paging                -Description $msg.paging -Arguments $whenArgument
     New-ParamCompleter -ShortName P -LongName no-paging             -Description $msg.no_paging
-    New-ParamCompleter              -LongName pager                 -Description $msg.pager -VariableName 'command'
-    New-ParamCompleter -ShortName m -LongName map-syntax            -Description $msg.map_syntax -VariableName 'glob-pattern:syntax-name'
-    New-ParamCompleter              -LongName ignored-suffix        -Description $msg.ignore_suffix -VariableName 'suffix'
-    New-ParamCompleter              -LongName theme                 -Description $msg.theme -VariableName 'theme' -ArgumentCompleter $themeCompleter
+    New-ParamCompleter              -LongName pager                 -Description $msg.pager -Arguments @{ Name = 'command' }
+    New-ParamCompleter -ShortName m -LongName map-syntax            -Description $msg.map_syntax -Arguments @{ Name = 'glob-pattern:syntax-name' }
+    New-ParamCompleter              -LongName ignored-suffix        -Description $msg.ignore_suffix -Arguments @{ Name = 'suffix' }
+    New-ParamCompleter              -LongName theme                 -Description $msg.theme -Arguments $themeArgument
     New-ParamCompleter              -LongName theme-dark            -Description $msg.theme_dark
     New-ParamCompleter              -LongName theme-light           -Description $msg.theme_light
     New-ParamCompleter              -LongName list-themes           -Description $msg.list_themes
     New-ParamCompleter -ShortName s -LongName squeeze-blank         -Description $msg.squeeze_blank
-    New-ParamCompleter              -LongName squeeze-limit         -Description $msg.squeeze_limit -VariableName 'limit'
-    New-ParamCompleter              -LongName strip-ansi            -Description $msg.strip_ansi -VariableName 'when' -Arguments "auto", "always", "never"
-    New-ParamCompleter              -LongName style                 -Description $msg.style -ArgumentType List -Arguments $stylesArguments
-    New-ParamCompleter -ShortName r -LongName line-range            -Description $msg.line_range -VariableName 'N:M'
+    New-ParamCompleter              -LongName squeeze-limit         -Description $msg.squeeze_limit -Arguments @{ Name = 'limit' }
+    New-ParamCompleter              -LongName strip-ansi            -Description $msg.strip_ansi -Arguments $whenArgument
+    New-ParamCompleter              -LongName style                 -Description $msg.style -Arguments @{ Name = 'style-component'; List = $true; Candidates = $stylesArguments }
+    New-ParamCompleter -ShortName r -LongName line-range            -Description $msg.line_range -Arguments @{ Name = 'N:M' }
     New-ParamCompleter -ShortName L -LongName list-languages        -Description $msg.list_languages
     New-ParamCompleter              -LongName no-custom-assets      -Description $msg.no_custom_assets
     New-ParamCompleter              -LongName config-dir            -Description $msg.config_dir
@@ -127,8 +127,8 @@ Register-NativeCompleter -Name $cmdName -Description $msg.bat -Parameters @(
     New-ParamCompleter              -LongName no-config             -Description $msg.no_config
 ) -SubCommands @(
     New-CommandCompleter -Name cache -Description $msg.cache -Parameters @(
-        New-ParamCompleter              -LongName source           -Description $msg.cache_source -ArgumentType Directory -VariableName 'dir'
-        New-ParamCompleter              -LongName target           -Description $msg.cache_target -ArgumentType Directory -VariableName 'dir'
+        New-ParamCompleter              -LongName source           -Description $msg.cache_source -Arguments @{ Name = 'dir'; Type = 'Directory' }
+        New-ParamCompleter              -LongName target           -Description $msg.cache_target -Arguments @{ Name = 'dir'; Type = 'Directory' }
         New-ParamCompleter -ShortName b -LongName build            -Description $msg.cache_build
         New-ParamCompleter -ShortName c -LongName clear            -Description $msg.cache_clear
         New-ParamCompleter              -LongName blank            -Description $msg.cache_blank

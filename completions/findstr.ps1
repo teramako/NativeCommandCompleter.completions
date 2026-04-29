@@ -43,17 +43,21 @@ Register-NativeCompleter -Name findstr -Description $msg.findstr -Style Windows 
     New-ParamCompleter -Name O -Description $msg.print_offset
     New-ParamCompleter -Name P -Description $msg.skip_binary
     New-ParamCompleter -Name OFF,OFFLINE -Description $msg.offline
-    New-ParamCompleter -Name A -Description $msg.color -VariableName 'color'
-    New-ParamCompleter -Name F -Description $msg.file_list -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -Name C -Description $msg.string -VariableName 'string'
-    New-ParamCompleter -Name G -Description $msg.strings_file -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -Name D -Description $msg.dir_list -VariableName 'dir_list'
+    New-ParamCompleter -Name A -Description $msg.color -Arguments @{ Name = 'color' }
+    New-ParamCompleter -Name F -Description $msg.file_list -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -Name C -Description $msg.string -Arguments @{ Name = 'string' }
+    New-ParamCompleter -Name G -Description $msg.strings_file -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -Name D -Description $msg.dir_list -Arguments @{ Name = 'dir_list' }
     New-ParamCompleter -Name ? -Description $msg.help
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey('C') -and
-                             -not $this.BoundParameters.ContainsKey('G'))
-    {
-        return $null
+) -NoFileCompletions -Arguments @{
+    Name = 'strings';
+    Script = {
+        if ($this.BoundParameters.ContainsKey('C') -or $this.BoundParameters.ContainsKey('G')) {
+            [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
+        } else {
+            $null;
+        }
     }
+}, @{
+    Name = 'filename'; Nargs = '1+'; Type = 'File'
 }

@@ -93,6 +93,7 @@ $msg = data { ConvertFrom-StringData @'
     old_archive                = Same as --format=v7
     pax_option                 = Control pax keywords
     posix                      = Same as --format=posix
+    label                      = Create archive with volume name TEXT
     auto_compress              = Use archive suffix to determine the compression program
     use_compress_program       = Filter through specified program
     bzip2                      = Filter through bzip2
@@ -171,17 +172,17 @@ Register-NativeCompleter -Name tar -Parameters @(
 
     ## Operation modifiers
     New-ParamCompleter -LongName check-device -Description $msg.check_device
-    New-ParamCompleter -ShortName g -LongName listed-incremental -Description $msg.listed_incremental -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName hole-detection -Description $msg.hole_detection -Arguments "seek", "raw" -VariableName 'METHOD'
+    New-ParamCompleter -ShortName g -LongName listed-incremental -Description $msg.listed_incremental -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName hole-detection -Description $msg.hole_detection -Arguments @{ Name = 'METHOD'; Candidates = "seek", "raw" }
     New-ParamCompleter -ShortName G -LongName incremental -Description $msg.incremental
     New-ParamCompleter -LongName ignore-failed-read -Description $msg.ignore_failed_read
-    New-ParamCompleter -LongName level -Description $msg.level -Arguments "0" -VariableName 'NUMBER'
+    New-ParamCompleter -LongName level -Description $msg.level -Arguments @{ Name = 'NUMBER'; Candidates = "0" }
     New-ParamCompleter -ShortName n -LongName seek -Description $msg.seek
     New-ParamCompleter -LongName no-check-device -Description $msg.no_check_device
     New-ParamCompleter -LongName no-seek -Description $msg.no_seek
-    New-ParamCompleter -LongName occurrence -Description $msg.occurrence -Type FlagOrValue -VariableName 'N'
+    New-ParamCompleter -LongName occurrence -Description $msg.occurrence -Arguments @{ Name = 'N'; Nargs = '?' }
     New-ParamCompleter -LongName restrict -Description $msg.restrict
-    New-ParamCompleter -LongName sparse-version -Description $msg.sparse_version -Arguments "0.0", "0.1", "1.0" -VariableName 'MAJOR[.MINOR]'
+    New-ParamCompleter -LongName sparse-version -Description $msg.sparse_version -Arguments @{ Name = 'MAJOR[.MINOR]'; Candidates = "0.0", "0.1", "1.0" }
     New-ParamCompleter -ShortName S -LongName sparse -Description $msg.sparse
 
     ## Overwrite control
@@ -189,7 +190,7 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName keep-newer-files -Description $msg.keep_newer_files
     New-ParamCompleter -LongName keep-directory-symlink -Description $msg.keep_directory_symlink
     New-ParamCompleter -LongName no-overwrite-dir -Description $msg.no_overwrite_dir
-    New-ParamCompleter -LongName one-top-level -Description $msg.one_top_level -Type FlagOrValue -VariableName 'DIR'
+    New-ParamCompleter -LongName one-top-level -Description $msg.one_top_level -Arguments @{ Name = 'DIR'; Nargs = '?' }
     New-ParamCompleter -LongName overwrite -Description $msg.overwrite
     New-ParamCompleter -LongName overwrite-dir -Description $msg.overwrite_dir
     New-ParamCompleter -LongName recursive-unlink -Description $msg.recursive_unlink
@@ -202,26 +203,26 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName ignore-command-error -Description $msg.ignore_command_error
     New-ParamCompleter -LongName no-ignore-command-error -Description $msg.no_ignore_command_error
     New-ParamCompleter -ShortName O -LongName to-stdout -Description $msg.to_stdout
-    New-ParamCompleter -LongName to-command -Description $msg.to_command -VariableName 'COMMAND'
+    New-ParamCompleter -LongName to-command -Description $msg.to_command -Arguments @{ Name = 'COMMAND' }
 
     ## Handling of file attributes
-    New-ParamCompleter -LongName atime-preserve -Description $msg.atime_preserve -Type FlagOrValue -Arguments "replace", "system" -VariableName 'METHOD'
+    New-ParamCompleter -LongName atime-preserve -Description $msg.atime_preserve -Arguments @{ Name = 'METHOD'; Nargs = '?'; Candidates = "replace", "system" }
     New-ParamCompleter -LongName delay-directory-restore -Description $msg.delay_directory_restore
-    New-ParamCompleter -LongName group -Description $msg.group -VariableName 'NAME[:GID]'
-    New-ParamCompleter -LongName group-map -Description $msg.group_map -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName mode -Description $msg.mode -VariableName 'CHANGES'
-    New-ParamCompleter -LongName mtime -Description $msg.mtime -VariableName 'DATE-OR-FILE'
+    New-ParamCompleter -LongName group -Description $msg.group -Arguments @{ Name = 'NAME[:GID]' }
+    New-ParamCompleter -LongName group-map -Description $msg.group_map -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName mode -Description $msg.mode -Arguments @{ Name = 'CHANGES' }
+    New-ParamCompleter -LongName mtime -Description $msg.mtime -Arguments @{ Name = 'DATE-OR-FILE' }
     New-ParamCompleter -ShortName m -LongName touch -Description $msg.touch
     New-ParamCompleter -LongName no-delay-directory-restore -Description $msg.no_delay_directory_restore
     New-ParamCompleter -LongName no-same-owner -Description $msg.no_same_owner
     New-ParamCompleter -LongName no-same-permissions -Description $msg.no_same_permissions
     New-ParamCompleter -LongName numeric-owner -Description $msg.numeric_owner
-    New-ParamCompleter -LongName owner -Description $msg.owner -VariableName 'NAME[:UID]'
-    New-ParamCompleter -LongName owner-map -Description $msg.owner_map -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -LongName owner -Description $msg.owner -Arguments @{ Name = 'NAME[:UID]' }
+    New-ParamCompleter -LongName owner-map -Description $msg.owner_map -Arguments @{ Name = 'FILE'; Type = 'File' }
     New-ParamCompleter -ShortName p -LongName same-permissions, preserve-permissions -Description $msg.same_permissions
     New-ParamCompleter -LongName same-owner -Description $msg.same_owner
     New-ParamCompleter -ShortName s -LongName same-order, preserve-order -Description $msg.same_order
-    New-ParamCompleter -LongName sort -Description $msg.sort -Arguments "none","name","inode" -VariableName 'ORDER'
+    New-ParamCompleter -LongName sort -Description $msg.sort -Arguments @{ Name = 'ORDER'; Candidates = "none","name","inode" }
 
     ## Extended file attributes
     New-ParamCompleter -LongName acls -Description $msg.acls
@@ -230,42 +231,44 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName no-selinux -Description $msg.no_selinux
     New-ParamCompleter -LongName xattrs -Description $msg.xattrs
     New-ParamCompleter -LongName no-xattrs -Description $msg.no_xattrs
-    New-ParamCompleter -LongName xattrs-exclude -Description $msg.xattrs_exclude -VariableName 'PATTERN'
-    New-ParamCompleter -LongName xattrs-include -Description $msg.xattrs_include -VariableName 'PATTERN'
+    New-ParamCompleter -LongName xattrs-exclude -Description $msg.xattrs_exclude -Arguments @{ Name = 'PATTERN' }
+    New-ParamCompleter -LongName xattrs-include -Description $msg.xattrs_include -Arguments @{ Name = 'PATTERN' }
 
     ## Device selection and switching
-    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'ARCHIVE'
+    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Arguments @{ Name = 'ARCHIVE'; Type = 'File' }
     New-ParamCompleter -LongName force-local -Description $msg.force_local
-    New-ParamCompleter -ShortName F -LongName info-script, new-volume-script -Description $msg.info_script -VariableName 'COMMAND'
-    New-ParamCompleter -ShortName L -LongName tape-length -Description $msg.tape_length -VariableName 'N'
+    New-ParamCompleter -ShortName F -LongName info-script, new-volume-script -Description $msg.info_script -Arguments @{ Name = 'COMMAND' }
+    New-ParamCompleter -ShortName L -LongName tape-length -Description $msg.tape_length -Arguments @{ Name = 'N' }
     New-ParamCompleter -ShortName M -LongName multi-volume -Description $msg.multi_volume
-    New-ParamCompleter -LongName rmt-command -Description $msg.rmt_command -VariableName 'COMMAND'
-    New-ParamCompleter -LongName rsh-command -Description $msg.rsh_command -VariableName 'COMMAND'
-    New-ParamCompleter -LongName volno-file -Description $msg.volno_file -VariableName 'FILE'
+    New-ParamCompleter -LongName rmt-command -Description $msg.rmt_command -Arguments @{ Name = 'COMMAND' }
+    New-ParamCompleter -LongName rsh-command -Description $msg.rsh_command -Arguments @{ Name = 'COMMAND' }
+    New-ParamCompleter -LongName volno-file -Description $msg.volno_file -Arguments @{ Name = 'FILE' }
 
     ## Device blocking
-    New-ParamCompleter -ShortName b -LongName blocking-factor -Description $msg.blocking_factor -VariableName 'BLOCKS'
+    New-ParamCompleter -ShortName b -LongName blocking-factor -Description $msg.blocking_factor -Arguments @{ Name = 'BLOCKS' }
     New-ParamCompleter -ShortName B -LongName read-full-records -Description $msg.read_full_records
     New-ParamCompleter -ShortName i -LongName ignore-zeros -Description $msg.ignore_zeros
-    New-ParamCompleter -LongName record-size -Description $msg.record_size -VariableName 'NUMBER'
+    New-ParamCompleter -LongName record-size -Description $msg.record_size -Arguments @{ Name = 'NUMBER' }
 
     ## Archive format selection
-    New-ParamCompleter -ShortName H -LongName format -Description $msg.format -Arguments @(
-        "gnu`t{0}" -f $msg.format_gnu
-        "oldgnu`t{0}" -f $msg.format_oldgnu
-        "pax`t{0}" -f $msg.format_pax
-        "posix`t{0}" -f $msg.format_posix
-        "ustar`t{0}" -f $msg.format_utar
-        "v7`t{0}" -f $msg.format_v7
-    ) -VariableName 'FORMAT'
+    New-ParamCompleter -ShortName H -LongName format -Description $msg.format -Arguments @{
+        Name = 'FORMAT'; Candidates = @(
+            "gnu`t{0}" -f $msg.format_gnu
+            "oldgnu`t{0}" -f $msg.format_oldgnu
+            "pax`t{0}" -f $msg.format_pax
+            "posix`t{0}" -f $msg.format_posix
+            "ustar`t{0}" -f $msg.format_utar
+            "v7`t{0}" -f $msg.format_v7
+        )
+    }
     New-ParamCompleter -LongName old-archive, portability -Description $msg.old_archive
-    New-ParamCompleter -LongName pax-option -Description $msg.pax_option -VariableName 'keyword[[:]=value]'
+    New-ParamCompleter -LongName pax-option -Description $msg.pax_option -Arguments @{ Name = 'keyword[[:]=value]' }
     New-ParamCompleter -LongName posix -Description $msg.posix
-    New-ParamCompleter -ShortName V -LongName label -Description "Set volume name" -Type Required
+    New-ParamCompleter -ShortName V -LongName label -Description $msg.label -Arguments @{ Name = 'TEXT' }
 
     ## Compression options
     New-ParamCompleter -ShortName a -LongName auto-compress -Description $msg.auto_compress
-    New-ParamCompleter -ShortName I -LongName use-compress-program -Description $msg.use_compress_program -VariableName 'COMMAND'
+    New-ParamCompleter -ShortName I -LongName use-compress-program -Description $msg.use_compress_program -Arguments @{ Name = 'COMMAND' }
     New-ParamCompleter -ShortName j -LongName bzip2 -Description $msg.bzip2
     New-ParamCompleter -ShortName J -LongName xz -Description $msg.xz
     New-ParamCompleter -LongName lzip -Description $msg.lzip
@@ -277,46 +280,48 @@ Register-NativeCompleter -Name tar -Parameters @(
     New-ParamCompleter -LongName zstd -Description $msg.zstd
 
     ## Local file selection
-    New-ParamCompleter -LongName add-file -Description $msg.add_file -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName backup -Description $msg.backup -Type FlagOrValue -Arguments @(
-        "none`t{0}" -f $msg.backup_none
-        "off`t{0}" -f $msg.backup_none
-        "t`t{0}" -f $msg.backup_t
-        "numbered`t{0}" -f $msg.backup_t
-        "nil`t{0}" -f $msg.backup_nil
-        "existing`t{0}" -f $msg.backup_nil
-        "never`t{0}" -f $msg.backup_never
-        "simple`t{0}" -f $msg.backup_nver
-    ) -VariableName 'CONTROL'
-    New-ParamCompleter -ShortName C -LongName directory -Description $msg.directory -ArgumentType Directory -VariableName 'DIR'
-    New-ParamCompleter -LongName exclude -Description $msg.exclude -VariableName 'PATTERN'
+    New-ParamCompleter -LongName add-file -Description $msg.add_file -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName backup -Description $msg.backup -Arguments @{
+        Name = 'CONTROL'; Nargs = '?'; Candidates = @(
+            "none`t{0}" -f $msg.backup_none
+            "off`t{0}" -f $msg.backup_none
+            "t`t{0}" -f $msg.backup_t
+            "numbered`t{0}" -f $msg.backup_t
+            "nil`t{0}" -f $msg.backup_nil
+            "existing`t{0}" -f $msg.backup_nil
+            "never`t{0}" -f $msg.backup_never
+            "simple`t{0}" -f $msg.backup_nver
+        )
+    }
+    New-ParamCompleter -ShortName C -LongName directory -Description $msg.directory -Arguments @{ Name = 'DIR'; Type = 'Directory' }
+    New-ParamCompleter -LongName exclude -Description $msg.exclude -Arguments @{ Name = 'PATTERN' }
     New-ParamCompleter -LongName exclude-backups -Description $msg.exclude_backups
     New-ParamCompleter -LongName exclude-caches -Description $msg.exclude_caches
     New-ParamCompleter -LongName exclude-caches-all -Description $msg.exclude_caches_all
     New-ParamCompleter -LongName exclude-caches-under -Description $msg.exclude_caches_under
-    New-ParamCompleter -LongName exclude-ignore -Description $msg.exclude_ignore -VariableName 'FILE'
-    New-ParamCompleter -LongName exclude-ignore-recursive -Description $msg.exclude_ignore_recursive -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName exclude-tag -Description $msg.exclude_tag -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName exclude-tag-all -Description $msg.exclude_tag_all -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName exclude-tag-under -Description $msg.exclude_tag_under -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -LongName exclude-ignore -Description $msg.exclude_ignore -Arguments @{ Name = 'FILE' }
+    New-ParamCompleter -LongName exclude-ignore-recursive -Description $msg.exclude_ignore_recursive -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName exclude-tag -Description $msg.exclude_tag -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName exclude-tag-all -Description $msg.exclude_tag_all -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName exclude-tag-under -Description $msg.exclude_tag_under -Arguments @{ Name = 'FILE'; Type = 'File' }
     New-ParamCompleter -LongName exclude-vcs -Description $msg.exclude_vcs
     New-ParamCompleter -LongName exclude-vcs-ignore -Description $msg.exclude_vcs_ignore
     New-ParamCompleter -ShortName h -LongName dereference -Description $msg.dereference
     New-ParamCompleter -LongName hard-dereference -Description $msg.hard_dereference
-    New-ParamCompleter -ShortName K -LongName starting-file -Description $msg.starting_file -VariableName 'MEMBER'
-    New-ParamCompleter -LongName newer-mtime -Description $msg.newer_mtime -VariableName 'DATE'
+    New-ParamCompleter -ShortName K -LongName starting-file -Description $msg.starting_file -Arguments @{ Name = 'MEMBER' }
+    New-ParamCompleter -LongName newer-mtime -Description $msg.newer_mtime -Arguments @{ Name = 'DATE' }
     New-ParamCompleter -LongName no-null -Description $msg.no_null
     New-ParamCompleter -LongName no-recursion -Description $msg.no_recursion
     New-ParamCompleter -LongName no-unquote -Description $msg.no_unquote
     New-ParamCompleter -LongName null -Description $msg.null
-    New-ParamCompleter -ShortName N -LongName newer, after-date -Description $msg.newer -VariableName 'DATE'
+    New-ParamCompleter -ShortName N -LongName newer, after-date -Description $msg.newer -Arguments @{ Name = 'DATE' }
     New-ParamCompleter -LongName one-file-system -Description $msg.one_file_system
     New-ParamCompleter -ShortName P -LongName absolute-names -Description $msg.absolute_names
     New-ParamCompleter -LongName recursion -Description $msg.recursion
-    New-ParamCompleter -LongName suffix -Description $msg.suffix -VariableName 'STRING'
-    New-ParamCompleter -ShortName T -LongName files-from -Description $msg.files_from -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -LongName suffix -Description $msg.suffix -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName T -LongName files-from -Description $msg.files_from -Arguments @{ Name = 'FILE'; Type = 'File' }
     New-ParamCompleter -LongName unquote -Description $msg.unquote
-    New-ParamCompleter -ShortName X -LongName exclude-from -Description $msg.exclude_from -ArgumentType File -VariableName 'FILE'
+    New-ParamCompleter -ShortName X -LongName exclude-from -Description $msg.exclude_from -Arguments @{ Name = 'FILE'; Type = 'File' }
 
     ## File name transformations
     # TBD
@@ -329,31 +334,34 @@ Register-NativeCompleter -Name tar -Parameters @(
     # TBD
 
     ## Informative output
-    New-ParamCompleter -LongName checkpoint -Description $msg.checkpoint -Type FlagOrValue -VariableName 'N'
+    New-ParamCompleter -LongName checkpoint -Description $msg.checkpoint -Arguments @{ Name = 'N'; Nargs = '?' }
     New-ParamCompleter -ShortName R -LongName block-number -Description $msg.block_number
-    New-ParamCompleter -LongName totals -Description $msg.totals -Type FlagOrValue -Arguments "SIGHUP","SIGQUIT","SIGINT","SIGUSR1","SIGUSR2" -VariableName 'SIGNAL'
+    New-ParamCompleter -LongName totals -Description $msg.totals -Arguments @{ Name = 'SIGNAL'; Nargs = '?'; Candidates = "SIGHUP","SIGQUIT","SIGINT","SIGUSR1","SIGUSR2" }
     New-ParamCompleter -LongName utc -Description $msg.utc
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -ShortName w -LongName interactive, confirmation -Description "Ask for confirmation"
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    $params = $this.BoundParameters
-    if ($params.ContainsKey('create') -or
-        $params.ContainsKey('append') -or
-        $params.ContainsKey('update') -or
-        $params.ContainsKey('catenate'))
-    {
-        return [MT.Comp.Helper]::CompleteFilename($this, $false, $false)
-    }
-    $file = $params.file
-    if ($file.Count -eq 1 -and (Test-Path -LiteralPath $file -PathType Leaf))
-    {
-        if ($params.ContainsKey('delete') -or
-            $params.ContainsKey('list') -or
-            $params.ContainsKey('extract'))
+) -Arguments @{
+    Name = 'FILE';
+    Nargs = '0+';
+    Script = {
+        $params = $this.BoundParameters
+        if ($params.ContainsKey('create') -or
+            $params.ContainsKey('append') -or
+            $params.ContainsKey('update') -or
+            $params.ContainsKey('catenate'))
         {
-            tar -atf $file | ForEach-Object {
-                "{0} `tArchived file" -f $_;
+            return [MT.Comp.Helper]::CompleteFilename($this, $false, $false)
+        }
+        $file = $params.file
+        if ($file.Count -eq 1 -and (Test-Path -LiteralPath $file -PathType Leaf))
+        {
+            if ($params.ContainsKey('delete') -or
+                $params.ContainsKey('list') -or
+                $params.ContainsKey('extract'))
+            {
+                tar -atf $file | ForEach-Object {
+                    "{0} `tArchived file" -f $_;
+                }
             }
         }
     }

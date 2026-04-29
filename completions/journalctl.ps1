@@ -98,71 +98,66 @@ $unitCompleter = {
         }
 }
 
-$facilityCompleter = {
-    $word = $_;
-    "kern","user","mail","daemon","auth","syslog","lpr","news","uucp","cron","authpriv","ftp",
-    "local0","local1","local2","local3","local4","local5","local6","local7" |
-        Where-Object { $_ -like "$word*" }
-}
-
 Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Parameters @(
     # Output control
     New-ParamCompleter -LongName no-full -Description $msg.no_full
     New-ParamCompleter -ShortName a -LongName all -Description $msg.all
-    New-ParamCompleter -ShortName n -LongName lines -Description $msg.lines -VariableName 'N'
+    New-ParamCompleter -ShortName n -LongName lines -Description $msg.lines -Arguments @{ Name = 'N' }
     New-ParamCompleter -LongName no-tail -Description $msg.no_tail
     New-ParamCompleter -ShortName r -LongName reverse -Description $msg.reverse
-    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments @(
-        "short`t{0}" -f $msg.output_short
-        "short-full`t{0}" -f $msg.output_short_full
-        "short-iso`t{0}" -f $msg.output_short_iso
-        "short-iso-precise`t{0}" -f $msg.output_short_iso_precise
-        "short-precise`t{0}" -f $msg.output_short_precise
-        "short-monotonic`t{0}" -f $msg.output_short_monotonic
-        "short-unix`t{0}" -f $msg.output_short_unix
-        "verbose`t{0}" -f $msg.output_verbose
-        "export`t{0}" -f $msg.output_export
-        "json`t{0}" -f $msg.output_json
-        "json-pretty`t{0}" -f $msg.output_json_pretty
-        "json-sse`t{0}" -f $msg.output_json_sse
-        "json-seq`t{0}" -f $msg.output_json_seq
-        "cat`t{0}" -f $msg.output_cat
-        "with-unit`t{0}" -f $msg.output_with_unit
-    ) -VariableName 'STRING'
+    New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments @{
+        Name = 'STRING'; Candidates = @(
+            "short`t{0}" -f $msg.output_short
+            "short-full`t{0}" -f $msg.output_short_full
+            "short-iso`t{0}" -f $msg.output_short_iso
+            "short-iso-precise`t{0}" -f $msg.output_short_iso_precise
+            "short-precise`t{0}" -f $msg.output_short_precise
+            "short-monotonic`t{0}" -f $msg.output_short_monotonic
+            "short-unix`t{0}" -f $msg.output_short_unix
+            "verbose`t{0}" -f $msg.output_verbose
+            "export`t{0}" -f $msg.output_export
+            "json`t{0}" -f $msg.output_json
+            "json-pretty`t{0}" -f $msg.output_json_pretty
+            "json-sse`t{0}" -f $msg.output_json_sse
+            "json-seq`t{0}" -f $msg.output_json_seq
+            "cat`t{0}" -f $msg.output_cat
+            "with-unit`t{0}" -f $msg.output_with_unit
+        )
+    }
     New-ParamCompleter -LongName utc -Description $msg.utc
     New-ParamCompleter -LongName no-hostname -Description $msg.no_hostname
-    New-ParamCompleter -LongName output-fields -Description $msg.output_fields -VariableName 'LIST'
+    New-ParamCompleter -LongName output-fields -Description $msg.output_fields -Arguments @{ Name = 'LIST' }
     New-ParamCompleter -ShortName x -LongName catalog -Description $msg.catalog
 
     # Source selection
     New-ParamCompleter -ShortName m -LongName merge -Description $msg.merge
-    New-ParamCompleter -ShortName b -LongName boot -Description $msg.boot -Type FlagOrValue -VariableName 'ID'
+    New-ParamCompleter -ShortName b -LongName boot -Description $msg.boot -Arguments @{ Name = 'ID'; Nargs = '?' }
     New-ParamCompleter -LongName list-boots -Description $msg.list_boots
     New-ParamCompleter -LongName this-boot -Description $msg.this_boot
     New-ParamCompleter -ShortName k -LongName dmesg -Description $msg.dmesg
     New-ParamCompleter -LongName system -Description $msg.system
     New-ParamCompleter -LongName user -Description $msg.user
-    New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -VariableName 'CONTAINER'
-    New-ParamCompleter -ShortName D -LongName directory -Description $msg.directory -ArgumentType Directory -VariableName 'PATH'
-    New-ParamCompleter -LongName file -Description $msg.file -ArgumentType File -VariableName 'PATH'
-    New-ParamCompleter -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'ROOT'
-    New-ParamCompleter -LongName namespace -Description $msg.namespace -VariableName 'NAMESPACE'
-    New-ParamCompleter -LongName image -Description $msg.image -ArgumentType File -VariableName 'IMAGE'
-    New-ParamCompleter -LongName image-policy -Description $msg.image_policy -VariableName 'POLICY'
+    New-ParamCompleter -ShortName M -LongName machine -Description $msg.machine -Arguments @{ Name = 'CONTAINER' }
+    New-ParamCompleter -ShortName D -LongName directory -Description $msg.directory -Arguments @{ Name = 'PATH'; Type = 'Directory' }
+    New-ParamCompleter -LongName file -Description $msg.file -Arguments @{ Name = 'PATH'; Type = 'File' }
+    New-ParamCompleter -LongName root -Description $msg.root -Arguments @{ Name = 'ROOT'; Type = 'Directory' }
+    New-ParamCompleter -LongName namespace -Description $msg.namespace -Arguments @{ Name = 'NAMESPACE' }
+    New-ParamCompleter -LongName image -Description $msg.image -Arguments @{ Name = 'IMAGE'; Type = 'File' }
+    New-ParamCompleter -LongName image-policy -Description $msg.image_policy -Arguments @{ Name = 'POLICY' }
 
     # Journal management
     New-ParamCompleter -LongName header -Description $msg.header
     New-ParamCompleter -LongName disk-usage -Description $msg.disk_usage
-    New-ParamCompleter -LongName vacuum-size -Description $msg.vacuum_size -VariableName 'BYTES'
-    New-ParamCompleter -LongName vacuum-files -Description $msg.vacuum_files -VariableName 'INT'
-    New-ParamCompleter -LongName vacuum-time -Description $msg.vacuum_time -VariableName 'TIME'
+    New-ParamCompleter -LongName vacuum-size -Description $msg.vacuum_size -Arguments @{ Name = 'BYTES' }
+    New-ParamCompleter -LongName vacuum-files -Description $msg.vacuum_files -Arguments @{ Name = 'INT' }
+    New-ParamCompleter -LongName vacuum-time -Description $msg.vacuum_time -Arguments @{ Name = 'TIME' }
     New-ParamCompleter -LongName list-catalog -Description $msg.list_catalog
     New-ParamCompleter -LongName dump-catalog -Description $msg.dump_catalog
     New-ParamCompleter -LongName update-catalog -Description $msg.update_catalog
     New-ParamCompleter -LongName setup-keys -Description $msg.setup_keys
-    New-ParamCompleter -LongName interval -Description $msg.interval -VariableName 'TIME'
+    New-ParamCompleter -LongName interval -Description $msg.interval -Arguments @{ Name = 'TIME' }
     New-ParamCompleter -LongName verify -Description $msg.verify
-    New-ParamCompleter -LongName verify-key -Description $msg.verify_key -VariableName 'KEY'
+    New-ParamCompleter -LongName verify-key -Description $msg.verify_key -Arguments @{ Name = 'KEY' }
     New-ParamCompleter -LongName sync -Description $msg.sync
     New-ParamCompleter -LongName relinquish-var -Description $msg.relinquish_var
     New-ParamCompleter -LongName smart-relinquish-var -Description $msg.smart_relinquish_var
@@ -170,18 +165,21 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     New-ParamCompleter -LongName rotate -Description $msg.rotate
 
     # Filtering
-    New-ParamCompleter -ShortName p -LongName priority -Description $msg.priority -VariableName 'RANGE'
-    New-ParamCompleter -LongName facility -Description $msg.facility -VariableName 'FACILITY' -ArgumentCompleter $facilityCompleter
-    New-ParamCompleter -ShortName g -LongName grep -Description $msg.grep -VariableName 'PATTERN'
-    New-ParamCompleter -LongName case-sensitive -Description $msg.case_sensitive -Type FlagOrValue -VariableName 'BOOLEAN'
-    New-ParamCompleter -ShortName t -LongName identifier -Description $msg.identifier -VariableName 'STRING'
-    New-ParamCompleter -ShortName u -LongName unit -Description $msg.unit -VariableName 'UNIT' -ArgumentCompleter $unitCompleter
-    New-ParamCompleter -LongName user-unit -Description $msg.user_unit -VariableName 'UNIT' -ArgumentCompleter $unitCompleter
-    New-ParamCompleter -ShortName S -LongName since -Description $msg.since -VariableName 'DATE'
-    New-ParamCompleter -ShortName U -LongName until -Description $msg.until -VariableName 'DATE'
-    New-ParamCompleter -ShortName c -LongName cursor -Description $msg.cursor -VariableName 'CURSOR'
-    New-ParamCompleter -LongName cursor-file -Description $msg.cursor_file -ArgumentType File -VariableName 'FILE'
-    New-ParamCompleter -LongName after-cursor -Description $msg.after_cursor -VariableName 'CURSOR'
+    New-ParamCompleter -ShortName p -LongName priority -Description $msg.priority -Arguments @{ Name = 'RANGE' }
+    New-ParamCompleter -LongName facility -Description $msg.facility -Arguments @{
+        Name = 'FACILITY'
+        Candidates = "kern","user","mail","daemon","auth","syslog","lpr","news","uucp","cron","authpriv","ftp", "local0","local1","local2","local3","local4","local5","local6","local7"
+    }
+    New-ParamCompleter -ShortName g -LongName grep -Description $msg.grep -Arguments @{ Name = 'PATTERN' }
+    New-ParamCompleter -LongName case-sensitive -Description $msg.case_sensitive -Arguments @{ Name = 'BOOLEAN'; Nargs = '?' }
+    New-ParamCompleter -ShortName t -LongName identifier -Description $msg.identifier -Arguments @{ Name = 'STRING' }
+    New-ParamCompleter -ShortName u -LongName unit -Description $msg.unit -Arguments @{ Name = 'UNIT'; Script = $unitCompleter }
+    New-ParamCompleter -LongName user-unit -Description $msg.user_unit -Arguments @{ Name = 'UNIT'; Script = $unitCompleter }
+    New-ParamCompleter -ShortName S -LongName since -Description $msg.since -Arguments @{ Name = 'DATE' }
+    New-ParamCompleter -ShortName U -LongName until -Description $msg.until -Arguments @{ Name = 'DATE' }
+    New-ParamCompleter -ShortName c -LongName cursor -Description $msg.cursor -Arguments @{ Name = 'CURSOR' }
+    New-ParamCompleter -LongName cursor-file -Description $msg.cursor_file -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName after-cursor -Description $msg.after_cursor -Arguments @{ Name = 'CURSOR' }
     New-ParamCompleter -LongName show-cursor -Description $msg.show_cursor
 
     # Behavior
@@ -195,15 +193,18 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     # Info
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName version -Description $msg.version
-) -NoFileCompletions -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    # Match expressions like FIELD=VALUE
-    if ($_ -match '^([A-Z_]+)=') {
-        # Field name provided, could suggest values based on common fields
-        $null
-    } else {
-        # Suggest common field names
-        "MESSAGE=","PRIORITY=","SYSLOG_IDENTIFIER=","_SYSTEMD_UNIT=","_PID=","_UID=","_GID=","_COMM=","_EXE=","_CMDLINE=" |
-            Where-Object { $_ -like "$wordToComplete*" }
+) -NoFileCompletions -Arguments @{
+    Name = 'MATCHES'
+    Nargs = '1+'
+    Script = {
+        # Match expressions like FIELD=VALUE
+        if ($_ -match '^([A-Z_]+)=') {
+            # Field name provided, could suggest values based on common fields
+            $null
+        } else {
+            # Suggest common field names
+            "MESSAGE=","PRIORITY=","SYSLOG_IDENTIFIER=","_SYSTEMD_UNIT=","_PID=","_UID=","_GID=","_COMM=","_EXE=","_CMDLINE=" |
+                Where-Object { $_ -like "$wordToComplete*" }
+        }
     }
 }

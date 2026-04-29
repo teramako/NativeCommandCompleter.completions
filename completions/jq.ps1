@@ -51,15 +51,15 @@ Register-NativeCompleter -Name jq -Description $msg.jq -Parameters @(
     New-ParamCompleter -ShortName C -LongName color-output -Description $msg.color_output
     New-ParamCompleter -ShortName M -LongName monochrome-output -Description $msg.monochrome_output
     New-ParamCompleter -LongName tab -Description $msg.tab
-    New-ParamCompleter -LongName indent -Description $msg.indent -VariableName 'N'
+    New-ParamCompleter -LongName indent -Description $msg.indent -Arguments @{ Name = 'N' }
     New-ParamCompleter -LongName unbuffered -Description $msg.unbuffered
     New-ParamCompleter -LongName stream -Description $msg.stream
     New-ParamCompleter -LongName seq -Description $msg.seq
-    New-ParamCompleter -ShortName f -LongName from-file -Description $msg.from_file -ArgumentType File -VariableName 'file'
-    New-ParamCompleter -LongName arg -Description $msg.arg -VariableName 'name value'
-    New-ParamCompleter -LongName argjson -Description $msg.argjson -VariableName 'name JSON'
-    New-ParamCompleter -LongName slurpfile -Description $msg.slurpfile -ArgumentType File -VariableName 'name file'
-    New-ParamCompleter -LongName rawfile -Description $msg.rawfile -ArgumentType File -VariableName 'name file'
+    New-ParamCompleter -ShortName f -LongName from-file -Description $msg.from_file -Arguments @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -LongName arg -Description $msg.arg -Arguments @{ Name = 'name' }, @{ Name = 'value' }
+    New-ParamCompleter -LongName argjson -Description $msg.argjson -Arguments @{ Name = 'name' }, @{ Name = 'JSON' }
+    New-ParamCompleter -LongName slurpfile -Description $msg.slurpfile -Arguments @{ Name = 'name' }, @{ Name = 'file'; Type = 'File' }
+    New-ParamCompleter -LongName rawfile -Description $msg.rawfile -Arguments @{ Name = 'name' }, @{ Name = 'file'; Type = 'File' }
     New-ParamCompleter -LongName args -Description $msg.args
     New-ParamCompleter -LongName jsonargs -Description $msg.jsonargs
     New-ParamCompleter -ShortName e -LongName exit-status -Description $msg.exit_status
@@ -68,17 +68,15 @@ Register-NativeCompleter -Name jq -Description $msg.jq -Parameters @(
     New-ParamCompleter -LongName build-configuration -Description $msg.build_configuration
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -LongName run-tests -Description $msg.run_tests
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey('from-file'))
-    {
-        if ([string]::IsNullOrEmpty($_))
+) -Arguments @{
+    Name = 'filter'
+    Script = {
+        if ($this.BoundParameters.ContainsKey('from-file'))
         {
-            "filter`tJQ filter expression"
+            [MT.Comp.Helper]::CompleteFilename($this);
         }
-        else
-        {
-            $null
-        }
+        else { $null }
     }
+}, @{
+    Name = 'file'; Nargs = '0+'; Type = 'File'
 }

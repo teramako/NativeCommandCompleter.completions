@@ -27,11 +27,7 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 
 Register-NativeCompleter -Name gzip -Parameters @(
     New-ParamCompleter -ShortName c -LongName stdout -Description $msg.stdout
-    New-ParamCompleter -ShortName d -LongName decompress -Description $msg.Decompress -ArgumentType File -ArgumentCompleter {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-            $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.\(?:gz|tgz)$'
-        });
-    }
+    New-ParamCompleter -ShortName d -LongName decompress -Description $msg.Decompress
     New-ParamCompleter -ShortName f -LongName force -Description $msg.force
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName k -LongName keep -Description $msg.keep
@@ -41,7 +37,7 @@ Register-NativeCompleter -Name gzip -Parameters @(
     New-ParamCompleter -ShortName N -LongName name -Description $msg.name
     New-ParamCompleter -ShortName q -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
-    New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -VariableName 'suffix'
+    New-ParamCompleter -ShortName S -LongName suffix -Description $msg.suffix -Arguments @{ Name = 'suffix' }
     New-ParamCompleter -ShortName t -LongName test -Description $msg.test
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version

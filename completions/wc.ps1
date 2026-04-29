@@ -25,10 +25,10 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName c -LongName bytes -Description $msg.bytes
         New-ParamCompleter -ShortName m -LongName chars -Description $msg.chars
         New-ParamCompleter -ShortName l -LongName lines -Description $msg.lines
-        New-ParamCompleter -LongName files0-from -Description $msg.files0_from -ArgumentType File -VariableName 'F'
+        New-ParamCompleter -LongName files0-from -Description $msg.files0_from -Arguments @{ Name = 'F'; Type = 'File' }
         New-ParamCompleter -ShortName L -LongName max-line-length -Description $msg.max_line_length
         New-ParamCompleter -ShortName w -LongName words -Description $msg.words
-        New-ParamCompleter -LongName total -Description $msg.total -VariableName 'WHEN' -Arguments "auto", "always", "only", "never"
+        New-ParamCompleter -LongName total -Description $msg.total -Arguments @{ Name = 'WHEN'; Candidates = "auto", "always", "only", "never" }
         New-ParamCompleter -LongName help -Description $msg.help
         New-ParamCompleter -LongName version -Description $msg.version
     )

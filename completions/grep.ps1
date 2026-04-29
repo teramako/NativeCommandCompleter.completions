@@ -58,22 +58,22 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 Register-NativeCompleter -Name grep -Description $msg.grep -Parameters @(
-    New-ParamCompleter -ShortName A -LongName after-context -Description $msg.afterContext -VariableName 'NUM'
+    New-ParamCompleter -ShortName A -LongName after-context -Description $msg.afterContext -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -ShortName a -LongName text -Description $msg.text
-    New-ParamCompleter -ShortName B -LongName before-context -Description $msg.beforeContext -VariableName 'NUM'
-    New-ParamCompleter -ShortName C -LongName context -Description $msg.context -VariableName 'NUM'
+    New-ParamCompleter -ShortName B -LongName before-context -Description $msg.beforeContext -Arguments @{ Name = 'NUM' }
+    New-ParamCompleter -ShortName C -LongName context -Description $msg.context -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -ShortName b -LongName byte-offset -Description $msg.byteOffset
-    New-ParamCompleter -LongName binary-files -Description $msg.binaryFiles -Arguments "binnary`tBinary format", "text`tText format" -VariableName 'TYPE'
-    New-ParamCompleter -LongName color,colour -Description $msg.color -Type FlagOrValue -Arguments 'never','always','auto' -VariableName WHEN
+    New-ParamCompleter -LongName binary-files -Description $msg.binaryFiles -Arguments @{ Name = 'TYPE'; Candidates = "binnary`tBinary format", "text`tText format" }
+    New-ParamCompleter -LongName color,colour -Description $msg.color -Arguments @{ Name = 'WHEN'; Nargs = '?'; Candidates = 'never','always','auto' }
     New-ParamCompleter -ShortName c -LongName count -Description $msg.count
-    New-ParamCompleter -ShortName D -LongName devices -Description $msg.devices -Arguments 'read', 'skip' -VariableName 'ACTION'
-    New-ParamCompleter -ShortName d -LongName directories -Description $msg.directories -Arguments 'read', 'skip', 'recurse' -VariableName 'ACTION'
+    New-ParamCompleter -ShortName D -LongName devices -Description $msg.devices -Arguments @{ Name = 'ACTION'; Candidates = 'read', 'skip' }
+    New-ParamCompleter -ShortName d -LongName directories -Description $msg.directories -Arguments @{ Name = 'ACTION'; Candidates = 'read', 'skip', 'recurse' }
     New-ParamCompleter -ShortName E -LongName extended-regexp -Description $msg.extendedRegexp
-    New-ParamCompleter -ShortName e -LongName regexp -Description $msg.regexp -VariableName 'PATTERNS'
-    New-ParamCompleter -LongName exclude-from -ArgumentType File -Description $msg.excludeFrom -VariableName 'FILE'
-    New-ParamCompleter -LongName exclude-dir -Description $msg.excludeDir -VariableName 'GLOB'
+    New-ParamCompleter -ShortName e -LongName regexp -Description $msg.regexp -Arguments @{ Name = 'PATTERNS' }
+    New-ParamCompleter -LongName exclude-from -Description $msg.excludeFrom -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName exclude-dir -Description $msg.excludeDir -Arguments @{ Name = 'GLOB' }
     New-ParamCompleter -ShortName F -LongName fixed-strings -Description $msg.fixedStrings
-    New-ParamCompleter -ShortName f -LongName file -ArgumentType File -Description $msg.file -VariableName 'FILE'
+    New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Arguments @{ Name = 'FILE'; Type = 'File' }
     New-ParamCompleter -ShortName G -LongName basic-regexp -Description $msg.basicRegexp
     New-ParamCompleter -ShortName H -LongName with-filename -Description $msg.withFilename
     New-ParamCompleter -ShortName h -LongName no-filename -Description $msg.noFilename
@@ -82,18 +82,18 @@ Register-NativeCompleter -Name grep -Description $msg.grep -Parameters @(
     New-ParamCompleter -ShortName i -LongName ignore-case -Description $msg.ignoreCase
     New-ParamCompleter -ShortName L -LongName files-without-match -Description $msg.filesWithoutMatch
     New-ParamCompleter -ShortName l -LongName files-with-matches -Description $msg.filesWithMatches
-    New-ParamCompleter -ShortName m -LongName max-count -Description $msg.maxCount -VariableName 'NUM'
+    New-ParamCompleter -ShortName m -LongName max-count -Description $msg.maxCount -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName mmap -Description $msg.mmap
     New-ParamCompleter -ShortName n -LongName line-number -Description $msg.lineNumber
     New-ParamCompleter -ShortName o -LongName only-matching -Description $msg.onlyMatching
-    New-ParamCompleter -LongName label -Description $msg.label -VariableName 'LABEL'
+    New-ParamCompleter -LongName label -Description $msg.label -Arguments @{ Name = 'LABEL' }
     New-ParamCompleter -LongName line-buffered -Description $msg.lineBuffered
     New-ParamCompleter -ShortName P -LongName perl-regexp -Description $msg.perlRegexp
     New-ParamCompleter -ShortName q -LongName quiet, slient -Description $msg.quiet
     New-ParamCompleter -ShortName R -LongName dereference-recursive -Description $msg.dereferenceRecursive
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
-    New-ParamCompleter -LongName include -Description $msg.include -VariableName 'GLOB'
-    New-ParamCompleter -LongName exclude -Description $msg.exclude -VariableName 'GLOB'
+    New-ParamCompleter -LongName include -Description $msg.include -Arguments @{ Name = 'GLOB' }
+    New-ParamCompleter -LongName exclude -Description $msg.exclude -Arguments @{ Name = 'GLOB' }
     New-ParamCompleter -ShortName s -LongName no-messages -Description $msg.noMessages
     New-ParamCompleter -ShortName T -LongName initial-tab -Description $msg.initialTab
     New-ParamCompleter -ShortName U -LongName binary -Description $msg.binary
@@ -104,19 +104,16 @@ Register-NativeCompleter -Name grep -Description $msg.grep -Parameters @(
     New-ParamCompleter -ShortName x -LongName line-regexp -Description $msg.lineRegexp
     New-ParamCompleter -ShortName z -LongName null-data -Description $msg.nullData
     New-ParamCompleter -ShortName Z -LongName null -Description $msg.null
-    New-ParamCompleter -LongName group-separator -Description $msg.groupSeparator -VariableName 'SEP'
+    New-ParamCompleter -LongName group-separator -Description $msg.groupSeparator -Arguments @{ Name = 'SEP' }
     New-ParamCompleter -LongName no-group-separator -Description $msg.noGroupSeparator
-) -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($argIndex -eq 0 -and -not $this.BoundParameters.ContainsKey("regexp"))
-    {
-        if ([string]::IsNullOrEmpty($_))
-        {
-            "pattern`tSpecify a pattern"
+) -Arguments @{
+    Name = 'PATTERNS'
+    Script =  {
+        if ($this.BoundParameters.ContainsKey("regexp")) {
+            [MT.Comp.Helper]::CompleteFilename($this);
         }
-        else
-        {
-            $null
-        }
+        else { $null }
     }
+}, @{
+    Name = 'FILLE'; Nargs = '1+'; Type = 'File'
 }

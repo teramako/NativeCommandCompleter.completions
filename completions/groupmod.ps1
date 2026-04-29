@@ -16,22 +16,22 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$groupCompleter = {
-    if (Test-Path -LiteralPath '/etc/group') {
-        Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
-            Where-Object Name -Like "$wordToComplete*" |
-            ForEach-Object {
-                "{0}`tGID: {1}" -f $_.Name, $_.GID
-            }
+Register-NativeCompleter -Name groupmod -Description $msg.groupmod -Parameters @(
+    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -Arguments @{ Name = 'GID' }
+    New-ParamCompleter -ShortName n -LongName new-name -Description $msg.new_name -Arguments @{ Name = 'NEW_GROUP' }
+    New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
+    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -Arguments @{ Name = 'PASSWORD' }
+    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -Arguments @{ Name = 'CHROOT_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -Arguments @{ Name = 'PREFIX_DIR'; Type = 'Directory' }
+    New-ParamCompleter -ShortName h -LongName help -Description $msg.help
+) -NoFileCompletions -Arguments @{
+    Name = 'GROUP'; Script = {
+        if (Test-Path -LiteralPath '/etc/group') {
+            Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
+                Where-Object Name -Like "$wordToComplete*" |
+                ForEach-Object {
+                    "{0}`tGID: {1}" -f $_.Name, $_.GID
+                }
+        }
     }
 }
-
-Register-NativeCompleter -Name groupmod -Description $msg.groupmod -Parameters @(
-    New-ParamCompleter -ShortName g -LongName gid -Description $msg.gid -VariableName 'GID'
-    New-ParamCompleter -ShortName n -LongName new-name -Description $msg.new_name -VariableName 'NEW_GROUP'
-    New-ParamCompleter -ShortName o -LongName non-unique -Description $msg.non_unique
-    New-ParamCompleter -ShortName p -LongName password -Description $msg.password -VariableName 'PASSWORD'
-    New-ParamCompleter -ShortName R -LongName root -Description $msg.root -ArgumentType Directory -VariableName 'CHROOT_DIR'
-    New-ParamCompleter -ShortName P -LongName prefix -Description $msg.prefix -ArgumentType Directory -VariableName 'PREFIX_DIR'
-    New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-) -NoFileCompletions -ArgumentCompleter $groupCompleter

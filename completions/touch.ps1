@@ -24,10 +24,10 @@ if ($LASTEXITCODE -eq 0) # GNU touch
     Register-NativeCompleter -Name touch -Description $msg.description -Parameters @(
         New-ParamCompleter -ShortName a -Description $msg.atime
         New-ParamCompleter -ShortName m -Description $msg.mtime
-        New-ParamCompleter -ShortName t -Description $msg.time -VariableName 'STAMP'
+        New-ParamCompleter -ShortName t -Description $msg.time -Arguments @{ Name = 'STAMP' }
         New-ParamCompleter -ShortName c -LongName no-create -Description $msg.noCreate
-        New-ParamCompleter -ShortName d -LongName date -Description $msg.date -VariableName 'STRING'
-        New-ParamCompleter -ShortName r -LongName reference -Description $msg.reference -ArgumentType File -VariableName 'FILE'
+        New-ParamCompleter -ShortName d -LongName date -Description $msg.date -Arguments @{ Name = 'STRING' }
+        New-ParamCompleter -ShortName r -LongName reference -Description $msg.reference -Arguments @{ Name = 'FILE'; Type = 'File' }
         New-ParamCompleter -LongName help -Description $msg.help
         New-ParamCompleter -LongName version -Description $msg.version
     )
@@ -37,9 +37,9 @@ else
     Register-NativeCompleter -Name touch -Description $msg.description -Parameters @(
         New-ParamCompleter -ShortName a -Description $msg.atime
         New-ParamCompleter -ShortName m -Description $msg.mtime
-        New-ParamCompleter -ShortName t -Description $msg.time -VariableName 'STAMP'
+        New-ParamCompleter -ShortName t -Description $msg.time -Arguments @{ Name = 'STAMP' }
         New-ParamCompleter -ShortName c -Description $msg.noCreate
-        New-ParamCompleter -ShortName d -Description $msg.date -VariableName 'STRING'
-        New-ParamCompleter -ShortName r -Description $msg.reference -ArgumentType File -VariableName 'FILE'
+        New-ParamCompleter -ShortName d -Description $msg.date -Arguments @{ Name = 'STRING' }
+        New-ParamCompleter -ShortName r -Description $msg.reference -Arguments @{ Name = 'FILE'; Type = 'File' }
     )
 }

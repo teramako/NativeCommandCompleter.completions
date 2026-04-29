@@ -67,19 +67,19 @@ if ($IsWindows)
     Register-NativeCompleter -Name ping -Description $msg.ping -Parameters @(
         New-ParamCompleter -Name '-t','/t' -Style $style -Description $msg.win_continuous
         New-ParamCompleter -Name '-a','/a' -Style $style -Description $msg.win_resolve
-        New-ParamCompleter -Name '-n','/n' -Style $style -Description $msg.win_count -VariableName 'count'
-        New-ParamCompleter -Name '-l','/l' -Style $style -Description $msg.win_size -VariableName 'size'
+        New-ParamCompleter -Name '-n','/n' -Style $style -Description $msg.win_count -Arguments @{ Name = 'count' }
+        New-ParamCompleter -Name '-l','/l' -Style $style -Description $msg.win_size -Arguments @{ Name = 'size' }
         New-ParamCompleter -Name '-f','/f' -Style $style -Description $msg.win_fragment
-        New-ParamCompleter -Name '-i','/i' -Style $style -Description $msg.win_ttl -VariableName 'TTL'
-        New-ParamCompleter -Name '-v','/v' -Style $style -Description $msg.win_typeOfService -VariableName 'TOS'
-        New-ParamCompleter -Name '-r','/r' -Style $style -Description $msg.win_recordRoute -VariableName 'count'
-        New-ParamCompleter -Name '-s','/s' -Style $style -Description $msg.win_timestamp -VariableName 'count'
-        New-ParamCompleter -Name '-j','/j' -Style $style -Description $msg.win_looseHostList -VariableName 'host-list'
-        New-ParamCompleter -Name '-k','/k' -Style $style -Description $msg.win_strictHostList -VariableName 'host-list'
-        New-ParamCompleter -Name '-w','/w' -Style $style -Description $msg.win_timeout -VariableName 'timeout'
+        New-ParamCompleter -Name '-i','/i' -Style $style -Description $msg.win_ttl -Arguments @{ Name = 'TTL' }
+        New-ParamCompleter -Name '-v','/v' -Style $style -Description $msg.win_typeOfService -Arguments @{ Name = 'TOS' }
+        New-ParamCompleter -Name '-r','/r' -Style $style -Description $msg.win_recordRoute -Arguments @{ Name = 'count' }
+        New-ParamCompleter -Name '-s','/s' -Style $style -Description $msg.win_timestamp -Arguments @{ Name = 'count' }
+        New-ParamCompleter -Name '-j','/j' -Style $style -Description $msg.win_looseHostList -Arguments @{ Name = 'host-list' }
+        New-ParamCompleter -Name '-k','/k' -Style $style -Description $msg.win_strictHostList -Arguments @{ Name = 'host-list' }
+        New-ParamCompleter -Name '-w','/w' -Style $style -Description $msg.win_timeout -Arguments @{ Name = 'timeout' }
         New-ParamCompleter -Name '-R','/R' -Style $style -Description $msg.win_roundTrip
-        New-ParamCompleter -Name '-S','/S' -Style $style -Description $msg.win_sourceAddr -VariableName 'src-addr'
-        New-ParamCompleter -Name '-c','/c' -Style $style -Description $msg.win_compartment -VariableName 'compartment'
+        New-ParamCompleter -Name '-S','/S' -Style $style -Description $msg.win_sourceAddr -Arguments @{ Name = 'src-addr' }
+        New-ParamCompleter -Name '-c','/c' -Style $style -Description $msg.win_compartment -Arguments @{ Name = 'compartment' }
         New-ParamCompleter -Name '-4','/4' -Style $style -Description $msg.ipv4
         New-ParamCompleter -Name '-6','/6' -Style $style -Description $msg.ipv6
         New-ParamCompleter -Name '-?','/?' -Style $style -Description $msg.help
@@ -93,34 +93,36 @@ else
         New-ParamCompleter -ShortName A -Description $msg.adaptive
         New-ParamCompleter -ShortName b -Description $msg.broadcast
         New-ParamCompleter -ShortName B -Description $msg.stickySrcAddr
-        New-ParamCompleter -ShortName c -Description $msg.count -VariableName 'count'
+        New-ParamCompleter -ShortName c -Description $msg.count -Arguments @{ Name = 'count' }
         New-ParamCompleter -ShortName D -Description $msg.printTimestamp
         New-ParamCompleter -ShortName d -Description $msg.soDebug
         New-ParamCompleter -ShortName f -Description $msg.flood
-        New-ParamCompleter -ShortName i -Description $msg.interval -VariableName 'interval'
-        New-ParamCompleter -ShortName I -Description $msg.interface -VariableName 'interface'
-        New-ParamCompleter -ShortName l -Description $msg.preload -VariableName 'preload'
-        New-ParamCompleter -ShortName m -Description $msg.mark -VariableName 'mark'
-        New-ParamCompleter -ShortName M -Description $msg.mtu_discovery -Arguments @(
-            "do`t{0}" -f $msg.pmtudisc_do
-            "dont`t{0}" -f $msg.pmtudisc_dont
-            "want`t{0}" -f $msg.pmtudisc_want
-            "probe`t{0}" -f $msg.pmtudisc_probe
-        ) -VariableName 'pmtudisc_opt'
+        New-ParamCompleter -ShortName i -Description $msg.interval -Arguments @{ Name = 'interval' }
+        New-ParamCompleter -ShortName I -Description $msg.interface -Arguments @{ Name = 'interface' }
+        New-ParamCompleter -ShortName l -Description $msg.preload -Arguments @{ Name = 'preload' }
+        New-ParamCompleter -ShortName m -Description $msg.mark -Arguments @{ Name = 'mark' }
+        New-ParamCompleter -ShortName M -Description $msg.mtu_discovery -Arguments @{
+            Name = 'pmtudisc_opt'; Candidates = @(
+                "do`t{0}" -f $msg.pmtudisc_do
+                "dont`t{0}" -f $msg.pmtudisc_dont
+                "want`t{0}" -f $msg.pmtudisc_want
+                "probe`t{0}" -f $msg.pmtudisc_probe
+            )
+        }
         New-ParamCompleter -ShortName n -Description $msg.numeric
-        New-ParamCompleter -ShortName p -Description $msg.pattern -VariableName 'pattern'
+        New-ParamCompleter -ShortName p -Description $msg.pattern -Arguments @{ Name = 'pattern' }
         New-ParamCompleter -ShortName q -Description $msg.quiet
         New-ParamCompleter -ShortName r -Description $msg.bypassRouting
         New-ParamCompleter -ShortName R -Description $msg.recordRoute
-        New-ParamCompleter -ShortName s -Description $msg.size -VariableName 'packetsize'
-        New-ParamCompleter -ShortName S -Description $msg.socketBufSz -VariableName 'sndbuf'
-        New-ParamCompleter -ShortName t -Description $msg.ttl -VariableName 'ttl'
-        New-ParamCompleter -ShortName T -Description $msg.timestamp -Arguments "tsonly","tsandaddr","tsprespec" -VariableName 'timestamp_opt'
+        New-ParamCompleter -ShortName s -Description $msg.size -Arguments @{ Name = 'packetsize' }
+        New-ParamCompleter -ShortName S -Description $msg.socketBufSz -Arguments @{ Name = 'sndbuf' }
+        New-ParamCompleter -ShortName t -Description $msg.ttl -Arguments @{ Name = 'ttl' }
+        New-ParamCompleter -ShortName T -Description $msg.timestamp -Arguments @{ Name = 'timestamp_opt'; Candidates = "tsonly","tsandaddr","tsprespec" }
         New-ParamCompleter -ShortName U -Description $msg.u2uLatency
         New-ParamCompleter -ShortName v -Description $msg.verbose
         New-ParamCompleter -ShortName V -Description $msg.version
-        New-ParamCompleter -ShortName w -Description $msg.deadline -VariableName 'deadline'
-        New-ParamCompleter -ShortName W -Description $msg.timeout -VariableName 'timeout'
+        New-ParamCompleter -ShortName w -Description $msg.deadline -Arguments @{ Name = 'deadline' }
+        New-ParamCompleter -ShortName W -Description $msg.timeout -Arguments @{ Name = 'timeout' }
         New-ParamCompleter -ShortName '4' -Description $msg.ipv4
         New-ParamCompleter -ShortName '6' -Description $msg.ipv6
         New-ParamCompleter -ShortName h -Description $msg.help

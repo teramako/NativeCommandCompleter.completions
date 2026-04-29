@@ -64,22 +64,22 @@ Register-NativeCompleter -Name diff -Parameters @(
     New-ParamCompleter -LongName normal -Description $msg.normal
     New-ParamCompleter -ShortName q -LongName brief -Description $msg.brief
     New-ParamCompleter -ShortName s -LongName reportIdenticalFiles -Description $msg.reportIdenticalFiles
-    New-ParamCompleter -ShortName C -LongName context -Description $msg.context -VariableName 'NUM'
+    New-ParamCompleter -ShortName C -LongName context -Description $msg.context -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -ShortName c -Description $msg.shortC
-    New-ParamCompleter -ShortName U -LongName unified -Description $msg.unified -VariableName 'NUM'
+    New-ParamCompleter -ShortName U -LongName unified -Description $msg.unified -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -ShortName u -Description $msg.shortU
     New-ParamCompleter -ShortName e -LongName ed -Description $msg.ed
     New-ParamCompleter -ShortName n -LongName rcs -Description $msg.rcs
     New-ParamCompleter -ShortName y -LongName sideBySide -Description $msg.sideBySide
-    New-ParamCompleter -ShortName W -LongName width -Description $msg.width -VariableName 'NUM'
+    New-ParamCompleter -ShortName W -LongName width -Description $msg.width -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName leftColumn -Description $msg.leftColumn
     New-ParamCompleter -LongName suppressCommonLines -Description $msg.suppressCommonLines
     New-ParamCompleter -ShortName p -LongName showCFunction -Description $msg.showCFunction
-    New-ParamCompleter -ShortName F -LongName showFunctionLine -Description $msg.showFunctionLine -VariableName 'REGEX'
-    New-ParamCompleter -LongName label -Description $msg.label -VariableName 'LABEL'
+    New-ParamCompleter -ShortName F -LongName showFunctionLine -Description $msg.showFunctionLine -Arguments @{ Name = 'REGEX' }
+    New-ParamCompleter -LongName label -Description $msg.label -Arguments @{ Name = 'LABEL' }
     New-ParamCompleter -ShortName t -LongName expandTabs -Description $msg.expandTabs
     New-ParamCompleter -ShortName T -LongName initialTab -Description $msg.initialTab
-    New-ParamCompleter -LongName tabsize -Description $msg.tabsize -VariableName 'NUM'
+    New-ParamCompleter -LongName tabsize -Description $msg.tabsize -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName suppressBlankEmpty -Description $msg.suppressBlankEmpty
     New-ParamCompleter -ShortName l -LongName paginate -Description $msg.paginate
     New-ParamCompleter -ShortName r -LongName recursive -Description $msg.recursive
@@ -88,29 +88,29 @@ Register-NativeCompleter -Name diff -Parameters @(
     New-ParamCompleter -LongName unidirectionalNewFile -Description $msg.unidirectionalNewFile
     New-ParamCompleter -LongName ignoreFileNameCase -Description $msg.ignoreFileNameCase
     New-ParamCompleter -LongName noIgnoreFileNameCase -Description $msg.noIgnoreFileNameCase
-    New-ParamCompleter -ShortName x -LongName exclude -Description $msg.exclude -VariableName 'PAT'
-    New-ParamCompleter -ShortName X -LongName excludeFrom -ArgumentType File -Description $msg.excludeFrom -VariableName 'FILE'
-    New-ParamCompleter -ShortName S -LongName startingFile -ArgumentType File -Description $msg.startingFile -VariableName 'FILE'
-    New-ParamCompleter -LongName fromFile -ArgumentType File -Description $msg.fromFile -VariableName 'FILE1'
-    New-ParamCompleter -LongName toFile -ArgumentType File -Description $msg.toFile -VariableName 'FILE2'
+    New-ParamCompleter -ShortName x -LongName exclude -Description $msg.exclude -Arguments @{ Name = 'PAT' }
+    New-ParamCompleter -ShortName X -LongName excludeFrom -Description $msg.excludeFrom -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -ShortName S -LongName startingFile -Description $msg.startingFile -Arguments @{ Name = 'FILE'; Type = 'File' }
+    New-ParamCompleter -LongName fromFile -Description $msg.fromFile -Arguments @{ Name = 'FILE1'; Type = 'File' }
+    New-ParamCompleter -LongName toFile -Description $msg.toFile -Arguments @{ Name = 'FILE2'; Type = 'File' }
     New-ParamCompleter -ShortName i -LongName ignoreCase -Description $msg.ignoreCase
     New-ParamCompleter -ShortName E -LongName ignoreTabExpansion -Description $msg.ignoreTabExpansion
     New-ParamCompleter -ShortName Z -LongName ignoreTrailingSpace -Description $msg.ignoreTrailingSpace
     New-ParamCompleter -ShortName b -LongName ignoreSpaceChange -Description $msg.ignoreSpaceChange
     New-ParamCompleter -ShortName w -LongName ignoreAllSpace -Description $msg.ignoreAllSpace
     New-ParamCompleter -ShortName B -LongName ignoreBlankLines -Description $msg.ignoreBlankLines
-    New-ParamCompleter -ShortName I -LongName ignoreMatchingLines -Description $msg.ignoreMatchingLines -VariableName 'REGEX'
+    New-ParamCompleter -ShortName I -LongName ignoreMatchingLines -Description $msg.ignoreMatchingLines -Arguments @{ Name = 'REGEX' }
     New-ParamCompleter -ShortName a -LongName text -Description $msg.text
     New-ParamCompleter -LongName stripTrailingCr -Description $msg.stripTrailingCr
-    New-ParamCompleter -ShortName D -LongName ifdef -Description $msg.ifdef -VariableName 'NAME'
-    New-ParamCompleter -LongName gtypeGroupFormat -Description $msg.gtypeGroupFormat -VariableName 'GFMT'
-    New-ParamCompleter -LongName lineFormat -Description $msg.lineFormat -VariableName 'LFMT'
-    New-ParamCompleter -LongName ltypeLineFormat -Description $msg.ltypeLineFormat -VariableName 'LFMT'
+    New-ParamCompleter -ShortName D -LongName ifdef -Description $msg.ifdef -Arguments @{ Name = 'NAME' }
+    New-ParamCompleter -LongName gtypeGroupFormat -Description $msg.gtypeGroupFormat -Arguments @{ Name = 'GFMT' }
+    New-ParamCompleter -LongName lineFormat -Description $msg.lineFormat -Arguments @{ Name = 'LFMT' }
+    New-ParamCompleter -LongName ltypeLineFormat -Description $msg.ltypeLineFormat -Arguments @{ Name = 'LFMT' }
     New-ParamCompleter -ShortName d -LongName minimal -Description $msg.minimal
-    New-ParamCompleter -LongName horizonLines -Description $msg.horizonLines -VariableName 'NUM'
+    New-ParamCompleter -LongName horizonLines -Description $msg.horizonLines -Arguments @{ Name = 'NUM' }
     New-ParamCompleter -LongName speedLargeFiles -Description $msg.speedLargeFiles
-    New-ParamCompleter -LongName color -Type FlagOrValue -Description $msg.color -Arguments 'never','always','auto' -VariableName 'WHEN'
-    New-ParamCompleter -LongName palette -Description $msg.palette -VariableName 'COLORS'
+    New-ParamCompleter -LongName color -Description $msg.color -Arguments @{ Name = 'WHEN'; Nargs = '?'; Candidates = 'never','always','auto' }
+    New-ParamCompleter -LongName palette -Description $msg.palette -Arguments @{ Name = 'COLORS' }
     New-ParamCompleter -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
 )

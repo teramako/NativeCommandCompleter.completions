@@ -77,7 +77,7 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-$installedPackageCompleter = {
+$installedPackageCompleter = New-ArgumentCompleter -Name pkg -Nargs '1+' -Script {
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return $null }
     if (-not (Test-Path -LiteralPath '/var/lib/dpkg/status')) { return $null }
     $q = "*${wordToComplete}*"
@@ -100,7 +100,7 @@ $installedPackageCompleter = {
     }
 }
 
-$packageCompleter = {
+$packageCompleter = New-ArgumentCompleter -Name pkg -Nargs '1+' -Script {
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return }
     $q = ".*${wordToComplete}.*"
     try {
@@ -132,25 +132,25 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-CommandCompleter -Name upgrade -Description $msg.upgrade -NoFileCompletions
     New-CommandCompleter -Name dist-upgrade -Description $msg.distUpgrade -NoFileCompletions
     New-CommandCompleter -Name dselect-upgrade -Description $msg.dselectUpgrade
-    New-CommandCompleter -Name install -Description $msg.install -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name reinstall -Description $msg.reinstall -ArgumentCompleter $installedPackageCompleter
-    New-CommandCompleter -Name remove -Description $msg.remove -ArgumentCompleter $installedPackageCompleter
-    New-CommandCompleter -Name purge -Description $msg.purge -ArgumentCompleter $installedPackageCompleter
-    New-CommandCompleter -Name source -Description $msg.source -ArgumentCompleter $packageCompleter
-    New-CommandCompleter -Name build-dep -Description $msg.buildDep -ArgumentCompleter $installedPackageCompleter
+    New-CommandCompleter -Name install -Description $msg.install -Arguments $packageCompleter
+    New-CommandCompleter -Name reinstall -Description $msg.reinstall -Arguments $installedPackageCompleter
+    New-CommandCompleter -Name remove -Description $msg.remove -Arguments $installedPackageCompleter
+    New-CommandCompleter -Name purge -Description $msg.purge -Arguments $installedPackageCompleter
+    New-CommandCompleter -Name source -Description $msg.source -Arguments $packageCompleter
+    New-CommandCompleter -Name build-dep -Description $msg.buildDep -Arguments $installedPackageCompleter
     New-CommandCompleter -Name satisfy -Description $msg.satisfy
     New-CommandCompleter -Name check -Description $msg.check
-    New-CommandCompleter -Name download -Description $msg.download -ArgumentCompleter $packageCompleter
+    New-CommandCompleter -Name download -Description $msg.download -Arguments $packageCompleter
     New-CommandCompleter -Name clean -Description $msg.clean
     New-CommandCompleter -Name autoclean -Description $msg.autoclean
     New-CommandCompleter -Name autoremove -Description $msg.autoremove
-    New-CommandCompleter -Name changelog -Description $msg.changelog -ArgumentCompleter $packageCompleter
+    New-CommandCompleter -Name changelog -Description $msg.changelog -Arguments $packageCompleter
     New-CommandCompleter -Name indextargets -Description $msg.indextargets
 ) -Parameters @(
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
     New-ParamCompleter -ShortName v -LongName version -Description $msg.version
-    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -ArgumentType File
-    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -VariableName 'OPTION'
+    New-ParamCompleter -ShortName c -LongName config-file -Description $msg.configFile -Arguments @{ Name = 'config_file'; Type = 'File' }
+    New-ParamCompleter -ShortName o -LongName option -Description $msg.option -Arguments @{ Name = 'OPTION' }
     New-ParamCompleter -ShortName y -LongName yes, assume-yes -Description $msg.assumeYes
     New-ParamCompleter -LongName assume-no -Description $msg.assumeNo
     New-ParamCompleter -LongName no-install-recommends -Description $msg.noInstallRecommends
@@ -163,8 +163,8 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -ShortName s -LongName simulate,just-print,dry-run,recon,no-act -Description $msg.simulate
     New-ParamCompleter -LongName show-upgraded -Description $msg.showUpgraded
     New-ParamCompleter -ShortName V -LongName verbose-versions -Description $msg.verboseVersions
-    New-ParamCompleter -ShortName a -LongName host-architecture -Description $msg.hostArchitecture -VariableName 'architecture'
-    New-ParamCompleter -ShortName P -LongName build-profiles -Description $msg.buildProfiles -VariableName 'profiles'
+    New-ParamCompleter -ShortName a -LongName host-architecture -Description $msg.hostArchitecture -Arguments @{ Name = 'architecture' }
+    New-ParamCompleter -ShortName P -LongName build-profiles -Description $msg.buildProfiles -Arguments @{ Name = 'profiles' }
     New-ParamCompleter -ShortName b -LongName compile,build -Description $msg.compile
     New-ParamCompleter -LongName ignore-hold -Description $msg.ignoreHold
     New-ParamCompleter -LongName with-new-pkgs -Description $msg.withNewPkgs
@@ -178,7 +178,7 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -LongName purge -Description $msg.purgeRemove
     New-ParamCompleter -LongName reinstall -Description $msg.reinstallOption
     New-ParamCompleter -LongName list-cleanup -Description $msg.listCleanup
-    New-ParamCompleter -ShortName t -LongName target-release,default-release -Description $msg.targetRelease -VariableName 'target-release'
+    New-ParamCompleter -ShortName t -LongName target-release,default-release -Description $msg.targetRelease -Arguments @{ Name = 'target-release' }
     New-ParamCompleter -LongName trivial-only -Description $msg.trivialOnly
     New-ParamCompleter -LongName no-remove -Description $msg.noRemove
     New-ParamCompleter -LongName auto-remove,autoremove -Description $msg.opt_autoRemove
@@ -192,9 +192,9 @@ Register-NativeCompleter -Name apt-get -Description $msg.apt_get -SubCommands @(
     New-ParamCompleter -LongName no-allow-insecure-repositories -Description $msg.noAllowInsecureRepositories
     New-ParamCompleter -LongName allow-releaseinfo-change -Description $msg.allowReleaseinfoChange
     New-ParamCompleter -LongName show-progress -Description $msg.showProgress
-    New-ParamCompleter -LongName with-source -Description $msg.withSource -ArgumentType File -VariableName 'filename'
-    New-ParamCompleter -ShortName e -LongName error-on -Description $msg.errorOn -Type FlagOrValue -VariableName 'any'
+    New-ParamCompleter -LongName with-source -Description $msg.withSource -Arguments @{ Name = 'filename'; Type = 'File' }
+    New-ParamCompleter -ShortName e -LongName error-on -Description $msg.errorOn -Arguments @{ Name = 'any'; Nargs = '?' }
     New-ParamCompleter -LongName mark-auto -Description $msg.markAuto
     New-ParamCompleter -LongName mark-manual -Description $msg.markManual
-    New-ParamCompleter -LongName solver -Description $msg.solver -VariableName 'name'
+    New-ParamCompleter -LongName solver -Description $msg.solver -Arguments @{ Name = 'name' }
 ) -NoFileCompletions

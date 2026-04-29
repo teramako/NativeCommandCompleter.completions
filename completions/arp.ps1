@@ -27,22 +27,22 @@ foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key
 if ($IsWindows)
 {
     Register-NativeCompleter -Name arp -Description $msg.arp -Style Unix -Parameters @(
-        New-ParamCompleter -ShortName a,g -Description $msg.win_display_all -Type FlagOrValue -VariableName 'inet_addr'
-        New-ParamCompleter -ShortName d -Description $msg.win_delete -VariableName 'inet_addr'
-        New-ParamCompleter -ShortName s -Description $msg.win_set -VariableName 'inet_addr'
-        New-ParamCompleter -ShortName N -Description $msg.win_display_inet -VariableName 'if_addr'
+        New-ParamCompleter -ShortName a,g -Description $msg.win_display_all -Arguments @{ Name = 'inet_addr'; Nargs = '?' }
+        New-ParamCompleter -ShortName d -Description $msg.win_delete -Arguments @{ Name = 'inet_addr' }
+        New-ParamCompleter -ShortName s -Description $msg.win_set -Arguments @{ Name = 'inet_addr' }
+        New-ParamCompleter -ShortName N -Description $msg.win_display_inet -Arguments @{ Name = 'if_addr' }
     ) -NoFileCompletions
 }
 else
 {
     Register-NativeCompleter -Name arp -Description $msg.arp -Parameters @(
-        New-ParamCompleter -ShortName a -LongName display -Description $msg.display -Type FlagOrValue -VariableName 'hostname'
-        New-ParamCompleter -ShortName d -LongName delete -Description $msg.delete -VariableName 'hostname'
-        New-ParamCompleter -ShortName s -LongName set -Description $msg.set -VariableName 'hostname'
-        New-ParamCompleter -ShortName f -LongName file -Description $msg.file -ArgumentType File -VariableName 'filename'
+        New-ParamCompleter -ShortName a -LongName display -Description $msg.display -Arguments @{ Name = 'hostname'; Nargs = '?' }
+        New-ParamCompleter -ShortName d -LongName delete -Description $msg.delete -Arguments @{ Name = 'hostname' }
+        New-ParamCompleter -ShortName s -LongName set -Description $msg.set -Arguments @{ Name = 'hostname' }
+        New-ParamCompleter -ShortName f -LongName file -Description $msg.file -Arguments @{ Name = 'filename'; Type = 'File' }
         New-ParamCompleter -ShortName n -LongName numeric -Description $msg.numeric
         New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
-        New-ParamCompleter -ShortName i -LongName device -Description $msg.device -VariableName 'if'
+        New-ParamCompleter -ShortName i -LongName device -Description $msg.device -Arguments @{ Name = 'if' }
         New-ParamCompleter -ShortName h -LongName help -Description $msg.help
         New-ParamCompleter -ShortName V -LongName version -Description $msg.version
     ) -NoFileCompletions

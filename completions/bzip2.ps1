@@ -33,16 +33,20 @@ Register-NativeCompleter -Name bzip2 -Parameters @(
     New-ParamCompleter -ShortName L,V -LongName license,version -Description $msg.version_and_license
     New-ParamCompleter -ShortName '1' -LongName fast -Description $msg.fast
     New-ParamCompleter -ShortName '9' -LongName best -Description $msg.best
-) -NoFileCompletions -ArgumentCompleter {
-    param([int] $position, [int] $argIndex)
-    if ($this.BoundParameters.ContainsKey('decompress'))
-    {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
-            $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
-        });
-    }
-    else
-    {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
+) -NoFileCompletions -Arguments @{
+    Name = 'filename'
+    Nargs = '1+'
+    Script = {
+        param([int] $position, [int] $argIndex)
+        if ($this.BoundParameters.ContainsKey('decompress'))
+        {
+            [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+                $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
+            });
+        }
+        else
+        {
+            [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
+        }
     }
 }

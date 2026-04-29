@@ -90,18 +90,21 @@ if ($LASTEXITCODE -eq 0)
         "all`t{0}" -f $msg.gnu_attrList_all
     )
     Register-NativeCompleter -Name cp -Parameters @(
-        New-ParamCompleter -ShortName a -LongName archive -Description $msg."gnu_archive"
+        New-ParamCompleter -ShortName a -LongName archive -Description $msg.gnu_archive
         New-ParamCompleter -LongName attributes-only -Description $msg.gnu_attributesOnly
-        New-ParamCompleter -LongName backup -Description $msg.gnu_backup -Arguments @(
-            "none `t{0}" -f $msg.gnu_backup_none
-            "off `t{0}" -f $msg.gnu_backup_none
-            "numbered `t{0}" -f $msg.gnu_backup_numbered
-            "t `t{0}" -f $msg.gnu_backup_numbered
-            "existing `t{0}" -f $msg.gnu_backup_existing
-            "nil `t{0}" -f $msg.gnu_backup_existing
-            "simple `t{0}" -f $msg.gnu_backup_simple
-            "never `t{0}" -f $msg.gnu_backup_simple
-        ) -VariableName 'CONTROL'
+        New-ParamCompleter -LongName backup -Description $msg.gnu_backup -Arguments @{
+            Name = 'CONTROL';
+            Candidates = @(
+                "none `t{0}" -f $msg.gnu_backup_none
+                "off `t{0}" -f $msg.gnu_backup_none
+                "numbered `t{0}" -f $msg.gnu_backup_numbered
+                "t `t{0}" -f $msg.gnu_backup_numbered
+                "existing `t{0}" -f $msg.gnu_backup_existing
+                "nil `t{0}" -f $msg.gnu_backup_existing
+                "simple `t{0}" -f $msg.gnu_backup_simple
+                "never `t{0}" -f $msg.gnu_backup_simple
+            )
+        }
         New-ParamCompleter -ShortName b -Description $msg.gnu_short_backup
         New-ParamCompleter -LongName copy-contents -Description $msg.gnu_copyContents
         New-ParamCompleter -ShortName d -Description $msg.gnu_short_d
@@ -110,14 +113,17 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName H -Description $msg.gnu_short_H
         New-ParamCompleter -ShortName l -LongName link -Description $msg.gnu_link
         New-ParamCompleter -LongName strip-trailing-slashes -Description $msg.gnu_stripTrailingSlashes
-        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.gnu_suffix -VariableName 'SUFFIX'
-        New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.gnu_targetDirectory -ArgumentType Directory -VariableName 'DIRECTORY'
+        New-ParamCompleter -ShortName S -LongName suffix -Description $msg.gnu_suffix -Arguments @{ Name = 'SUFFIX' }
+        New-ParamCompleter -ShortName t -LongName target-directory -Description $msg.gnu_targetDirectory -Arguments @{ Name = 'DIRECTORY'; Type = 'Directory' }
         New-ParamCompleter -ShortName u -Description $msg.gnu_short_update
-        New-ParamCompleter -LongName update -Description $msg.gnu_update -Type FlagOrValue -Arguments @(
-            "older `t{0}" -f $msg.gnu_update_older
-            "none `t{0}" -f $msg.gnu_update_none
-            "all `t{0}" -f $msg.gnu_update_all
-        ) -VariableName 'UPDATE'
+        New-ParamCompleter -LongName update -Description $msg.gnu_update -Arguments @{
+            Name = 'UPDATE'
+            Candidates = @(
+                "older `t{0}" -f $msg.gnu_update_older
+                "none `t{0}" -f $msg.gnu_update_none
+                "all `t{0}" -f $msg.gnu_update_all
+            )
+        }
         New-ParamCompleter -ShortName v -LongName verbose -Description $msg.gnu_verbose
         New-ParamCompleter -LongName help -Description $msg.gnu_help
         New-ParamCompleter -LongName version -Description $msg.gnu_version
@@ -125,26 +131,42 @@ if ($LASTEXITCODE -eq 0)
         New-ParamCompleter -ShortName n -LongName no-clobber -Description $msg.gnu_noClobber
         New-ParamCompleter -ShortName P -LongName no-dereference -Description $msg.gnu_noDereference
         New-ParamCompleter -ShortName p -Description $msg.gnu_short_p
-        New-ParamCompleter -LongName preserve -Description $msg.gnu_preserve -Arguments $attr_list_arguments -Type FlagOrValue -ArgumentType List -VariableName 'ATTR_LIST'
-        New-ParamCompleter -LongName no-preserve -Description $msg.gnu_noPreserve -Arguments $attr_list_arguments -ArgumentType List -VariableName 'ATTR_LIST'
+        New-ParamCompleter -LongName preserve -Description $msg.gnu_preserve -Arguments @{
+            Name = 'ATTR_LIST';
+            Candidates = $attr_list_arguments
+            Nargs = '?'
+            List = $true
+        }
+        New-ParamCompleter -LongName no-preserve -Description $msg.gnu_noPreserve -Arguments @{
+            Name = 'ATTR_LIST';
+            Candidates = $attr_list_arguments;
+            List = $true
+        }
         New-ParamCompleter -LongName parents -Description $msg.gnu_parents
         New-ParamCompleter -ShortName r,R -LongName recursive -Description $msg.gnu_recursive
-        New-ParamCompleter -LongName reflink -Description $msg.gnu_reflink -Type FlagOrValue -Arguments @(
-            "always `t{0}" -f $msg.gnu_reflink_always
-            "auto `t{0}" -f $msg.gnu_reflink_auto
-            "never `t{0}" -f  $msg.gnu_reflink_never
-        ) -VariableName 'WHEN'
+        New-ParamCompleter -LongName reflink -Description $msg.gnu_reflink -Arguments @{
+            Name = 'WHEN';
+            Nargs = '?'
+            Candidates = @(
+                "always `t{0}" -f $msg.gnu_reflink_always
+                "auto `t{0}" -f $msg.gnu_reflink_auto
+                "never `t{0}" -f  $msg.gnu_reflink_never
+            )
+        }
         New-ParamCompleter -LongName remove-destination -Description $msg.gnu_removeDestination
-        New-ParamCompleter -LongName sparse -Description $msg.gnu_sparse -Arguments @(
-            "always `t{0}" -f $msg.gnu_sparse_always
-            "auto `t{0}" -f $msg.gnu_sparse_auto
-            "never `t{0}" -f  $msg.gnu_sparse_never
-        ) -VariableName 'WHEN'
+        New-ParamCompleter -LongName sparse -Description $msg.gnu_sparse -Arguments @{
+            Name = 'WHEN';
+            Candidates = @(
+                "always `t{0}" -f $msg.gnu_sparse_always
+                "auto `t{0}" -f $msg.gnu_sparse_auto
+                "never `t{0}" -f  $msg.gnu_sparse_never
+            )
+        }
         New-ParamCompleter -ShortName s -LongName symbolic-link -Description $msg.gnu_symbolicLink
         New-ParamCompleter -ShortName T -LongName no-target-directory -Description $msg.gnu_noTargetDirectory
         New-ParamCompleter -ShortName x -LongName one-file-system -Description $msg.gnu_oneFileSystem
         New-ParamCompleter -ShortName Z -Description $msg.gnu_short_Z
-        New-ParamCompleter -ShortName X -LongName context -Description $msg.gnu_context -VariableName 'CTX'
+        New-ParamCompleter -ShortName X -LongName context -Description $msg.gnu_context -Arguments @{ Name = 'CTX' }
     )
 }
 else

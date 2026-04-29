@@ -61,15 +61,15 @@ Register-NativeCompleter -Name ps -Description 'report a snapshot of the current
     New-ParamCompleter -ShortName N -LongName deselect -Description $msg.deselect
 
     # Process selection by list
-    New-ParamCompleter -ShortName C -Description $msg.process_by_command -ArgumentType List -VariableName 'cmdlist'
-    New-ParamCompleter -ShortName G -LongName Group -Description $msg.process_by_rgroup -ArgumentType List -VariableName 'grplist'
-    New-ParamCompleter -ShortName g -LongName group -Description $msg.process_by_group -ArgumentType List -VariableName 'grplist'
-    New-ParamCompleter -ShortName p -LongName pid -Description $msg.process_by_pid -ArgumentType List -VariableName 'pidlist'
-    New-ParamCompleter -LongName ppid -Description $msg.process_by_ppid -ArgumentType List -VariableName 'pidlist'
-    New-ParamCompleter -LongName sid -Description $msg.process_by_sid -ArgumentType List -VariableName 'sesslist'
-    New-ParamCompleter -ShortName t -LongName tty -Description $msg.process_by_tty -ArgumentType List -VariableName 'ttylist'
-    New-ParamCompleter -ShortName U -LongName User -Description $msg.process_by_ruser -ArgumentType List -VariableName 'userlist'
-    New-ParamCompleter -ShortName u -LongName user -Description $msg.process_by_user -ArgumentType List -VariableName 'userlist'
+    New-ParamCompleter -ShortName C -Description $msg.process_by_command -Arguments @{ Name = 'cmdlist'; List = $true }
+    New-ParamCompleter -ShortName G -LongName Group -Description $msg.process_by_rgroup -Arguments @{ Name = 'grplist'; List = $true }
+    New-ParamCompleter -ShortName g -LongName group -Description $msg.process_by_group -Arguments @{ Name = 'grplist'; List = $true }
+    New-ParamCompleter -ShortName p -LongName pid -Description $msg.process_by_pid -Arguments @{ Name = 'pidlist'; List = $true }
+    New-ParamCompleter -LongName ppid -Description $msg.process_by_ppid -Arguments @{ Name = 'pidlist'; List = $true }
+    New-ParamCompleter -LongName sid -Description $msg.process_by_sid -Arguments @{ Name = 'sesslist'; List = $true }
+    New-ParamCompleter -ShortName t -LongName tty -Description $msg.process_by_tty -Arguments @{ Name = 'ttylist'; List = $true }
+    New-ParamCompleter -ShortName U -LongName User -Description $msg.process_by_ruser -Arguments @{ Name = 'userlist'; List = $true }
+    New-ParamCompleter -ShortName u -LongName user -Description $msg.process_by_user -Arguments @{ Name = 'userlist'; List = $true }
 
     # Output format control
     New-ParamCompleter -ShortName f -Description $msg.format_full
@@ -79,15 +79,15 @@ Register-NativeCompleter -Name ps -Description 'report a snapshot of the current
     New-ParamCompleter -ShortName u -Description $msg.format_user
     New-ParamCompleter -ShortName v -Description $msg.format_vm
     New-ParamCompleter -ShortName F -Description $msg.format_full_extra
-    New-ParamCompleter -ShortName o -LongName format -Description $msg.format_custom -VariableName 'format'
-    New-ParamCompleter -ShortName O -Description $msg.with_preloaded -VariableName 'format'
+    New-ParamCompleter -ShortName o -LongName format -Description $msg.format_custom -Arguments @{ Name = 'format' }
+    New-ParamCompleter -ShortName O -Description $msg.with_preloaded -Arguments @{ Name = 'format' }
 
     # Output modifiers
     New-ParamCompleter -ShortName H -LongName forest -Description $msg.forest
     New-ParamCompleter -ShortName h -LongName headers -Description $msg.headers
     New-ParamCompleter -LongName no-headers -Description $msg.no_headers
-    New-ParamCompleter -LongName lines -Description $msg.lines -VariableName 'n'
-    New-ParamCompleter -LongName cols,columns,width -Description $msg.columns -VariableName 'n'
+    New-ParamCompleter -LongName lines -Description $msg.lines -Arguments @{ Name = 'n' }
+    New-ParamCompleter -LongName cols,columns,width -Description $msg.columns -Arguments @{ Name = 'n' }
     New-ParamCompleter -ShortName w -Description $msg.wide
     New-ParamCompleter -LongName cumulative -Description $msg.cumulative
 
@@ -97,7 +97,7 @@ Register-NativeCompleter -Name ps -Description 'report a snapshot of the current
     New-ParamCompleter -ShortName T -Description $msg.threads_with_SPID
 
     # Miscellaneous options
-    New-ParamCompleter -LongName sort -Description $msg.sort -VariableName '[+|-]key'
+    New-ParamCompleter -LongName sort -Description $msg.sort -Arguments @{ Name = '[+|-]key' }
     New-ParamCompleter -LongName context -Description $msg.context
     New-ParamCompleter -ShortName q -LongName quick-pid -Description $msg.quick_pid
 

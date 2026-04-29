@@ -47,7 +47,7 @@ if ($IsWindows)
     $runNewWindowParam = New-ParamCompleter -ShortName N -LongName new-window -Description $msg.win_Run_NewWindow
     $runDisableInputParam = New-ParamCompleter -LongName disable-input -Description $msg.win_Run_DisableInput
     $runInlineParam = New-ParamCompleter -LongName inline -Description $msg.win_Run_Inline
-    $runChdirParam = New-ParamCompleter -ShortName D -LongName chdir -Description $msg.win_Run_Chdir -ArgumentType Directory
+    $runChdirParam = New-ParamCompleter -ShortName D -LongName chdir -Description $msg.win_Run_Chdir -Arguments @{ Name = 'chdir'; Type = 'Directory' }
 
     Register-NativeCompleter -Name sudo -Description 'Sudo for Windows' -DelegateArgumentIndex 0 -SubCommands @(
         New-CommandCompleter -Name run -Description $msg.win_Run -DelegateArgumentIndex 0 -Parameters @(
@@ -56,12 +56,7 @@ if ($IsWindows)
         New-CommandCompleter -Name config -Description $msg.win_Config -Parameters @(
             New-ParamCompleter -LongName enable -Description $msg.win_Config_Enable -Arguments "disable", "enable", "forceNewWindow", "disableInput", "normal", "default"
         )
-        New-CommandCompleter -Name help -Description $msg.win_Help -ArgumentCompleter {
-            $arg = $_;
-            $results = "run", "config", "help" | Where-Object { $_.StartsWith($arg, [System.StringComparison]::OrdinalIgnoreCase) }
-            if ($results.Count -eq 0) { return $null }
-            $results
-        }
+        New-CommandCompleter -Name help -Description $msg.win_Help -Arguments @{ Name = 'COMMAND'; Candidates = "run", "config", "help" }
     ) -Parameters @(
         $runPreserveEnvParam, $runNewWindowParam, $runDisableInputParam, $runInlineParam, $runChdirParam
         New-ParamCompleter -ShortName h -LongName help -Description $msg.win_Base_Help
@@ -74,34 +69,38 @@ else
         New-ParamCompleter -ShortName h -Description $msg.gnu_help
         New-ParamCompleter -ShortName V -Description $msg.gnu_version
         New-ParamCompleter -ShortName A -Description $msg.gnu_askpass
-        New-ParamCompleter -ShortName C -Description $msg.gnu_closeall -Arguments "0", "1", "2", "255"
+        New-ParamCompleter -ShortName C -Description $msg.gnu_closeall -Arguments @{ Name = 'num'; Candidates = "0", "1", "2", "255" }
         New-ParamCompleter -ShortName E -Description $msg.gnu_preserve_env
         New-ParamCompleter -ShortName H -Description $msg.gnu_home
         New-ParamCompleter -ShortName K -Description $msg.gnu_remove_timestamp
         New-ParamCompleter -ShortName P -Description $msg.gnu_preserve_groups
         New-ParamCompleter -ShortName S -Description $msg.gnu_stdin
         New-ParamCompleter -ShortName b -Description $msg.gnu_background
-        New-ParamCompleter -ShortName e -Description $msg.gnu_edit -ArgumentType File
-        New-ParamCompleter -ShortName g -Description $msg.gnu_group -ArgumentCompleter {
-            Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
-                Where-Object Name -Like "$wordToComplete*" |
-                ForEach-Object {
-                    "{0}`t{1}" -f $_.Name, $_.Users
-                }
+        New-ParamCompleter -ShortName e -Description $msg.gnu_edit -Arguments @{ Name = 'file'; Type = 'File' }
+        New-ParamCompleter -ShortName g -Description $msg.gnu_group -Arguments @{
+            Name = 'group'; Script = {
+                Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
+                    Where-Object Name -Like "$wordToComplete*" |
+                    ForEach-Object {
+                        "{0}`t{1}" -f $_.Name, $_.Users
+                    }
+            }
         }
         New-ParamCompleter -ShortName i -Description $msg.gnu_login
         New-ParamCompleter -ShortName k -Description $msg.gnu_reset_timestamp
         New-ParamCompleter -ShortName l -Description $msg.gnu_list
         New-ParamCompleter -ShortName n -Description $msg.gnu_non_interactive
-        New-ParamCompleter -ShortName p -Description $msg.gnu_prompt -Type Required
+        New-ParamCompleter -ShortName p -Description $msg.gnu_prompt -Arguments @{ Name = 'prompt' }
         New-ParamCompleter -ShortName s -Description $msg.gnu_shell
-        New-ParamCompleter -ShortName u -Description $msg.gnu_user -ArgumentCompleter {
-            Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
-                Where-Object Name -Like "$wordToComplete*" |
-                ForEach-Object {
-                    $comment = ($_.Comment -Split ',')[0]
-                    "{0}`t{1}" -f $_.Name, $comment
-                }
+        New-ParamCompleter -ShortName u -Description $msg.gnu_user -Arguments @{
+            Name = 'user'; Script = {
+                Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
+                    Where-Object Name -Like "$wordToComplete*" |
+                    ForEach-Object {
+                        $comment = ($_.Comment -Split ',')[0]
+                        "{0}`t{1}" -f $_.Name, $comment
+                    }
+            }
         }
         New-ParamCompleter -ShortName v -Description $msg.gnu_validate
     )
