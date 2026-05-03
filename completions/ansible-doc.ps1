@@ -69,4 +69,6 @@ Register-NativeCompleter -Name ansible-doc -Parameters @(
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName version -Description $msg.version
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
-) -NoFileCompletions
+) -NoFileCompletions -Arguments @{
+    Name = 'plugin'; Nargs = '0+'
+}
