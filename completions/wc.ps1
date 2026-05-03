@@ -1,7 +1,7 @@
 <#
  # wc completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     wc                  = print newline, word, and byte counts for each file

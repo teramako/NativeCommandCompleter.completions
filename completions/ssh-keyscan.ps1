@@ -1,7 +1,7 @@
 <#
  # ssh-keyscan completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ssh_keyscan     = gather SSH public keys from servers

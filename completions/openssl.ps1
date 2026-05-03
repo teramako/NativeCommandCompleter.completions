@@ -1,7 +1,7 @@
 <#
  # openssl completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     openssl                 = OpenSSL command line tool
@@ -711,7 +711,7 @@ $passphraseArgument = New-ArgumentCompleter arg -Script {
         }
         'file:*' {
             $w = $wordToComplete.Split(':', 2)[1]
-            [MT.Comp.Helper]::CompleteFilename($w, $this.CurrentDirectory, $true, $false, $null, 'file:')
+            [Sabamiso.Helper]::CompleteFilename($w, $this.CurrentDirectory, $true, $false, $null, 'file:')
         }
         'fd:*' { $null }
         'stdin' { $null }

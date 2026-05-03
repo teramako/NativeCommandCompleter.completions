@@ -1,7 +1,7 @@
 <#
  # ansible-playbook completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ansible_playbook       = Runs Ansible playbooks, executing the defined tasks on the targeted hosts.
@@ -51,7 +51,7 @@ $extraVarsCompleter = {
         "'@`tRead from file",
         "'{`tYAML/JSON"
     } elseif ($wordToComplete -match '^([''"])?@.*?\1?$') {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, $null, "@")
+        [Sabamiso.Helper]::CompleteFilename($this, $false, $false, $null, "@")
     } else {
         return $null
     }
@@ -144,7 +144,7 @@ Register-NativeCompleter -Name ansible-playbook -Description $msg.ansible_playbo
     Name = 'playbook';
     Nargs = '1+';
     Script = { param([int] $position, [int] $argIndex)
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+        [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
             $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.ya?ml$'
         })
     }

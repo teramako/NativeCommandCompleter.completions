@@ -1,7 +1,7 @@
 <#
  # tail completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     gnu_bytes               = output the last K bytes; with +K output bytes starting with the Kth

@@ -1,7 +1,7 @@
 <#
   tar completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     catenate                   = Append archive to archive
@@ -350,7 +350,7 @@ Register-NativeCompleter -Name tar -Parameters @(
             $params.ContainsKey('update') -or
             $params.ContainsKey('catenate'))
         {
-            return [MT.Comp.Helper]::CompleteFilename($this, $false, $false)
+            return [Sabamiso.Helper]::CompleteFilename($this, $false, $false)
         }
         $file = $params.file
         if ($file.Count -eq 1 -and (Test-Path -LiteralPath $file -PathType Leaf))

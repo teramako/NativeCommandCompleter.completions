@@ -1,7 +1,7 @@
 <#
  # tmux completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     tmux_support256color             = Force tmux to assume the terminal supports 256 colours

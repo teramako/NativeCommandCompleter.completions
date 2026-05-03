@@ -1,7 +1,7 @@
 <#
  # grep completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     grep                  = print lines that match patterns
@@ -110,7 +110,7 @@ Register-NativeCompleter -Name grep -Description $msg.grep -Parameters @(
     Name = 'PATTERNS'
     Script =  {
         if ($this.BoundParameters.ContainsKey("regexp")) {
-            [MT.Comp.Helper]::CompleteFilename($this);
+            [Sabamiso.Helper]::CompleteFilename($this);
         }
         else { $null }
     }

@@ -1,7 +1,7 @@
 <#
  # find completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 if ($IsWindows) {
     # TBD: Windows support
