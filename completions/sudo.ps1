@@ -26,6 +26,7 @@ $msg = data { ConvertFrom-StringData @'
     gnu_validate         = Validate the credentials, extending timeout
 
 # from: https://github.com/microsoft/sudo/blob/main/sudo/Resources/en-US/Sudo.resw
+    win_sudo             = Sudo for Windows
     win_Base_Help        = Print help
     win_Base_Version     = Print version
     win_Run              = Run a command as admin
@@ -49,7 +50,7 @@ if ($IsWindows)
     $runInlineParam = New-ParamCompleter -LongName inline -Description $msg.win_Run_Inline
     $runChdirParam = New-ParamCompleter -ShortName D -LongName chdir -Description $msg.win_Run_Chdir -Arguments @{ Name = 'chdir'; Type = 'Directory' }
 
-    Register-NativeCompleter -Name sudo -Description 'Sudo for Windows' -DelegateArgumentIndex 0 -SubCommands @(
+    Register-NativeCompleter -Name sudo -Description $msg.win_sudo -DelegateArgumentIndex 0 -SubCommands @(
         New-CommandCompleter -Name run -Description $msg.win_Run -DelegateArgumentIndex 0 -Parameters @(
             $runPreserveEnvParam, $runNewWindowParam, $runDisableInputParam, $runInlineParam, $runChdirParam
         )
