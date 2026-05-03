@@ -350,7 +350,7 @@ Register-NativeCompleter -Name tar -Parameters @(
             $params.ContainsKey('update') -or
             $params.ContainsKey('catenate'))
         {
-            return [MT.Comp.Helper]::CompleteFilename($this, $false, $false)
+            return [Sabamiso.Helper]::CompleteFilename($this, $false, $false)
         }
         $file = $params.file
         if ($file.Count -eq 1 -and (Test-Path -LiteralPath $file -PathType Leaf))

@@ -160,7 +160,7 @@ Register-NativeCompleter -Name ansible-galaxy -Description $msg.ansible_galaxy -
             Script = {
                 param([int] $position, [int] $argIndex)
                 if ($argIndex -eq 0) {
-                    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+                    [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
                         $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.tar\.gz$'
                     })
                 }

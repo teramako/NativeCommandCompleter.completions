@@ -711,7 +711,7 @@ $passphraseArgument = New-ArgumentCompleter arg -Script {
         }
         'file:*' {
             $w = $wordToComplete.Split(':', 2)[1]
-            [MT.Comp.Helper]::CompleteFilename($w, $this.CurrentDirectory, $true, $false, $null, 'file:')
+            [Sabamiso.Helper]::CompleteFilename($w, $this.CurrentDirectory, $true, $false, $null, 'file:')
         }
         'fd:*' { $null }
         'stdin' { $null }

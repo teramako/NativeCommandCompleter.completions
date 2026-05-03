@@ -74,14 +74,14 @@ Register-NativeCompleter -Name lsblk -Description $msg.lsblk -Parameters @(
     Script = {
         if ([System.IO.Path]::IsPathRooted($wordToComplete))
         {
-            [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+            [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
                 $_.Attributes.HasFlag([System.IO.FileAttributes]::Normal) -and
                 $_.Name -match '^(sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+|loop[0-9]+)'
             })
         }
         else
         {
-            [MT.Comp.Helper]::CompleteFilename('/dev/', $this.CurrentDirectory.Path, $false, $false, {
+            [Sabamiso.Helper]::CompleteFilename('/dev/', $this.CurrentDirectory.Path, $false, $false, {
                 $_.Attributes.HasFlag([System.IO.FileAttributes]::Normal) -and
                 $_.Name -match '^(sd[a-z]+|nvme[0-9]+n[0-9]+|vd[a-z]+|hd[a-z]+|mmcblk[0-9]+|loop[0-9]+)' -and
                 $_.Name -like "$wordToComplete*"

@@ -23,7 +23,7 @@ Register-NativeCompleter -Name bunzip2 -Parameters @(
     Name = 'filename'
     Nargs = '1+'
     Script = {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+        [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
             $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
         });
     }

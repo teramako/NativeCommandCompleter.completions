@@ -47,7 +47,7 @@ if ($IsLinux)
         Script = {
             if ($this.BoundParameters.ContainsKey("expression"))
             {
-                [MT.Comp.Helper]::CompleteFilename($this);
+                [Sabamiso.Helper]::CompleteFilename($this);
             } else { $null }
         }
     }, @{

@@ -32,7 +32,7 @@ Register-NativeCompleter -Name chmod -Description $msg.chmod -Parameters @(
     Name = 'MODE'
     Script = {
         if ($this.BoundParameters.ContainsKey("reference")) {
-            [MT.Comp.Helper]::CompleteFilename($this, $true, $true);
+            [Sabamiso.Helper]::CompleteFilename($this, $true, $true);
             return;
         }
         $word = $this.WordToComplete;

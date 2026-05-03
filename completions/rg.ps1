@@ -204,7 +204,7 @@ Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
     Name = 'PATTERN'
     Script = {
         if ($this.BoundParameters.ContainsKey("regexp") -or $this.BoundParameters.ContainsKey("file")) {
-            [MT.Comp.Helper]::CompleteFilename($this);
+            [Sabamiso.Helper]::CompleteFilename($this);
         } else { $null }
     }
 }, @{

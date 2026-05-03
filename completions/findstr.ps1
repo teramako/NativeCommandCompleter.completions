@@ -53,7 +53,7 @@ Register-NativeCompleter -Name findstr -Description $msg.findstr -Style Windows 
     Name = 'strings';
     Script = {
         if ($this.BoundParameters.ContainsKey('C') -or $this.BoundParameters.ContainsKey('G')) {
-            [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
+            [Sabamiso.Helper]::CompleteFilename($this, $false, $false);
         } else {
             $null;
         }

@@ -40,13 +40,13 @@ Register-NativeCompleter -Name bzip2 -Parameters @(
         param([int] $position, [int] $argIndex)
         if ($this.BoundParameters.ContainsKey('decompress'))
         {
-            [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+            [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
                 $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
             });
         }
         else
         {
-            [MT.Comp.Helper]::CompleteFilename($this, $false, $false);
+            [Sabamiso.Helper]::CompleteFilename($this, $false, $false);
         }
     }
 }

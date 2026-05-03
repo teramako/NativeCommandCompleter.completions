@@ -73,7 +73,7 @@ Register-NativeCompleter -Name jq -Description $msg.jq -Parameters @(
     Script = {
         if ($this.BoundParameters.ContainsKey('from-file'))
         {
-            [MT.Comp.Helper]::CompleteFilename($this);
+            [Sabamiso.Helper]::CompleteFilename($this);
         }
         else { $null }
     }
