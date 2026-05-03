@@ -536,8 +536,8 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
     # completions
     New-CommandCompleter -Name completions -Description $msg.cmd_completions -Parameters @(
         $helpParam
-    ) -NoFileCompletions -ArgumentCompleter {
-        "bash","fish","powershell","zsh","fig" | Where-Object { $_ -like "$wordToComplete*" }
+    ) -NoFileCompletions -Arguments @{
+        Name = "SHELL"; Candidates = "bash","fish","powershell","zsh","fig"
     }
 
     # coverage
@@ -962,10 +962,10 @@ Register-NativeCompleter -Name deno -Description $msg.deno -Parameters @(
     )
 
     # help
-    New-CommandCompleter -Name help -Description $msg.cmd_help -NoFileCompletions -ArgumentCompleter {
-        "run","serve","add","bench","cache","check","clean","compile","completions","coverage","doc",
-        "eval","fmt","info","init","install","jupyter","lint","lsp","publish","repl","remove","task",
-        "test","types","uninstall","upgrade","vendor","help" |
-            Where-Object { $_ -like "$wordToComplete*" }
+    New-CommandCompleter -Name help -Description $msg.cmd_help -NoFileCompletions -Arguments @{
+        Name = "COMMAND";
+        Candidates = "run","serve","add","bench","cache","check","clean","compile","completions","coverage","doc",
+                     "eval","fmt","info","init","install","jupyter","lint","lsp","publish","repl","remove","task",
+                     "test","types","uninstall","upgrade","vendor","help"
     }
 ) -NoFileCompletions

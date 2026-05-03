@@ -256,29 +256,23 @@ $paneCompleter = {
 $bufferCompleter = {
     tmux list-buffers -F "#{buffer_name}`t#{buffer_sample}" 2>/dev/null | Where-Object { $_ -like "$wordToComplete*" }
 }
-$optionCompleter = {
-    param([int] $postion, [int] $argIndex)
-    if ($argIndex -eq 0)
-    {
-        @(
-            "backspace", "buffer-limit", "command-alias", "default-terminal", "copy-command", "escape-time", "editor", "exit-empty", "exit-unattached",
-            "extended-keys", "focus-events", "history-file", "message-limit", "prompt-history-limit", "set-clipboard", "terminal-features", "terminal-overrides",
-            "user-keys", "activity-action", "assume-paste-time", "base-index", "bell-action", "default-command", "default-shell", "default-size",
-            "destroy-unattached", "detach-on-destroy", "display-panes-active-colour", "display-panes-colour", "display-panes-time", "display-time",
-            "history-limit", "key-table", "lock-after-time", "lock-command", "message-command-style", "message-style", "mouse", "prefix", "renumber-windows",
-            "repeat-time", "set-titles", "set-titles-string", "silence-action", "status", "status-format", "status-interval", "status-justify", "status-keys",
-            "status-left", "status-left-length", "status-left-style", "status-position", "status-right", "status-right-length", "status-right-style", "status-style",
-            "update-environment", "visual-activity", "visual-bell", "visual-silence", "word-separators", "aggressive-resize", "automatic-rename",
-            "automatic-rename-format", "clock-mode-colour", "clock-mode-style", "fill-character", "main-pane-height", "main-pane-width", "copy-mode-match-style",
-            "copy-mode-mark-style", "copy-mode-current-match-style", "mode-keys", "mode-style", "monitor-activity", "monitor-bell", "monitor-silence", "other-pane-height",
-            "other-pane-width", "pane-active-border-style", "pane-base-index", "pane-border-format", "pane-border-indicators", "pane-border-lines", "pane-border-status",
-            "pane-border-style", "popup-style", "popup-border-style", "popup-border-lines", "window-status-activity-style", "window-status-bell-style",
-            "window-status-current-format", "window-status-current-style", "window-status-format", "window-status-last-style", "window-status-separator",
-            "window-status-style", "window-size", "wrap-search", "allow-passthrough", "allow-rename", "alternate-screen", "cursor-colour", "pane-colours", "cursor-style",
-            "remain-on-exit", "remain-on-exit-format", "scroll-on-clear", "synchronize-panes", "window-active-style", "window-style"
-        ) | Where-Object { $_ -like "$wordToComplete*" }
-    }
-}
+$options = @(
+    "backspace", "buffer-limit", "command-alias", "default-terminal", "copy-command", "escape-time", "editor", "exit-empty", "exit-unattached",
+    "extended-keys", "focus-events", "history-file", "message-limit", "prompt-history-limit", "set-clipboard", "terminal-features", "terminal-overrides",
+    "user-keys", "activity-action", "assume-paste-time", "base-index", "bell-action", "default-command", "default-shell", "default-size",
+    "destroy-unattached", "detach-on-destroy", "display-panes-active-colour", "display-panes-colour", "display-panes-time", "display-time",
+    "history-limit", "key-table", "lock-after-time", "lock-command", "message-command-style", "message-style", "mouse", "prefix", "renumber-windows",
+    "repeat-time", "set-titles", "set-titles-string", "silence-action", "status", "status-format", "status-interval", "status-justify", "status-keys",
+    "status-left", "status-left-length", "status-left-style", "status-position", "status-right", "status-right-length", "status-right-style", "status-style",
+    "update-environment", "visual-activity", "visual-bell", "visual-silence", "word-separators", "aggressive-resize", "automatic-rename",
+    "automatic-rename-format", "clock-mode-colour", "clock-mode-style", "fill-character", "main-pane-height", "main-pane-width", "copy-mode-match-style",
+    "copy-mode-mark-style", "copy-mode-current-match-style", "mode-keys", "mode-style", "monitor-activity", "monitor-bell", "monitor-silence", "other-pane-height",
+    "other-pane-width", "pane-active-border-style", "pane-base-index", "pane-border-format", "pane-border-indicators", "pane-border-lines", "pane-border-status",
+    "pane-border-style", "popup-style", "popup-border-style", "popup-border-lines", "window-status-activity-style", "window-status-bell-style",
+    "window-status-current-format", "window-status-current-style", "window-status-format", "window-status-last-style", "window-status-separator",
+    "window-status-style", "window-size", "wrap-search", "allow-passthrough", "allow-rename", "alternate-screen", "cursor-colour", "pane-colours", "cursor-style",
+    "remain-on-exit", "remain-on-exit-format", "scroll-on-clear", "synchronize-panes", "window-active-style", "window-style"
+)
 $promptTypes = "command", "search", "target", "window-target"
 $terminalFeatures = @(
     "256`tSupports 256 colours",
@@ -735,7 +729,12 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName U -Description $msg.setOption_unsetOption2
         New-ParamCompleter -ShortName w -Description $mst.option_windowOption
         $targetPaneParam
-    ) -NoFileCompletions -ArgumentCompleter $optionCompleter
+    ) -NoFileCompletions -Arguments @{
+        Name = 'option';
+        Candidates = $options
+    }, @{
+        Name = 'value'; Nargs = '?'
+    }
     # show-options
     New-CommandCompleter -Name show-options -Aliases show -Description $msg.showOptions -Parameters @(
         New-ParamCompleter -ShortName A -Description $msg.showOptions_inheritedOptions
@@ -747,7 +746,9 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName v -Description $msg.showOptions_value
         New-ParamCompleter -ShortName w -Description $msg.option_windowOption
         $targetPaneParam
-    ) -NoFileCompletions -ArgumentCompleter $optionCompleter
+    ) -NoFileCompletions -Arguments @{
+        Name = 'option'; Nargs = '?'; Candidates = $options
+    }
 
     #
     # GLOBAL AND SESSION ENVIRONMENT

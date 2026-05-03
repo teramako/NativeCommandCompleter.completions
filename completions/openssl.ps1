@@ -976,10 +976,13 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $providerParams
-    ) -NoFileCompletions -ArgumentCompleter {
-        "512`tMinimum value",
-        "2048`tDefault value",
-        "10000`tMaximum value"
+    ) -NoFileCompletions -Arguments @{
+        Name = 'numbits'; Nargs = '?';
+        Candidates = @(
+            "512`tMinimum value",
+            "2048`tDefault value",
+            "10000`tMaximum value"
+        )
     }
 
     New-CommandCompleter -Name dsa -Description $msg._dsa -Style Unix -Parameters @(
@@ -1158,9 +1161,9 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         New-ParamCompleter -Name mac -Description $msg.kdf_mac -Arguments @{ Name = 'name' }
         New-ParamCompleter -Name kdfopt -Description $msg.kdf_kdfopt -Arguments @{ Name = 'nm:v' }
         $providerParams
-    ) -NoFileCompletions -ArgumentCompleter {
-        "TLS1-PRF", "HKDF", "SSKDF", "PBKDF2", "SSHKDF", "X942KDF-ASN1", "X942KDF-CONCAT", "X963KDF", "SCRYPT" |
-            Where-Object { $_ -like "$wordToComplete*" }
+    ) -NoFileCompletions -Arguments @{
+        Name = 'kdf_name'
+        Candidates = "TLS1-PRF", "HKDF", "SSKDF", "PBKDF2", "SSHKDF", "X942KDF-ASN1", "X942KDF-CONCAT", "X963KDF", "SCRYPT"
     }
 
     New-CommandCompleter -Name req -Description $msg._req -Style Unix -Parameters @(
@@ -1499,12 +1502,11 @@ Register-NativeCompleter -Name openssl -Description $msg.openssl -Style Unix -Su
         $randParam
         $writerandParam
         $providerParams
-    ) -NoFileCompletions -ArgumentCompleter {
-        $list = 'md5', 'sha1', 'rmd160', 'sha256', 'sha512', 'hmac', 'des-ede3',
-                'aes-128-cbc', 'aes-192-cbc', 'aes-256-cbc',
-                'camellia-128-cbc', 'camellia-192-cbc', 'camellia-256-cbc',
-                'ghash', 'rand', 'kmac128', 'kmac256'
-        $list.Where({ $_ -like "$wordToComplete*" })
+    ) -NoFileCompletions -Arguments @{
+        Name = 'algorithm'; Nargs = '0+';
+        Candidates = 'md5', 'sha1', 'rmd160', 'sha256', 'sha512', 'hmac', 'des-ede3', 'aes-128-cbc',
+                     'aes-192-cbc', 'aes-256-cbc', 'camellia-128-cbc', 'camellia-192-cbc', 'camellia-256-cbc',
+                     'ghash', 'rand', 'kmac128', 'kmac256'
     }
 
     New-CommandCompleter -Name list -Description $msg._list -Style Unix -Parameters @(

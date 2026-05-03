@@ -641,9 +641,16 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             $verbosityParam
             $newDiagnosticsParam
             $helpParam
-        ) -ArgumentCompleter {
-            $cmdline = $this.CommandAst.ToString()
-            dotnet complete "$cmdLine" | Where-Object { -not ($_ -match '^[-/]') } | ForEach-Object { "$_`tTemplate" }
+        ) -NoFileCompletions -Arguments @{
+            Name = 'template-short-name'; Nargs = '?';
+            Description = 'A short name of the template to create.'
+            Script = {
+                $cmdline = $this.CommandAst.ToString()
+                dotnet complete "$cmdLine" | Where-Object { -not ($_ -match '^[-/]') } | ForEach-Object { "$_`tTemplate" }
+            }
+        }, @{
+            Name = 'template-arg'; Nargs = '0+';
+            Description = 'Template specific options to use.';
         }
         # new install
         New-CommandCompleter -Name install -Description $msg.NewInstall -Parameters @(
@@ -653,7 +660,11 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             $verbosityParam
             $newDiagnosticsParam
             $helpParam
-        ) -ArgumentCompleter $dotnetCompleteScript
+        ) -Arguments @{
+            Name = 'package'; Nargs = '1+';
+            Description = 'NuGet package ID or path to folder or NuGet package to install.'
+            Script = $dotnetCompleteScript
+        }
         # new uninstall
         New-CommandCompleter -Name uninstall -Description $msg.NewUninstall -Parameters @(
             $verbosityParam
@@ -702,11 +713,17 @@ Register-NativeCompleter -Name dotnet -Parameters @(
             $newDiagnosticsParam
             $helpParam
         )
-    ) -ArgumentCompleter {
-        $cmdline = $this.CommandAst.ToString()
-        dotnet complete "$cmdLine" |
-            Where-Object { -not ($_ -match '^(?:[-/]|(?:create|(?:un)?install|update|search|list|details)$)') } |
-            ForEach-Object { "$_`tTemplate" }
+    ) -Arguments @{
+        Name = 'template-short-name'; Nargs = '?';
+        Description = 'A short name of the template to create.'
+        Script = {
+            $cmdline = $this.CommandAst.ToString()
+            dotnet complete "$cmdLine" |
+                Where-Object { -not ($_ -match '^(?:[-/]|(?:create|(?:un)?install|update|search|list|details)$)') } |
+                ForEach-Object { "$_`tTemplate" }
+        }
+    }, @{
+        Name = 'template-arg'; Nargs = '0+'; Description = 'Template specific options to use.'
     }
     #
     # nuget

@@ -143,6 +143,8 @@ $unitCompleter = {
             }
         }
 }
+$unitArgument    = New-ArgumentCompleter UNIT -Nargs '0+' -Script $unitCompleter
+$patternArgument = New-ArgumentCompleter PATTERN -Nargs '1+' -Script $unitCompleter
 
 $unitFileCompleter = {
     systemctl list-unit-files --no-legend --no-pager --plain |
@@ -156,6 +158,7 @@ $unitFileCompleter = {
             }
         }
 }
+$unitFileArgument = New-ArgumentCompleter UNIT -Nargs '1+' -Script $unitFileCompleter
 
 $typeValues = "service", "socket", "target", "device", "mount", "automount", "swap", "timer", "path", "slice", "scope"
 $stateValues = "loaded", "not-found", "bad-setting", "error", "merged", "masked", "active", "inactive", "failed", "activating", "deactivating"
@@ -170,43 +173,43 @@ Register-NativeCompleter -Name systemctl -Description $msg.systemctl -SubCommand
     New-CommandCompleter -Name list-unit-files -Description $msg.list_unit_files -NoFileCompletions
     New-CommandCompleter -Name list-jobs -Description $msg.list_jobs -NoFileCompletions
     New-CommandCompleter -Name list-machines -Description $msg.list_machines -NoFileCompletions
-    New-CommandCompleter -Name list-dependencies -Description $msg.list_dependencies -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name start -Description $msg.start -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name stop -Description $msg.stop -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name reload -Description $msg.reload -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name restart -Description $msg.restart -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name try-restart -Description $msg.try_restart -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name reload-or-restart -Description $msg.reload_or_restart -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name try-reload-or-restart -Description $msg.try_reload_or_restart -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name isolate -Description $msg.isolate -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name kill -Description $msg.kill -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name clean -Description $msg.clean -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name freeze -Description $msg.freeze -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name thaw -Description $msg.thaw -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name is-active -Description $msg.is_active -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name is-failed -Description $msg.is_failed -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name status -Description $msg.status -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name show -Description $msg.show -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name cat -Description $msg.cat -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name help -Description $msg.help -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name reset-failed -Description $msg.reset_failed -ArgumentCompleter $unitCompleter
+    New-CommandCompleter -Name list-dependencies -Description $msg.list_dependencies -Arguments $unitArgument
+    New-CommandCompleter -Name start -Description $msg.start -Arguments $patternArgument
+    New-CommandCompleter -Name stop -Description $msg.stop -Arguments $patternArgument
+    New-CommandCompleter -Name reload -Description $msg.reload -Arguments $patternArgument
+    New-CommandCompleter -Name restart -Description $msg.restart -Arguments $patternArgument
+    New-CommandCompleter -Name try-restart -Description $msg.try_restart -Arguments $patternArgument
+    New-CommandCompleter -Name reload-or-restart -Description $msg.reload_or_restart -Arguments $patternArgument
+    New-CommandCompleter -Name try-reload-or-restart -Description $msg.try_reload_or_restart -Arguments $patternArgument
+    New-CommandCompleter -Name isolate -Description $msg.isolate -Arguments $patternArgument
+    New-CommandCompleter -Name kill -Description $msg.kill -Arguments $patternArgument
+    New-CommandCompleter -Name clean -Description $msg.clean -Arguments $patternArgument
+    New-CommandCompleter -Name freeze -Description $msg.freeze -Arguments $patternArgument
+    New-CommandCompleter -Name thaw -Description $msg.thaw -Arguments $patternArgument
+    New-CommandCompleter -Name is-active -Description $msg.is_active -Arguments $patternArgument
+    New-CommandCompleter -Name is-failed -Description $msg.is_failed -Arguments $patternArgument
+    New-CommandCompleter -Name status -Description $msg.status -Arguments $patternArgument
+    New-CommandCompleter -Name show -Description $msg.show -Arguments $patternArgument
+    New-CommandCompleter -Name cat -Description $msg.cat -Arguments $patternArgument
+    New-CommandCompleter -Name help -Description $msg.help -Arguments $patternArgument
+    New-CommandCompleter -Name reset-failed -Description $msg.reset_failed -Arguments $patternArgument
 
     # Unit file commands
-    New-CommandCompleter -Name enable -Description $msg.enable -ArgumentCompleter $unitFileCompleter
-    New-CommandCompleter -Name disable -Description $msg.disable -ArgumentCompleter $unitFileCompleter
-    New-CommandCompleter -Name reenable -Description $msg.reenable -ArgumentCompleter $unitFileCompleter
-    New-CommandCompleter -Name preset -Description $msg.preset -ArgumentCompleter $unitFileCompleter
+    New-CommandCompleter -Name enable -Description $msg.enable -Arguments $unitFileArgument
+    New-CommandCompleter -Name disable -Description $msg.disable -Arguments $unitFileArgument
+    New-CommandCompleter -Name reenable -Description $msg.reenable -Arguments $unitFileArgument
+    New-CommandCompleter -Name preset -Description $msg.preset -Arguments $unitFileArgument
     New-CommandCompleter -Name preset-all -Description $msg.preset_all -NoFileCompletions
-    New-CommandCompleter -Name is-enabled -Description $msg.is_enabled -ArgumentCompleter $unitFileCompleter
-    New-CommandCompleter -Name mask -Description $msg.mask -ArgumentCompleter $unitFileCompleter
-    New-CommandCompleter -Name unmask -Description $msg.unmask -ArgumentCompleter $unitFileCompleter
+    New-CommandCompleter -Name is-enabled -Description $msg.is_enabled -Arguments $unitFileArgument
+    New-CommandCompleter -Name mask -Description $msg.mask -Arguments $unitFileArgument
+    New-CommandCompleter -Name unmask -Description $msg.unmask -Arguments $unitFileArgument
     New-CommandCompleter -Name link -Description $msg.link
-    New-CommandCompleter -Name revert -Description $msg.revert -ArgumentCompleter $unitFileCompleter
-    New-CommandCompleter -Name add-wants -Description $msg.add_wants -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name add-requires -Description $msg.add_requires -ArgumentCompleter $unitCompleter
-    New-CommandCompleter -Name edit -Description $msg.edit -ArgumentCompleter $unitCompleter
+    New-CommandCompleter -Name revert -Description $msg.revert -Arguments $unitFileArgument
+    New-CommandCompleter -Name add-wants -Description $msg.add_wants -Arguments $unitFileArgument
+    New-CommandCompleter -Name add-requires -Description $msg.add_requires -Arguments $unitFileArgument
+    New-CommandCompleter -Name edit -Description $msg.edit -Arguments $unitFileArgument
     New-CommandCompleter -Name get-default -Description $msg.get_default -NoFileCompletions
-    New-CommandCompleter -Name set-default -Description $msg.set_default -ArgumentCompleter $unitCompleter
+    New-CommandCompleter -Name set-default -Description $msg.set_default -Arguments $unitFileArgument
 
     # Manager commands
     New-CommandCompleter -Name daemon-reload -Description $msg.daemon_reload -NoFileCompletions

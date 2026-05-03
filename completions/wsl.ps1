@@ -135,14 +135,18 @@ Register-NativeCompleter -Name wsl -Description $msg.wsl -Parameters @(
         New-ParamCompleter -LongName version -Description $msg.install_version -Arguments @{ Name = 'version' }
         New-ParamCompleter -LongName vhd-size -Description $msg.install_vhdSize -Arguments @{ Name = 'size' }
         New-ParamCompleter -LongName web-download -Description $msg.install_webDownload
-    ) -NoFileCompletions -ArgumentCompleter $onlineDistributionCompleter
+    ) -NoFileCompletions -Arguments @{
+        Name = 'distribution'; Script = $onlineDistributionCompleter
+    }
 
     New-CommandCompleter -Name '--manage' -Description $msg.manage -Parameters @(
         New-ParamCompleter -LongName move -Description $msg.manage_move -Arguments @{ Name = 'location'; Type = 'Directory' }
         New-ParamCompleter -Name s -LongName set-sparse -Description $msg.manage_setSparse -Arguments "true", "false"
         New-ParamCompleter -LongName set-default-user -Description $msg.manage_setDefaultUser -Arguments @{ Name = 'username' }
         New-ParamCompleter -LongName resize -Description $msg.manage_resize -Arguments @{ Name = 'size' }
-    ) -NoFileCompletions -ArgumentCompleter $distributionCompleter
+    ) -NoFileCompletions -Arguments @{
+        Name = 'distribution'; Script = $distributionCompleter
+    }
 
     New-CommandCompleter -Name '--mount' -Description $msg.mount -Parameters @(
         New-ParamCompleter -LongName vhd -Description $msg.mount_vhd
