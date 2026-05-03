@@ -1,7 +1,7 @@
 <#
  # awk completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     awk                  = pattern scanning and text processing language

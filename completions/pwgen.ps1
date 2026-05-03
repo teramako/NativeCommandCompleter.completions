@@ -1,7 +1,7 @@
 <#
  # pwgen completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     capitalize      = Include at least one capital letter in the password

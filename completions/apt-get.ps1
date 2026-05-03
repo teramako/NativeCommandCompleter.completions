@@ -1,7 +1,7 @@
 <#
  # apt-get completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     apt_get                     = APT package handling utility - command-line interface

@@ -1,7 +1,7 @@
 <#
  # ansible-vault completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ansible_vault             = encryption/decryption utility for Ansible data files

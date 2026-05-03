@@ -1,7 +1,7 @@
 <#
  # bzip2recover completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 Register-NativeCompleter -Name bzip2recover -NoFileCompletions -Arguments @{
     Name = 'filename';

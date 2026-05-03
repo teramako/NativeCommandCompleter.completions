@@ -1,7 +1,7 @@
 <#
  # useradd completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     useradd                 = create a new user or update default new user information

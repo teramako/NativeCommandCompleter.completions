@@ -1,7 +1,7 @@
 <#
  # ansible-playbook completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ansible_playbook       = Runs Ansible playbooks, executing the defined tasks on the targeted hosts.

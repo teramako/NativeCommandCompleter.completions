@@ -1,7 +1,7 @@
 <#
  # whoami completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     upn     = Displays the user name in user principal name (UPN) format.

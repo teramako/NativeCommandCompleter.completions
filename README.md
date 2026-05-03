@@ -1,29 +1,29 @@
-# NativeCommandCompleter.completions
+# Sabamiso.completions
 
-Completion definitions for [NativeCommandCompleter.psm](https://github.com/teramako/NativeCommandCompleter.psm).
+Completion definitions for [Sabamiso.psm](https://github.com/teramako/Sabamiso.psm).
 
 ## 🚀 Install
 
 ### Via PowerShell Gallery
 ```powershell
-Install-PSResource NativeCommandCompleter.completions
+Install-PSResource Sabamiso.completions
 ```
 
 Add to your profile:
 ```powershell
-Import-Module NativeCommandCompleter.psm
-Import-Module NativeCommandCompleter.completions
+Import-Module Sabamiso.psm
+Import-Module Sabamiso.completions
 ```
 
 ### Via git clone
 ```powershell
-git clone https://github.com/teramako/NativeCommandCompleter.completions.git
+git clone https://github.com/teramako/Sabamiso.completions.git
 ```
 
 Add to your profile:
 ```powershell
-Import-Module NativeCommandCompleter.psm
-$env:PS_COMPLETE_PATH = "path/to/NativeCommandCompleter.completions/completions"
+Import-Module Sabamiso.psm
+$env:PS_COMPLETE_PATH = "path/to/Sabamiso.completions/completions"
 ```
 
 ## 📋 Completions
@@ -34,4 +34,4 @@ See the [`completions/`](./completions) directory for all available completion d
 
 To add completions for a new command, create a `.ps1` file named after the command in the `completions/` directory.
 
-See the [NativeCommandCompleter.psm documentation](https://github.com/teramako/NativeCommandCompleter.psm#-write-completion-scripts) for how to write completion scripts.
+See the [Sabamiso.psm documentation](https://github.com/teramako/Sabamiso.psm#-write-completion-scripts) for how to write completion scripts.

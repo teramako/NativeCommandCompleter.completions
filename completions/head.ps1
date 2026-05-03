@@ -1,7 +1,7 @@
 <#
  # head completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     gnu_bytes   = Print the first N bytes; Leading '-', truncate the last N bytes

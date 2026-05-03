@@ -1,7 +1,7 @@
 <#
  # ssh-copy-id completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ssh_copy_id = use locally available keys to authorise logins on a remote machine

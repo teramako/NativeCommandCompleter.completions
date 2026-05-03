@@ -27,7 +27,7 @@ $commonParam = if ($PSCmdlet.MyInvocation.BoundParameters['Verbose'])
     @{ Verbose = $false }
 }
 
-$psdFile = "NativeCommandCompleter.completions.psd1"
+$psdFile = "Sabamiso.completions.psd1"
 $ModuleManifest = Test-ModuleManifest -Path (Join-Path -Path $psmDir -ChildPath $psdFile)
 $tmpDir = Join-Path -Path $PSScriptRoot -ChildPath out, $ModuleManifest.Name
 $compltionsDir = Join-Path -Path $PSScriptRoot -ChildPath completions

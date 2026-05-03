@@ -1,7 +1,7 @@
 <#
  # apt-cache completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     apt_cache        = query the APT cache

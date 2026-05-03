@@ -1,7 +1,7 @@
 <#
  # traceroute completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     traceroute              = print the route packets trace to network host

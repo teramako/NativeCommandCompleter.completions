@@ -1,7 +1,7 @@
 <#
  # ssh-keygen completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ssh_keygen                = authentication key generation, management and conversion

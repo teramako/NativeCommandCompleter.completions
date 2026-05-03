@@ -19,7 +19,7 @@ TabExpansion2 -inputScript $commandAst.ToString().PadRight($cursorPosition) `
     | Select-Object -ExpandProperty CompletionMatches
 #>
 
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     _Help                              = Show command line help.

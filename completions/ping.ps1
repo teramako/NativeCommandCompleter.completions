@@ -1,7 +1,7 @@
 <#
  # ping completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ping                = Send ICMP ECHO_REQUEST packets to network hosts

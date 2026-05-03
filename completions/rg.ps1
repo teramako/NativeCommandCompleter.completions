@@ -1,7 +1,7 @@
 <#
  # rg (ripgrep) completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     rg                      = recursively search the current directory for lines matching a pattern
