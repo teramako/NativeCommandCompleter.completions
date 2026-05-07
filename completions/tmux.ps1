@@ -922,7 +922,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         $startingDirectoryParam_c
         New-ParamCompleter -ShortName d -Description $msg.runShell_delay -Arguments @{ Name = 'delay' }
         $targetPaneParam
-    ) -DelegateArgumentIndex 0
+    ) -Arguments @{ Name = 'shell-comand'; Type = 'DelegatingCommand' }
 
     # wait-for
     New-CommandCompleter -Name wait-for -Aliases wait -Parameters @(
