@@ -49,6 +49,7 @@ Register-NativeCompleter -Name umount -Description $msg.umount -Parameters @(
 ) -Arguments @{
     Name = 'directory|device'
     Script = {
+        param([string] $wordToComplete)
         # Complete mounted filesystems
         $q = "$wordToComplete*"
         if (Test-Path /proc/mounts) {

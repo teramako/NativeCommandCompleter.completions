@@ -72,6 +72,7 @@ Register-NativeCompleter -Name lsblk -Description $msg.lsblk -Parameters @(
     Name = 'device';
     Nargs = '0+';
     Script = {
+        param([string] $wordToComplete)
         if ([System.IO.Path]::IsPathRooted($wordToComplete))
         {
             [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {

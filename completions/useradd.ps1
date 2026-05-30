@@ -36,6 +36,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $groupCompleter = {
+    param([string] $wordToComplete)
     if (Test-Path '/etc/group') {
         Get-Content '/etc/group' | ForEach-Object {
             if ($_ -match '^([^:]+):') {
@@ -49,6 +50,7 @@ $groupCompleter = {
 }
 
 $shellCompleter = {
+    param([string] $wordToComplete)
     if (Test-Path '/etc/shells') {
         Get-Content '/etc/shells' | Where-Object {
             -not [string]::IsNullOrWhiteSpace($_) -and -not $_.StartsWith('#')

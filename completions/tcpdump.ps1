@@ -73,6 +73,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $interfaceCompleter = {
+    param([string] $wordToComplete)
     tcpdump -D 2>/dev/null | ForEach-Object {
         if ($_ -match '^\d+\.(\S+)(?:\s+\((.*)\)\s*\[.+?\])?') {
             $name = $Matches[1]

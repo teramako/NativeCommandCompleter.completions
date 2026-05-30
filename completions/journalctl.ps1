@@ -87,6 +87,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $unitCompleter = {
+    param([string] $wordToComplete)
     systemctl list-units --all --no-legend --no-pager --plain |
         ForEach-Object {
             if ($_ -match '^([^\s]+)\s+') {
@@ -197,8 +198,9 @@ Register-NativeCompleter -Name journalctl -Description $msg.journalctl -Paramete
     Name = 'MATCHES'
     Nargs = '1+'
     Script = {
+        param([string] $wordToComplete)
         # Match expressions like FIELD=VALUE
-        if ($_ -match '^([A-Z_]+)=') {
+        if ($wordToComplete -match '^([A-Z_]+)=') {
             # Field name provided, could suggest values based on common fields
             $null
         } else {
