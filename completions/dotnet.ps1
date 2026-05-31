@@ -19,7 +19,7 @@ TabExpansion2 -inputScript $commandAst.ToString().PadRight($cursorPosition) `
     | Select-Object -ExpandProperty CompletionMatches
 #>
 
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     _Help                              = Show command line help.
@@ -395,17 +395,17 @@ $dotnetCompleteScript = {
     dotnet complete "$cmdLine"
 }
 $projectCompleter = {
-    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+    [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
         $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.\w+proj$'
     });
 }
 $solutionCompleter = {
-    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+    [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
         $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.slnx?$'
     });
 }
 $solutionOrProjectCompleter = {
-    [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+    [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
         $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.(?:slnx?|\w+proj)$'
     });
 }

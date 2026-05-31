@@ -1,7 +1,7 @@
 <#
  # tmux completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     tmux_support256color             = Force tmux to assume the terminal supports 256 colours
@@ -237,15 +237,19 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $sessionCompleter = {
+    param([string] $wordToComplete)
     tmux list-sessions -F "#S:#I `t#S #W#{?window_active,*, }" | Where-Object { $_ -like "$wordToComplete*" }
 }
 $clientCompleter = {
+    param([string] $wordToComplete)
     tmux list-clients -F "#{client_tty} `t#{client_session}" | Where-Object { $_ -like "$wordToComplete*" }
 }
 $windowCompleter = {
+    param([string] $wordToComplete)
     tmux list-windows -F "#I`t#W #{?window_active, *,}#{?window_marked_flag, M,}#{?window_zoomed_flag, Z,}" 2>/dev/null | Where-Object { $_ -like "$wordToComplete*" }
 }
 $paneCompleter = {
+    param([string] $wordToComplete)
     $detail = '#{=/15/...:pane_title}#{?pane_marked, <marked>,}#{?window_active, <active #{?pane_active,pane,win.}>,}'
     @(
         tmux list-panes -F "#P`t#D $detail" 2>/dev/null
@@ -254,6 +258,7 @@ $paneCompleter = {
     ) | Where-Object { $_ -like "$wordToComplete*" }
 }
 $bufferCompleter = {
+    param([string] $wordToComplete)
     tmux list-buffers -F "#{buffer_name}`t#{buffer_sample}" 2>/dev/null | Where-Object { $_ -like "$wordToComplete*" }
 }
 $options = @(
@@ -556,6 +561,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         New-ParamCompleter -ShortName t -Description $msg.listPanes_target -Arguments @{
             Name = 'target';
             Script = {
+                param([string] $wordToComplete)
                 if ($this.BoundParameters.ContainsKey('s')) {
                     tmux list-sessions -F "#S:#I `t#S #W#{?window_active,*, }" | Where-Object { $_ -like "$wordToComplete*" }
                 } else {
@@ -922,7 +928,7 @@ Register-NativeCompleter -Name tmux -Parameters @(
         $startingDirectoryParam_c
         New-ParamCompleter -ShortName d -Description $msg.runShell_delay -Arguments @{ Name = 'delay' }
         $targetPaneParam
-    ) -DelegateArgumentIndex 0
+    ) -Arguments @{ Name = 'shell-comand'; Type = 'DelegatingCommand' }
 
     # wait-for
     New-CommandCompleter -Name wait-for -Aliases wait -Parameters @(

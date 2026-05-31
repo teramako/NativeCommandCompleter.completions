@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    Completion definitions for NativeCommandCompleter.psm
+    Completion definitions for Sabamiso.psm
 .DESCRIPTION
     Automatically adds the bundled completions directory to PS_COMPLETE_PATH.
 .LINK
-    https://github.com/teramako/NativeCommandCompleter.psm
+    https://github.com/teramako/Sabamiso.psm
 #>
 
 $completionsDir = Join-Path -Path $PSScriptRoot -ChildPath 'completions'

@@ -1,7 +1,7 @@
 <#
  # bat completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $cmdName = [System.IO.Path]::GetFileNameWithoutExtension($MyInvocation.MyCommand.Name)
 $msg = data { ConvertFrom-StringData @'
@@ -67,9 +67,11 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $themeArgument= New-ArgumentCompleter -Name theme -Script {
+    param([string] $wordToComplete)
     bat --list-themes | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object { "'{0}'" -f $_ }
 }
 $languageArgument = New-ArgumentCompleter -Name language -Script {
+    param([string] $wordToComplete)
     bat --list-languages | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object { "'{0}'`t{1}" -f ($_ -split ':') }
 }
 $whenArgument = New-ArgumentCompleter -Name when -Candidates @("auto", "never", "always")

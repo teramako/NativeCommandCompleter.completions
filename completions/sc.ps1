@@ -1,7 +1,7 @@
 <#
  # sc completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     sc                      = Service Control - Communicates with the Service Control Manager and services
@@ -78,6 +78,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $serviceArgument = New-ArgumentCompleter service -Script {
+    param([string] $wordToComplete)
     Get-Service | Where-Object Name -Like "$wordToComplete*" | ForEach-Object {
         "{0}`t{1}" -f $_.Name, $_.DisplayName
     }

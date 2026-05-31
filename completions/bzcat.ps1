@@ -1,7 +1,7 @@
 <#
  # bzcat completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     small = Reduce memory usage
@@ -15,7 +15,7 @@ Register-NativeCompleter -Name bzcat -Parameters @(
     Name = 'filename'
     Nargs = '1+'
     Script = {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+        [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
             $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Name -match '\.t?bz2?$'
         });
     }

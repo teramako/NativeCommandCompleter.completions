@@ -1,7 +1,7 @@
 <#
  # ansible-inventory completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ansible_inventory       = Show Ansible inventory information

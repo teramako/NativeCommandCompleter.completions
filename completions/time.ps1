@@ -1,7 +1,7 @@
 <#
  # time completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     output      = Do not send the results to stderr, but overwrite the specified file
@@ -16,7 +16,7 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
-Register-NativeCompleter -Name time -DelegateArgumentIndex 0 -Parameters @(
+Register-NativeCompleter -Name time -Parameters @(
     New-ParamCompleter -ShortName o -LongName output -Description $msg.output -Arguments @{ Name = 'FILE'; Type = 'File' }
     New-ParamCompleter -ShortName a -LongName append -Description $msg.append
     New-ParamCompleter -ShortName f -LongName format -Description $msg.format -Arguments @{ Name = 'FORMAT' }
@@ -25,4 +25,4 @@ Register-NativeCompleter -Name time -DelegateArgumentIndex 0 -Parameters @(
     New-ParamCompleter -ShortName v -LongName verbose -Description $msg.verbose
     New-ParamCompleter -LongName quiet -Description $msg.quiet
     New-ParamCompleter -ShortName V -LongName version -Description $msg.version
-)
+) -Arguments @{ Name = 'COMMAND'; Type = 'DelegatingCommand' }

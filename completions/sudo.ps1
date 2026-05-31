@@ -1,7 +1,7 @@
 <#
  # sudo completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     gnu_help             = Display help and exit
@@ -42,6 +42,8 @@ $msg = data { ConvertFrom-StringData @'
 Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyContinue;
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
+$deletingCommandArg = New-ArgumentCompleter "command" -Type DelegatingCommand
+
 if ($IsWindows)
 {
     $runPreserveEnvParam = New-ParamCompleter -ShortName E -LongName preserve-env -Description $msg.win_Run_CopyEnv
@@ -50,10 +52,10 @@ if ($IsWindows)
     $runInlineParam = New-ParamCompleter -LongName inline -Description $msg.win_Run_Inline
     $runChdirParam = New-ParamCompleter -ShortName D -LongName chdir -Description $msg.win_Run_Chdir -Arguments @{ Name = 'chdir'; Type = 'Directory' }
 
-    Register-NativeCompleter -Name sudo -Description $msg.win_sudo -DelegateArgumentIndex 0 -SubCommands @(
-        New-CommandCompleter -Name run -Description $msg.win_Run -DelegateArgumentIndex 0 -Parameters @(
+    Register-NativeCompleter -Name sudo -Description $msg.win_sudo -SubCommands @(
+        New-CommandCompleter -Name run -Description $msg.win_Run -Parameters @(
             $runPreserveEnvParam, $runNewWindowParam, $runDisableInputParam, $runInlineParam, $runChdirParam
-        )
+        ) -Arguments $deletingCommandArg
         New-CommandCompleter -Name config -Description $msg.win_Config -Parameters @(
             New-ParamCompleter -LongName enable -Description $msg.win_Config_Enable -Arguments "disable", "enable", "forceNewWindow", "disableInput", "normal", "default"
         )
@@ -62,11 +64,11 @@ if ($IsWindows)
         $runPreserveEnvParam, $runNewWindowParam, $runDisableInputParam, $runInlineParam, $runChdirParam
         New-ParamCompleter -ShortName h -LongName help -Description $msg.win_Base_Help
         New-ParamCompleter -ShortName V -LongName version -Description $msg.win_Base_Version
-    )
+    ) -Arguments $deletingCommandArg
 }
 else
 {
-    Register-NativeCompleter -Name sudo -DelegateArgumentIndex 0 -Parameters @(
+    Register-NativeCompleter -Name sudo -Parameters @(
         New-ParamCompleter -ShortName h -Description $msg.gnu_help
         New-ParamCompleter -ShortName V -Description $msg.gnu_version
         New-ParamCompleter -ShortName A -Description $msg.gnu_askpass
@@ -80,6 +82,7 @@ else
         New-ParamCompleter -ShortName e -Description $msg.gnu_edit -Arguments @{ Name = 'file'; Type = 'File' }
         New-ParamCompleter -ShortName g -Description $msg.gnu_group -Arguments @{
             Name = 'group'; Script = {
+                param([string] $wordToComplete)
                 Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
                     Where-Object Name -Like "$wordToComplete*" |
                     ForEach-Object {
@@ -95,6 +98,7 @@ else
         New-ParamCompleter -ShortName s -Description $msg.gnu_shell
         New-ParamCompleter -ShortName u -Description $msg.gnu_user -Arguments @{
             Name = 'user'; Script = {
+                param([string] $wordToComplete)
                 Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
                     Where-Object Name -Like "$wordToComplete*" |
                     ForEach-Object {
@@ -104,5 +108,5 @@ else
             }
         }
         New-ParamCompleter -ShortName v -Description $msg.gnu_validate
-    )
+    ) -Arguments $deletingCommandArg
 }

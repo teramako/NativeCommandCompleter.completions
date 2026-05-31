@@ -1,7 +1,7 @@
 <#
  # ansible completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ansible          = Run a task on target hosts
@@ -45,6 +45,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $connectionCompleter = {
+    param([string] $wordToComplete)
     $q = "$wordToComplete*"
     $items = ansible-doc -t connection -lj | ConvertFrom-Json -AsHashtable
     $items.GetEnumerator().ForEach({
@@ -59,6 +60,8 @@ $connectionCompleter = {
 }
 
 $becomeCompleter = {
+    param([string] $wordToComplete)
+    $q = "$wordToComplete*"
     $items = ansible-doc -t become -lj | ConvertFrom-Json -AsHashtable
     $items.GetEnumerator().ForEach({
         $name = $_.Key.Split('.')[-1]
@@ -123,7 +126,7 @@ Register-NativeCompleter -Name ansible -Description $msg.ansible -Parameters @(
     New-ParamCompleter -LongName ask-vault-pass, ask-vault-password   -Description $msg.ask_vault_pass
 ) -NoFileCompletions -Arguments @{
     Name = "host-pattern"
-    Script = { param([int] $position, [int] $argIndex)
+    Script = { param([string] $wordToComplete)
         $q = "$wordToComplete*"
         $cmdArgs = @("--list")
         if ($this.BoundParameters["inventory"]) {

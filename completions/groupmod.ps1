@@ -1,7 +1,7 @@
 <#
  # groupmod completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     groupmod            = modify a group definition on the system
@@ -26,6 +26,7 @@ Register-NativeCompleter -Name groupmod -Description $msg.groupmod -Parameters @
     New-ParamCompleter -ShortName h -LongName help -Description $msg.help
 ) -NoFileCompletions -Arguments @{
     Name = 'GROUP'; Script = {
+        param([string] $wordToComplete)
         if (Test-Path -LiteralPath '/etc/group') {
             Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
                 Where-Object Name -Like "$wordToComplete*" |

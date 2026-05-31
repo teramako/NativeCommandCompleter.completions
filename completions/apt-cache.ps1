@@ -1,7 +1,7 @@
 <#
  # apt-cache completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     apt_cache        = query the APT cache
@@ -49,6 +49,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $packageCompleter = New-ArgumentCompleter -Name pkg -Nargs '1+' -Script {
+    param([string] $wordToComplete)
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return }
     $q = ".*${wordToComplete}.*"
     try {

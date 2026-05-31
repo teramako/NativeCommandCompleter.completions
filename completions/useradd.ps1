@@ -1,7 +1,7 @@
 <#
  # useradd completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     useradd                 = create a new user or update default new user information
@@ -36,6 +36,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $groupCompleter = {
+    param([string] $wordToComplete)
     if (Test-Path '/etc/group') {
         Get-Content '/etc/group' | ForEach-Object {
             if ($_ -match '^([^:]+):') {
@@ -49,6 +50,7 @@ $groupCompleter = {
 }
 
 $shellCompleter = {
+    param([string] $wordToComplete)
     if (Test-Path '/etc/shells') {
         Get-Content '/etc/shells' | Where-Object {
             -not [string]::IsNullOrWhiteSpace($_) -and -not $_.StartsWith('#')

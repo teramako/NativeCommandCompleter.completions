@@ -1,7 +1,7 @@
 <#
  # umount completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     umount             = unmount filesystems
@@ -49,6 +49,7 @@ Register-NativeCompleter -Name umount -Description $msg.umount -Parameters @(
 ) -Arguments @{
     Name = 'directory|device'
     Script = {
+        param([string] $wordToComplete)
         # Complete mounted filesystems
         $q = "$wordToComplete*"
         if (Test-Path /proc/mounts) {

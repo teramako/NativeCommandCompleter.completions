@@ -16,7 +16,7 @@ TabExpansion2 -inputScript $commandAst.ToString().PadRight($cursorPosition) `
     | Select-Object -ExpandProperty CompletionMatches
 #>
 
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     git                     = the stupid content tracker
@@ -219,11 +219,13 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $branchCompleter = {
+    param([string] $wordToComplete)
     git for-each-ref --format="%(refname:strip=2)`tLocal Branch" --sort=refname refs/heads/ |
         Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $allBranchCompleter = {
+    param([string] $wordToComplete)
     git for-each-ref --format="%(refname:strip=2)`t%(refname:rstrip=-2)" --sort=refname refs/heads/ refs/remotes/ |
         ForEach-Object {
             $fields=$_.Split("`t");
@@ -233,14 +235,17 @@ $allBranchCompleter = {
 }
 
 $remoteCompleter = {
+    param([string] $wordToComplete)
     git remote 2>/dev/null | Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $tagCompleter = {
+    param([string] $wordToComplete)
     git tag -l "$wordToComplete*" 2>/dev/null
 }
 
 $refCompleter = {
+    param([string] $wordToComplete)
     @(
         git branch --format='%(refname:short)' 2>/dev/null
         git tag -l 2>/dev/null

@@ -1,7 +1,7 @@
 <#
  # ip completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ip                      = show / manipulate routing, network devices, interfaces and tunnels
@@ -238,7 +238,7 @@ Register-NativeCompleter -Name ip -Description $msg.ip -Style Unix -Parameters @
         New-CommandCompleter -Name delete -Aliases del -Description $msg.netns_delete -NoFileCompletions
         New-CommandCompleter -Name identify -Description $msg.netns_identify -NoFileCompletions
         New-CommandCompleter -Name pids -Description $msg.netns_pids -NoFileCompletions
-        New-CommandCompleter -Name exec -Description $msg.netns_exec -DelegateArgumentIndex 1 -NoFileCompletions
+        New-CommandCompleter -Name exec -Description $msg.netns_exec -NoFileCompletions
         New-CommandCompleter -Name monitor -Description $msg.netns_monitor -NoFileCompletions
     ) -NoFileCompletions
 

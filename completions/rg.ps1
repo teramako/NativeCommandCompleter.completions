@@ -1,7 +1,7 @@
 <#
  # rg (ripgrep) completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     rg                      = recursively search the current directory for lines matching a pattern
@@ -204,7 +204,7 @@ Register-NativeCompleter -Name rg -Description $msg.rg -Parameters @(
     Name = 'PATTERN'
     Script = {
         if ($this.BoundParameters.ContainsKey("regexp") -or $this.BoundParameters.ContainsKey("file")) {
-            [MT.Comp.Helper]::CompleteFilename($this);
+            [Sabamiso.Helper]::CompleteFilename($this);
         } else { $null }
     }
 }, @{

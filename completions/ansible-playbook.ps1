@@ -1,7 +1,7 @@
 <#
  # ansible-playbook completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     ansible_playbook       = Runs Ansible playbooks, executing the defined tasks on the targeted hosts.
@@ -46,18 +46,19 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $extraVarsCompleter = {
-    param([int] $postion, [int] $argIndex)
+    param([string] $wordToComplete)
     if ([string]::IsNullOrEmpty($wordToComplete)) {
         "'@`tRead from file",
         "'{`tYAML/JSON"
-    } elseif ($wordToComplete -match '^([''"])?@.*?\1?$') {
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, $null, "@")
+    } elseif ($wordToComplete -like '@*') {
+        [Sabamiso.Helper]::CompleteFilename($this, $false, $false, $null, "@")
     } else {
         return $null
     }
 }
 
 $connectionCompleter = {
+    param([string] $wordToComplete)
     $q = "$wordToComplete*"
     $items = ansible-doc -t connection -lj | ConvertFrom-Json -AsHashtable
     $items.GetEnumerator().ForEach({
@@ -85,7 +86,7 @@ $becomeCompleter = {
 }
 
 $hostsCompleter = {
-    param([int] $position, [int] $argIndex)
+    param([string] $wordToComplete)
     $q = "$wordToComplete*"
     $cmdArgs = @("--list")
     if ($this.BoundParameters["inventory"]) {
@@ -144,7 +145,7 @@ Register-NativeCompleter -Name ansible-playbook -Description $msg.ansible_playbo
     Name = 'playbook';
     Nargs = '1+';
     Script = { param([int] $position, [int] $argIndex)
-        [MT.Comp.Helper]::CompleteFilename($this, $false, $false, {
+        [Sabamiso.Helper]::CompleteFilename($this, $false, $false, {
             $_.Attributes.HasFlag([System.IO.FileAttributes]::Directory) -or $_.Extension -match '\.ya?ml$'
         })
     }

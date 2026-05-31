@@ -1,7 +1,7 @@
 <#
  # tee completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     append                 = Append to the given files, do not overwrite

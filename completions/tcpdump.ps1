@@ -1,7 +1,7 @@
 <#
  # tcpdump completion
  #>
-Import-Module NativeCommandCompleter.psm -ErrorAction SilentlyContinue
+Import-Module Sabamiso.psm -ErrorAction SilentlyContinue
 
 $msg = data { ConvertFrom-StringData @'
     tcpdump                     = dump traffic on a network
@@ -73,6 +73,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $interfaceCompleter = {
+    param([string] $wordToComplete)
     tcpdump -D 2>/dev/null | ForEach-Object {
         if ($_ -match '^\d+\.(\S+)(?:\s+\((.*)\)\s*\[.+?\])?') {
             $name = $Matches[1]
