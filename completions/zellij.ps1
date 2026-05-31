@@ -196,6 +196,7 @@ $onForceCloseArgs    = "quit", "detach"
 $clipboardArguments  = "system", "primary"
 
 $sessionCompleter = {
+    param([string] $wordToComplete)
     zellij list-sessions --no-formatting 2>$null | ForEach-Object {
         $d = $_.Split(" ", 2)
         if ($d[0] -like "$wordToComplete*") {

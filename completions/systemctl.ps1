@@ -132,6 +132,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $unitCompleter = {
+    param([string] $wordToComplete)
     systemctl list-units --all --no-legend --no-pager --plain |
         ForEach-Object {
             if ($_ -match '^(\S+)\s+\S+\s+\S+\s+\S+\s+(.*)$') {
@@ -147,6 +148,7 @@ $unitArgument    = New-ArgumentCompleter UNIT -Nargs '0+' -Script $unitCompleter
 $patternArgument = New-ArgumentCompleter PATTERN -Nargs '1+' -Script $unitCompleter
 
 $unitFileCompleter = {
+    param([string] $wordToComplete)
     systemctl list-unit-files --no-legend --no-pager --plain |
         ForEach-Object {
             if ($_ -match '^(\S+)\s+(.*)$') {

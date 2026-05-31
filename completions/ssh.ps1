@@ -158,6 +158,7 @@ Register-NativeCompleter -Name ssh -Description $msg.ssh -Parameters @(
 ) -NoFileCompletions -Arguments @{
     Name = 'destination'
     Script = {
+        param([string] $wordToComplete)
         $configFile = $this.BoundParameters["F"] ?? '~/.ssh/config'
         if (-not (Test-Path $configFile)) { return }
         Get-Content ~/.ssh/config | ForEach-Object {

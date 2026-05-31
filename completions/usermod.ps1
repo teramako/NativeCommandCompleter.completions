@@ -34,6 +34,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $userCompleter = {
+    param([string] $wordToComplete)
     if (Test-Path -LiteralPath '/etc/passwd') {
         Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
             Where-Object Name -Like "$wordToComplete*" |
@@ -49,6 +50,7 @@ $userCompleter = {
 }
 
 $groupCompleter = {
+    param([string] $wordToComplete)
     if (Test-Path -LiteralPath '/etc/group') {
         Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
             Where-Object Name -Like "$wordToComplete*" |

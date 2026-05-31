@@ -702,6 +702,7 @@ $pvkWeakParam = New-ParamCompleter -Name pvk-weak -Description $msg.pvk_weak
 $pvkNoneParam = New-ParamCompleter -Name pvk-none -Description $msg.pvk_none
 
 $passphraseArgument = New-ArgumentCompleter arg -Script {
+    param([string] $wordToComplete)
     switch -Wildcard ($wordToComplete) {
         'pass:*' { $null }
         'env:*' {
@@ -751,9 +752,10 @@ $keyParam = New-ParamCompleter -Name key -Description $msg.key -Arguments @{ Nam
 $pkeyoptParam = New-ParamCompleter -Name pkeyopt -Description $msg.genpkey_pkeyopt -Arguments @{
     Name = 'opt:value'
     Script = {
+        param([string] $wordToComplete)
         $alg = $this.BoundParameters."algorithm"
         if (-not $alg) { return $null }
-        ($k, $v) = $_.Split(':', 2)
+        ($k, $v) = $wordToComplete.Split(':', 2)
         if (-not ([string]::IsNullOrEmpty($v))) {
         }
 

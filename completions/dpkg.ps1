@@ -75,6 +75,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $installedPackageCompleter = {
+    param([string] $wordToComplete)
     if ([string]::IsNullOrWhiteSpace($wordToComplete) -or $wordToComplete.Length -lt 2) { return $null }
     if (-not (Test-Path -LiteralPath '/var/lib/dpkg/status')) { return $null }
     $q = "*${wordToComplete}*"

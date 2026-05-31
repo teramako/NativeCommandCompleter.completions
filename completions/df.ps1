@@ -40,6 +40,7 @@ if ($LASTEXITCODE -eq 0) # GNU df
 {
     $fieldList = "source","fstype","itotal","iused","iavail","ipcent","size","used","avail","pcent","file","target" 
     $typeArgument = New-ArgumentCompleter TYPE -Script {
+        param([string] $wordToComplete)
         df --output=fstype | Select-Object -Skip 1 | Sort-Object -Unique | Where-Object { $_ -like "$wordToComplete*" }
     }
 

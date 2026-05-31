@@ -46,11 +46,11 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $extraVarsCompleter = {
-    param([int] $postion, [int] $argIndex)
+    param([string] $wordToComplete)
     if ([string]::IsNullOrEmpty($wordToComplete)) {
         "'@`tRead from file",
         "'{`tYAML/JSON"
-    } elseif ($wordToComplete -match '^([''"])?@.*?\1?$') {
+    } elseif ($wordToComplete -like '@*') {
         [Sabamiso.Helper]::CompleteFilename($this, $false, $false, $null, "@")
     } else {
         return $null
@@ -58,6 +58,7 @@ $extraVarsCompleter = {
 }
 
 $connectionCompleter = {
+    param([string] $wordToComplete)
     $q = "$wordToComplete*"
     $items = ansible-doc -t connection -lj | ConvertFrom-Json -AsHashtable
     $items.GetEnumerator().ForEach({
@@ -85,7 +86,7 @@ $becomeCompleter = {
 }
 
 $hostsCompleter = {
-    param([int] $position, [int] $argIndex)
+    param([string] $wordToComplete)
     $q = "$wordToComplete*"
     $cmdArgs = @("--list")
     if ($this.BoundParameters["inventory"]) {

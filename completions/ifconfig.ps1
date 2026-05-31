@@ -74,6 +74,7 @@ Register-NativeCompleter -Name ifconfig -Description $msg.ifconfig -Parameters @
 ) -NoFileCompletions -Arguments @{
     Name = 'interface'
     Script = {
+        param([string] $wordToComplete)
         # Complete <interface>
         if (Test-Path -LiteralPath '/sys/class/net' -PathType Container) {
             Get-ChildItem -LiteralPath '/sys/class/net' | Where-Object Name -Like "$wordToComplete*" |

@@ -67,6 +67,7 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $distributionCompleter = {
+    param([string] $wordToComplete)
     $enc = [Console]::OutputEncoding
     [Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding("utf-16")
     try {
@@ -81,6 +82,7 @@ $distributionCompleter = {
 }
 
 $runningDistributionCompleter = {
+    param([string] $wordToComplete)
     $enc = [Console]::OutputEncoding
     [Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding("utf-16")
     try {
@@ -95,6 +97,7 @@ $runningDistributionCompleter = {
 }
 
 $onlineDistributionCompleter = {
+    param([string] $wordToComplete)
     $enc = [Console]::OutputEncoding
     [Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding("utf-16")
     try {

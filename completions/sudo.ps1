@@ -82,6 +82,7 @@ else
         New-ParamCompleter -ShortName e -Description $msg.gnu_edit -Arguments @{ Name = 'file'; Type = 'File' }
         New-ParamCompleter -ShortName g -Description $msg.gnu_group -Arguments @{
             Name = 'group'; Script = {
+                param([string] $wordToComplete)
                 Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
                     Where-Object Name -Like "$wordToComplete*" |
                     ForEach-Object {
@@ -97,6 +98,7 @@ else
         New-ParamCompleter -ShortName s -Description $msg.gnu_shell
         New-ParamCompleter -ShortName u -Description $msg.gnu_user -Arguments @{
             Name = 'user'; Script = {
+                param([string] $wordToComplete)
                 Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
                     Where-Object Name -Like "$wordToComplete*" |
                     ForEach-Object {

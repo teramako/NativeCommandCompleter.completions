@@ -21,7 +21,7 @@ if ($LASTEXITCODE -eq 0) # GNU mkdir
         New-ParamCompleter -ShortName m -LongName mode -Description $msg.mode -Arguments @{
             Name = 'MODE'
             Script = {
-                $word = $this.WordToComplete;
+                param([string] $word)
                 switch -Regex ($word)
                 {
                     '^[-+=]?[0-7]+' {

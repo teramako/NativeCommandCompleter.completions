@@ -21,6 +21,7 @@ Register-NativeCompleter -Name groupdel -Description $msg.groupdel -Parameters @
 ) -NoFileCompletions -Arguments @{
     Name = 'GROUP';
     Script = {
+        param([string] $wordToComplete)
         if (Test-Path -LiteralPath '/etc/group') {
             Import-Csv -Delimiter : -Header Name,X,GID,Users -Path /etc/group |
                 Where-Object Name -Like "$wordToComplete*" |

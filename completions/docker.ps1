@@ -410,31 +410,37 @@ Import-LocalizedData -BindingVariable localizedMessages -ErrorAction SilentlyCon
 foreach ($key in $localizedMessages.Keys) { $msg[$key] = $localizedMessages[$key] }
 
 $containerCompleter = {
+    param([string] $wordToComplete)
     docker ps --format "{{.Names}}\t{{.Image}} ({{.Status}})" 2>$null |
         Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $allContainerCompleter = {
+    param([string] $wordToComplete)
     docker ps -a --format "{{.Names}}\t{{.Image}} ({{.Status}})" 2>$null |
         Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $imageCompleter = {
+    param([string] $wordToComplete)
     docker images --format "{{.Repository}}:{{.Tag}}\t{{.ID}} ({{.Size}})" 2>$null |
         Where-Object { $_ -ne "<none>:<none>" -and $_ -like "$wordToComplete*" }
 }
 
 $networkCompleter = {
+    param([string] $wordToComplete)
     docker network ls --format "{{.Name}}\t{{.Driver}} ({{.Scope}})" 2>$null |
         Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $volumeCompleter = {
+    param([string] $wordToComplete)
     docker volume ls --format "{{.Name}}\t{{.Driver}}" 2>$null |
         Where-Object { $_ -like "$wordToComplete*" }
 }
 
 $contextCompleter = {
+    param([string] $wordToComplete)
     docker context ls --format "{{.Name}}\t{{.Description}}" 2>$null |
         Where-Object { $_ -like "$wordToComplete*" }
 }

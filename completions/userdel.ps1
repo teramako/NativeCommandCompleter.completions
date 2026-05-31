@@ -25,6 +25,7 @@ Register-NativeCompleter -Name userdel -Description $msg.userdel -Parameters @(
 ) -NoFileCompletions -Arguments @{
     Name = 'LOGIN';
     Script = {
+        param([string] $wordToComplete)
         if (Test-Path -LiteralPath '/etc/passwd') {
             Import-Csv -Delimiter : -Header Name,X,UID,GID,Comment,Home,Shell -Path /etc/passwd |
                 Where-Object Name -Like "$wordToComplete*" |

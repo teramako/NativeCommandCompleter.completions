@@ -53,7 +53,7 @@ $integrityArguments = @(
 )
 
 $sidCompleter = {
-    param([int]$position, [int] $argIndex)
+    param([string] $wordToComplete)
     if ($wordToComplete -match '^\*') {
         $w = $wordToComplete.Substring(1);
         Get-LocalUser | Where-Object { $_.SID -like "$w*" } | ForEach-Object {
