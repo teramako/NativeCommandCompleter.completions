@@ -59,7 +59,7 @@ if ($LASTEXITCODE -eq 0) # GNU xargs
         New-ParamCompleter -ShortName x -LongName exit -Description $msg.exit
         New-ParamCompleter -LongName help -Description $msg.help
         New-ParamCompleter -LongName version -Description $msg.version
-    ) -DelegateArgumentIndex 0
+    ) -Arguments @{ Name = 'COMMAND'; Type = 'DelegatingCommand' }
 }
 else # BSD xargs
 {
@@ -78,5 +78,5 @@ else # BSD xargs
         New-ParamCompleter -ShortName s -Description $msg.bsd_size -Arguments @{ Name = 'size' }
         New-ParamCompleter -ShortName t -Description $msg.bsd_trace
         New-ParamCompleter -ShortName x -Description $msg.exit
-    ) -DelegateArgumentIndex 0
+    ) -Arguments @{ Name = 'COMMAND'; Type = 'DelegatingCommand' }
 }
